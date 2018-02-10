@@ -44,7 +44,9 @@
 
 * [冒泡排序](Algorithm/BubbleSort.h)
 * [冒泡排序（改进版）](Algorithm/BubbleSort_orderly.h)
-* [选择排序](Algorithm/BubbleSort_orderly.h)
+* [选择排序](Algorithm/SelectionSort.h)
+* [快速排序](Algorithm/QuickSort.h)
+
 
 ## Problems
 
