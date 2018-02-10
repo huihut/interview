@@ -43,7 +43,8 @@
 ### 排序
 
 * [冒泡排序](Algorithm/BubbleSort.h)
-* [冒泡排序（跳过有序的改进版）](Algorithm/BubbleSort_orderly.h)
+* [冒泡排序（改进版）](Algorithm/BubbleSort_orderly.h)
+* [选择排序](Algorithm/BubbleSort_orderly.h)
 
 ## Problems
 

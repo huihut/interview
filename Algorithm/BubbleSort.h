@@ -1,5 +1,4 @@
 // 冒泡排序
-
 void BubbleSort(vector<int>& v) {
 	int temp;
 	for (int i = 0; i < v.size() - 1; ++i) {
