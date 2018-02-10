@@ -46,9 +46,27 @@
 * [冒泡排序（改进版）](Algorithm/BubbleSort_orderly.h)
 * [选择排序](Algorithm/SelectionSort.h)
 * [快速排序](Algorithm/QuickSort.h)
+* [文件排序](Algorithm/FileSort)
 
+### 查找
+
+* [顺序查找](Algorithm/SequentialSearch.h)
+* [蛮力字符串匹配](Algorithm/BruteForceStringMatch.h)
+* [文件查找](Algorithm/FileSearch)
 
 ## Problems
+
+### Single Problem
+
+* [Chessboard Coverage Problem (棋盘覆盖问题)](Problems/ChessboardCoverageProblem)
+
+* [Knapsack Problem (背包问题)](Problems/KnapsackProblem)
+
+* [Neumann Neighbor Problem (冯诺依曼邻居问题)](Problems/NeumannNeighborProblem)
+
+* [Round Robin Problem (循环赛日程安排问题)](Problems/RoundRobinProblem)
+
+* [Tubing Problem (输油管道问题)](Problems/TubingProblem)
 
 ### Leetcode Problems
 
