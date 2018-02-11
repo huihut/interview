@@ -10,6 +10,7 @@ public:
             return (findKth(nums1, 0, nums2, 0, len / 2) + findKth(nums1, 0, nums2, 0, len / 2 + 1)) / 2;
 	}
     
+	// find kth number of two sorted array
 	double findKth(vector<int>& nums1, int i1, vector<int>& nums2, int i2, int k) {
 		if (i1 >= nums1.size()) {
 			return nums2[i2 + k - 1];

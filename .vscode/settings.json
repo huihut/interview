@@ -4,6 +4,7 @@
         "type_traits": "cpp",
         "xstring": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "iosfwd": "cpp"
     }
 }
