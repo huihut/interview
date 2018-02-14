@@ -39,6 +39,77 @@
 
 ## 数据结构
 
+### 顺序结构
+
+#### 顺序栈（Sequence Stack）
+
+```cpp
+typedef struct {
+	ElemType *elem;
+	int top;
+	int size;
+	int increment;
+} SqSrack;
+```
+
+![](images/SqStack.png)
+
+#### 队列（Sequence Queue）
+
+```cpp
+typedef struct {
+	ElemType * elem;
+	int front;
+	int rear;
+	int maxSize;
+}SqQueue;
+```
+
+##### 非循环队列
+
+![](images/SqQueue.png)
+
+`SqQueue.rear++`
+
+##### 循环队列
+
+![](images/SqLoopStack.png)
+
+`SqQueue.rear = (SqQueue.rear + 1) % SqQueue.maxSize`
+
+#### 顺序表（Sequence List）
+
+```cpp
+typedef struct {
+	ElemType *elem;
+	int length;
+	int size;
+	int increment;
+} SqList;
+```
+
+![](images/SqList.png)
+
+### 链式结构
+
+#### 链栈（Link Stack）
+
+#### 链队列（Link Queue）
+
+#### 线性表的链式表示（Link List）
+
+### 哈希表
+
+### 递归
+
+### 二叉树
+
+### 三叉树
+
+### 森林
+
+### 图
+
 ## 算法
 
 ### 排序
@@ -229,7 +300,7 @@ Add | 0x123
 
 extern "C" 的作用是让C++编译器将 `extern "C"` 声明的代码当作C语言代码处理，可以避免C++因符号修饰导致代码不能和C语言库中的符号进行链接的问题。
 
-```
+```cpp
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -274,7 +345,7 @@ Linux下的共享库就是普通的ELF共享对象。
 ### Windows的动态链接库（Dynamic-Link Library）
 
 DLL头文件
-```
+```cpp
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -297,7 +368,7 @@ MODULE_API int module_init();
 ```
 
 DLL源文件
-```
+```cpp
 #define MODULE_API_EXPORTS
 #include "module.h"
 
