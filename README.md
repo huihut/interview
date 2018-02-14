@@ -136,6 +136,178 @@
 
 ## 链接装载库
 
+### 内存、栈、堆
+
+一般应用程序内存空间有如下区域：
+
+* 栈：用于维护函数调用的上下文
+* 堆：用来容纳应用程序动态分配的内存区域
+* 可执行文件映像：存储着可执行文件在内存中的映像，由装载器装载是将可执行文件的内存读取或映射到这里
+* 保留区：保留区并不是一个单一的内存区域，而是对内存中受到保护而禁止访问的内存区域的总称，如通常C语言讲无效指针赋值为0（NULL），因此0地址正常情况下不可能有效的访问数据
+
+#### 栈
+
+栈保存了一个函数调用所需要的维护信息，常被称为堆栈帧（Stack Frame）或活动记录（Activate Record），一般包含以下几方面：
+
+* 函数的返回地址和参数
+* 临时变量：包括函数的非静态局部变量以及编译器自动生成的其他临时变量
+* 保存上下文：包括函数调用前后需要保持不变的寄存器
+
+#### 堆
+
+堆分配算法：
+
+* 空闲链表（Free List）
+* 位图（Bitmap）
+* 对象池
+
+#### “段错误（segment fault）” 或 “非法操作，该内存地址不能read/write”
+
+典型的非法指针解引用造成的错误。当指针指向一个不允许读写的内存地址，而程序却试图利用指针来读或写该地址时，会出现这个错误。
+
+普遍原因：
+
+* 将指针初始化位NULL，之后没有给它一个合理的值就开始使用指针
+* 没用初始化栈中的指针，指针的值一般会是随机数，之后就直接开始使用指针
+
+### 编译链接
+
+#### 编译链接过程
+
+1. 预编译（预编译器处理如`#include`、`#define`等预编译指令，生成`.i`或`.ii`文件）
+2. 编译（编译器进行词法分析、语法分析、语义分析、中间代码生成、目标代码生成、优化，生成`.s`文件）
+3. 汇编（汇编器把汇编码翻译成机器码，生成`.o`文件）
+4. 链接（连接器进行地址和空间分配、符号决议、重定位，生成`.out`文件）
+
+> 现在版本GCC把预编译和编译合成一步，预编译编译程序cc1、汇编器as、连接器ld
+
+> MSVC编译环境，编译器cl、连接器link、可执行文件查看器dumpbin
+
+#### 目标文件
+
+编译器编译源代码后生成的文件叫做目标文件。目标文件从结构上讲，它是已经编译后的可执行文件格式，只是还没有经过链接的过程，其中可能有些符号或有些地址还没有被调整。
+
+> 可执行文件（Windows的`.exe`和Linux的`ELF`）、动态链接库（Windows的`.dll`和Linux的`.so`）、静态链接库（Windows的`.lib`和Linux的`.a`）都是按照可执行文件格式存储（Windows按照PE-COFF，Linux按照ELF）
+
+##### 目标文件格式
+
+* Windows的PE（Portable Executable），或称为PE-COFF，`.obj`格式
+* Linux的ELF（Executable Linkable Format），`.o`格式
+* Intel/Microsoft的OMF（Object Module Format）
+* Unix的`a.out`格式
+* MS-DOS的`.COM`格式
+
+> PE和ELF都是COFF（Common File Format）的变种
+
+##### 目标文件存储结构
+
+段 | 功能
+--- | ---
+File Header | 文件头，描述整个文件的文件属性（包括文件是否可执行、是静态链接或动态连接及入口地址、目标硬件、目标操作系统等）
+.text section | 代码段，执行语句编译成的机器代码 
+.data section | 数据段，已初始化的全局变量和局部静态变量
+.bss section | BBS段（Block Started by Symbol），未初始化的全局变量和局部静态变量（因为默认值为0，所以只是在此预留位置，不占空间）
+.rodate section | 只读数据段，存放只读数据，一般是程序里面的只读变量（如const修饰的变量）和字符串常量
+.comment section | 注释信息段，存放编译器版本信息
+.note.GNU-stack section | 堆栈提示段 
+
+> 其他段略
+
+#### 链接的接口————符号
+
+在链接中，目标文件之间相互拼合实际上是目标文件之间对地址的引用，即对函数和变量的地址的引用。我们将函数和变量统称为符号（Symbol），函数名或变量名就是符号名（Symbol Name）。
+
+如下符号表（Symbol Table）：
+
+Symbol（符号名） | Symbol Value （地址）
+--- | ---
+main| 0x100
+Add | 0x123
+... | ...
+
+#### extern "C"
+
+extern "C" 的作用是让C++编译器将 `extern "C"` 声明的代码当作C语言代码处理，可以避免C++因符号修饰导致代码不能和C语言库中的符号进行链接的问题。
+
+```
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void *memset(void *, int, size_t);
+
+#ifdef __cplusplus
+}
+#endif
+```
+
+### Linux的共享库（Shared Library）
+
+Linux下的共享库就是普通的ELF共享对象。
+
+共享库版本更新应该保证二进制接口ABI（Application Binary Interface）的兼容
+
+#### 命名
+
+`libname.so.x.y.z`
+
+* x：主版本号，不同主版本号的库之间不兼容，需要重新编译
+* y：次版本号，高版本号向后兼容低版本号
+* z：发布版本号，不对接口进行更改，完全兼容
+
+#### 路径
+
+大部分包括Linux在内的开源系统遵循FHS（File Hierarchy Standard）的标准，这标准规定了系统文件如何存放，包括各个目录结构、组织和作用。
+
+* /lib：存放系统最关键和最基础的共享库，如动态链接器、C语言运行库、数学库等
+* /usr/lib：存放非系统运行时所需要的关键性的库，主要是开发库
+* /usr/local/lib：存放跟操作系统本身并不十分相关的库，主要是一些第三方应用程序的库
+
+> 动态链接器会在`/lib`、`/usr/lib`和由`/etc/ld.so.conf`配置文件指定的，目录中查找共享库
+
+#### 环境变量
+
+* LD_LIBRARY_PATH：临时改变某个应用程序的共享库查找路径，而不会影响其他应用程序
+* LD_PRELOAD：指定预先装载的一些共享库甚至是目标文件
+* LD_DEBUG：打开动态链接器的调试功能
+
+### Windows的动态链接库（Dynamic-Link Library）
+
+DLL头文件
+```
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef _WIN32
+#  ifdef MODULE_API_EXPORTS
+#    define MODULE_API __declspec(dllexport)
+#  else
+#    define MODULE_API __declspec(dllimport)
+#  endif
+#else
+#  define MODULE_API
+#endif
+
+MODULE_API int module_init();
+
+#ifdef __cplusplus
+}
+#endif
+```
+
+DLL源文件
+```
+#define MODULE_API_EXPORTS
+#include "module.h"
+
+MODULE_API int module_init()
+{
+    /* do something useful */
+    return 0;
+}
+```
+
 ### 运行库（Runtime Library）
 
 #### 典型程序运行步骤
@@ -169,7 +341,7 @@
 
 #### C语言运行库（CRT）
 
-一个C语言运行库大致包含如下功能：
+大致包含如下功能：
 
 * 启动与退出：包括入口函数及入口函数所依赖的其他函数等。
 * 标准函数：有C语言标准规定的C语言标准库所拥有的函数实现。
