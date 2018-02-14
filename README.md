@@ -92,13 +92,71 @@ typedef struct {
 
 ### 链式结构
 
-#### 链栈（Link Stack）
+```cpp
+typedef struct LNode {
+    ElemType data;
+    struct LNode *next;
+} LNode, *LinkList; 
+```
 
 #### 链队列（Link Queue）
 
-#### 线性表的链式表示（Link List）
+![](images/LinkQueue.png)
+
+#### 线性表的链式表示
+
+##### 单链表（Link List）
+
+![](images/LinkList.png)
+
+##### 双向链表（Du-Link-List）
+
+![](images/DuLinkList.png)
+
+##### 循环链表（Cir-Link-List）
+
+![](images/CirLinkList.png)
 
 ### 哈希表
+
+#### 概念
+
+哈希函数：`H(key): K -> D , key ∈ K`
+
+#### 构造方法
+
+* 直接定址法
+* 除留余数法
+* 数字分析法
+* 折叠法
+* 平方取中法
+
+#### 冲突处理方法
+
+* 链地址法：key相同的用单链表链接
+* 开放定址法
+    * 线性探测法：key相同 -> 放到key的下一个位置，`Hi = (H(key) + i) % m`
+    * 二次探测法：key相同 -> 放到 `Di = 1^2, -1^2, ..., ±（k)^2,(k<=m/2）`
+    * 随机探测法：`H = (H(key) + 伪随机数) % m`
+
+#### 线性探测的哈希表数据结构
+
+```cpp
+
+typedef char KeyType;
+
+typedef struct {
+	KeyType key;
+}RcdType;
+
+typedef struct {
+	RcdType *rcd;
+	int size;
+	int count;
+	bool *tag;
+}HashTable;
+```
+![](images/HashTable.png)
 
 ### 递归
 
