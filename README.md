@@ -181,9 +181,6 @@ typedef struct {
 
 #### 广义表
 
-[维基百科 . 广义表](https://zh.wikipedia.org/wiki/%E5%B9%BF%E4%B9%89%E8%A1%A8)
-
-
 ##### 头尾链表存储表示
 
 ```cpp
