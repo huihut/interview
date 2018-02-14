@@ -160,6 +160,74 @@ typedef struct {
 
 ### 递归
 
+#### 概念
+
+函数直接或间接地调用自身
+
+#### 递归与分治
+
+* 分治法
+    * 问题的分解
+    * 问题规模的分解
+* 折半查找（递归）
+* 归并查找（递归）
+* 快速排序（递归）
+
+#### 递归与迭代
+
+* 迭代：反复利用变量旧值推出新值
+* 折半查找（迭代）
+* 归并查找（迭代）
+
+#### 广义表
+
+[维基百科 . 广义表](https://zh.wikipedia.org/wiki/%E5%B9%BF%E4%B9%89%E8%A1%A8)
+
+
+##### 头尾链表存储表示
+
+```cpp
+// 广义表的头尾链表存储表示
+typedef enum {ATOM, LIST} ElemTag;
+// ATOM==0：原子，LIST==1：子表
+typedef struct GLNode {
+    ElemTag tag;
+    // 公共部分，用于区分原子结点和表结点
+    union {
+        // 原子结点和表结点的联合部分
+        AtomType atom;
+        // atom是原子结点的值域，AtomType由用户定义
+        struct {
+            struct GLNode *hp, *tp;
+        } ptr;
+        // ptr是表结点的指针域，prt.hp和ptr.tp分别指向表头和表尾
+    } a;
+} *GList, GLNode;
+```
+
+![](images/GeneralizedList1.png)
+
+##### 扩展线性链表存储表示
+
+```cpp
+// 广义表的扩展线性链表存储表示
+typedef enum {ATOM, LIST} ElemTag;
+// ATOM==0：原子，LIST==1：子表
+typedef struct GLNode1 {
+    ElemTag tag;
+    // 公共部分，用于区分原子结点和表结点
+    union {
+        // 原子结点和表结点的联合部分
+        AtomType atom; // 原子结点的值域
+        struct GLNode1 *hp; // 表结点的表头指针
+    } a;
+    struct GLNode1 *tp;
+    // 相当于线性链表的next，指向下一个元素结点
+} *GList1, GLNode1;
+```
+
+![](images/GeneralizedList2.png)
+
 ### 二叉树
 
 ### 三叉树
