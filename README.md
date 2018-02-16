@@ -43,6 +43,8 @@
 
 #### 顺序栈（Sequence Stack）
 
+[SqStack.cpp](DataStructure/SqStack.cpp)
+
 ```cpp
 typedef struct {
 	ElemType *elem;
@@ -79,6 +81,8 @@ typedef struct {
 
 #### 顺序表（Sequence List）
 
+[SqList.cpp](DataStructure/SqList.cpp)
+
 ```cpp
 typedef struct {
 	ElemType *elem;
@@ -91,6 +95,10 @@ typedef struct {
 ![](images/SqList.png)
 
 ### 链式结构
+
+[LinkList.cpp](DataStructure/LinkList.cpp)
+
+[LinkList_with_head.cpp](DataStructure/LinkList_with_head.cpp)
 
 ```cpp
 typedef struct LNode {
@@ -118,6 +126,8 @@ typedef struct LNode {
 ![](images/CirLinkList.png)
 
 ### 哈希表
+
+[HashTable.cpp](DataStructure/HashTable.cpp)
 
 #### 概念
 
@@ -227,6 +237,8 @@ typedef struct GLNode1 {
 
 ### 二叉树
 
+[BinaryTree.cpp](DataStructure/BinaryTree.cpp)
+
 #### 性质
 
 1. 非空二叉树第 i 层最多 2^(i-1) 个结点 (i >= 1)
@@ -239,6 +251,14 @@ typedef struct GLNode1 {
     3. 若 2i + 1 > n，则 i 结点没有右孩子，否则孩子编号为 2i + 1
 
 #### 存储结构
+
+```cpp
+typedef struct BiTNode
+{
+    TElemType data;
+    struct BiTNode *lchild, *rchild;
+}BiTNode, *BiTree;
+```
 
 ##### 顺序存储
 
@@ -269,7 +289,7 @@ typedef struct GLNode1 {
     * LR型：根的左孩子左旋，再右旋
     * RL型：右孩子的左子树，先右旋，再左旋
 
-### 森林
+### 其他树及森林
 
 #### 树的存储结构
 
@@ -281,11 +301,13 @@ typedef struct GLNode1 {
 
 一种不相交的子集所构成的集合 S = {S1, S2, ..., Sn}
 
+#### 平衡二叉树（AVL树）
+
+#### 红黑树
+
 #### B树
 
 #### B+树
-
-#### 红黑树
 
 #### 八叉树
 
