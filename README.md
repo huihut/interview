@@ -34,6 +34,108 @@
 * 运行时类型识别（RTTI）
 * 友元类和友元函数
 * struct和class的区别
+* this指针
+
+### const
+
+```cpp
+// 类
+class A
+{
+private:
+    const int a;                // 常对象成员，只能在初始化列表赋值
+
+public:
+    // 构造函数
+    A() { };
+    A(int x) : a(x) { };        // 初始化列表
+
+    // const可用于对重载函数的区分
+    int getValue();             // 普通成员函数
+    int getValue() const;       // 常成员函数
+};
+
+void function()
+{
+    // 对象
+    A b;                        // 普通对象，可以调用全部成员函数
+    const A a;                  // 常对象，只能调用常成员函数、更新常成员变量
+    canst A *p = &a;            // 常指针
+    canst A &q = a;             // 常引用
+
+    // 指针
+    char greeting[] = "Hello";
+    char* p1 = greeting;                // 指针变量，指向字符数组变量
+    const char* p2 = greeting;          // 指针变量，指向字符数组常量
+    char* const p3 = greeting;          // 常指针，指向字符数组变量
+    const char* const p4 = greeting;    // 常指针，指向字符数组常量
+}
+
+// 函数
+void function1(const int Var);           // 传递过来的参数在函数内不可变
+void function2(const char* Var);         // 参数指针所指内容为常量
+void function3(char* const Var);         // 参数指针为常指针
+void function4(const int& Var);          // 引用参数在函数内为常量
+
+// 函数返回值
+const int function5();      // 返回一个常数
+const int* function6();     // 返回一个指向常量的指针变量，使用：const int *p = function6();
+int* const function7();     // 返回一个指向变量的常指针，使用：int* const p = function7();
+```
+
+### inline 内联函数
+
+#### 特征
+
+* 相当于把内联函数里面的内容写在调用内联函数处；
+* 相当于不用执行进入函数的步骤，直接执行函数体；
+* 相当于宏，却比宏多了类型检查，真正具有函数特性；
+* 不能包含循环、递归、switch等复杂操作。
+
+#### 使用
+
+```cpp
+// 声明1（加inline，建议使用）
+inline int functionName(int first, int secend,...);
+
+// 声明2（不加inline）
+int functionName(int first, int secend,...);
+
+// 定义
+inline int functionName(int first, int secend,...) {/****/};
+```
+
+#### 编译器对inline函数的处理步骤
+
+1. 将inline函数体复制到inline函数调用点处； 
+2. 为所用inline函数中的局部变量分配内存空间； 
+3. 将inline函数的的输入参数和返回值映射到调用方法的局部变量空间中； 
+4. 如果inline函数有多个返回点，将其转变为inline函数代码块末尾的分支（使用GOTO）。
+
+#### 优缺点
+
+优点
+
+1. 内联函数同宏函数一样将在被调用处进行代码展开，省去了参数压栈、栈帧开辟与回收，结果返回等，从而提高程序运行速度。
+2. 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换（同普通函数），而宏定义则不会。 
+3. 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能。
+4. 内联函数在运行时可调试，而宏定义不可以。
+
+缺点
+
+1. 代码膨胀。内联是以代码膨胀（复制）为代价，消除函数调用带来的开销。如果执行函数体内代码的时间，相比于函数调用的开销较大，那么效率的收获会很少。另一方面，每一处内联函数的调用都要复制代码，将使程序的总代码量增大，消耗更多的内存空间。
+2. inline函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像non-inline可以直接链接。
+3. 是否内联，程序员不可控。内联函数只是对编译器的建议，是否对函数内联，决定权在于编译器。
+
+### Effective C++
+
+1. 视C++为一个语言联邦（C、Object-Oriented C++、Template C++、STL）
+2. 尽量以`const`、`enum`、`inline`替换`#define`（宁可以编译器替换预处理器）
+3. 尽可能使用const
+4. 确定对象被使用前已先被初始化
+5. 了解C++默默编写并调用哪些函数（编译器暗自为class创建default构造函数、copy构造函数、copy assignment操作符、析构函数）
+6. 
+
 
 ## STL
 
@@ -377,7 +479,10 @@ typedef struct BiTNode
 * [53. Maximum Subarray](Problems/LeetcodeProblems/53-maximum-subarray.h)
 * [66. Plus One](Problems/LeetcodeProblems/66-plus-one.h)
 * [88. Merge Sorted Array](Problems/LeetcodeProblems/88-merge-sorted-array.h)
+* [118. Pascal's Triangle](Problems/LeetcodeProblems/118-pascals-triangle.h)
+* [119. Pascal's Triangle II](Problems/LeetcodeProblems/119-pascals-triangle-ii.h)
 * [121. Best Time to Buy and Sell Stock](Problems/LeetcodeProblems/121-best-time-to-buy-and-sell-stock.h)
+* [122. Best Time to Buy and Sell Stock II](Problems/LeetcodeProblems/122-best-time-to-buy-and-sell-stock-ii.h)
 * [169. Majority Element](Problems/LeetcodeProblems/169-majority-element.h)
 * [283. Move Zeroes](Problems/LeetcodeProblems/283-move-zeroes.h)
 
@@ -394,6 +499,28 @@ typedef struct BiTNode
 * TCP和UDP的区别
 * socket套接字
 * HTTP返回码
+
+### 概念
+
+* TCP（Transmission Control Protocol，传输控制协议，在运输层）是一种面向连接的、可靠的、基于字节流的传输层通信协议。
+* UDP（User Datagram Protocol，用户数据报协议，在运输层）是OSI（Open System Interconnection 开放式系统互联） 参考模型中一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。
+* IP（Internet Protocol，网际协议，在网络层）是为计算机网络相互连接进行通信而设计的协议。
+* Socket 建立网络通信连接至少要一对端口号(socket)。socket本质是编程接口(API)，对TCP/IP的封装，TCP/IP也要提供可供程序员做网络开发所用的接口，这就是Socket编程接口。
+
+
+[linux网络编程之TCP/IP基础（一）：TCP/IP协议栈与数据报封装](http://blog.csdn.net/jnu_simba/article/details/8957242)
+
+### ISO/OSI参考模型
+
+OSI（open system interconnection）开放系统互联模型是由ISO（International Organization for Standardization）国际标准化组织定义的网络分层模型，共七层，如下图
+
+![ISO/OSI七层网络模型](images/ISOOSI七层网络模型.png)
+
+### TCP/IP协议四层模型
+
+TCP/IP网络协议栈分为应用层（Application）、传输层（Transport）、网络层（Network）和链路层（Link）四层。如下图所示
+
+![TCP/IP协议四层模型](images/TCPIP协议四层模型.png)
 
 ### HTTP
 
@@ -413,7 +540,7 @@ typedef struct BiTNode
 * 200 OK: 请求成功
 * 301 Moved Permanently: 永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替
 * 400 Bad Request: 客户端请求的语法错误，服务器无法理解
-* 401 Unauthorized: 	请求要求用户的身份认证
+* 401 Unauthorized: 请求要求用户的身份认证
 * 403 Forbidden: 服务器理解请求客户端的请求，但是拒绝执行此请求
 * 404 Not Found: 服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置"您所请求的资源无法找到"的个性页面
 * 408 Request Timeout: 服务器等待客户端发送的请求时间过长，超时
@@ -421,15 +548,67 @@ typedef struct BiTNode
 * 503 Service Unavailable: 由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中
 * 504 Gateway Timeout: 充当网关或代理的服务器，未及时从远端服务器获取请求
 
+## 网络编程
+
+### Socket
+
+[Linux Socket编程（不限Linux）](https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html)
+
+![Socket客户端服务器通讯](images/socket客户端服务器通讯.jpg)
+
+
+#### Socket 中的 read()、write() 函数
+
+```cpp
+ssize_t read(int fd, void *buf, size_t count);
+ssize_t write(int fd, const void *buf, size_t count);
+```
+
+* read函数是负责从fd中读取内容.当读成功时，read返回实际所读的字节数。如果返回的值是0表示已经读到文件的结束了，小于0表示出现了错误。如果错误为EINTR说明读是由中断引起的，如果是ECONNREST表示网络连接出了问题。
+* write函数将buf中的nbytes字节内容写入文件描述符fd。成功时返回写的字节数。失败时返回-1，并设置errno变量。在网络程序中，当我们向套接字文件描述符写时有俩种可能。（1）write的返回值大于0，表示写了部分或者是全部的数据。（2）返回的值小于0，此时出现了错误。我们要根据错误类型来处理。如果错误为EINTR表示在写的时候出现了中断错误。如果为EPIPE表示网络连接出现了问题（对方已经关闭了连接）。
+
+#### socket中TCP的三次握手建立连接
+
+我们知道tcp建立连接要进行“三次握手”，即交换三个分组。大致流程如下：
+
+1. 客户端向服务器发送一个SYN J
+2. 服务器向客户端响应一个SYN K，并对SYN J进行确认ACK J+1
+3. 客户端再想服务器发一个确认ACK K+1
+
+只有就完了三次握手，但是这个三次握手发生在socket的那几个函数中呢？请看下图：
+
+![socket中发送的TCP三次握手](http://images.cnblogs.com/cnblogs_com/skynet/201012/201012122157467258.png)
+
+从图中可以看出：
+1. 当客户端调用connect时，触发了连接请求，向服务器发送了SYN J包，这时connect进入阻塞状态；  
+2. 服务器监听到连接请求，即收到SYN J包，调用accept函数接收请求向客户端发送SYN K ，ACK J+1，这时accept进入阻塞状态；  
+3. 客户端收到服务器的SYN K ，ACK J+1之后，这时connect返回，并对SYN K进行确认；  
+4. 服务器收到ACK K+1时，accept返回，至此三次握手完毕，连接建立。
+
+#### socket中TCP的四次握手释放连接
+
+上面介绍了socket中TCP的三次握手建立过程，及其涉及的socket函数。现在我们介绍socket中的四次握手释放连接的过程，请看下图：
+
+![socket中发送的TCP四次握手](http://images.cnblogs.com/cnblogs_com/skynet/201012/201012122157487616.png)
+
+图示过程如下：
+
+1. 某个应用进程首先调用close主动关闭连接，这时TCP发送一个FIN M；
+2. 另一端接收到FIN M之后，执行被动关闭，对这个FIN进行确认。它的接收也作为文件结束符传递给应用进程，因为FIN的接收意味着应用进程在相应的连接上再也接收不到额外数据；
+3. 一段时间之后，接收到文件结束符的应用进程调用close关闭它的socket。这导致它的TCP也发送一个FIN N；
+4. 接收到这个FIN的源发送端TCP对它进行确认。
+
+这样每个方向上都有一个FIN和ACK。
+
 ## 数据库
 
 * 数据库事务四大特性：原子性、一致性、分离性、持久性
 * 数据库索引：顺序索引 B+树索引 hash索引
 [MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
+* [SQL 约束 (Constraints)](http://www.w3school.com.cn/sql/sql_constraints.asp)
+
 
 ## 设计模式
-
-## 网络编程
 
 ## 链接装载库
 
@@ -668,6 +847,11 @@ MODULE_API int module_init()
 
 * [ 海量数据处理面试题集锦](http://blog.csdn.net/v_july_v/article/details/6685962)
 * [十道海量数据处理面试题与十个方法大总结](http://blog.csdn.net/v_JULY_v/article/details/6279498)
+
+## 音视频
+
+* [最全实时音视频开发要用到的开源工程汇总](http://www.yunliaoim.com/im/1869.html)
+* [18个实时音视频开发中会用到开源项目](http://webrtc.org.cn/18%E4%B8%AA%E5%AE%9E%E6%97%B6%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BC%9A%E7%94%A8%E5%88%B0%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/)
 
 ## 其他
 
