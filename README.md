@@ -878,12 +878,12 @@ MODULE_API int module_init()
 
 ## 招聘时间岗位
 
-[2018 IT名企校招指南](https://www.nowcoder.com/activity/campus2018)
+[牛客网 . 2018 IT名企校招指南](https://www.nowcoder.com/activity/campus2018)
 
 ## 面试题目经验
 
 * [牛客网 . 2017秋季校园招聘笔经面经专题汇总](https://www.nowcoder.com/discuss/12805)
-* [互联网求职路上，你见过哪些写得很好、很用心的面经？最好能分享自己的面经、心路历程。](https://www.zhihu.com/question/29693016)
+* [知乎 . 互联网求职路上，你见过哪些写得很好、很用心的面经？最好能分享自己的面经、心路历程。](https://www.zhihu.com/question/29693016)
 * [知乎 . 互联网公司最常见的面试算法题有哪些？](https://www.zhihu.com/question/24964987)
 * [知乎 . 面试 C++ 程序员，什么样的问题是好问题？](https://www.zhihu.com/question/20184857)
 * [cnblogs . C++面试集锦( 面试被问到的问题 )](https://www.cnblogs.com/Y1Focus/p/6707121.html)
