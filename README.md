@@ -162,8 +162,8 @@ assert( p != NULL );
 如
 
 ```cpp
-#pragma pack(push) //保存对齐状态
-#pragma pack(4)//设定为4字节对齐
+#pragma pack(push)  //保存对齐状态
+#pragma pack(4)     //设定为4字节对齐
 
 struct test
 {
@@ -172,7 +172,7 @@ struct test
     int m3;
 };
 
-#pragma pack(pop)//恢复对齐状态
+#pragma pack(pop)   //恢复对齐状态
 ```
 
 ### extern "C"
@@ -367,46 +367,6 @@ int main() {
 
 * 宏定义可以实现类似于函数的功能，但是它终归不是函数，而宏定义中括弧中的“参数”也不是真的参数，在宏展开的时候对“参数”进行的是一对一的替换。 
 
-### 内存分配和管理
-
-#### malloc、calloc、realloc、alloca
-
-1. malloc：申请指定字节数的内存。申请到的内存中的初始值不确定。
-2. calloc：为指定长度的对象，分配能容纳其指定个数的内存。申请到的内存的每一位(bit)都初始化为0
-3. realloc：更改以前分配的内存长度(增加或减少)。当增加长度时，可能需将以前分配区的内容移到另一个足够大的区域，而新增区域内的初始值则不确定
-4. alloca：在栈上申请内存。程序在出栈的时候，会自动释放内存。但是需要注意的是，alloca不具可移植性, 而且在没有传统堆栈的机器上很难实现。alloca不宜使用在必须广泛移植的程序中,。C99中支持变长数组(VLA), 可以用来替代alloca()。
-
-#### malloc、free
-
-申请内存，确认是否申请成功
-
-```cpp
-char *str = (char*) malloc(100);
-assert(str != nullptr);
-```
-
-释放内存后指针置空
-
-```cpp
-free(p); 
-p = nullptr;
-```
-
-#### new、delete
-
-1. new/new[]：完成两件事，先底层调用malloc分了配内存，然后创建一个对象（调用构造函数）。
-2. delete/delete[]：也完成两件事，先调用析构函数（清理资源），然后底层调用free释放空间。
-3. new在申请内存时会自动计算所需字节数，而malloc则需我们自己输入申请内存空间的字节数。
-
-```cpp
-int main()
-{
-    T* t = new T(); // 先内存分配 ，再构造函数
-    delete t; // 先析构函数，再内存释放
-    return 0;
-}
-```
-
 ### 初始化列表
 
 好处
@@ -553,6 +513,66 @@ virtual int A() = 0;
         Data vall = { 0, "Anna" };
         ```
 
+### 内存分配和管理
+
+#### malloc、calloc、realloc、alloca
+
+1. malloc：申请指定字节数的内存。申请到的内存中的初始值不确定。
+2. calloc：为指定长度的对象，分配能容纳其指定个数的内存。申请到的内存的每一位(bit)都初始化为0
+3. realloc：更改以前分配的内存长度(增加或减少)。当增加长度时，可能需将以前分配区的内容移到另一个足够大的区域，而新增区域内的初始值则不确定
+4. alloca：在栈上申请内存。程序在出栈的时候，会自动释放内存。但是需要注意的是，alloca不具可移植性, 而且在没有传统堆栈的机器上很难实现。alloca不宜使用在必须广泛移植的程序中,。C99中支持变长数组(VLA), 可以用来替代alloca()。
+
+#### malloc、free
+
+申请内存，确认是否申请成功
+
+```cpp
+char *str = (char*) malloc(100);
+assert(str != nullptr);
+```
+
+释放内存后指针置空
+
+```cpp
+free(p); 
+p = nullptr;
+```
+
+#### new、delete
+
+1. new/new[]：完成两件事，先底层调用malloc分了配内存，然后创建一个对象（调用构造函数）。
+2. delete/delete[]：也完成两件事，先调用析构函数（清理资源），然后底层调用free释放空间。
+3. new在申请内存时会自动计算所需字节数，而malloc则需我们自己输入申请内存空间的字节数。
+
+```cpp
+int main()
+{
+    T* t = new T(); // 先内存分配 ，再构造函数
+    delete t; // 先析构函数，再内存释放
+    return 0;
+}
+```
+
+### 智能指针
+
+#### C++标准库（STL）中
+
+头文件：`#include <memory>`
+
+##### C++98
+
+```cpp
+std::auto_ptr<std::string> ps (new std::string(str))；
+```
+
+##### C++11
+
+1. shared_ptr
+2. unique_ptr
+3. weak_ptr
+4. auto_ptr
+
+
 ### 运行时类型识别（RTTI）
 
 ```cpp
@@ -622,7 +642,7 @@ typeid 注意事项：
 3. 尽可能使用const
 4. 确定对象被使用前已先被初始化
 5. 了解C++默默编写并调用哪些函数（编译器暗自为class创建default构造函数、copy构造函数、copy assignment操作符、析构函数）
-6. 
+
 
 ### Google C++ Style Guide
 
