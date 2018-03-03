@@ -234,7 +234,7 @@ struct Student {
     int age; 
 };
 
-void f( Student me ); // 正确，"struct" 关键字可省略
+void f( Student me );       // 正确，"struct" 关键字可省略
 ```
 
 二、若定义了与 `Student` 同名函数之后，则 `Student` 只代表函数，不代表结构体，如下：
@@ -244,13 +244,13 @@ typedef struct Student {
     int age; 
 } S;
 
-void Student() {} // 正确，定义后 "Student" 只代表此函数
+void Student() {}           // 正确，定义后 "Student" 只代表此函数
 
-//void S() {} // 错误，符号 "S" 已经被定义为一个 "struct Student" 的别名
+//void S() {}               // 错误，符号 "S" 已经被定义为一个 "struct Student" 的别名
 
 int main() {
     Student(); 
-    struct Student me; // 或者 "S me";
+    struct Student me;      // 或者 "S me";
     return 0;
 }
 ```
@@ -454,8 +454,8 @@ int main()
 {
     Shape * shape1 = new Circle(4.0);
     Shape * shape2 = new Rect(5.0, 6.0);
-    shape1->calcArea();     //调用圆形类里面的方法
-    shape2->calcArea();     //调用矩形类里面的方法
+    shape1->calcArea();         //调用圆形类里面的方法
+    shape2->calcArea();         //调用矩形类里面的方法
     return 0；
 }
 ```
@@ -466,11 +466,11 @@ int main()
 class Shape
 {
 public:
-    Shape();        //构造函数不能是虚函数
+    Shape();                //构造函数不能是虚函数
     virtual double calcArea();
-    virtual ~Shape();    //虚析构函数
+    virtual ~Shape();       //虚析构函数
 }
-class Circle : public Shape     //圆形类
+class Circle : public Shape //圆形类
 {
 public:
     virtual double calcArea();
@@ -480,7 +480,7 @@ int main()
 {
     Shape * shape1 = new Circle(4.0);
     shape1->calcArea();    
-    delete shape1;      //因为是虚析构函数，所以调用子类析构函数后，也调用父类析构函数。
+    delete shape1;          //因为是虚析构函数，所以调用子类析构函数后，也调用父类析构函数。
     shape1 = NULL;
     return 0；
 }
@@ -547,8 +547,8 @@ p = nullptr;
 ```cpp
 int main()
 {
-    T* t = new T(); // 先内存分配 ，再构造函数
-    delete t; // 先析构函数，再内存释放
+    T* t = new T();     // 先内存分配 ，再构造函数
+    delete t;           // 先析构函数，再内存释放
     return 0;
 }
 ```
@@ -579,20 +579,20 @@ std::auto_ptr<std::string> ps (new std::string(str))；
 class Flyable                       //【能飞的】
 {
 public:
-    virtual void takeoff() = 0;    //起飞
-    virtual void land() = 0;       //降落
+    virtual void takeoff() = 0;     // 起飞
+    virtual void land() = 0;        // 降落
 }
 class Bird : public Flyable         //【鸟】
 {
 public:
-    void foraging() {...}           //觅食
+    void foraging() {...}           // 觅食
     virtual void takeoff() {...}
     virtual void land() {...}
 }
 class Plane : public Flyable        //【飞机】
 {
 public:
-    void carry() {...}              //运输
+    void carry() {...}              // 运输
     virtual void take off() {...}
     virtual void land() {...}
 }
@@ -609,13 +609,13 @@ private:
     ...
 }
 
-class doSomething(Flyable *obj)     //【做些事情】
+class doSomething(Flyable *obj)                 //【做些事情】
 {
     obj->takeoff();
 
-    cout << typeid(*obj).name() << endl;    //输出传入对象类型（Bird or Plane）
+    cout << typeid(*obj).name() << endl;        //输出传入对象类型（Bird or Plane）
 
-    if(typeid(*obj) == typeid(Bird))    //判断对象类型
+    if(typeid(*obj) == typeid(Bird))            //判断对象类型
     {
         Bird *bird = dynamic_cast<Bird *>(obj); //对象转化
         bird->foraging();
