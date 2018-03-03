@@ -164,12 +164,14 @@ assert( p != NULL );
 ```cpp
 #pragma pack(push) //保存对齐状态
 #pragma pack(4)//设定为4字节对齐
+
 struct test
 {
-char m1;
-double m4;
-int m3;
+    char m1;
+    double m4;
+    int m3;
 };
+
 #pragma pack(pop)//恢复对齐状态
 ```
 
