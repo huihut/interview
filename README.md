@@ -234,7 +234,7 @@ struct Student {
     int age; 
 };
 
-void f( Student me ); // 正确，“struct” 关键字可省略
+void f( Student me ); // 正确，"struct" 关键字可省略
 ```
 
 二、若定义了与 `Student` 同名函数之后，则 `Student` 只代表函数，不代表结构体，如下：
@@ -244,13 +244,13 @@ typedef struct Student {
     int age; 
 } S;
 
-void Student() {} // 正确，定义后 `Student` 只代表此函数
+void Student() {} // 正确，定义后 "Student" 只代表此函数
 
-//void S() {} // 错误，符号 “S” 已经被定义为一个 “struct Student” 的别名
+//void S() {} // 错误，符号 "S" 已经被定义为一个 "struct Student" 的别名
 
 int main() {
     Student(); 
-    struct Student me; // 或者 S me;
+    struct Student me; // 或者 "S me";
     return 0;
 }
 ```
@@ -275,28 +275,30 @@ explicit修饰的构造函数可用来防止隐式转换
 class Test1
 {
 public:
-    Test1(int n)
+    Test1(int n)            //普通构造函数
     {
         num=n;
-    }//普通构造函数
+    }
 private:
     int num;
 };
+
 class Test2
 {
 public:
-    explicit Test2(int n)
+    explicit Test2(int n)   //explicit(显式)构造函数
     {
         num=n;
-    }//explicit(显式)构造函数
+    }
 private:
     int num;
 };
+
 int main()
 {
-    Test1 t1=12;//隐式调用其构造函数,成功
-    Test2 t2=12;//编译错误,不能隐式调用其构造函数
-    Test2 t2(12);//显式调用成功
+    Test1 t1=12;            //隐式调用其构造函数,成功
+    Test2 t2=12;            //编译错误,不能隐式调用其构造函数
+    Test2 t2(12);           //显式调用成功
     return 0;
 }
 ```
@@ -344,9 +346,9 @@ cin >> x;
 cout << x << endl;
 ```
 
-### ::范围解析运算符
+### :: 范围解析运算符
 
-::可以加在类型名称（类、类成员、成员函数、变量等）前，表示作用域为全局命名空间
+`::` 可以加在类型名称（类、类成员、成员函数、变量等）前，表示作用域为全局命名空间
 
 如
 
@@ -626,7 +628,7 @@ typeid 注意事项：
 
 ![Google C++ Style Guide](http://img.blog.csdn.net/20140713220242000)
 
-> 原文地址：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](http://blog.csdn.net/voidccc/article/details/37599203)
+> 原图地址：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](http://blog.csdn.net/voidccc/article/details/37599203)
 
 ## STL
 
