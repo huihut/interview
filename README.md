@@ -1,4 +1,3 @@
-
 ## 目录
 
 * [C/C++](#cc)
@@ -19,23 +18,8 @@
 * [招聘时间岗位](#%E6%8B%9B%E8%81%98%E6%97%B6%E9%97%B4%E5%B2%97%E4%BD%8D)
 * [面试题目经验](#%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E7%BB%8F%E9%AA%8C)
 
-----
 
 ## C/C++
-
-* 封装
-* 继承
-* 多态
-* 虚函数
-* 内存分配和管理
-* extern"C"
-* const作用
-* 什么是面向对象（OOP）
-* new、malloc、alloca的区别
-* 运行时类型识别（RTTI）
-* 友元类和友元函数
-* struct和class的区别
-* this指针
 
 ### const
 
@@ -53,7 +37,7 @@ public:
 
     // const可用于对重载函数的区分
     int getValue();             // 普通成员函数
-    int getValue() const;       // 常成员函数
+    int getValue() const;       // 常成员函数，不得修改类中的任何数据成员的值
 };
 
 void function()
@@ -83,6 +67,34 @@ const int function5();      // 返回一个常数
 const int* function6();     // 返回一个指向常量的指针变量，使用：const int *p = function6();
 int* const function7();     // 返回一个指向变量的常指针，使用：int* const p = function7();
 ```
+
+#### 作用
+
+1. 修饰变量，说明该变量不可以被改变；
+2. 修饰指针，分为指向常量的指针和指针常量；
+3. 常量引用，经常用于形参类型，即避免了拷贝，又避免了函数对值的修改；
+4. 修饰成员函数，说明该成员函数内不能修改成员变量。
+
+### static
+
+#### 作用
+
+1. 修饰普通变量，修改变量的存储区域和生命周期，使变量存储在静态区，在main函数运行前就分配了空间，如果有初始值就用初始值初始化它，如果没有初始值系统用默认值初始化它。
+2. 修饰普通函数，表明函数的作用范围，仅在定义该函数的文件内才能使用。在多人开发项目时，为了防止与他人命令函数重名，可以将函数定位为static。
+3. 修饰成员变量，修饰成员变量使所有的对象只保存一个该变量，而且不需要生成对象就可以访问该成员。
+4. 修饰成员函数，修饰成员函数使得不需要生成对象就可以访问该函数，但是在static函数内不能访问非静态成员。
+
+### this 指针
+
+1. `this` 指针是一个隐含于每一个成员函数中的特殊指针。它指向正在被该成员函数操作的那个对象。
+2. 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 `this` 指针，然后调用成员函数，每次成员函数存取数据成员时，由隐含使用 `this` 指针。
+3. 当一个成员函数被调用时，自动向它传递一个隐含的参数，该参数是一个指向这个成员函数所在的对象的指针。
+4. `this` 指针被隐含地声明为: `ClassName *const this`，这意味着不能给 `this` 指针赋值；在 `ClassName` 类的 `const` 成员函数中，`this` 指针的类型为：`const ClassName* const`，这说明不能对 `this` 指针所指向的这种对象是不可修改的（即不能对这种对象的数据成员进行赋值操作）；
+5. 由于 `this` 并不是一个常规变量，所以，不能取得 `this` 的地址。
+6. 在以下场景中，经常需要显式引用 `this` 指针：
+        1. 为实现对象的链式引用；
+        2. 为避免对同一对象进行赋值操作；
+        3. 在实现一些数据结构时，如 `list`。
 
 ### inline 内联函数
 
@@ -128,6 +140,477 @@ inline int functionName(int first, int secend,...) {/****/};
 2. inline函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像non-inline可以直接链接。
 3. 是否内联，程序员不可控。内联函数只是对编译器的建议，是否对函数内联，决定权在于编译器。
 
+### assert()
+
+断言，是宏，而非函数。assert宏的原型定义在`<assert.h>`中，其作用是如果它的条件返回错误，则终止程序执行。
+
+如
+
+```cpp
+assert( p != NULL );
+```
+
+### sizeof()
+
+* sizeof对数组，得到整个数组所占空间大小。
+* sizeof对指针，得到指针本身所占空间大小。
+
+### #pragma pack(n)
+
+设定结构体、联合以及类成员变量以n字节方式对齐
+
+如
+
+```cpp
+#pragma pack(push) //保存对齐状态
+#pragma pack(4)//设定为4字节对齐
+struct test
+{
+char m1;
+double m4;
+int m3;
+};
+#pragma pack(pop)//恢复对齐状态
+```
+
+### extern "C"
+
+* 被extern限定的函数或变量是extern类型的
+* 被extern "C"修饰的变量和函数是按照C语言方式编译和连接的
+
+extern "C" 的作用是让C++编译器将 `extern "C"` 声明的代码当作C语言代码处理，可以避免C++因符号修饰导致代码不能和C语言库中的符号进行链接的问题。
+
+```cpp
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void *memset(void *, int, size_t);
+
+#ifdef __cplusplus
+}
+#endif
+```
+
+### struct 和 typedef struct
+
+#### C 中
+
+```c
+// c
+typedef struct Student {
+    int age; 
+} S;
+```
+
+等价于
+
+```c
+// c
+struct Student { 
+    int age; 
+};
+
+typedef struct Student S;
+```
+
+此时 `S` 等价于 `struct Student`，但两个标识符名称空间不相同。
+
+另外还可以定义与 `struct Student` 不冲突的 `void Student() {}`。
+
+#### C++ 中
+
+由于编译器定位符号的规则（搜索规则）改变，导致不同于C语言。
+
+一、如果在类标识符空间定义了 `struct Student {...};`，使用 `Student me;` 时，编译器将搜索全局标识符表，`Student` 未找到，则在类标识符内搜索。
+
+即表现为可以使用 `Student` 也可以使用 `struct Student`，如下：
+
+```cpp
+// cpp
+struct Student { 
+    int age; 
+};
+
+void f( Student me ); // 正确，“struct” 关键字可省略
+```
+
+二、若定义了与 `Student` 同名函数之后，则 `Student` 只代表函数，不代表结构体，如下：
+
+```cpp
+typedef struct Student { 
+    int age; 
+} S;
+
+void Student() {} // 正确，定义后 `Student` 只代表此函数
+
+//void S() {} // 错误，符号 “S” 已经被定义为一个 “struct Student” 的别名
+
+int main() {
+    Student(); 
+    struct Student me; // 或者 S me;
+    return 0;
+}
+```
+
+### C++ 中 struct 和 class
+
+总的来说，struct更适合看成是一个数据结构的实现体，class更适合看成是一个对象的实现体。
+
+#### 区别
+
+* 最本质的一个区别就是默认的访问控制
+    1. 默认的继承访问权限。struct是public的，class是private的。  
+    2. struct作为数据结构的实现体，它默认的数据访问控制是public的，而class作为对象的实现体，它默认的成员变量访问控制是private的。
+
+### explicit （显式）构造函数
+
+explicit修饰的构造函数可用来防止隐式转换
+
+如下
+
+```cpp
+class Test1
+{
+public:
+    Test1(int n)
+    {
+        num=n;
+    }//普通构造函数
+private:
+    int num;
+};
+class Test2
+{
+public:
+    explicit Test2(int n)
+    {
+        num=n;
+    }//explicit(显式)构造函数
+private:
+    int num;
+};
+int main()
+{
+    Test1 t1=12;//隐式调用其构造函数,成功
+    Test2 t2=12;//编译错误,不能隐式调用其构造函数
+    Test2 t2(12);//显式调用成功
+    return 0;
+}
+```
+
+### frend 友元类和友元函数
+
+* 能访问私有成员  
+* 破坏封装性
+* 友元关系不可传递
+* 友元关系的单向性
+* 友元声明的形式及数量不受限制
+
+### using 引入命名空间成员
+
+```cpp
+using namespace_name::name
+```
+
+#### 尽量不要使用`using namespace std;`污染命名空间
+
+> 一般说来，使用using命令比使用using编译命令更安全，这是由于它**只导入了制定的名称**。如果该名称与局部名称发生冲突，编译器将**发出指示**。using编译命令导入所有的名称，包括可能并不需要的名称。如果与局部名称发生冲突，则**局部名称将覆盖名称空间版本**，而编译器**并不会发出警告**。另外，名称空间的开放性意味着名称空间的名称可能分散在多个地方，这使得难以准确知道添加了哪些名称。
+
+尽量不要使用
+
+```cpp
+using namespace std;
+```
+
+应该使用
+
+```cpp
+int x;
+std::cin >> x ;
+std::cout << x << std::endl;
+```
+
+或者
+
+```cpp
+using std::cin;
+using std::cout;
+using std::endl;
+int x;
+cin >> x;
+cout << x << endl;
+```
+
+### ::范围解析运算符
+
+::可以加在类型名称（类、类成员、成员函数、变量等）前，表示作用域为全局命名空间
+
+如
+
+```cpp
+int count = 0;      // global count
+
+int main() {
+  int count = 0;    // local count
+  ::count = 1;      // set global count to 1
+  count = 2;        // set local count to 2
+  return 0;
+}
+```
+
+### 宏
+
+* 宏定义可以实现类似于函数的功能，但是它终归不是函数，而宏定义中括弧中的“参数”也不是真的参数，在宏展开的时候对“参数”进行的是一对一的替换。 
+
+### 内存分配和管理
+
+#### malloc、calloc、realloc、alloca
+
+1. malloc：申请指定字节数的内存。申请到的内存中的初始值不确定。
+2. calloc：为指定长度的对象，分配能容纳其指定个数的内存。申请到的内存的每一位(bit)都初始化为0
+3. realloc：更改以前分配的内存长度(增加或减少)。当增加长度时，可能需将以前分配区的内容移到另一个足够大的区域，而新增区域内的初始值则不确定
+4. alloca：在栈上申请内存。程序在出栈的时候，会自动释放内存。但是需要注意的是，alloca不具可移植性, 而且在没有传统堆栈的机器上很难实现。alloca不宜使用在必须广泛移植的程序中,。C99中支持变长数组(VLA), 可以用来替代alloca()。
+
+#### malloc、free
+
+申请内存，确认是否申请成功
+
+```cpp
+char *str = (char*) malloc(100);
+assert(str != nullptr);
+```
+
+释放内存后指针置空
+
+```cpp
+free(p); 
+p = nullptr;
+```
+
+#### new、delete
+
+1. new/new[]：完成两件事，先底层调用malloc分了配内存，然后创建一个对象（调用构造函数）。
+2. delete/delete[]：也完成两件事，先调用析构函数（清理资源），然后底层调用free释放空间。
+3. new在申请内存时会自动计算所需字节数，而malloc则需我们自己输入申请内存空间的字节数。
+
+```cpp
+int main()
+{
+    T* t = new T(); // 先内存分配 ，再构造函数
+    delete t; // 先析构函数，再内存释放
+    return 0;
+}
+```
+
+### 初始化列表
+
+好处
+
+* 更高效：少了一次调用默认构造函数的过程。
+* 有些场合必须要用初始化列表：
+  1. 常量成员，因为常量只能初始化不能赋值，所以必须放在初始化列表里面
+  2. 引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面
+  3. 没有默认构造函数的类类型，因为使用初始化列表可以不必调用默认构造函数来初始化，而是直接调用拷贝构造函数初始化。
+
+
+### 面向对象
+
+面向对象程序设计（Object-oriented programming，OOP）是种具有对象概念的程序编程典范，同时也是一种程序开发的抽象方针。
+
+![面向对象特征](http://img.my.csdn.net/uploads/201211/22/1353564524_6375.png)
+
+面向对象三大特征 —— 封装、继承、多态
+
+### 封装
+
+* 把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。
+* 关键字：public, protected, friendly, private。不写默认为 friendly。
+
+| 关键字 | 当前类 | 包内 | 子孙类 | 包外 |
+| --- | --- | --- | --- | --- |
+| public | √ | √ | √ | √ |
+| protected | √ | √ | √ | × |
+| friendly | √ | √ | × | × |
+| private | √ | × | × | × |
+
+### 继承
+
+* 基类（子类）——&gt; 派生类（父类）
+
+### 多态
+
+* 多态，即多种状态，在面向对象语言中，接口的多种不同的实现方式即为多态。多态性在C++中是通过虚函数来实现的。
+* 多态是以封装和继承为基础的。
+
+#### 静态多态（早绑定）
+
+```cpp
+class A
+{
+public:
+    void do(int a);
+    void do(int a, int b);
+}
+```
+
+#### 动态多态（晚绑定）
+
+* 用 virtual 修饰成员函数，使其成为虚函数
+
+**注意：**
+
+* 普通函数不能是虚函数
+* 静态函数不能是虚函数
+* 内联函数不能是虚函数
+* 构造函数不能是虚函数  
+
+```cpp
+class Shape     //形状类
+{
+public:
+    virtual double calcArea()
+    {
+        ...
+    }
+}
+class Circle : public Shape     //圆形类
+{
+public:
+    virtual double calcArea();
+    ...
+}
+class Rect : public Shape       //矩形类
+{
+public:
+    virtual double calcArea();
+    ...
+}
+int main()
+{
+    Shape * shape1 = new Circle(4.0);
+    Shape * shape2 = new Rect(5.0, 6.0);
+    shape1->calcArea();     //调用圆形类里面的方法
+    shape2->calcArea();     //调用矩形类里面的方法
+    return 0；
+}
+```
+
+* 虚析构函数
+
+```cpp
+class Shape
+{
+public:
+    Shape();        //构造函数不能是虚函数
+    virtual double calcArea();
+    virtual ~Shape();    //虚析构函数
+}
+class Circle : public Shape     //圆形类
+{
+public:
+    virtual double calcArea();
+    ...
+}
+int main()
+{
+    Shape * shape1 = new Circle(4.0);
+    shape1->calcArea();    
+    delete shape1;      //因为是虚析构函数，所以调用子类析构函数后，也调用父类析构函数。
+    shape1 = NULL;
+    return 0；
+}
+```
+
+* 纯虚函数 （含有纯虚函数的类叫做抽象类）
+
+```cpp
+virtual int A() = 0;
+```
+
+### 抽象类、接口类、聚合类
+
+* 抽象类：含有纯虚函数的类
+* 接口类：仅含有纯虚函数的抽象类
+* 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+    * 所有成员都是public
+    * 没有有定于任何构造函数
+    * 没有类内初始化
+    * 没有基类，也没有virtual函数
+    * 如：
+        ```cpp
+        //定义：
+        struct Date 
+        {
+            int ival;
+            string s;
+        }
+        //初始化：
+        Data vall = { 0, "Anna" };
+        ```
+
+### 运行时类型识别（RTTI）
+
+```cpp
+class Flyable                       //【能飞的】
+{
+public:
+    virtual void takeoff() = 0;    //起飞
+    virtual void land() = 0;       //降落
+}
+class Bird : public Flyable         //【鸟】
+{
+public:
+    void foraging() {...}           //觅食
+    virtual void takeoff() {...}
+    virtual void land() {...}
+}
+class Plane : public Flyable        //【飞机】
+{
+public:
+    void carry() {...}              //运输
+    virtual void take off() {...}
+    virtual void land() {...}
+}
+
+class type_info
+{
+public:
+    const char* name() const;
+    bool operator == (const type_info & rhs) const;
+    bool operator != (const type_info & rhs) const;
+    int before(const type_info & rhs) const;
+    virtual ~type_info();
+private:
+    ...
+}
+
+class doSomething(Flyable *obj)     //【做些事情】
+{
+    obj->takeoff();
+
+    cout << typeid(*obj).name() << endl;    //输出传入对象类型（Bird or Plane）
+
+    if(typeid(*obj) == typeid(Bird))    //判断对象类型
+    {
+        Bird *bird = dynamic_cast<Bird *>(obj); //对象转化
+        bird->foraging();
+    }
+
+    obj->land();
+}
+```
+
+dynamic\_cast 注意事项：
+* 只能应用于指针和引用的转化
+* 要转化的类型中必须包含虚函数
+* 转化成功返回子类的地址，转化失败返回NULL
+
+typeid 注意事项：
+* type\_id 返回一个 type\_info 对象的引用
+* 如果想通过基类的指针获得派生类的数据类型，基类必须带有虚函数
+* 只能获取对象的实际类型
+
 ### Effective C++
 
 1. 视C++为一个语言联邦（C、Object-Oriented C++、Template C++、STL）
@@ -137,8 +620,35 @@ inline int functionName(int first, int secend,...) {/****/};
 5. 了解C++默默编写并调用哪些函数（编译器暗自为class创建default构造函数、copy构造函数、copy assignment操作符、析构函数）
 6. 
 
+### Google C++ Style Guide
+
+![Google C++ Style Guide](http://img.blog.csdn.net/20140713220242000)
+
+> 原文地址：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](http://blog.csdn.net/voidccc/article/details/37599203)
 
 ## STL
+
+### 底层数据结构实现
+
+* vector：底层数据结构为数组，支持快速随机访问
+* list：底层数据结构为双向链表，支持快速增删
+* deque：底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问
+    * deque是一个双端队列(double-ended queue)，也是在堆中保存内容的.它的保存形式如下:
+    * [堆1] --> [堆2] -->[堆3] --> ...
+    * 每个堆保存好几个元素,然后堆和堆之间有指针指向,看起来像是list和vector的结合品.
+* stack：底层一般用list或deque实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时
+* queue：底层一般用list或deque实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时
+    * （stack和queue其实是适配器,而不叫容器，因为是对容器的再封装）
+* priority_queue：底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现
+* set：底层数据结构为红黑树，有序，不重复
+* multiset：底层数据结构为红黑树，有序，可重复
+* map：底层数据结构为红黑树，有序，不重复
+* multimap：底层数据结构为红黑树，有序，可重复
+* hash_set：底层数据结构为hash表，无序，不重复
+* hash_multiset：底层数据结构为hash表，无序，可重复 
+* hash_map：底层数据结构为hash表，无序，不重复
+* hash_multimap：底层数据结构为hash表，无序，可重复 
+
 
 ## 数据结构
 
@@ -460,13 +970,9 @@ typedef struct BiTNode
 ### Single Problem
 
 * [Chessboard Coverage Problem (棋盘覆盖问题)](Problems/ChessboardCoverageProblem)
-
 * [Knapsack Problem (背包问题)](Problems/KnapsackProblem)
-
 * [Neumann Neighbor Problem (冯诺依曼邻居问题)](Problems/NeumannNeighborProblem)
-
 * [Round Robin Problem (循环赛日程安排问题)](Problems/RoundRobinProblem)
-
 * [Tubing Problem (输油管道问题)](Problems/TubingProblem)
 
 ### Leetcode Problems
@@ -491,6 +997,7 @@ typedef struct BiTNode
 ## 操作系统
 
 * 进程间的通信方式（管道、有名管道、信号、共享内存、消息队列、信号量、套接字、文件）
+* 线程和进程的差异
 
 ## 计算机网络
 
@@ -701,22 +1208,6 @@ Symbol（符号名） | Symbol Value （地址）
 main| 0x100
 Add | 0x123
 ... | ...
-
-#### extern "C"
-
-extern "C" 的作用是让C++编译器将 `extern "C"` 声明的代码当作C语言代码处理，可以避免C++因符号修饰导致代码不能和C语言库中的符号进行链接的问题。
-
-```cpp
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void *memset(void *, int, size_t);
-
-#ifdef __cplusplus
-}
-#endif
-```
 
 ### Linux的共享库（Shared Library）
 
