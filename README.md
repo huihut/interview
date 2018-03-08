@@ -648,7 +648,7 @@ typeid 注意事项：
 
 ![Google C++ Style Guide](http://img.blog.csdn.net/20140713220242000)
 
-> 原图地址：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](http://blog.csdn.net/voidccc/article/details/37599203)
+> 图片来源于：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](http://blog.csdn.net/voidccc/article/details/37599203)
 
 ## STL
 
@@ -1025,34 +1025,182 @@ typedef struct BiTNode
 
 ## 计算机网络
 
-* TCP/IP
-* TCP协议
-* TCP三次握手
-* TCP和UDP的区别
-* socket套接字
-* HTTP返回码
+计算机经网络体系结构：
 
-### 概念
+![计算机经网络体系结构](images/计算机经网络体系结构.png)
 
-* TCP（Transmission Control Protocol，传输控制协议，在运输层）是一种面向连接的、可靠的、基于字节流的传输层通信协议。
-* UDP（User Datagram Protocol，用户数据报协议，在运输层）是OSI（Open System Interconnection 开放式系统互联） 参考模型中一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。
-* IP（Internet Protocol，网际协议，在网络层）是为计算机网络相互连接进行通信而设计的协议。
+
+### 物理层
+
+* 传输数据的单位 ———— 比特
+* 数据传输系统：源系统（源点、发送器） --> 传输系统 --> 目的系统（接收器、终点）
+
+通道：
+* 单向通道（单工通道）：只有一个方向通信，没有反方向交互，如广播
+* 双向交替通行（半双工通信）：通信双方都可发消息，但不能同时发送或接收
+* 双向同时通信（全双工通信）：通信双方可以同时发送和接收信息
+
+通道复用技术：
+* 频分复用（FDM，Frequency Division Multiplexing）：不同用户在不同频带，所用用户在同样时间占用不同带宽资源
+* 时分复用（TDM，Time Division Multiplexing）：不同用户在同一时间段的不同时间片，所有用户在不同时间占用同样的频带宽度
+* 波分复用（WDM，Wavelength Division Multiplexing）：光的频分复用
+* 码分复用（CDM，Code Division Multiplexing）：不同用户使用不同的码，可以在同样时间使用同样频带通信
+
+### 数据链路层
+
+主要信道：
+* 点对点信道
+* 广播信道
+
+#### 点对点信道
+
+* 数据单元 ———— 帧
+
+三个基本问题：
+* 封装成帧：把网络层的IP数据报封装成帧，`SOH - 数据部分 - EOT`
+* 透明传输：不管数据部分什么字符，都能传输出去；可以通过字节填充方法解决（冲突字符前加转义字符）
+* 差错检测：降低误码率（BER，Bit Error Rate），广泛使用循环冗余检测（CRC，Cyclic Redundancy Check）
+
+点对点协议（Point-to-Point Protocol）：
+* 点对点协议（Point-to-Point Protocol）：用户计算机和ISP通信时所使用的协议
+
+#### 广播信道
+
+广播通信：
+* 硬件地址（物理地址、MAC地址）
+* 单播（unicast）帧（一对一）：收到的帧的MAC地址与本站的硬件地址相同
+* 广播（broadcast）帧（一对全体）：发送给本局域网上所有站点的帧
+* 多播（multicast）帧（一对多）：发送给本局域网上一部分站点的帧
+
+### 网络层
+
+* IP（Internet Protocol，网际协议）是为计算机网络相互连接进行通信而设计的协议。
+* ARP（Address Resolution Protocol，地址解析协议）
+* ICMP（Internet Control Message Protocol，网际控制报文协议）
+* IGMP（Internet Group Management Protocol，网际组管理协议）
+
+#### IP 网际协议
+
+IP地址分类：
+* IP地址 ::= {<网络号>,<主机号>}
+
+
+IP地址类别 | 网络号 | 网络范围 | 主机号 | IP地址范围
+---|---|---|---|---
+A 类 | 8bit，第一位固定为 0 | 0 —— 127 | 24bit | 1.0.0.0 —— 127.255.255.255
+B 类 | 16bit，前两位固定为  10 | 128.0 —— 191.255 | 16bit | 128.0.0.0 —— 191.255.255.255
+C  类 | 24bit，前三位固定为  110 | 192.0.0 —— 223.255.255 | 8bit | 192.0.0.0 —— 223.255.255.255
+D  类 | 前四位固定为 1110，后面为多播地址
+E  类 | 前五位固定为 11110，后面保留为今后所用
+
+IP 数据报格式：
+
+![IP数据报格式](images/IP数据报格式.png)
+
+#### ICMP 网际控制报文协议
+
+ICMP 报文格式：
+
+![ICMP报文格式](images/ICMP报文格式.png)
+
+应用：
+* PING（Packet InterNet Groper，分组网间探测）测试两个主机之间的连通性
+    * TTL（Time To Live，生存时间）该字段指定IP包被路由器丢弃之前允许通过的最大网段数量
+
+#### 内部网关协议
+
+* RIP（Routing Information Protocol，路由信息协议）
+* OSPF（Open Sortest Path First，开放最短路径优先）
+
+#### 外部网关协议
+
+* BGP（Border Gateway Protocol，边界网关协议）
+
+#### IP多播
+
+* IGMP（Internet Group Management Protocol，网际组管理协议）
+* 多播路由选择协议
+
+#### VPN 和 NAT
+
+* VPN（Virtual Private Network，虚拟专用网）
+* NAT（Network Address Translation，网络地址转换）
+
+### 运输层
+
+协议：
+
+* TCP（Transmission Control Protocol，传输控制协议）
+* UDP（User Datagram Protocol，用户数据报协议）
+
+端口：
+
+应用程序 | FTP | TELNET | SMTP | DNS | TFTP | HTTP | HTTPS | SNMP
+---| --- | --- |--- |--- |--- |--- |--- |--- |--- |--- |---  
+端口号| 21 | 23 | 25 | 53 | 69 | 80 | 443 | 161
+
+#### TCP
+
+* TCP（Transmission Control Protocol，传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议，其传输的单位是报文段。
+
+特征：
+* 面向连接
+* 只能点对点（一对一）通信
+* 可靠交互
+* 全双工通信
+* 面向字节流
+
+特殊功能：
+* 超时重传
+* 流量控制
+* 拥塞控制
+
+TCP 报文结构
+
+![TCP报文](images/TCP报文.png)
+
+TCP 首部
+
+![TCP首部](images/TCP首部.png)
+
+#### UDP
+
+* UDP（User Datagram Protocol，用户数据报协议）是OSI（Open System Interconnection 开放式系统互联） 参考模型中一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务，其传输的单位是用户数据报。
+
+特征：
+* 无连接
+* 尽最大努力交付
+* 面向报文
+* 没有拥塞控制
+* 支持一对一、一对多、多对一、多对多的交互通信
+* 首部开销小
+
+UDP 报文结构
+
+![UDP报文](images/UDP报文.png)
+
+UDP 首部
+
+![UDP首部](images/UDP首部.png)
+
+> TCP/UDP 图片来源于：<https://github.com/JerryC8080/understand-tcp-udp>
+
+#### TCP传输连接管理
+
+##### TCP 三次握手建立连接
+
+![UDP报文](images/TCP三次握手建立连接.png)
+
+##### TCP 四次握手释放连接
+
+![UDP报文](images/TCP四次握手释放连接.png)
+
+### 应用层
+
+* HTTP（HyperText Transfer Protocol，超文本传输协议）是用于从WWW（World Wide Web，万维网）服务器传输超文本到本地浏览器的传送协议。
+* FTP（File Transfer Protocol，文件传输协议）用于Internet上的控制文件的双向传输。同时，它也是一个应用程序（Application）。
+* SMTP（Simple Mail Transfer Protocol，简单邮件传输协议）是一组用于由源地址到目的地址传送邮件的规则，由它来控制信件的中转方式。SMTP协议属于TCP/IP协议簇，它帮助每台计算机在发送或中转信件时找到下一个目的地。
 * Socket 建立网络通信连接至少要一对端口号(socket)。socket本质是编程接口(API)，对TCP/IP的封装，TCP/IP也要提供可供程序员做网络开发所用的接口，这就是Socket编程接口。
-
-
-[linux网络编程之TCP/IP基础（一）：TCP/IP协议栈与数据报封装](http://blog.csdn.net/jnu_simba/article/details/8957242)
-
-### ISO/OSI参考模型
-
-OSI（open system interconnection）开放系统互联模型是由ISO（International Organization for Standardization）国际标准化组织定义的网络分层模型，共七层，如下图
-
-![ISO/OSI七层网络模型](images/ISOOSI七层网络模型.png)
-
-### TCP/IP协议四层模型
-
-TCP/IP网络协议栈分为应用层（Application）、传输层（Transport）、网络层（Network）和链路层（Link）四层。如下图所示
-
-![TCP/IP协议四层模型](images/TCPIP协议四层模型.png)
 
 ### HTTP
 
