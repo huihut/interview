@@ -1195,6 +1195,8 @@ UDP 首部
 
 ![UDP报文](images/TCP四次握手释放连接.png)
 
+> 因为TCP三次握手建立连接、四次握手释放连接很重要，所以附上《计算机网络（第7版）-谢希仁》书中对此章的详细描述：<https://github.com/huihut/interview/blob/master/images/TCP-transport-connection-management.png>
+
 ### 应用层
 
 #### DNS
