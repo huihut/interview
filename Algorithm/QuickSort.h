@@ -4,7 +4,7 @@ void QuickSort(vector<int>& v, int low, int high) {
 		return;
 	int first = low;		// 低位下标
 	int last = high;		// 高位下标
-	float key = v[first];	// 设第一个为基准
+	int key = v[first];		// 设第一个为基准
 
 	while (first < last)
 	{
