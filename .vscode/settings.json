@@ -6,6 +6,11 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "iosfwd": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "algorithm": "cpp",
+        "streambuf": "cpp",
+        "tuple": "cpp",
+        "system_error": "cpp",
+        "xtr1common": "cpp"
     }
 }

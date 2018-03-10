@@ -977,17 +977,22 @@ typedef struct BiTNode
 
 ### 排序
 
-* [冒泡排序](Algorithm/BubbleSort.h)
-* [冒泡排序（改进版）](Algorithm/BubbleSort_orderly.h)
-* [选择排序](Algorithm/SelectionSort.h)
-* [快速排序](Algorithm/QuickSort.h)
-* [文件排序](Algorithm/FileSort)
+排序算法 | 平均时间复杂度 | 最差时间复杂度 | 空间复杂度 | 稳定性
+---|---|---|---|---
+[冒泡排序](Algorithm/BubbleSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定
+[冒泡排序（改进版）](Algorithm/BubbleSort_orderly.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定
+[选择排序](Algorithm/SelectionSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定
+[快速排序](Algorithm/QuickSort.h) | O(n*log<sub>2</sub>n) |  O(n<sup>2</sup>) | O(log<sub>2</sub>n)~O(n) | 不稳定
+[文件排序](Algorithm/FileSort) |
 
 ### 查找
 
-* [顺序查找](Algorithm/SequentialSearch.h)
-* [蛮力字符串匹配](Algorithm/BruteForceStringMatch.h)
-* [文件查找](Algorithm/FileSearch)
+查找算法 | 平均时间复杂度 | 空间复杂度 | 查找条件
+---|---|---|---
+[顺序查找](Algorithm/SequentialSearch.h) | O(n) | O(1) | 无序或有序
+[二分查找（折半查找）](Algorithm/BinarySearch.h) | O(log<sub>2</sub>n)| O(1) | 有序
+[蛮力字符串匹配](Algorithm/BruteForceStringMatch.h) | O(n*m) | 
+[文件查找](Algorithm/FileSearch) | 
 
 ## Problems
 
@@ -1162,6 +1167,14 @@ TCP 报文结构
 TCP 首部
 
 ![TCP首部](images/TCP首部.png)
+
+TCP：状态控制码（Code，Control Flag），占6比特，含义如下：
+* URG：紧急比特（urgent），当URG＝1时，表明紧急指针字段有效，代表该封包为紧急封包。它告诉系统此报文段中有紧急数据，应尽快传送(相当于高优先级的数据)， 且上图中的 Urgent Pointer 字段也会被启用。
+* ACK: 确认比特（Acknowledge）。只有当ACK＝1时确认号字段才有效，代表这个封包为确认封包。当ACK＝0时，确认号无效。
+* PSH: （Push function）若为1时，代表要求对方立即传送缓冲区内的其他对应封包，而无需等缓冲满了才送。
+* RST: 复位比特(Reset)，当RST＝1时，表明TCP连接中出现严重差错（如由于主机崩溃或其他原因），必须释放连接，然后再重新建立运输连接。
+* SYN: 同步比特(Synchronous)，SYN置为1，就表示这是一个连接请求或连接接受报文，通常带有 SYN 标志的封包表示『主动』要连接到对方的意思。
+* FIN: 终止比特(Final)，用来释放一个连接。当FIN＝1时，表明此报文段的发送端的数据已发送完毕，并要求释放运输连接。
 
 #### UDP
 
