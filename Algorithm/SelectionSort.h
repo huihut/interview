@@ -1,5 +1,7 @@
 // 选择排序
 void SelectionSort(vector<int>& v) {
+	if (v.size() <= 0)
+		return;
 	int min, temp;
 	for (int i = 0; i < v.size() - 1; ++i) {
 		min = i;

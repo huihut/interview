@@ -11,6 +11,7 @@
         "streambuf": "cpp",
         "tuple": "cpp",
         "system_error": "cpp",
-        "xtr1common": "cpp"
+        "xtr1common": "cpp",
+        "limits": "cpp"
     }
 }
