@@ -415,7 +415,7 @@ class A
 public:
     void do(int a);
     void do(int a, int b);
-}
+};
 ```
 
 #### 动态多态（晚绑定）
@@ -437,19 +437,19 @@ public:
     {
         ...
     }
-}
+};
 class Circle : public Shape     //圆形类
 {
 public:
     virtual double calcArea();
     ...
-}
+};
 class Rect : public Shape       //矩形类
 {
 public:
     virtual double calcArea();
     ...
-}
+};
 int main()
 {
     Shape * shape1 = new Circle(4.0);
@@ -469,13 +469,13 @@ public:
     Shape();                //构造函数不能是虚函数
     virtual double calcArea();
     virtual ~Shape();       //虚析构函数
-}
+};
 class Circle : public Shape //圆形类
 {
 public:
     virtual double calcArea();
     ...
-}
+};
 int main()
 {
     Shape * shape1 = new Circle(4.0);
@@ -581,21 +581,21 @@ class Flyable                       //【能飞的】
 public:
     virtual void takeoff() = 0;     // 起飞
     virtual void land() = 0;        // 降落
-}
+};
 class Bird : public Flyable         //【鸟】
 {
 public:
     void foraging() {...}           // 觅食
     virtual void takeoff() {...}
     virtual void land() {...}
-}
+};
 class Plane : public Flyable        //【飞机】
 {
 public:
     void carry() {...}              // 运输
     virtual void take off() {...}
     virtual void land() {...}
-}
+};
 
 class type_info
 {
@@ -607,7 +607,7 @@ public:
     virtual ~type_info();
 private:
     ...
-}
+};
 
 class doSomething(Flyable *obj)                 //【做些事情】
 {
@@ -622,7 +622,7 @@ class doSomething(Flyable *obj)                 //【做些事情】
     }
 
     obj->land();
-}
+};
 ```
 
 dynamic\_cast 注意事项：
@@ -1443,6 +1443,26 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 
 ## 设计模式
+
+### 单例模式
+
+```cpp
+class CSingleton
+{
+private:
+    CSingleton()
+    {
+    }
+    static CSingleton *m_pInstance;
+public:
+    static CSingleton * GetInstance()
+    {
+        if(m_pInstance == nullptr)
+            m_pInstance = new CSingleton();
+        return m_pInstance;
+    }
+};
+```
 
 ## 链接装载库
 
