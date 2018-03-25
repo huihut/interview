@@ -265,6 +265,10 @@ int main() {
     1. 默认的继承访问权限。struct是public的，class是private的。  
     2. struct作为数据结构的实现体，它默认的数据访问控制是public的，而class作为对象的实现体，它默认的成员变量访问控制是private的。
 
+### C实现C++类
+
+[C语言实现封装、继承和多态](http://dongxicheng.org/cpp/ooc/)
+
 ### explicit （显式）构造函数
 
 explicit修饰的构造函数可用来防止隐式转换
@@ -1087,6 +1091,26 @@ typedef struct BiTNode
 
 > 进程线程部分知识点来源于：[进程线程面试题总结](http://blog.csdn.net/wujiafei_njgcxy/article/details/77098977)
 
+### Linux 内核的同步方式
+
+#### 原因
+
+在现代操作系统里，同一时间可能有多个内核执行流在执行，因此内核其实象多进程多线程编程一样也需要一些同步机制来同步各执行单元对共享数据的访问。尤其是在多处理器系统上，更需要一些同步机制来同步不同处理器上的执行单元对共享的数据的访问。
+
+#### 同步方式
+
+* 原子操作
+* 信号量（semaphore）
+* 读写信号量（rw_semaphore）
+* 自旋锁（spinlock）
+* 大内核锁（BKL，Big Kernel Lock）
+* 读写锁（rwlock）
+* 大读者锁（brlock-Big Reader Lock）
+* 读-拷贝修改(RCU，Read-Copy Update)
+* 顺序锁（seqlock）
+
+> 来自[Linux 内核的同步机制，第 1 部分](https://www.ibm.com/developerworks/cn/linux/l-synch/part1/)、[Linux 内核的同步机制，第 2 部分](https://www.ibm.com/developerworks/cn/linux/l-synch/part2/)
+
 ### 死锁
 
 #### 产生条件
@@ -1110,6 +1134,58 @@ typedef struct BiTNode
 * Windows：FCB表 + FAT + 位图
 * Unix：inode + 混合索引 + 成组连接
 
+### 主机字节序与网络字节序
+
+#### 主机字节序（CPU字节序）
+
+##### 概念
+
+主机字节序又叫CPU字节序，其不是由操作系统决定的，而是由CPU指令集架构决定的。主机字节序分为两种：
+
+* 大端字节序（Big Endian）：高序字节存储在低位地址，低序字节存储在高位地址
+* 小端字节序（Little Endian）：高序字节存储在高位地址，低序字节存储在低位地址
+
+##### 存储方式
+
+32位整数0x12345678是从起始位置为0x00的地址开始存放，则：
+
+内存地址 | 0x00 | 0x01 | 0x02 | 0x03
+---|---|---|---|---
+大端|78|56|34|12
+小端|12|34|56|78
+
+##### 判断大端小端
+
+可以这样判断自己CPU字节序是大端还是小端：
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int i = 0x12345678;
+
+	if (*((char*)&i) == 0x12)
+		cout << "大端" << endl;
+	else	
+		cout << "小端" << endl;
+
+	return 0;
+}
+```
+##### 各架构处理器的字节序
+
+* Intel、AMD（X86架构）：小端
+* ARM（ARM架构）：大端小端都支持，默认是小端
+* IBM、Motorola（PowerPC架构）：大端
+
+#### 网络字节序
+
+网络字节顺序是TCP/IP中规定好的一种数据表示格式，它与具体的CPU类型、操作系统等无关，从而可以保重数据在不同主机之间传输时能够被正确解释。
+
+网络字节顺序采用：大端（Big Endian）排列方式。
+
 ## 计算机网络
 
 计算机经网络体系结构：
@@ -1122,7 +1198,7 @@ typedef struct BiTNode
 ---|---|---
 物理层 | 通过媒介传输比特，确定机械及电气规范（比特Bit） | RJ45、CLOCK、IEEE802.3（中继器，集线器）
 数据链路层|将比特组装成帧和点到点的传递（帧Frame）| PPP、FR、HDLC、VLAN、MAC（网桥，交换机）
-网络层|负责数据包从源到宿的传递和网际互连（包PackeT）|IP、ICMP、ARP、RARP、OSPF、IPX、RIP、IGRP（路由器）
+网络层|负责数据包从源到宿的传递和网际互连（包Packet）|IP、ICMP、ARP、RARP、OSPF、IPX、RIP、IGRP（路由器）
 运输层|提供端到端的可靠报文传递和错误恢复（段Segment）|TCP、UDP、SPX
 会话层|建立、管理和终止会话（会话协议数据单元SPDU）|NFS、SQL、NETBIOS、RPC
 表示层|对数据进行翻译、加密和压缩（表示协议数据单元PPDU）|JPEG、MPEG、ASII
@@ -1294,17 +1370,80 @@ UDP 首部
 
 > TCP/UDP 图片来源于：<https://github.com/JerryC8080/understand-tcp-udp>
 
+#### TCP 与 UDP 的区别
+
+1. TCP面向连接，UDP是无连接的；
+2. TCP提供可靠的服务，也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复，且按序到达；UDP尽最大努力交付，即不保证可靠交付
+3. TCP的逻辑通信信道是全双工的可靠信道；UDP则是不可靠信道
+5. 每一条TCP连接只能是点到点的；UDP支持一对一，一对多，多对一和多对多的交互通信
+6. TCP面向字节流（可能出现黏包问题），实际上是TCP把数据看成一连串无结构的字节流；UDP是面向报文的（不会出现黏包问题）
+7. UDP没有拥塞控制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如IP电话，实时视频会议等）
+8. TCP首部开销20字节；UDP的首部开销小，只有8个字节
+
 #### TCP传输连接管理
+
+> 因为TCP三次握手建立连接、四次挥手释放连接很重要，所以附上《计算机网络（第7版）-谢希仁》书中对此章的详细描述：<https://github.com/huihut/interview/blob/master/images/TCP-transport-connection-management.png>
 
 ##### TCP 三次握手建立连接
 
 ![UDP报文](images/TCP三次握手建立连接.png)
 
-##### TCP 四次握手释放连接
+【TCP建立连接全过程解释】
 
-![UDP报文](images/TCP四次握手释放连接.png)
+1. 客户端发送SYN给服务器，说明客户端请求建立连接；
+2. 服务端收到客户端发的SYN，并回复SYN+ACK给客户端（同意建立连接）；
+3. 客户端收到服务端的SYN+ACK后，回复ACK给服务端（表示客户端收到了服务端发的同意报文）；
+4. 服务端收到客户端的ACK，连接已建立，可以数据传输。
 
-> 因为TCP三次握手建立连接、四次握手释放连接很重要，所以附上《计算机网络（第7版）-谢希仁》书中对此章的详细描述：<https://github.com/huihut/interview/blob/master/images/TCP-transport-connection-management.png>
+##### TCP为什么要进行三次握手？
+
+【答案一】因为信道不可靠，而TCP想在不可靠信道上建立可靠地传输，那么三次通信是理论上的最小值。（而UDP则不需建立可靠传输，因此UDP不需要三次握手。）
+
+> [Google Groups . TCP建立连接为什么是三次握手？{技术}{网络通信}](https://groups.google.com/forum/#!msg/pongba/kF6O7-MFxM0/5S7zIJ4yqKUJ)
+
+【答案二】因为双方都需要确认对方收到了自己发送的序列号，确认过程最少要进行三次通信。
+
+> [知乎 . TCP 为什么是三次握手，而不是两次或四次？](https://www.zhihu.com/question/24853633/answer/115173386)
+
+【答案三】为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。
+
+> [《计算机网络（第7版）-谢希仁》](https://github.com/huihut/interview/blob/master/images/TCP-transport-connection-management.png)
+
+##### TCP 四次挥手释放连接
+
+![UDP报文](images/TCP四次挥手释放连接.png)
+
+【TCP释放连接全过程解释】
+
+1. 客户端发送FIN给服务器，说明客户端不必发送数据给服务器了（请求释放从客户端到服务器的连接）；
+2. 服务器接收到客户端发的FIN，并回复ACK给客户端（同意释放从客户端到服务器的连接）；
+3. 客户端收到服务端回复的ACK，此时从客户端到服务器的连接已释放（但服务端到客户端的连接还未释放，并且客户端还可以接收数据）；
+4. 服务端继续发送之前没发完的数据给客户端；
+5. 服务端发送FIN+ACK给客户端，说明服务端发送完了数据（请求释放从服务端到客户端的连接，就算没收到客户端的回复，过段时间也会自动释放）；
+6. 客户端收到服务端的FIN+ACK，并回复ACK给客户端（同意释放从服务端到客户端的连接）；
+7. 服务端收到客户端的ACK后，释放从服务端到客户端的连接。
+
+##### TCP为什么要进行四次挥手？
+
+【问题一】TCP为什么要进行四次挥手？ / 为什么TCP建立连接需要三次，而释放连接则需要四次？
+
+【答案一】因为TCP是全双工模式，客户端请求关闭连接后，客户端向服务端的连接关闭（一二次挥手），服务端继续传输之前没传完的数据给客户端（数据传输），服务端向客户端的连接关闭（三四次挥手）。所以TCP释放连接时服务器的ACK和FIN是分开发送的（中间隔着数据传输），而TCP建立连接时服务器的ACK和SYN是一起发送的（第二次握手），所以TCP建立连接需要三次，而释放连接则需要四次。
+
+
+【问题二】为什么TCP连接时可以ACK和SYN一起发送，而释放时则ACK和FIN分开发送呢？（ACK和FIN分开是指第二次和第三次挥手）
+
+【答案二】因为客户端请求释放时，服务器可能还有数据需要传输给客户端，因此服务端要先响应客户端FIN请求（服务端发送ACK），然后数据传输，传输完成后，服务端再提出FIN请求（服务端发送FIN）；而连接时则没有中间的数据传输，因此连接时可以ACK和SYN一起发送。
+
+【问题三】为什么客户端释放最后需要TIME-WAIT等待2MSL呢？
+
+【答案三】
+
+1. 为了保证客户端发送的最后一个ACK报文能够到达服务端。若未成功到达，则服务端超时重传FIN+ACK报文段，客户端再重传ACK，并重新计时。
+2. 防止已失效的连接请求报文段出现在本连接中。TIME-WAIT持续2MSL可使本连接持续的时间内所产生的所有报文段都从网络中消失，这样可使下次连接中不会出现旧的连接报文段。
+
+#### TCP 有限状态机
+
+![TCP的有限状态机](images/TCP的有限状态机.png)
 
 ### 应用层
 
