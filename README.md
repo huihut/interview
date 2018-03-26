@@ -517,6 +517,8 @@ virtual int A() = 0;
         Data vall = { 0, "Anna" };
         ```
 
+### 虚继承、虚函数继承
+
 ### 内存分配和管理
 
 #### malloc、calloc、realloc、alloca
