@@ -1,19 +1,35 @@
+/*
+
+选择排序思路：
+1. 在未排序序列中找到最小（大）元素，存放到排序序列的起始位置
+2. 从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾
+3. 以此类推，直到所有元素均排序完毕
+
+*/
+
 // 选择排序
 void SelectionSort(vector<int>& v) {
-	if (v.size() <= 0)
-		return;
-	int min, temp;
-	for (int i = 0; i < v.size() - 1; ++i) {
+	int min, len = v.size();
+	for (int i = 0; i < len - 1; ++i) {
 		min = i;
-		for (int j = i + 1; j < v.size(); ++j) {
+		for (int j = i + 1; j < len; ++j) {
 			if (v[j] < v[min]) {    // 标记最小的
 				min = j;
 			}
 		}
-		if (i != min) { // 交换到前面
-			temp = v[i];
-			v[i] = v[min];
-			v[min] = temp;
-		}
+		if (i != min)  // 交换到前面
+			swap(v[i], v[min]);
+	}
+}
+
+// 模板实现
+template<typename T> 
+void Selection_Sort(std::vector<T>& arr) {
+	for (int i = 0; i < arr.size() - 1; i++) {
+		int min = i;
+		for (int j = i + 1; j < arr.size(); j++)
+			if (arr[j] < arr[min])
+				min = j;
+		std::swap(arr[i], arr[min]);
 	}
 }
