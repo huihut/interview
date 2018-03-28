@@ -601,7 +601,72 @@ std::auto_ptr<std::string> ps (new std::string(str))；
 4. auto_ptr
 
 
-### 运行时类型识别（RTTI）
+### 强制类型转换运算符
+
+[MSDN . 强制转换运算符](https://msdn.microsoft.com/zh-CN/library/5f6c9f8h.aspx)
+
+#### static_cast
+
+* 用于非多态类型的转换
+* 不执行运行时类型检查（转换安全性不如 dynamic_cast）
+* 通常用于转换数值数据类型（如 float -> int）
+* 可以在整个类层次结构中移动指针，子类转化为父类安全（向上转换），父类转化为子类不安全（因为子类可能有不在父类的字段或方法）
+
+> 向上转换是一种隐式转换。
+
+#### dynamic_cast
+
+* 用于多态类型的转换
+* 执行行运行时类型检查
+* 只适用于指针或引用
+* 对不明确的指针的转换将失败（返回nullptr），但不引发异常
+* 可以在整个类层次结构中移动指针，包括向上转换、向下转换
+
+#### const_cast 
+
+* 用于删除 const、volatile 和 __unaligned 特性（如将 const int 类型转换为 int 类型 ）
+
+#### reinterpret_cast
+
+* 用于位的简单重新解释
+* 滥用 reinterpret_cast 运算符可能很容易带来风险。 除非所需转换本身是低级别的，否则应使用其他强制转换运算符之一。
+* 允许将任何指针转换为任何其他指针类型（如 char* 到 int* 或 One_class* 到 Unrelated_class* 之类的转换，但其本身并不安全）
+* 也允许将任何整数类型转换为任何指针类型以及反向转换。
+* reinterpret_cast 运算符不能丢掉 const、volatile 或 __unaligned 特性。 
+* reinterpret_cast 的一个实际用途是在哈希函数中，即，通过让两个不同的值几乎不以相同的索引结尾的方式将值映射到索引。
+
+#### bad_cast
+
+* 由于强制转换为引用类型失败，dynamic_cast 运算符引发 bad_cast 异常。
+
+```cpp
+try {  
+    Circle& ref_circle = dynamic_cast<Circle&>(ref_shape);   
+}  
+catch (bad_cast b) {  
+    cout << "Caught: " << b.what();  
+} 
+```
+
+### 运行时类型信息 (RTTI) 
+
+#### dynamic_cast
+
+* 用于多态类型的转换
+
+#### typeid
+
+* typeid 运算符允许在运行时确定对象的类型
+* type\_id 返回一个 type\_info 对象的引用
+* 如果想通过基类的指针获得派生类的数据类型，基类必须带有虚函数
+* 只能获取对象的实际类型
+
+#### type_info
+
+* type_info 类描述编译器在程序中生成的类型信息。 此类的对象可以有效存储指向类型的名称的指针。 type_info 类还可存储适合比较两个类型是否相等或比较其排列顺序的编码值。 类型的编码规则和排列顺序是未指定的，并且可能因程序而异。
+* 头文件：`typeinfo`
+
+#### 例子
 
 ```cpp
 class Flyable                       //【能飞的】
@@ -641,7 +706,7 @@ class doSomething(Flyable *obj)                 //【做些事情】
 {
     obj->takeoff();
 
-    cout << typeid(*obj).name() << endl;        //输出传入对象类型（Bird or Plane）
+    cout << typeid(*obj).name() << endl;        //输出传入对象类型（"class Bird" or "class Plane"）
 
     if(typeid(*obj) == typeid(Bird))            //判断对象类型
     {
@@ -652,16 +717,6 @@ class doSomething(Flyable *obj)                 //【做些事情】
     obj->land();
 };
 ```
-
-dynamic\_cast 注意事项：
-* 只能应用于指针和引用的转化
-* 要转化的类型中必须包含虚函数
-* 转化成功返回子类的地址，转化失败返回NULL
-
-typeid 注意事项：
-* type\_id 返回一个 type\_info 对象的引用
-* 如果想通过基类的指针获得派生类的数据类型，基类必须带有虚函数
-* 只能获取对象的实际类型
 
 ### Effective C++
 
