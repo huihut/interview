@@ -25,11 +25,13 @@ void SelectionSort(vector<int>& v) {
 // 模板实现
 template<typename T> 
 void Selection_Sort(std::vector<T>& arr) {
-	for (int i = 0; i < arr.size() - 1; i++) {
+	int len = arr.size();
+	for (int i = 0; i < len - 1; i++) {
 		int min = i;
-		for (int j = i + 1; j < arr.size(); j++)
+		for (int j = i + 1; j < len; j++)
 			if (arr[j] < arr[min])
 				min = j;
-		std::swap(arr[i], arr[min]);
+		if(i != min)
+			std::swap(arr[i], arr[min]);
 	}
 }

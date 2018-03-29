@@ -12,6 +12,10 @@
         "tuple": "cpp",
         "system_error": "cpp",
         "xtr1common": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "exception": "cpp",
+        "fstream": "cpp",
+        "map": "cpp",
+        "utility": "cpp"
     }
 }
