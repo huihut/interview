@@ -629,7 +629,7 @@ weak_ptr 允许你共享但不拥有某对象，一旦最末一个拥有该对�
 
 ##### unique_ptr
 
-unique_ptr 是C++11才开始提供的类型，是一种在异常是可以帮助避免资源泄漏的智能指针。采用独占式拥有，意味着可以确保一个对象和其相应的资源同一时间只被一个pointer拥有。一旦拥有着被销毁或编程empty，或开始拥有另一个对象，先前拥有的那个对象就会被销毁，其任何相应资源亦会被释放。
+unique_ptr 是C++11才开始提供的类型，是一种在异常时可以帮助避免资源泄漏的智能指针。采用独占式拥有，意味着可以确保一个对象和其相应的资源同一时间只被一个pointer拥有。一旦拥有着被销毁或编程empty，或开始拥有另一个对象，先前拥有的那个对象就会被销毁，其任何相应资源亦会被释放。
 
 unique_ptr用于取代auto_ptr
 
@@ -1958,6 +1958,9 @@ MODULE_API int module_init()
 * [18个实时音视频开发中会用到开源项目](http://webrtc.org.cn/18%E4%B8%AA%E5%AE%9E%E6%97%B6%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BC%9A%E7%94%A8%E5%88%B0%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/)
 
 ## 其他
+
+* [Bjarne Stroustrup的常见问题](http://www.stroustrup.com/bs_faq.html)
+* [Bjarne Stroustrup的C ++风格和技巧常见问题](http://www.stroustrup.com/bs_faq2.html)
 
 ## 书籍
 
