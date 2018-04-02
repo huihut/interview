@@ -147,7 +147,7 @@ inline int functionName(int first, int secend,...) {/****/};
 
 * 虚函数可以是内联函数，内联是可以修饰虚函数的，但是当虚函数表现多态性的时候不能内联。
 * 内联是在编译器建议编译器内联，而虚函数的多态性在运行期，编译器无法知道运行期调用哪个代码，因此虚函数表现为多态性时（运行期）不可以内联。
-* `inline virtual` 唯一可以内联的时候是：编译器知道所调用的对象是哪个类（如 Base::who()），这只有在编译器具有实际对象而不是对象的指针或引用时才会发生。即，与局部、全局、静态对象或组合内的完全包含的对象。
+* `inline virtual` 唯一可以内联的时候是：编译器知道所调用的对象是哪个类（如 Base::who()），这只有在编译器具有实际对象而不是对象的指针或引用时才会发生。
 
 ```cpp
 #include <iostream>  
@@ -159,6 +159,7 @@ public:
     {  
         cout << "I am Base\n";  
     }  
+    virtual ~Base();
 };  
 class Derived: public Base  
 {  
@@ -178,6 +179,10 @@ int main()
     // 此处的虚函数是通过指针调用的，需要在运行时期间才能确定，所以不能为内联。  
     Base *ptr = new Derived();  
     ptr->who();  
+
+    // 因为Base有虚析构函数，所以调用子类析构函数后，也调用父类析构函数，防止内存泄漏。
+    delete ptr;
+    ptr = nullptr;
    
     return 0;  
 }  
@@ -474,7 +479,7 @@ public:
 * 普通函数（非类成员函数）不能是虚函数
 * 静态函数（static）不能是虚函数
 * 构造函数不能是虚函数
-* 内联函数不能是表现多态性时的虚函数，解释见：[]()
+* 内联函数不能是表现多态性时的虚函数，解释见：[虚函数（virtual）可以是内联函数（inline）吗？](https://github.com/huihut/interview#%E8%99%9A%E5%87%BD%E6%95%B0virtual%E5%8F%AF%E4%BB%A5%E6%98%AF%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0inline%E5%90%97)
 
 ```cpp
 class Shape     //形状类
