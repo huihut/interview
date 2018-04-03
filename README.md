@@ -180,7 +180,7 @@ int main()
 	Base *ptr = new Derived();
 	ptr->who();
 
-	// 因为Base有虚析构函数（virtual ~Base() {}），所以调用基类（Base）析构函数，也调用派生类（Derived）析构函数，防止内存泄漏。
+	// 因为Base有虚析构函数（virtual ~Base() {}），所以delete调用基类（Base）析构函数，也调用派生类（Derived）析构函数，防止内存泄漏。
 	delete ptr;
 	ptr = nullptr;
 
