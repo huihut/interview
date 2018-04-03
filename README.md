@@ -180,7 +180,7 @@ int main()
 	Base *ptr = new Derived();
 	ptr->who();
 
-	// 因为Base有虚析构函数（virtual ~Base() {}），所以delete调用基类（Base）析构函数，也调用派生类（Derived）析构函数，防止内存泄漏。
+	// 因为Base有虚析构函数（virtual ~Base() {}），所以delete时，会先调用派生类（Derived）析构函数，再调用基类（Base）析构函数，防止内存泄漏。
 	delete ptr;
 	ptr = nullptr;
 
@@ -533,7 +533,7 @@ int main()
 {
     Shape * shape1 = new Circle(4.0);
     shape1->calcArea();    
-    delete shape1;          //因为Shape有虚析构函数，所以delete释放内存时，调用基类析构函数，也调用子类析构函数。
+    delete shape1;  //因为Shape有虚析构函数，所以delete释放内存时，先调用子类析构函数，再调用基类析构函数，防止内存泄漏。
     shape1 = NULL;
     return 0；
 }
