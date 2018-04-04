@@ -479,7 +479,7 @@ public:
 
 * 普通函数（非类成员函数）不能是虚函数
 * 静态函数（static）不能是虚函数
-* 构造函数不能是虚函数
+* 构造函数不能是虚函数（因为在调用构造函数时，虚表指针并没有在对象的内存空间中，必须要构造函数调用完成后才会形成虚表指针）
 * 内联函数不能是表现多态性时的虚函数，解释见：[虚函数（virtual）可以是内联函数（inline）吗？](https://github.com/huihut/interview#%E8%99%9A%E5%87%BD%E6%95%B0virtual%E5%8F%AF%E4%BB%A5%E6%98%AF%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0inline%E5%90%97)
 
 ```cpp
@@ -578,8 +578,8 @@ virtual int A() = 0;
 
 ### 虚函数指针、虚函数表
 
-* 虚函数指针：在含有虚函数类的对象中，指向虚函数表
-* 虚函数表：在程序只读数据段（.rodate section），存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚表中覆盖原本基类的那个虚函数指针
+* 虚函数指针：在含有虚函数类的对象中，指向虚函数表，在运行时确定。
+* 虚函数表：在程序只读数据段（.rodate section），存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建。
 
 
 ### 虚继承、虚函数
@@ -645,6 +645,17 @@ int main()
     return 0;
 }
 ```
+
+##### delete this 合法吗？
+
+[Is it legal (and moral) for a member function to say delete this?](https://isocpp.org/wiki/faq/freestore-mgmt#delete-this)
+
+合法，但：
+
+1. 必须保证 this 对象是通过 new（不是 new[]、不是 placement new、不是栈上、不是全局、不是其他对象成员）分配的
+2. 必须保证调用 delete this 的成员函数是最后一个调用 this 的成员函数
+3. 必须保证成员函数的 delete this 后面没有调用 this 了
+4. 必须保证 delete this 后，没有人使用了
 
 ### 智能指针
 
@@ -810,6 +821,8 @@ class doSomething(Flyable *obj)                 //【做些事情】
 3. 尽可能使用const
 4. 确定对象被使用前已先被初始化
 5. 了解C++默默编写并调用哪些函数（编译器暗自为class创建default构造函数、copy构造函数、copy assignment操作符、析构函数）
+6. 若不想使用编译器自动生成的函数，就应该明确拒绝（将不想使用的成员函数声明为private，并且不予实现）
+7. 为多态基类声明virtual析构函数（如果class带有任何virtual函数，它就应该拥有一个virtual析构函数）
 
 
 ### Google C++ Style Guide
@@ -841,6 +854,10 @@ class doSomething(Flyable *obj)                 //【做些事情】
 * hash_map：底层数据结构为hash表，无序，不重复
 * hash_multimap：底层数据结构为hash表，无序，可重复 
 
+### STL空间配置器如何处理内存的？能说一下它的大概实现方案吗？为什么是8bytes的倍数？
+
+* 大于128bytes用malloc直接申请
+* 小于128bytes使用一个8bytes倍数的数组来进行申请（原因是为了提高效率，同时对于64位的机器而言，地址大小为8bytes）
 
 ## 数据结构
 
@@ -1129,17 +1146,23 @@ typedef struct BiTNode
 
 #### 红黑树
 
+##### 红黑树的特征是什么？
+
+1. 节点是红色或黑色。
+2. 根是黑色。
+3. 所有叶子都是黑色（叶子是NIL节点）。
+4. 每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）（新增节点的父节点必须相同）
+5. 从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。（新增节点必须为红）
+
+##### 调整
+
+1. 变色
+2. 左旋
+3. 右旋
+
 ##### 应用
 
 * 关联数组：如STL中的map、set
-
-##### 红黑树的特征是什么？
-
-* 节点是红色或黑色。
-* 根是黑色。
-* 所有叶子都是黑色（叶子是NIL节点）。
-* 每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）
-* 从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。
 
 ##### 红黑树、B树、B+的区别？
 
@@ -1240,8 +1263,6 @@ typedef struct BiTNode
 
 ## 操作系统
 
-* 进程间的通信方式（管道、有名管道、信号、共享内存、消息队列、信号量、套接字、文件）
-
 ### 进程与线程
 
 对于有线程系统：
@@ -1302,6 +1323,16 @@ typedef struct BiTNode
 
 > 进程线程部分知识点来源于：[进程线程面试题总结](http://blog.csdn.net/wujiafei_njgcxy/article/details/77098977)
 
+#### 进程之间私有和共享的资源
+
+* 私有：地址空间、堆、全局变量、栈、寄存器
+* 共享：代码段，公共数据，进程目录，进程ID
+
+#### 线程之间私有和共享的资源
+
+* 私有：线程栈，寄存器，程序寄存器
+* 共享：堆，地址空间，全局变量，静态变量
+
 ### Linux 内核的同步方式
 
 #### 原因
@@ -1323,6 +1354,12 @@ typedef struct BiTNode
 > 来自[Linux 内核的同步机制，第 1 部分](https://www.ibm.com/developerworks/cn/linux/l-synch/part1/)、[Linux 内核的同步机制，第 2 部分](https://www.ibm.com/developerworks/cn/linux/l-synch/part2/)
 
 ### 死锁
+
+#### 原因
+
+* 系统资源不足
+* 资源分配不当
+* 进程运行推进顺序不合适
 
 #### 产生条件
 
@@ -1396,6 +1433,27 @@ int main()
 网络字节顺序是TCP/IP中规定好的一种数据表示格式，它与具体的CPU类型、操作系统等无关，从而可以保重数据在不同主机之间传输时能够被正确解释。
 
 网络字节顺序采用：大端（Big Endian）排列方式。
+
+### 页面置换算法
+
+在地址映射过程中，若在页面中发现所要访问的页面不在内存中，则产生缺页中断。当发生缺页中断时，如果操作系统内存中没有空闲页面，则操作系统必须在内存选择一个页面将其移出内存，以便为即将调入的页面让出空间。而用来选择淘汰哪一页的规则叫做页面置换算法。
+
+#### 分类
+
+* 全局置换：在整个内存空间置换
+* 局部置换：在本进程中进行置换
+
+#### 算法
+
+全局：
+* 工作集算法
+* 缺页率置换算法
+
+局部：
+* 最佳置换算法（OPT）
+* 先进先出置换算法（FIFO）
+* 最近最久未使用（LRU）算法
+* 时钟（Clock）置换算法
 
 ## 计算机网络
 
@@ -1511,6 +1569,18 @@ ICMP 报文格式：
 
 * VPN（Virtual Private Network，虚拟专用网）
 * NAT（Network Address Translation，网络地址转换）
+
+#### 路由表包含什么？
+
+1. 网络ID（Network ID, Network number）：就是目标地址的网络ID。
+2. 子网掩码（subnet mask）：用来判断IP所属网络
+3. 下一跳地址/接口（Next hop / interface）：就是数据在发送到目标地址的旅途中下一站的地址。其中interface指向next hop（即为下一个route）。一个自治系统（AS, Autonomous system）中的route应该包含区域内所有的子网络，而默认网关（Network id: 0.0.0.0, Netmask: 0.0.0.0）指向自治系统的出口。
+
+根据应用和执行的不同，路由表可能含有如下附加信息：
+
+1. 花费（Cost）：就是数据发送过程中通过路径所需要的花费。
+2. 路由的服务质量
+3. 路由中需要过滤的出/入连接列表
 
 ### 运输层
 
@@ -1726,7 +1796,7 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
 * 4xx：表示客户的差错，如请求中有错误的语法或不能完成
     * 400 Bad Request: 客户端请求的语法错误，服务器无法理解
     * 401 Unauthorized: 请求要求用户的身份认证
-    * 403 Forbidden: 服务器理解请求客户端的请求，但是拒绝执行此请求
+    * 403 Forbidden: 服务器理解请求客户端的请求，但是拒绝执行此请求（权限不够）
     * 404 Not Found: 服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置"您所请求的资源无法找到"的个性页面
     * 408 Request Timeout: 服务器等待客户端发送的请求时间过长，超时
 * 5xx：表示服务器的差错，如服务器失效无法完成请求
@@ -2084,15 +2154,31 @@ MODULE_API int module_init()
 
 ## 面试题目经验
 
+### 牛客网
+
 * [牛客网 . 2017秋季校园招聘笔经面经专题汇总](https://www.nowcoder.com/discuss/12805)
+* [牛客网 . 史上最全2017春招面经大合集！！](https://www.nowcoder.com/discuss/25268)
+* [牛客网 . 面试题干货在此](https://www.nowcoder.com/discuss/57978)
+
+### 知乎
+
 * [知乎 . 互联网求职路上，你见过哪些写得很好、很用心的面经？最好能分享自己的面经、心路历程。](https://www.zhihu.com/question/29693016)
 * [知乎 . 互联网公司最常见的面试算法题有哪些？](https://www.zhihu.com/question/24964987)
 * [知乎 . 面试 C++ 程序员，什么样的问题是好问题？](https://www.zhihu.com/question/20184857)
-* [cnblogs . C++面试集锦( 面试被问到的问题 )](https://www.cnblogs.com/Y1Focus/p/6707121.html)
-* [cnblogs . C/C++ 笔试、面试题目大汇总](https://www.cnblogs.com/fangyukuan/archive/2010/09/18/1829871.html)
-* [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
+
+### CSDN
+
 * [CSDN . 全面整理的C++面试题](http://blog.csdn.net/ljzcome/article/details/574158)
 * [CSDN . 百度研发类面试题（C++方向）](http://blog.csdn.net/Xiongchao99/article/details/74524807?locationNum=6&fps=1)
 * [CSDN . c++常见面试题30道](http://blog.csdn.net/fakine/article/details/51321544)
 * [CSDN . 腾讯2016实习生面试经验（已经拿到offer)](http://blog.csdn.net/onever_say_love/article/details/51223886)
+
+### cnblogs
+
+* [cnblogs . C++面试集锦( 面试被问到的问题 )](https://www.cnblogs.com/Y1Focus/p/6707121.html)
+* [cnblogs . C/C++ 笔试、面试题目大汇总](https://www.cnblogs.com/fangyukuan/archive/2010/09/18/1829871.html)
+* [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
+
+### Segmentfault
+
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
