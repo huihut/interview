@@ -694,15 +694,19 @@ std::auto_ptr<std::string> ps (new std::string(str))；
 
 多个智能指针可以共享同一个对象，对象的最末一个拥有着有责任销毁对象，并清理与该对象相关的所有资源。
 
+* 支持定制型删除器（custom deleter），可防范 Cross-DLL 问题（对象在动态链接库（DLL）中被 new 创建，却在另一个 DLL 内被 delete 销毁）、自动解除互斥锁
+
 ##### weak_ptr
 
 weak_ptr 允许你共享但不拥有某对象，一旦最末一个拥有该对象的智能指针失去了所有权，任何weak_ptr都会自动成空（empty）。因此，在default和copy构造函数之外，weak_ptr只提供“接受一个shared_ptr”的构造函数。
+
+* 可打破环状引用（cycles of references，两个其实已经没有被使用的对象彼此互指，使之看似还在 “被使用” 的状态）的问题
 
 ##### unique_ptr
 
 unique_ptr 是C++11才开始提供的类型，是一种在异常时可以帮助避免资源泄漏的智能指针。采用独占式拥有，意味着可以确保一个对象和其相应的资源同一时间只被一个pointer拥有。一旦拥有着被销毁或编程empty，或开始拥有另一个对象，先前拥有的那个对象就会被销毁，其任何相应资源亦会被释放。
 
-unique_ptr用于取代auto_ptr
+* unique_ptr 用于取代 auto_ptr
 
 ##### auto_ptr
 
@@ -827,13 +831,29 @@ class doSomething(Flyable *obj)                 //【做些事情】
 
 ### Effective C++
 
-1. 视C++为一个语言联邦（C、Object-Oriented C++、Template C++、STL）
+1. 视 C++ 为一个语言联邦（C、Object-Oriented C++、Template C++、STL）
 2. 尽量以`const`、`enum`、`inline`替换`#define`（宁可以编译器替换预处理器）
-3. 尽可能使用const
+3. 尽可能使用 const
 4. 确定对象被使用前已先被初始化
-5. 了解C++默默编写并调用哪些函数（编译器暗自为class创建default构造函数、copy构造函数、copy assignment操作符、析构函数）
-6. 若不想使用编译器自动生成的函数，就应该明确拒绝（将不想使用的成员函数声明为private，并且不予实现）
-7. 为多态基类声明virtual析构函数（如果class带有任何virtual函数，它就应该拥有一个virtual析构函数）
+5. 了解 C++ 默默编写并调用哪些函数（编译器暗自为 class 创建 default 构造函数、copy 构造函数、copy assignment 操作符、析构函数）
+6. 若不想使用编译器自动生成的函数，就应该明确拒绝（将不想使用的成员函数声明为 private，并且不予实现）
+7. 为多态基类声明 virtual 析构函数（如果 class 带有任何 virtual 函数，它就应该拥有一个 virtual 析构函数）
+8. 别让异常逃离析构函数（析构函数应该吞下不传播异常，或者结束程序，而不是吐出异常；如果要处理异常应该在非析构的普通函数处理）
+9. 绝不在构造和析构过程中调用 virtual 函数（因为这类调用从不下降至 derived class）
+10. 令 operator= 返回一个 reference to *this （用于连锁赋值）
+11. 在 operator= 中处理 “自我赋值”
+12. 赋值对象时应确保复制“对象内的所有成员变量”及“所有 base class 成分”（调用基类复制构造函数）
+13. 以对象管理资源（资源在构造函数获得，在析构函数释放，建议使用智能指针，资源取得时机便是初始化时机（Resource Acquisition Is Initialization，RAII））
+14. 在资源管理类中小心 copying 行为（普遍的 RAII class copying 行为是：抑制 copying、引用计数、深度拷贝、转移底部资源拥有权（类似auto_ptr））
+15. 在资源管理类中提供对原始资源（raw resources）的访问（对原始资源的访问可能经过显式转换或隐式转换，一般而言显示转换比较安全，隐式转换对客户比较方便）
+16. 成对使用 new 和 delete 时要采取相同形式（`new` 中使用 `[]` 则 `delete []`，`new` 中不使用 `[]` 则 `delete`）
+17. 以独立语句将 newed 对象存储于（置入）智能指针（如果不这样做，可能会因为编译器优化，导致难以察觉的资源泄漏）
+18. 让接口容易被正确使用，不易被误用（促进正常使用的办法：接口的一致性、内置类型的行为兼容；阻止误用的办法：建立新类型，限制类型上的操作，约束对象值、消除客户的资源管理责任）
+19. 设计 class 犹如设计 type，需要考虑对象创建、销毁、初始化、赋值、值传递、合法值、继承关系、转换、一般化等等。
+20. 宁以 pass-by-reference-to-const 替换 pass-by-value （前者通常更高效、避免切割问题（slicing problem），但不适用于内置类型、STL迭代器、函数对象）
+21. 必须返回对象时，别妄想返回其 reference（绝不返回 pointer 或 reference 指向一个 local stack 对象，或返回 reference 指向一个 heap-allocated 对象，或返回 pointer 或 reference 指向一个 local static 对象而有可能同时需要多个这样的对象。）
+22. 将成员变量声明为 private（为了封装、一致性、对其读写精确控制等）
+23. 宁以 non-member、non-friend 替换 member 函数（可增加封装性、包裹弹性（packaging flexibility）、机能扩充性）
 
 
 ### Google C++ Style Guide
