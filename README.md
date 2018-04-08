@@ -1435,8 +1435,8 @@ typedef struct BiTNode
 大端|12|34|56|78
 小端|78|56|34|12
 
-![大端序](https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big-Endian.svg/280px-Big-Endian.svg.png)
-![小端序](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/280px-Little-Endian.svg.png)
+![大端序](images/CPU-Big-Endian.svg.png)
+![小端序](images/CPU-Little-Endian.svg.png)
 
 ##### 判断大端小端
 
