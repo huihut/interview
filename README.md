@@ -834,7 +834,7 @@ class doSomething(Flyable *obj)                 //【做些事情】
 1. 视 C++ 为一个语言联邦（C、Object-Oriented C++、Template C++、STL）
 2. 尽量以`const`、`enum`、`inline`替换`#define`（宁可以编译器替换预处理器）
 3. 尽可能使用 const
-4. 确定对象被使用前已先被初始化
+4. 确定对象被使用前已先被初始化（构造时赋值（copy 构造函数）比 default 构造后赋值（copy assignment）效率高）
 5. 了解 C++ 默默编写并调用哪些函数（编译器暗自为 class 创建 default 构造函数、copy 构造函数、copy assignment 操作符、析构函数）
 6. 若不想使用编译器自动生成的函数，就应该明确拒绝（将不想使用的成员函数声明为 private，并且不予实现）
 7. 为多态基类声明 virtual 析构函数（如果 class 带有任何 virtual 函数，它就应该拥有一个 virtual 析构函数）
@@ -855,8 +855,8 @@ class doSomething(Flyable *obj)                 //【做些事情】
 22. 将成员变量声明为 private（为了封装、一致性、对其读写精确控制等）
 23. 宁以 non-member、non-friend 替换 member 函数（可增加封装性、包裹弹性（packaging flexibility）、机能扩充性）
 24. 若所有参数（包括被this指针所指的那个隐喻参数）皆须要类型转换，请为此采用 non-member 函数
- 
-
+25. 考虑写一个不抛异常的 swap 函数
+26. 尽可能延后变量定义式的出现时间（可增加程序清晰度并改善程序效率）
 
 ### Google C++ Style Guide
 
@@ -1432,8 +1432,11 @@ typedef struct BiTNode
 
 内存地址 | 0x00 | 0x01 | 0x02 | 0x03
 ---|---|---|---|---
-大端|78|56|34|12
-小端|12|34|56|78
+大端|12|34|56|78
+小端|78|56|34|12
+
+![大端序](https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big-Endian.svg/280px-Big-Endian.svg.png)
+![小端序](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/280px-Little-Endian.svg.png)
 
 ##### 判断大端小端
 
@@ -1457,9 +1460,9 @@ int main()
 ```
 ##### 各架构处理器的字节序
 
-* Intel、AMD（X86架构）：小端
-* ARM（ARM架构）：大端小端都支持，默认是小端
-* IBM、Motorola（PowerPC架构）：大端
+* x86（Intel、AMD）、MOS Technology 6502、Z80、VAX、PDP-11等处理器为小端序；
+* Motorola 6800、Motorola 68000、PowerPC 970、System/370、SPARC（除V9外）等处理器为大端序；
+* ARM（默认小端序）、PowerPC（除PowerPC 970外）、DEC Alpha、SPARC V9、MIPS、PA-RISC及IA64的字节序是可配置的。
 
 #### 网络字节序
 
