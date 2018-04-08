@@ -854,6 +854,8 @@ class doSomething(Flyable *obj)                 //【做些事情】
 21. 必须返回对象时，别妄想返回其 reference（绝不返回 pointer 或 reference 指向一个 local stack 对象，或返回 reference 指向一个 heap-allocated 对象，或返回 pointer 或 reference 指向一个 local static 对象而有可能同时需要多个这样的对象。）
 22. 将成员变量声明为 private（为了封装、一致性、对其读写精确控制等）
 23. 宁以 non-member、non-friend 替换 member 函数（可增加封装性、包裹弹性（packaging flexibility）、机能扩充性）
+24. 若所有参数（包括被this指针所指的那个隐喻参数）皆须要类型转换，请为此采用 non-member 函数
+ 
 
 
 ### Google C++ Style Guide
@@ -2000,7 +2002,7 @@ File Header | 文件头，描述整个文件的文件属性（包括文件是否
 .text section | 代码段，执行语句编译成的机器代码 
 .data section | 数据段，已初始化的全局变量和局部静态变量
 .bss section | BBS段（Block Started by Symbol），未初始化的全局变量和局部静态变量（因为默认值为0，所以只是在此预留位置，不占空间）
-.rodate section | 只读数据段，存放只读数据，一般是程序里面的只读变量（如const修饰的变量）和字符串常量
+.rodata section | 只读数据段，存放只读数据，一般是程序里面的只读变量（如const修饰的变量）和字符串常量
 .comment section | 注释信息段，存放编译器版本信息
 .note.GNU-stack section | 堆栈提示段 
 
