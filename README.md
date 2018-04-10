@@ -1909,23 +1909,47 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 ## 设计模式
 
+### 设计模式的六大原则
+
+* 单一职责原则（SRP，Single Responsibility Principle）
+* 里氏替换原则（LSP，Liskov Substitution Principle）
+* 依赖倒置原则（DIP，Dependence Inversion Principle）
+* 接口隔离原则（ISP，Interface Segregation Principle）
+* 迪米特法则（LoD，Law of Demeter）
+* 开放封闭原则（OCP，Open Close Principle）
+
 ### 单例模式
 
 ```cpp
-class CSingleton
+// 懒汉式单例模式
+class Singleton
 {
 private:
-    CSingleton()
-    {
-    }
-    static CSingleton *m_pInstance;
+	Singleton() { }
+	static Singleton * pInstance;
 public:
-    static CSingleton * GetInstance()
-    {
-        if(m_pInstance == nullptr)
-            m_pInstance = new CSingleton();
-        return m_pInstance;
-    }
+	static Singleton * GetInstance()
+	{
+		if (pInstance == nullptr)
+			pInstance = new Singleton();
+		return pInstance;
+	}
+};
+
+// 线程安全的单例模式
+class Singleton
+{
+private:
+	Singleton() { }
+	~Singleton() { }
+	Singleton(const Singleton &);
+	Singleton & operator = (const Singleton &);
+public:
+	static Singleton & GetInstance()
+	{
+		static Singleton instance;
+		return instance;
+	}
 };
 ```
 
