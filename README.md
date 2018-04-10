@@ -614,9 +614,6 @@ virtual int A() = 0;
         * 虚函数不占用存储空间
         * 虚函数表存储的是虚函数地址
 
-
-
-
 ### 内存分配和管理
 
 #### malloc、calloc、realloc、alloca
