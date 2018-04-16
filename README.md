@@ -709,6 +709,11 @@ unique_ptr 是C++11才开始提供的类型，是一种在异常时可以帮助�
 
 被c++11弃用，原因是缺乏语言特性如“针对构造和赋值”的std::move语义，以及其他瑕疵。
 
+##### auto_ptr 与 unique_ptr 比较
+
+* auto_ptr 可以赋值拷贝，复制拷贝后所有权转移；unqiue_ptr 无拷贝赋值语义，但实现了move 语义；
+* auto_ptr 对象不能管理数组（析构调用 delete），unique_ptr 可以管理数组（析构调用 delete[] ）；
+
 ### 强制类型转换运算符
 
 [MSDN . 强制转换运算符](https://msdn.microsoft.com/zh-CN/library/5f6c9f8h.aspx)
