@@ -1245,13 +1245,25 @@ typedef struct BiTNode
 
 ### 排序
 
-排序算法 | 平均时间复杂度 | 最差时间复杂度 | 空间复杂度 | 稳定性
----|---|---|---|---
-[冒泡排序](Algorithm/BubbleSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定
-[冒泡排序（改进版）](Algorithm/BubbleSort_orderly.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定
-[选择排序](Algorithm/SelectionSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定
-[快速排序](Algorithm/QuickSort.h) | O(n*log<sub>2</sub>n) |  O(n<sup>2</sup>) | O(log<sub>2</sub>n)~O(n) | 不稳定
+排序算法 | 平均时间复杂度 | 最差时间复杂度 | 空间复杂度 | 数据对象稳定性  | 描述
+---|---|---|---|---|---
+[冒泡排序](Algorithm/BubbleSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定|（无序区，有序区）。从无序区通过交换找出最大元素放到有序区前端。
+[选择排序](Algorithm/SelectionSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|数组不稳定、链表稳定|（有序区，无序区）。在无序区里找一个最小的元素跟在有序区的后面。对数组：比较得多，换得少。
+[插入排序](Algorithm/InsertSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定|（有序区，无序区）。把无序区的第一个元素插入到有序区的合适的位置。对数组：比较得少，换得多。
+[快速排序](Algorithm/QuickSort.h) | O(n*log<sub>2</sub>n) |  O(n<sup>2</sup>) | O(log<sub>2</sub>n) | 不稳定|（小数，基准元素，大数）。在区间中随机挑选一个元素作基准，将小于基准的元素放在基准之前，大于基准的元素放在基准之后，再分别对小数区与大数区进行排序。
+[堆排序](Algorithm/HeapSort.h) | O(n*log<sub>2</sub>n)|O(n<sup>2</sup>)|O(1)|不稳定|（最大堆，有序区）。从堆顶把根卸出来放在有序区之前，再恢复堆。
+[归并排序](Algorithm/MergeSort.h) | O(n*log<sub>2</sub>n) | O(n*log<sub>2</sub>n)|O(1)|稳定|把数据分为两段，从两段中逐个选最小的元素移入新数据段的末尾。可从上到下或从下到上进行。
+[希尔排序](Algorithm/ShellSort.h) | O(n*log<sup>2</sup>n)|O(n<sup>2</sup>)|O(1)|不稳定|每一轮按照事先决定的间隔进行插入排序，间隔会依次缩小，最后一次一定要是1。
+[计数排序](Algorithm/CountSort.h) | O(n+m)|O(n+m)|O(n+m)|稳定|统计小于等于该元素值的元素的个数i，于是该元素就放在目标数组的索引i位（i≥0）。
+[桶排序](Algorithm/BucketSort.h) | O(n)|O(n)|O(m)|稳定|将值为i的元素放入i号桶，最后依次把桶里的元素倒出来。
+[基数排序](Algorithm/RadixSort.h) | O(k*n)|O(n<sup>2</sup>)| |稳定|一种多关键字的排序算法，可用桶排序实现。
 [文件排序](Algorithm/FileSort) |
+
+> * 均按从小到大排列
+> * k：代表数值中的"数位"个数
+> * n：代表数据规模
+> * m：代表数据的最大值减最小值
+> * 来自 [wikipedia . 排序算法](https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95)
 
 ### 查找
 

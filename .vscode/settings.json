@@ -16,6 +16,10 @@
         "exception": "cpp",
         "fstream": "cpp",
         "map": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "ios": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "xiosbase": "cpp"
     }
 }
