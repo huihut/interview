@@ -2,6 +2,8 @@
 #include <algorithm>
 using namespace std;
 
+// 堆排序：（最大堆，有序区）。从堆顶把根卸出来放在有序区之前，再恢复堆。
+
 void max_heapify(int arr[], int start, int end) {
 	//建立父節點指標和子節點指標
 	int dad = start;
