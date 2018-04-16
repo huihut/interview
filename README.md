@@ -1251,13 +1251,12 @@ typedef struct BiTNode
 [选择排序](Algorithm/SelectionSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|数组不稳定、链表稳定
 [插入排序](Algorithm/InsertSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定
 [快速排序](Algorithm/QuickSort.h) | O(n*log<sub>2</sub>n) |  O(n<sup>2</sup>) | O(log<sub>2</sub>n) | 不稳定
-[堆排序](Algorithm/HeapSort.h) | O(n*log<sub>2</sub>n)|O(n<sup>2</sup>)|O(1)|不稳定
+[堆排序](Algorithm/HeapSort.cpp) | O(n*log<sub>2</sub>n)|O(n<sup>2</sup>)|O(1)|不稳定
 [归并排序](Algorithm/MergeSort.h) | O(n*log<sub>2</sub>n) | O(n*log<sub>2</sub>n)|O(1)|稳定
 [希尔排序](Algorithm/ShellSort.h) | O(n*log<sup>2</sup>n)|O(n<sup>2</sup>)|O(1)|不稳定
-[计数排序](Algorithm/CountSort.h) | O(n+m)|O(n+m)|O(n+m)|稳定
-[桶排序](Algorithm/BucketSort.h) | O(n)|O(n)|O(m)|稳定
+[计数排序](Algorithm/CountSort.cpp) | O(n+m)|O(n+m)|O(n+m)|稳定
+[桶排序](Algorithm/BucketSort.cpp) | O(n)|O(n)|O(m)|稳定
 [基数排序](Algorithm/RadixSort.h) | O(k*n)|O(n<sup>2</sup>)| |稳定
-[文件排序](Algorithm/FileSort) |
 
 > * 均按从小到大排列
 > * k：代表数值中的"数位"个数
@@ -1271,8 +1270,13 @@ typedef struct BiTNode
 ---|---|---|---
 [顺序查找](Algorithm/SequentialSearch.h) | O(n) | O(1) | 无序或有序
 [二分查找（折半查找）](Algorithm/BinarySearch.h) | O(log<sub>2</sub>n)| O(1) | 有序
-[蛮力字符串匹配](Algorithm/BruteForceStringMatch.h) | O(n*m) | 
-[文件查找](Algorithm/FileSearch) | 
+[插值查找](Algorithm/InsertionSearch.h) | O(log<sub>2</sub>(log<sub>2</sub>n)) | O(1) | 有序
+[斐波那契查找](Algorithm/FibonacciSearch.cpp) | O(log<sub>2</sub>n) | O(1) | 有序
+[哈希查找](DataStructure/HashTable.cpp) | O(1) | O(n) | 无序或有序
+[二叉查找树（二叉搜索树查找）](Algorithm/BSTSearch.h) |O(log<sub>2</sub>n) |   | 
+[红黑树](DataStructure/RedBlackTree.cpp) |O(log<sub>2</sub>n) | |
+2-3树 | O(log<sub>2</sub>n - log<sub>3</sub>n) |   | 
+B树/B+树 |O(log<sub>2</sub>n) |   | 
 
 ## Problems
 
@@ -1286,22 +1290,8 @@ typedef struct BiTNode
 
 ### Leetcode Problems
 
-#### Array
-
-* [1. Two Sum](Problems/LeetcodeProblems/1-two-sum.h)
-* [4. Median of Two Sorted Arrays](Problems/LeetcodeProblems/4-median-of-two-sorted-arrays.h)
-* [11. Container With Most Water](Problems/LeetcodeProblems/11-container-with-most-water.h)
-* [26. Remove Duplicates from Sorted Array](Problems/LeetcodeProblems/26-remove-duplicates-from-sorted-array.h)
-* [53. Maximum Subarray](Problems/LeetcodeProblems/53-maximum-subarray.h)
-* [66. Plus One](Problems/LeetcodeProblems/66-plus-one.h)
-* [88. Merge Sorted Array](Problems/LeetcodeProblems/88-merge-sorted-array.h)
-* [118. Pascal's Triangle](Problems/LeetcodeProblems/118-pascals-triangle.h)
-* [119. Pascal's Triangle II](Problems/LeetcodeProblems/119-pascals-triangle-ii.h)
-* [121. Best Time to Buy and Sell Stock](Problems/LeetcodeProblems/121-best-time-to-buy-and-sell-stock.h)
-* [122. Best Time to Buy and Sell Stock II](Problems/LeetcodeProblems/122-best-time-to-buy-and-sell-stock-ii.h)
-* [169. Majority Element](Problems/LeetcodeProblems/169-majority-element.h)
-* [283. Move Zeroes](Problems/LeetcodeProblems/283-move-zeroes.h)
-
+* [Github . haoel/leetcode](https://github.com/haoel/leetcode)
+* [Github . pezy/LeetCode](https://github.com/pezy/LeetCode)
 
 ## 操作系统
 
