@@ -1,3 +1,14 @@
+# C/C++面试知识总结
+
+为2018年春招总结的C/C++面试知识，只为复习、分享。知识点与图片部分来自网络，侵删。欢迎 `star`，欢迎提出 `issues`，欢迎加入 `gitter` 
+
+[![Join the chat at https://gitter.im/cppInterview/Lobby](https://badges.gitter.im/cppInterview/Lobby.svg)](https://gitter.im/cppInterview/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## 使用建议
+
+* `Ctrl+F`：快速查找定位知识点
+* `TOC导航`：配合 [jawil/GayHub](https://github.com/jawil/GayHub) 插件使用更佳
+
 ## 目录
 
 * [C/C++](#cc)
