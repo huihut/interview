@@ -1,5 +1,7 @@
 ## 目录
 
+[![Join the chat at https://gitter.im/cppInterview/Lobby](https://badges.gitter.im/cppInterview/Lobby.svg)](https://gitter.im/cppInterview/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 * [C/C++](#cc)
 * [STL](#stl)
 * [数据结构](#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
