@@ -1,6 +1,6 @@
 # C/C++ 面试知识总结
 
-为 2018 年春招总结的 C/C++ 面试知识，只为复习、分享。知识点与图片部分来自网络，侵删。欢迎 `star`，欢迎提出 `issues`，欢迎加入 `gitter` 
+为 2018 年春招总结的 C/C++ 面试知识，只为复习、分享。知识点与图片部分来自网络，侵删。欢迎 `star`，欢迎 `issues`。
 
 [![Join the chat at https://gitter.im/cppInterview/Lobby](https://badges.gitter.im/cppInterview/Lobby.svg)](https://gitter.im/cppInterview/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
