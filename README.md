@@ -56,8 +56,8 @@ void function()
     // 对象
     A b;                        // 普通对象，可以调用全部成员函数
     const A a;                  // 常对象，只能调用常成员函数、更新常成员变量
-    canst A *p = &a;            // 常指针
-    canst A &q = a;             // 常引用
+    const A *p = &a;            // 常指针
+    const A &q = a;             // 常引用
 
     // 指针
     char greeting[] = "Hello";
