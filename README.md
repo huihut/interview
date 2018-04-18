@@ -1,6 +1,6 @@
 # C/C++ 面试知识总结
 
-为 2018 年春招总结的 C/C++ 面试知识，只为复习、分享。知识点与图片部分来自网络，侵删。欢迎 `star`，欢迎 `issues`。
+为 2018 年春招总结的 C/C++ 面试知识，只为复习、分享。知识点与图片部分来自网络，侵删。欢迎 star，欢迎 issues。
 
 [![Join the chat at https://gitter.im/cppInterview/Lobby](https://badges.gitter.im/cppInterview/Lobby.svg)](https://gitter.im/cppInterview/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -475,14 +475,17 @@ int main() {
 
 ### 继承
 
-* 基类（子类）——&gt; 派生类（父类）
+* 基类（父类）——&gt; 派生类（子类）
 
 ### 多态
 
-* 多态，即多种状态，在面向对象语言中，接口的多种不同的实现方式即为多态。多态性在 C++ 中是通过虚函数来实现的。
+* 多态，即多种状态，在面向对象语言中，接口的多种不同的实现方式即为多态。
+* C++ 多态有两种：静态多态（早绑定）、动态多态（晚绑定）。静态多态是通过函数重载实现的；动态多态是通过虚函数实现的。
 * 多态是以封装和继承为基础的。
 
 #### 静态多态（早绑定）
+
+函数重载
 
 ```cpp
 class A
@@ -495,7 +498,7 @@ public:
 
 #### 动态多态（晚绑定）
 
-* 用 virtual 修饰成员函数，使其成为虚函数
+* 虚函数：用 virtual 修饰成员函数，使其成为虚函数
 
 **注意：**
 
@@ -678,22 +681,22 @@ int main()
 
 ### 智能指针
 
-#### C++标准库（STL）中
+#### C++ 标准库（STL）中
 
 头文件：`#include <memory>`
 
-#### C++98
+#### C++ 98
 
 ```cpp
 std::auto_ptr<std::string> ps (new std::string(str))；
 ```
 
-#### C++11
+#### C++ 11
 
 1. shared_ptr
 2. unique_ptr
 3. weak_ptr
-4. auto_ptr（被c++11弃用）
+4. auto_ptr（被 C++11 弃用）
 
 * Class shared_ptr 实现共享式拥有（shared ownership）概念。多个智能指针指向相同对象，该对象和其相关资源会在 “最后一个 reference 被销毁” 时被释放。为了在结构较复杂的情景中执行上述工作，标准库提供 weak_ptr、bad_weak_ptr 和 enable_shared_from_this 等辅助类。
 * Class unique_ptr 实现独占式拥有（exclusive ownership）或严格拥有（strict ownership）概念，保证同一时间内只有一个智能指针可以指向该对象。你可以移交拥有权。它对于避免内存泄漏（resource leak）——如 new 后忘记 delete ——特别有用。
