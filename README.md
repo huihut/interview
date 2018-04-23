@@ -1448,7 +1448,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 ### 文件系统
 
 * Windows：FCB 表 + FAT + 位图
-* Unix：inode + 混合索引 + 成组连接
+* Unix：inode + 混合索引 + 成组链接
 
 ### 主机字节序与网络字节序
 
