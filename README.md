@@ -515,6 +515,7 @@ public:
     {
         ...
     }
+    virtual ~Shape();
 };
 class Circle : public Shape     // 圆形类
 {
@@ -534,6 +535,10 @@ int main()
     Shape * shape2 = new Rect(5.0, 6.0);
     shape1->calcArea();         // 调用圆形类里面的方法
     shape2->calcArea();         // 调用矩形类里面的方法
+    delete shape1;
+    shape1 = nullptr;
+    delete shape2;
+    shape2 = nullptr;
     return 0;
 }
 ```
