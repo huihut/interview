@@ -1332,6 +1332,20 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 * [Github . haoel/leetcode](https://github.com/haoel/leetcode)
 * [Github . pezy/LeetCode](https://github.com/pezy/LeetCode)
 
+### 剑指 Offer
+
+* [Github . zhedahht/CodingInterviewChinese2](https://github.com/zhedahht/CodingInterviewChinese2)
+* [Github . gatieme/CodingInterviews](https://github.com/gatieme/CodingInterviews)
+
+### Cracking the Coding Interview 程序员面试金典
+
+* [Github . careercup/ctci](https://github.com/careercup/ctci)
+* [牛客网 . 程序员面试金典](https://www.nowcoder.com/ta/cracking-the-coding-interview)
+
+### 牛客网
+
+* [牛客网 . 在线编程专题](https://www.nowcoder.com/activity/oj)
+
 ## 操作系统
 
 ### 进程与线程
@@ -1696,11 +1710,11 @@ TCP 首部
 
 TCP：状态控制码（Code，Control Flag），占 6 比特，含义如下：
 * URG：紧急比特（urgent），当 `URG＝1` 时，表明紧急指针字段有效，代表该封包为紧急封包。它告诉系统此报文段中有紧急数据，应尽快传送(相当于高优先级的数据)， 且上图中的 Urgent Pointer 字段也会被启用。
-* ACK: 确认比特（Acknowledge）。只有当 `ACK＝1` 时确认号字段才有效，代表这个封包为确认封包。当 `ACK＝0` 时，确认号无效。
-* PSH: （Push function）若为 1 时，代表要求对方立即传送缓冲区内的其他对应封包，而无需等缓冲满了才送。
-* RST: 复位比特(Reset)，当 `RST＝1` 时，表明 TCP 连接中出现严重差错（如由于主机崩溃或其他原因），必须释放连接，然后再重新建立运输连接。
-* SYN: 同步比特(Synchronous)，SYN 置为 1，就表示这是一个连接请求或连接接受报文，通常带有 SYN 标志的封包表示『主动』要连接到对方的意思。
-* FIN: 终止比特(Final)，用来释放一个连接。当 `FIN＝1` 时，表明此报文段的发送端的数据已发送完毕，并要求释放运输连接。
+* ACK：确认比特（Acknowledge）。只有当 `ACK＝1` 时确认号字段才有效，代表这个封包为确认封包。当 `ACK＝0` 时，确认号无效。
+* PSH：（Push function）若为 1 时，代表要求对方立即传送缓冲区内的其他对应封包，而无需等缓冲满了才送。
+* RST：复位比特(Reset)，当 `RST＝1` 时，表明 TCP 连接中出现严重差错（如由于主机崩溃或其他原因），必须释放连接，然后再重新建立运输连接。
+* SYN：同步比特(Synchronous)，SYN 置为 1，就表示这是一个连接请求或连接接受报文，通常带有 SYN 标志的封包表示『主动』要连接到对方的意思。
+* FIN：终止比特(Final)，用来释放一个连接。当 `FIN＝1` 时，表明此报文段的发送端的数据已发送完毕，并要求释放运输连接。
 
 #### UDP
 
