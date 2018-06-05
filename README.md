@@ -904,7 +904,7 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 ### 索引
 
-[STL 容器方法含义](https://github.com/huihut/interview/tree/master/STL)
+[STL 方法含义](https://github.com/huihut/interview/tree/master/STL)
 
 ### 容器
 
