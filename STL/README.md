@@ -147,3 +147,15 @@ equal_range|获取相同元素的范围，返回包含容器中所有具有与 k
 ## pair
 
 这个类把一对值（values）结合在一起，这些值可能是不同的类型（T1 和 T2）。每个值可以被公有的成员变量first、second访问。
+
+# 算法（algorithms）
+
+方法|含义
+---|---
+all_of|返回容器范围 `[first,last)`（参数，迭代器（下同））内的所有元素是否都满足 pred（参数，如 `[](int i){return i%2;}`（下同））条件的布尔值
+any_of|返回容器范围 `[first,last)`（参数）内的任何元素是否存在满足 pred（参数）条件的布尔值
+none_of|返回容器范围 `[first,last)`（参数）内的所以元素是否都不满足 pred（参数）条件的布尔值
+for_each|对于容器范围 `[first,last)`（参数）内的所以元素都调用 fn（参数，一元函数的指针或函数对象）
+find|返回容器范围 `[first,last)`（参数）第一个等于 val（参数）的迭代器。如果没有找到这样的元素则返回 last（参数）
+find_if|返回容器范围 `[first,last)`（参数）内的第一个 pred（参数，一元布尔函数指针）为 true 的迭代器
+find_if_not|返回容器范围 `[first,last)`（参数）内的第一个 pred（参数，一元布尔函数指针）为 false 的迭代器
