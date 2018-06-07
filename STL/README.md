@@ -38,16 +38,16 @@ vector 是表示可以改变大小的数组的序列容器。
 vector|构造函数
 ~vector|析构函数，销毁容器对象
 operator=|将新内容分配给容器，替换其当前内容，并相应地修改其大小
-begin|返回指向数组容器中第一个元素的迭代器
-end|返回指向数组容器中最后一个元素之后的理论元素的迭代器
-rbegin|返回指向数组容器中最后一个元素的反向迭代器
-rend|返回一个反向迭代器，指向数组中第一个元素之前的理论元素
-cbegin|返回指向数组容器中第一个元素的常量迭代器（const_iterator）
-cend|返回指向数组容器中最后一个元素之后的理论元素的常量迭代器（const_iterator）
-crbegin|返回指向数组容器中最后一个元素的常量反向迭代器（const_reverse_iterator）
-crend|返回指向数组中第一个元素之前的理论元素的常量反向迭代器（const_reverse_iterator）
-size|返回数组容器中元素的数量
-max_size|返回数组容器可容纳的最大元素数
+begin|返回指向容器中第一个元素的迭代器
+end|返回指向容器中最后一个元素之后的理论元素的迭代器
+rbegin|返回指向容器中最后一个元素的反向迭代器
+rend|返回一个反向迭代器，指向中第一个元素之前的理论元素
+cbegin|返回指向容器中第一个元素的常量迭代器（const_iterator）
+cend|返回指向容器中最后一个元素之后的理论元素的常量迭代器（const_iterator）
+crbegin|返回指向容器中最后一个元素的常量反向迭代器（const_reverse_iterator）
+crend|返回指向容器中第一个元素之前的理论元素的常量反向迭代器（const_reverse_iterator）
+size|返回容器中元素的数量
+max_size|返回容器可容纳的最大元素数
 resize|调整容器的大小，使其包含 n（参数）个元素
 capacity|返回当前为 vector 分配的存储空间（容量）的大小
 empty|返回 vector 是否为空
@@ -69,7 +69,7 @@ emplace|通过在 position（参数）位置处插入新元素 args（参数）�
 emplace_back|在 vector 的末尾插入一个新的元素，紧跟在当前的最后一个元素之后
 get_allocator|返回与vector关联的构造器对象的副本
 swap(vector)|容器 x（参数）的内容与容器 y（参数）的内容交换。两个容器对象都必须是相同的类型（相同的模板参数），尽管大小可能不同
-relational operators (vector)|形如 `vectorA > vectorB`；依此比较数组每个元素的大小关系
+relational operators (vector)|形如 `vectorA > vectorB`；依此比较每个元素的大小关系
 
 ## deque
 
@@ -159,3 +159,10 @@ for_each|对于容器范围 `[first,last)`（参数）内的所以元素都调�
 find|返回容器范围 `[first,last)`（参数）第一个等于 val（参数）的迭代器。如果没有找到这样的元素则返回 last（参数）
 find_if|返回容器范围 `[first,last)`（参数）内的第一个 pred（参数，一元布尔函数指针）为 true 的迭代器
 find_if_not|返回容器范围 `[first,last)`（参数）内的第一个 pred（参数，一元布尔函数指针）为 false 的迭代器
+find_end|返回容器范围 `[first1,last1)`（参数）内的最后一个完全匹配 `[first2,last2)`（参数）的 `first2`（参数）的迭代器，无法找到则返回 `last1`（参数）
+count|返回容器范围 `[first1,last1)`（参数）内等于 val（参数）的元素个数
+equal|返回容器范围 `[first1,last1)`（参数）与 `first2`开始的容器是否全部元素相等的布尔值
+search|返回容器范围 `[first1,last1)`（参数）内的第一个完全匹配 `[first2,last2)`（参数）的 `first2`（参数）的迭代器，无法找到则返回 `last1`（参数）
+copy|将范围 `[first1,last1)`（参数）内的元素复制到从 `result`（参数）迭代器开始的容器，返回 `result`（参数）指向的容器的范围 `[first1,last1)`（参数）的末尾
+move|将范围 `[first1,last1)`（参数）内的元素移动到从 `result`（参数）迭代器开始的容器，返回 `result`（参数）指向的容器的范围 `[first1,last1)`（参数）的末尾
+swap|交换 `a`、`b`（参数）两个对象的值
