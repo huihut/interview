@@ -678,7 +678,7 @@ int main()
 1. 必须保证 this 对象是通过 `new`（不是 `new[]`、不是 placement new、不是栈上、不是全局、不是其他对象成员）分配的
 2. 必须保证调用 `delete this` 的成员函数是最后一个调用 this 的成员函数
 3. 必须保证成员函数的 `delete this ` 后面没有调用 this 了
-4. 必须保证 `delete this` 后，没有人使用了
+4. 必须保证 `delete this` 后没有人使用了
 
 #### 如何定义一个只能在堆上（栈上）生成对象的类？
 
@@ -1304,7 +1304,7 @@ typedef struct BiTNode
 > * k：代表数值中的 “数位” 个数
 > * n：代表数据规模
 > * m：代表数据的最大值减最小值
-> * 来自 [wikipedia . 排序算法](https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95)
+> * 来自：[wikipedia . 排序算法](https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95)
 
 ### 查找
 
@@ -1469,7 +1469,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 * 读-拷贝修改(RCU，Read-Copy Update)
 * 顺序锁（seqlock）
 
-> 来自[Linux 内核的同步机制，第 1 部分](https://www.ibm.com/developerworks/cn/linux/l-synch/part1/)、[Linux 内核的同步机制，第 2 部分](https://www.ibm.com/developerworks/cn/linux/l-synch/part2/)
+> 来自：[Linux 内核的同步机制，第 1 部分](https://www.ibm.com/developerworks/cn/linux/l-synch/part1/)、[Linux 内核的同步机制，第 2 部分](https://www.ibm.com/developerworks/cn/linux/l-synch/part2/)
 
 ### 死锁
 
@@ -1916,7 +1916,7 @@ PUT | 从客户端向服务器传送的数据取代指定的文档的内容
 DELETE | 请求服务器删除指定的页面
 TRACE | 回显服务器收到的请求，主要用于测试或诊断
 
-状态吗（Status-Code）
+状态码（Status-Code）
 
 * 1xx：表示通知信息，如请求收到了或正在进行处理
     * 100 Continue：继续，客户端应继续其请求
@@ -1936,7 +1936,7 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
     * 503 Service Unavailable: 由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的 Retry-After 头信息中
     * 504 Gateway Timeout: 充当网关或代理的服务器，未及时从远端服务器获取请求
 
-> [菜鸟教程 . HTTP状态码](http://www.runoob.com/http/http-status-codes.html)
+> 更多状态码：[菜鸟教程 . HTTP状态码](http://www.runoob.com/http/http-status-codes.html)
 
 ##### 其他协议
 
