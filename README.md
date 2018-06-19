@@ -419,6 +419,24 @@ int main()
 using namespace_name::name;
 ```
 
+#### 构造函数的 using 声明【C++11】
+
+在 C++11 中，派生类能够重用其直接积累定义的构造函数。
+
+```cpp
+class Derived : Base {
+public:
+    using Base::Base;
+    /* ... */
+};
+```
+
+如上 using 声明，对于基类的每个构造函数，编译器都生成一个与之对应（形参列表完全相同）的派生类构造函数。生成如下类型构造函数：
+
+```cpp
+derived(parms) : base(args) { }
+```
+
 #### using 指示
 
 `using 指示` 使得某个特定命名空间中所有名字都可见，这样我们就无需再为它们添加任何前缀限定符了。如：
@@ -492,11 +510,31 @@ int main() {
 
 </details>
 
+### 引用
+
+#### 左值引用
+
+常规引用，一般表示对象的身份。
+
+#### 右值引用
+
+右值引用就是必须绑定到右值（一个将要销毁的对象，一个临时对象）的引用，一般表示对象的值。
+
+右值引用可实现转移语义（Move Sementics）和精确传递（Perfect Forwarding），它的主要目的有两个方面：
+
+* 消除两个对象交互时不必要的对象拷贝，节省运算存储资源，提高效率。
+* 能够更简洁明确地定义泛型函数。
+
+#### 引用折叠
+
+* `X& &`、`X& &&`、`X&& &` 可折叠成 `X&`
+* `X&& &&` 可折叠成 `X&`
+
 ### 宏
 
-* 宏定义可以实现类似于函数的功能，但是它终归不是函数，而宏定义中括弧中的“参数”也不是真的参数，在宏展开的时候对 “参数” 进行的是一对一的替换。 
+* 宏定义可以实现类似于函数的功能，但是它终归不是函数，而宏定义中括弧中的“参数”也不是真的参数，在宏展开的时候对 “参数” 进行的是一对一的替换。
 
-### 初始化列表
+### 成员初始化列表
 
 好处
 
@@ -506,6 +544,64 @@ int main() {
   2. 引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面
   3. 没有默认构造函数的类类型，因为使用初始化列表可以不必调用默认构造函数来初始化，而是直接调用拷贝构造函数初始化。
 
+### initializer_list 列表初始化【C++11】
+
+用花括号初始化器列表列表初始化一个对象，其中对应构造函数接受一个 `std::initializer_list` 参数.
+
+<details><summary>initializer_list 使用</summary> 
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <initializer_list>
+ 
+template <class T>
+struct S {
+    std::vector<T> v;
+    S(std::initializer_list<T> l) : v(l) {
+         std::cout << "constructed with a " << l.size() << "-element list\n";
+    }
+    void append(std::initializer_list<T> l) {
+        v.insert(v.end(), l.begin(), l.end());
+    }
+    std::pair<const T*, std::size_t> c_arr() const {
+        return {&v[0], v.size()};  // 在 return 语句中复制列表初始化
+                                   // 这不使用 std::initializer_list
+    }
+};
+ 
+template <typename T>
+void templated_fn(T) {}
+ 
+int main()
+{
+    S<int> s = {1, 2, 3, 4, 5}; // 复制初始化
+    s.append({6, 7, 8});      // 函数调用中的列表初始化
+ 
+    std::cout << "The vector size is now " << s.c_arr().second << " ints:\n";
+ 
+    for (auto n : s.v)
+        std::cout << n << ' ';
+    std::cout << '\n';
+ 
+    std::cout << "Range-for over brace-init-list: \n";
+ 
+    for (int x : {-1, -2, -3}) // auto 的规则令此带范围 for 工作
+        std::cout << x << ' ';
+    std::cout << '\n';
+ 
+    auto al = {10, 11, 12};   // auto 的特殊规则
+ 
+    std::cout << "The list bound to auto has size() = " << al.size() << '\n';
+ 
+//    templated_fn({1, 2, 3}); // 编译错误！“ {1, 2, 3} ”不是表达式，
+                             // 它无类型，故 T 无法推导
+    templated_fn<std::initializer_list<int>>({1, 2, 3}); // OK
+    templated_fn<std::vector<int>>({1, 2, 3});           // 也 OK
+}
+```
+
+</details>
 
 ### 面向对象
 
@@ -673,6 +769,11 @@ virtual int A() = 0;
     * 虚函数
         * 虚函数不占用存储空间
         * 虚函数表存储的是虚函数地址
+
+### 模板类、成员模板、虚函数
+
+* 模板类中可以使用虚函数
+* 一个类（无论是普通类还是类模板）的成员模板（本身是模板的成员函数）不能是虚函数
 
 ### 抽象类、接口类、聚合类
 
