@@ -32,6 +32,17 @@
 
 ### const
 
+#### 作用
+
+1. 修饰变量，说明该变量不可以被改变；
+2. 修饰指针，分为指向常量的指针和指针常量；
+3. 常量引用，经常用于形参类型，即避免了拷贝，又避免了函数对值的修改；
+4. 修饰成员函数，说明该成员函数内不能修改成员变量。
+
+#### 使用
+
+<details><summary>const 使用</summary> 
+
 ```cpp
 // 类
 class A
@@ -77,12 +88,7 @@ const int* function6();     // 返回一个指向常量的指针变量，使用�
 int* const function7();     // 返回一个指向变量的常指针，使用：int* const p = function7();
 ```
 
-#### 作用
-
-1. 修饰变量，说明该变量不可以被改变；
-2. 修饰指针，分为指向常量的指针和指针常量；
-3. 常量引用，经常用于形参类型，即避免了拷贝，又避免了函数对值的修改；
-4. 修饰成员函数，说明该成员函数内不能修改成员变量。
+</details>
 
 ### volatile
 
@@ -128,6 +134,9 @@ volatile int i = 10;
 
 #### 使用
 
+<details><summary>inline 使用</summary> 
+
+
 ```cpp
 // 声明1（加 inline，建议使用）
 inline int functionName(int first, int secend,...);
@@ -138,6 +147,8 @@ int functionName(int first, int secend,...);
 // 定义
 inline int functionName(int first, int secend,...) {/****/};
 ```
+
+</details>
 
 #### 编译器对inline函数的处理步骤
 
@@ -168,6 +179,9 @@ inline int functionName(int first, int secend,...) {/****/};
 * 虚函数可以是内联函数，内联是可以修饰虚函数的，但是当虚函数表现多态性的时候不能内联。
 * 内联是在编译器建议编译器内联，而虚函数的多态性在运行期，编译器无法知道运行期调用哪个代码，因此虚函数表现为多态性时（运行期）不可以内联。
 * `inline virtual` 唯一可以内联的时候是：编译器知道所调用的对象是哪个类（如 `Base::who()`），这只有在编译器具有实际对象而不是对象的指针或引用时才会发生。
+
+<details><summary>虚函数内联使用</summary> 
+
 
 ```cpp
 #include <iostream>  
@@ -209,6 +223,8 @@ int main()
 } 
 ```
 
+</details>
+
 ### assert()
 
 断言，是宏，而非函数。assert 宏的原型定义在`<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。
@@ -228,7 +244,8 @@ assert( p != NULL );
 
 设定结构体、联合以及类成员变量以 n 字节方式对齐
 
-如
+<details><summary>#pragma pack(n) 使用</summary> 
+
 
 ```cpp
 #pragma pack(push)  // 保存对齐状态
@@ -244,12 +261,16 @@ struct test
 #pragma pack(pop)   // 恢复对齐状态
 ```
 
+</details>
+
 ### extern "C"
 
 * 被 extern 限定的函数或变量是 extern 类型的
 * 被 `extern "C"` 修饰的变量和函数是按照 C 语言方式编译和连接的
 
 `extern "C"` 的作用是让 C++ 编译器将 `extern "C"` 声明的代码当作 C 语言代码处理，可以避免 C++ 因符号修饰导致代码不能和C语言库中的符号进行链接的问题。
+
+<details><summary>extern "C" 使用</summary> 
 
 ```cpp
 #ifdef __cplusplus
@@ -262,6 +283,8 @@ void *memset(void *, int, size_t);
 }
 #endif
 ```
+
+</details>
 
 ### struct 和 typedef struct
 
@@ -342,7 +365,7 @@ int main() {
 
 explicit 修饰的构造函数可用来防止隐式转换
 
-如下
+<details><summary>explicit 使用</summary> 
 
 ```cpp
 class Test1
@@ -376,6 +399,8 @@ int main()
 }
 ```
 
+</details>
+
 ### friend 友元类和友元函数
 
 * 能访问私有成员  
@@ -384,23 +409,37 @@ int main()
 * 友元关系的单向性
 * 友元声明的形式及数量不受限制
 
-### using 引入命名空间成员
+### using
+
+#### using 声明
+
+一条 `using 声明` 语句一次只引入命名空间的一个成员。它使得我们可以清楚知道程序中所引用的到底是哪个名字。如：
 
 ```cpp
-using namespace_name::name
+using namespace_name::name;
 ```
 
-#### 尽量不要使用 `using namespace std;` 污染命名空间
+#### using 指示
+
+`using 指示` 使得某个特定命名空间中所有名字都可见，这样我们就无需再为它们添加任何前缀限定符了。如：
+
+```cpp
+using namespace_name name;
+```
+
+#### 尽量少使用 `using 指示` 污染命名空间
 
 > 一般说来，使用 using 命令比使用 using 编译命令更安全，这是由于它**只导入了制定的名称**。如果该名称与局部名称发生冲突，编译器将**发出指示**。using编译命令导入所有的名称，包括可能并不需要的名称。如果与局部名称发生冲突，则**局部名称将覆盖名称空间版本**，而编译器**并不会发出警告**。另外，名称空间的开放性意味着名称空间的名称可能分散在多个地方，这使得难以准确知道添加了哪些名称。
 
-尽量不要使用
+<details><summary>using 使用</summary> 
+
+尽量少使用 `using 指示`
 
 ```cpp
 using namespace std;
 ```
 
-应该使用
+应该多使用 `using 声明`
 
 ```cpp
 int x;
@@ -419,22 +458,39 @@ cin >> x;
 cout << x << endl;
 ```
 
+</details>
+
 ### :: 范围解析运算符
 
-`::` 可以加在类型名称（类、类成员、成员函数、变量等）前，表示作用域为全局命名空间
+#### 分类
 
-如
+1. 全局作用域符（`::name`）：用于类型名称（类、类成员、成员函数、变量等）前，表示作用域为全局命名空间
+2. 类作用域符（`class::name`）：用于表示指定类型的作用域范围是具体某个类的
+3. 命名空间作用域符（`namespace::name`）:用于表示指定类型的作用域范围是具体某个命名空间的
+
+<details><summary>:: 使用</summary> 
 
 ```cpp
-int count = 0;      // global count
+int count = 0;      // 全局（::）的 count
+
+class A {
+public:
+    static int count;      // 类 A 的 count（A::count）
+};
 
 int main() {
-  int count = 0;    // local count
-  ::count = 1;      // set global count to 1
-  count = 2;        // set local count to 2
-  return 0;
+    ::count = 1;      // 设置全局的 count 的值为 1
+
+    A::count = 2;	  // 设置类 A 的 count 为 2
+
+    int count = 0;    // 局部的 count
+    count = 3;        // 设置局部的 count 的值为 3
+
+    return 0;
 }
 ```
+
+</details>
 
 ### 宏
 
@@ -505,6 +561,8 @@ public:
 * 构造函数不能是虚函数（因为在调用构造函数时，虚表指针并没有在对象的内存空间中，必须要构造函数调用完成后才会形成虚表指针）
 * 内联函数不能是表现多态性时的虚函数，解释见：[虚函数（virtual）可以是内联函数（inline）吗？](https://github.com/huihut/interview#%E8%99%9A%E5%87%BD%E6%95%B0virtual%E5%8F%AF%E4%BB%A5%E6%98%AF%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0inline%E5%90%97)
 
+<details><summary>动态多态使用</summary> 
+
 ```cpp
 class Shape                     // 形状类
 {
@@ -541,7 +599,13 @@ int main()
 }
 ```
 
-* 虚析构函数
+</details>
+
+### 虚析构函数
+
+虚析构函数是为了解决基类的指针指向派生类对象，并用基类的指针删除派生类对象。
+
+<details><summary>虚析构函数使用</summary> 
 
 ```cpp
 class Shape
@@ -567,32 +631,15 @@ int main()
 }
 ```
 
-* 纯虚函数 （含有纯虚函数的类叫做抽象类）
+</details>
+
+### 纯虚函数
+
+纯虚函数是一种特殊的虚函数，在基类中不能对虚函数给出有意义的实现，而把它声明为纯虚函数，它的实现留给该基类的派生类去做。
 
 ```cpp
 virtual int A() = 0;
 ```
-
-### 抽象类、接口类、聚合类
-
-* 抽象类：含有纯虚函数的类
-* 接口类：仅含有纯虚函数的抽象类
-* 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
-    * 所有成员都是 public
-    * 没有有定于任何构造函数
-    * 没有类内初始化
-    * 没有基类，也没有 virtual 函数
-    * 如：
-        ```cpp
-        // 定义
-        struct Date 
-        {
-            int ival;
-            string s;
-        }
-        // 初始化
-        Data vall = { 0, "Anna" };
-        ```
 
 ### 虚函数、纯虚函数
 
@@ -608,9 +655,7 @@ virtual int A() = 0;
 * 虚函数指针：在含有虚函数类的对象中，指向虚函数表，在运行时确定。
 * 虚函数表：在程序只读数据段（`.rodata section`，见：[目标文件存储结构](#%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84)），存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建。
 
-### 虚继承、虚函数
-
-#### 虚继承
+### 虚继承
 
 虚继承用于解决多继承条件下的菱形继承问题（浪费存储空间、存在二义性）。
 
@@ -618,7 +663,7 @@ virtual int A() = 0;
 
 实际上，vbptr 指的是虚基类表指针（virtual base table pointer），该指针指向了一个虚基类表（virtual table），虚表中记录了虚基类与本类的偏移地址；通过偏移地址，这样就找到了虚基类成员，而虚继承也不用像普通多继承那样维持着公共基类（虚基类）的两份同样的拷贝，节省了存储空间。
 
-#### 虚继承与虚函数
+### 虚继承、虚函数
 
 * 相同之处：都利用了虚指针（均占用类的存储空间）和虚表（均不占用类的存储空间）
 * 不同之处：
@@ -628,6 +673,16 @@ virtual int A() = 0;
     * 虚函数
         * 虚函数不占用存储空间
         * 虚函数表存储的是虚函数地址
+
+### 抽象类、接口类、聚合类
+
+* 抽象类：含有纯虚函数的类
+* 接口类：仅含有纯虚函数的抽象类
+* 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+    * 所有成员都是 public
+    * 没有有定于任何构造函数
+    * 没有类内初始化
+    * 没有基类，也没有 virtual 函数
 
 ### 内存分配和管理
 
@@ -639,6 +694,10 @@ virtual int A() = 0;
 4. alloca：在栈上申请内存。程序在出栈的时候，会自动释放内存。但是需要注意的是，alloca 不具可移植性, 而且在没有传统堆栈的机器上很难实现。alloca 不宜使用在必须广泛移植的程序中。C99 中支持变长数组 (VLA)，可以用来替代 alloca。
 
 #### malloc、free
+
+用于分配、释放内存
+
+<details><summary>malloc、free 使用</summary> 
 
 申请内存，确认是否申请成功
 
@@ -654,11 +713,17 @@ free(p);
 p = nullptr;
 ```
 
+</details>
+
 #### new、delete
 
 1. new/new[]：完成两件事，先底层调用 malloc 分了配内存，然后调用构造函数（创建对象）。
 2. delete/delete[]：也完成两件事，先调用析构函数（清理资源），然后底层调用 free 释放空间。
 3. new 在申请内存时会自动计算所需字节数，而 malloc 则需我们自己输入申请内存空间的字节数。
+
+<details><summary>new、delete 使用</summary> 
+
+申请内存，确认是否申请成功
 
 ```cpp
 int main()
@@ -669,7 +734,9 @@ int main()
 }
 ```
 
-##### delete this 合法吗？
+</details>
+
+### delete this 合法吗？
 
 [Is it legal (and moral) for a member function to say delete this?](https://isocpp.org/wiki/faq/freestore-mgmt#delete-this)
 
@@ -680,17 +747,17 @@ int main()
 3. 必须保证成员函数的 `delete this ` 后面没有调用 this 了
 4. 必须保证 `delete this` 后没有人使用了
 
-#### 如何定义一个只能在堆上（栈上）生成对象的类？
+### 如何定义一个只能在堆上（栈上）生成对象的类？
 
 [如何定义一个只能在堆上（栈上）生成对象的类?](https://www.nowcoder.com/questionTerminal/0a584aa13f804f3ea72b442a065a7618)
 
-##### 只能在堆上
+#### 只能在堆上
 
 方法：将析构函数设置为私有
 
 原因：C++ 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象。
 
-##### 只能在栈上
+#### 只能在栈上
 
 方法：将 new 和 delete 重载为私有
 
@@ -783,6 +850,8 @@ unique_ptr 是 C++11 才开始提供的类型，是一种在异常时可以帮�
 
 * 由于强制转换为引用类型失败，dynamic_cast 运算符引发 bad_cast 异常。
 
+<details><summary>bad_cast 使用</summary> 
+
 ```cpp
 try {  
     Circle& ref_circle = dynamic_cast<Circle&>(ref_shape);   
@@ -791,6 +860,8 @@ catch (bad_cast b) {
     cout << "Caught: " << b.what();  
 } 
 ```
+
+</details>
 
 ### 运行时类型信息 (RTTI) 
 
@@ -810,7 +881,7 @@ catch (bad_cast b) {
 * type_info 类描述编译器在程序中生成的类型信息。 此类的对象可以有效存储指向类型的名称的指针。 type_info 类还可存储适合比较两个类型是否相等或比较其排列顺序的编码值。 类型的编码规则和排列顺序是未指定的，并且可能因程序而异。
 * 头文件：`typeinfo`
 
-#### 例子
+<details><summary>typeid、type_info 使用</summary>
 
 ```cpp
 class Flyable                       // 能飞的
@@ -862,6 +933,8 @@ class doSomething(Flyable *obj)                 // 做些事情
 };
 ```
 
+</details>
+
 ### Effective C++
 
 1. 视 C++ 为一个语言联邦（C、Object-Oriented C++、Template C++、STL）
@@ -896,9 +969,13 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 ### Google C++ Style Guide
 
+<details><summary>Google C++ Style Guide 图</summary>
+
 ![Google C++ Style Guide](http://img.blog.csdn.net/20140713220242000)
 
 > 图片来源于：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](http://blog.csdn.net/voidccc/article/details/37599203)
+
+</details>
 
 ## STL
 
@@ -939,6 +1016,8 @@ hash_multimap|hash表|无序|可重复|
 
 [SqStack.cpp](DataStructure/SqStack.cpp)
 
+<details><summary>顺序栈数据结构和图片</summary>
+
 ```cpp
 typedef struct {
 	ElemType *elem;
@@ -950,7 +1029,11 @@ typedef struct {
 
 ![](images/SqStack.png)
 
+</details>
+
 #### 队列（Sequence Queue）
+
+<details><summary>队列数据结构</summary>
 
 ```cpp
 typedef struct {
@@ -961,21 +1044,33 @@ typedef struct {
 }SqQueue;
 ```
 
+</details>
+
 ##### 非循环队列
+
+<details><summary>非循环队列图片</summary>
 
 ![](images/SqQueue.png)
 
 `SqQueue.rear++`
 
+</details>
+
 ##### 循环队列
+
+<details><summary>循环队列图片</summary>
 
 ![](images/SqLoopStack.png)
 
 `SqQueue.rear = (SqQueue.rear + 1) % SqQueue.maxSize`
 
+</details>
+
 #### 顺序表（Sequence List）
 
 [SqList.cpp](DataStructure/SqList.cpp)
+
+<details><summary>顺序表数据结构和图片</summary>
 
 ```cpp
 typedef struct {
@@ -988,11 +1083,16 @@ typedef struct {
 
 ![](images/SqList.png)
 
+</details>
+
+
 ### 链式结构
 
 [LinkList.cpp](DataStructure/LinkList.cpp)
 
 [LinkList_with_head.cpp](DataStructure/LinkList_with_head.cpp)
+
+<details><summary>链式数据结构</summary>
 
 ```cpp
 typedef struct LNode {
@@ -1001,23 +1101,42 @@ typedef struct LNode {
 } LNode, *LinkList; 
 ```
 
+</details>
+
 #### 链队列（Link Queue）
 
+<details><summary>链队列图片</summary>
+
 ![](images/LinkQueue.png)
+
+</details>
 
 #### 线性表的链式表示
 
 ##### 单链表（Link List）
 
+<details><summary>单链表图片</summary>
+
 ![](images/LinkList.png)
+
+</details>
+
 
 ##### 双向链表（Du-Link-List）
 
+<details><summary>双向链表图片</summary>
+
 ![](images/DuLinkList.png)
+
+</details>
 
 ##### 循环链表（Cir-Link-List）
 
+<details><summary>循环链表图片</summary>
+
 ![](images/CirLinkList.png)
+
+</details>
 
 ### 哈希表
 
@@ -1045,8 +1164,9 @@ typedef struct LNode {
 
 #### 线性探测的哈希表数据结构
 
-```cpp
+<details><summary>线性探测的哈希表数据结构和图片</summary>
 
+```cpp
 typedef char KeyType;
 
 typedef struct {
@@ -1060,7 +1180,11 @@ typedef struct {
 	bool *tag;
 }HashTable;
 ```
+
 ![](images/HashTable.png)
+
+</details>
+
 
 ### 递归
 
@@ -1087,6 +1211,8 @@ typedef struct {
 
 ##### 头尾链表存储表示
 
+<details><summary>广义表的头尾链表存储表示和图片</summary>
+
 ```cpp
 // 广义表的头尾链表存储表示
 typedef enum {ATOM, LIST} ElemTag;
@@ -1108,7 +1234,11 @@ typedef struct GLNode {
 
 ![](images/GeneralizedList1.png)
 
+</details>
+
 ##### 扩展线性链表存储表示
+
+<details><summary>扩展线性链表存储表示和图片</summary>
 
 ```cpp
 // 广义表的扩展线性链表存储表示
@@ -1129,6 +1259,8 @@ typedef struct GLNode1 {
 
 ![](images/GeneralizedList2.png)
 
+</details>
+
 ### 二叉树
 
 [BinaryTree.cpp](DataStructure/BinaryTree.cpp)
@@ -1146,6 +1278,8 @@ typedef struct GLNode1 {
 
 #### 存储结构
 
+<details><summary>二叉树数据结构</summary>
+
 ```cpp
 typedef struct BiTNode
 {
@@ -1154,13 +1288,24 @@ typedef struct BiTNode
 }BiTNode, *BiTree;
 ```
 
+</details>
+
+
 ##### 顺序存储
+
+<details><summary>二叉树顺序存储图片</summary>
 
 ![](images/SqBinaryTree.png)
 
+</details>
+
 ##### 链式存储
 
+<details><summary>二叉树链式存储图片</summary>
+
 ![](images/LinkBinaryTree.png)
+
+</details>
 
 #### 遍历方式
 
@@ -1203,7 +1348,11 @@ typedef struct BiTNode
 * 平衡二叉树必定是二叉搜索树，反之则不一定
 * 最小二叉平衡树的节点的公式：`F(n)=F(n-1)+F(n-2)+1` （1 是根节点，F(n-1) 是左子树的节点数量，F(n-2) 是右子树的节点数量）
 
+<details><summary>平衡二叉树图片</summary>
+
 ![](images/Self-balancingBinarySearchTree.png)
+
+</details>
 
 ##### 最小失衡树
 
@@ -1243,7 +1392,11 @@ typedef struct BiTNode
 
 #### B 树（B-tree）、B+ 树（B+-tree）
 
+<details><summary>B 树、B+ 树图片</summary>
+
 ![B 树（B-tree）、B+ 树（B+-tree）](https://i.stack.imgur.com/l6UyF.png)
+
+</details>
 
 ##### 特点
 
@@ -1272,7 +1425,11 @@ typedef struct BiTNode
 
 #### 八叉树
 
+<details><summary>八叉树图片</summary>
+
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Octree2.png/400px-Octree2.png)
+
+</details>
 
 八叉树（octree），或称八元树，是一种用于描述三维空间（划分空间）的树状数据结构。八叉树的每个节点表示一个正方体的体积元素，每个节点有八个子节点，这八个子节点所表示的体积元素加在一起就等于父节点的体积。一般中心点作为节点的分叉中心。
 
@@ -1520,10 +1677,17 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 大端|12|34|56|78
 小端|78|56|34|12
 
+
+<details><summary>大端小端图片</summary>
+
 ![大端序](images/CPU-Big-Endian.svg.png)
 ![小端序](images/CPU-Little-Endian.svg.png)
 
+</details>
+
 ##### 判断大端小端
+
+<details><summary>判断大端小端</summary>
 
 可以这样判断自己 CPU 字节序是大端还是小端：
 
@@ -1543,6 +1707,9 @@ int main()
 	return 0;
 }
 ```
+
+</details>
+
 ##### 各架构处理器的字节序
 
 * x86（Intel、AMD）、MOS Technology 6502、Z80、VAX、PDP-11 等处理器为小端序；
@@ -1856,7 +2023,11 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 
 #### TCP 有限状态机
 
+<details><summary>TCP 有限状态机图片</summary>
+
 ![TCP 的有限状态机](images/TCP的有限状态机.png)
+
+</details>
 
 ### 应用层
 
@@ -2195,6 +2366,8 @@ Linux 下的共享库就是普通的 ELF 共享对象。
 
 ### Windows 的动态链接库（Dynamic-Link Library）
 
+<details><summary>Windows 动态链接库例子</summary>
+
 DLL 头文件
 ```cpp
 #ifdef __cplusplus
@@ -2229,6 +2402,8 @@ MODULE_API int module_init()
     return 0;
 }
 ```
+
+</details>
 
 ### 运行库（Runtime Library）
 
