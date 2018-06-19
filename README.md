@@ -30,7 +30,7 @@
 
 ## C/C++
 
-<details><summary>const</summary><br>
+<details><summary><h3>const</h3></summary><br>
 
 ```cpp
 // 类
