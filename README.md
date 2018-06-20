@@ -357,6 +357,57 @@ int main() {
     1. 默认的继承访问权限。struct 是 public 的，class 是 private 的。  
     2. struct 作为数据结构的实现体，它默认的数据访问控制是 public 的，而 class 作为对象的实现体，它默认的成员变量访问控制是 private 的。
 
+### union 联合
+
+联合（union）是一种节省空间的特殊的类，一个 union 可以有多个数据成员，但是在任意时刻只有一个数据成员可以有值。当某个成员被赋值后其他成员变为未定义状态。联合有如下特点：
+
+* 默认访问控制符为 public
+* 可以含有构造函数、析构函数
+* 不能含有引用类型的成员
+* 不能继承自其他类，不能作为基类
+* 不能含有虚函数
+* 匿名 union 在定义所在作用域可直接访问 union 成员
+* 匿名 union 不能包含 protected 成员或 private 成员
+* 全局匿名联合必须是静态（static）的
+
+<details><summary>union 使用</summary> 
+
+```cpp
+#include<iostream>
+
+union UnionTest {
+    UnionTest() : i(10) {};
+    int i;
+    double d;
+};
+
+static union {
+    int i;
+    double d;
+};
+
+int main() {
+    UnionTest u;
+
+    union {
+        int i;
+        double d;
+    };
+
+    std::cout << u.i << std::endl;  // 输出 UnionTest 联合的 10
+
+    ::i = 20;
+    std::cout << ::i << std::endl;  // 输出全局静态匿名联合的 20
+
+    i = 30;
+    std::cout << i << std::endl;    // 输出局部匿名联合的 30
+
+    return 0;
+}
+```
+
+</details>
+
 ### C 实现 C++ 类
 
 [C 语言实现封装、继承和多态](http://dongxicheng.org/cpp/ooc/)
@@ -489,17 +540,17 @@ cout << x << endl;
 <details><summary>:: 使用</summary> 
 
 ```cpp
-int count = 0;      // 全局（::）的 count
+int count = 0;        // 全局（::）的 count
 
 class A {
 public:
-    static int count;      // 类 A 的 count（A::count）
+    static int count; // 类 A 的 count（A::count）
 };
 
 int main() {
     ::count = 1;      // 设置全局的 count 的值为 1
 
-    A::count = 2;	  // 设置类 A 的 count 为 2
+    A::count = 2;     // 设置类 A 的 count 为 2
 
     int count = 0;    // 局部的 count
     count = 3;        // 设置局部的 count 的值为 3
@@ -509,6 +560,21 @@ int main() {
 ```
 
 </details>
+
+### enum 枚举类型
+
+#### 限定作用域的枚举类型
+
+```cpp
+enum class open_modes { input, output, append };
+```
+
+#### 不限定作用域的枚举类型
+
+```cpp
+enum color { red, yellow, green };
+enum { floatPrec = 6, doublePrec = 10 };
+```
 
 ### 引用
 
@@ -818,7 +884,7 @@ p = nullptr;
 
 #### new、delete
 
-1. new/new[]：完成两件事，先底层调用 malloc 分了配内存，然后调用构造函数（创建对象）。
+1. new / new[]：完成两件事，先底层调用 malloc 分了配内存，然后调用构造函数（创建对象）。
 2. delete/delete[]：也完成两件事，先调用析构函数（清理资源），然后底层调用 free 释放空间。
 3. new 在申请内存时会自动计算所需字节数，而 malloc 则需我们自己输入申请内存空间的字节数。
 
@@ -836,6 +902,20 @@ int main()
 ```
 
 </details>
+
+#### 定位 new
+
+定位 new（placement new）允许我们向 new 传递额外的参数。
+
+```cpp
+new (palce_address) type
+new (palce_address) type (initializers)
+new (palce_address) type [size]
+new (palce_address) type [size] { braced initializer list }
+```
+
+* `palce_address` 是个指针
+* `initializers` 提供一个（可能为空的）以逗号分隔的初始值列表
 
 ### delete this 合法吗？
 
