@@ -216,9 +216,7 @@ int main()
 
 ### assert()
 
-断言，是宏，而非函数。assert 宏的原型定义在`<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。
-
-如
+断言，是宏，而非函数。assert 宏的原型定义在`<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。如：
 
 ```cpp
 assert( p != NULL );
@@ -588,6 +586,35 @@ enum color { red, yellow, green };
 enum { floatPrec = 6, doublePrec = 10 };
 ```
 
+### decltype
+
+decltype 关键字用于检查实体的声明类型或表达式的类型及值分类。语法：
+
+```cpp
+decltype ( expression )
+```
+
+<details><summary>decltype 使用</summary> 
+
+```cpp
+// 尾置返回允许我们在参数列表之后声明返回类型
+template <typename It>
+auto fcn(It beg, It end) -> decltype(*beg)
+{
+    // 处理序列
+    return *beg;    // 返回序列中一个元素的引用
+}
+// 为了使用模板参数成员，必须用 typename
+template <typename It>
+auto fcn2(It beg, It end) -> typename remove_reference<decltype(*beg)>::type
+{
+    // 处理序列
+    return *beg;    // 返回序列中一个元素的拷贝
+}
+```
+
+</details>
+
 ### 引用
 
 #### 左值引用
@@ -606,7 +633,7 @@ enum { floatPrec = 6, doublePrec = 10 };
 #### 引用折叠
 
 * `X& &`、`X& &&`、`X&& &` 可折叠成 `X&`
-* `X&& &&` 可折叠成 `X&`
+* `X&& &&` 可折叠成 `X&&`
 
 ### 宏
 
