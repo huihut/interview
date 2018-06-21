@@ -286,5 +286,5 @@ minmax_element(beg, end, comp); // 返回一个 pair，其中 first 成员为最
 
 // 字典序比较，根据第一对不相等的元素的相对大小来返回结果。如果第一个序列在字典序中小于第二个序列，则返回 true。否则，返回 fa1se。如果个序列比另一个短，且所有元素都与较长序列的对应元素相等，则较短序列在字典序中更小。如果序列长度相等，且对应元素都相等，则在字典序中任何一个都不大于另外一个。
 lexicographical_compare(beg1, end1, beg2, end2);
-lexicographical_compare(beg1, end1, beg2, end2, comp)
+lexicographical_compare(beg1, end1, beg2, end2, comp);
 ```
