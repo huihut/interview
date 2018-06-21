@@ -4,8 +4,9 @@
 
 ## 使用建议
 
-* `Ctrl+F`：快速查找定位知识点
-* `TOC导航`：配合 [jawil/GayHub](https://github.com/jawil/GayHub) 插件使用更佳
+* `Ctrl + F`：快速查找定位知识点
+* `TOC 导航`：使用 [jawil/GayHub](https://github.com/jawil/GayHub) 插件快速目录跳转
+* `T`：按 `T` 激活文件查找器快速查找 / 跳转文件
 
 ## 目录
 
