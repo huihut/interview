@@ -624,7 +624,7 @@ auto fcn2(It beg, It end) -> typename remove_reference<decltype(*beg)>::type
 
 #### 右值引用
 
-右值引用就是必须绑定到右值（一个将要销毁的对象，一个临时对象）的引用，一般表示对象的值。
+右值引用就是必须绑定到右值（一个临时对象、将要销毁的对象）的引用，一般表示对象的值。
 
 右值引用可实现转移语义（Move Sementics）和精确传递（Perfect Forwarding），它的主要目的有两个方面：
 
