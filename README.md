@@ -483,7 +483,7 @@ using namespace_name::name;
 
 #### 构造函数的 using 声明【C++11】
 
-在 C++11 中，派生类能够重用其直接积累定义的构造函数。
+在 C++11 中，派生类能够重用其直接基类定义的构造函数。
 
 ```cpp
 class Derived : Base {
