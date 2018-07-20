@@ -2466,6 +2466,14 @@ public:
 
 ## 链接装载库
 
+### 各平台文件格式
+
+平台 | 可执行文件 | 目标文件 | 动态库/共享对象 | 静态库
+---|---|---|---|---
+Windows|exe|obj|dll|lib
+Unix/Linux|ELF、out|o|so|a
+Mac|Mach-O|o|dylib、tbd、framework|a、framework
+
 ### 内存、栈、堆
 
 一般应用程序内存空间有如下区域：
