@@ -2420,6 +2420,8 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 ## 设计模式
 
+> 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/column/details/15392.html) 系列博文
+
 ### 设计模式的六大原则
 
 * 单一职责原则（SRP，Single Responsibility Principle）
@@ -2431,38 +2433,23 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 ### 单例模式
 
-```cpp
-// 懒汉式单例模式
-class Singleton
-{
-private:
-	Singleton() { }
-	static Singleton * pInstance;
-public:
-	static Singleton * GetInstance()
-	{
-		if (pInstance == nullptr)
-			pInstance = new Singleton();
-		return pInstance;
-	}
-};
+[单例模式例子](DesignPattern/SingletonPattern)
 
-// 线程安全的单例模式
-class Singleton
-{
-private:
-	Singleton() { }
-	~Singleton() { }
-	Singleton(const Singleton &);
-	Singleton & operator = (const Singleton &);
-public:
-	static Singleton & GetInstance()
-	{
-		static Singleton instance;
-		return instance;
-	}
-};
-```
+### 抽象工厂模式
+
+[抽象工厂模式例子](DesignPattern/AbstractFactoryPattern)
+
+### 适配器模式
+
+[适配器模式例子](DesignPattern/AdapterPattern)
+
+### 桥接模式
+
+[桥接模式例子](DesignPattern/BridgePattern)
+
+### 观察者模式
+
+[观察者模式例子](DesignPattern/ObserverPattern)
 
 ## 链接装载库
 
