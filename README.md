@@ -2422,14 +2422,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 > 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/column/details/15392.html) 系列博文
 
-### 设计模式的六大原则
-
-* 单一职责原则（SRP，Single Responsibility Principle）
-* 里氏替换原则（LSP，Liskov Substitution Principle）
-* 依赖倒置原则（DIP，Dependence Inversion Principle）
-* 接口隔离原则（ISP，Interface Segregation Principle）
-* 迪米特法则（LoD，Law of Demeter）
-* 开放封闭原则（OCP，Open Close Principle）
+[设计模式工程目录](DesignPattern)
 
 ### 单例模式
 
@@ -2450,6 +2443,15 @@ ssize_t write(int fd, const void *buf, size_t count);
 ### 观察者模式
 
 [观察者模式例子](DesignPattern/ObserverPattern)
+
+### 设计模式的六大原则
+
+* 单一职责原则（SRP，Single Responsibility Principle）
+* 里氏替换原则（LSP，Liskov Substitution Principle）
+* 依赖倒置原则（DIP，Dependence Inversion Principle）
+* 接口隔离原则（ISP，Interface Segregation Principle）
+* 迪米特法则（LoD，Law of Demeter）
+* 开放封闭原则（OCP，Open Close Principle）
 
 ## 链接装载库
 
