@@ -1226,11 +1226,6 @@ hash_multiset|hash表|无序|可重复|
 hash_map|hash表|无序|不可重复|
 hash_multimap|hash表|无序|可重复|
 
-### STL 空间配置器如何处理内存的？能说一下它的大概实现方案吗？为什么是 8Bytes 的倍数？
-
-* 大于 128Bytes 用 malloc 直接申请
-* 小于 128Bytes 使用一个 8Bytes 倍数的数组来进行申请（原因是为了提高效率，同时对于 64 位的机器而言，地址大小为 8Bytes）
-
 ## 数据结构
 
 ### 顺序结构
