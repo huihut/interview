@@ -2750,7 +2750,7 @@ MODULE_API int module_init()
 
 ## 招聘时间岗位
 
-* [牛客网 . 2018 IT名企校招指南](https://www.nowcoder.com/activity/campus2018)
+* [牛客网 . 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
 
 ## 面试题目经验
 
