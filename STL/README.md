@@ -54,7 +54,7 @@ empty|返回 vector 是否为空
 reserve|请求 vector 容量至少足以包含 n（参数）个元素
 shrink_to_fit|要求容器减小其 capacity（容量）以适应其 size（元素数量）
 operator[]|返回容器中第 n（参数）个位置的元素的引用
-at|返回中第 n（参数）个位置的元素的引用
+at|返回容器中第 n（参数）个位置的元素的引用
 front|返回对容器中第一个元素的引用
 back|返回对容器中最后一个元素的引用
 data|返回指向容器中第一个元素的指针
