@@ -2467,14 +2467,6 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 ## 链接装载库
 
-### 各平台文件格式
-
-平台 | 可执行文件 | 目标文件 | 动态库/共享对象 | 静态库
----|---|---|---|---
-Windows|exe|obj|dll|lib
-Unix/Linux|ELF、out|o|so|a
-Mac|Mach-O|o|dylib、tbd、framework|a、framework
-
 ### 内存、栈、堆
 
 一般应用程序内存空间有如下区域：
@@ -2510,6 +2502,14 @@ Mac|Mach-O|o|dylib、tbd、framework|a、framework
 * 没用初始化栈中的指针，指针的值一般会是随机数，之后就直接开始使用指针
 
 ### 编译链接
+
+#### 各平台文件格式
+
+平台 | 可执行文件 | 目标文件 | 动态库/共享对象 | 静态库
+---|---|---|---|---
+Windows|exe|obj|dll|lib
+Unix/Linux|ELF、out|o|so|a
+Mac|Mach-O|o|dylib、tbd、framework|a、framework
 
 #### 编译链接过程
 
