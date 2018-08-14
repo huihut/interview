@@ -2594,41 +2594,377 @@ Linux 下的共享库就是普通的 ELF 共享对象。
 * `LD_PRELOAD`：指定预先装载的一些共享库甚至是目标文件
 * `LD_DEBUG`：打开动态链接器的调试功能
 
-### Windows 的动态链接库（Dynamic-Link Library）
+#### so 共享库的编写
 
-<details><summary>Windows 动态链接库例子</summary>
+<details><summary>使用 CLion 编写共享库</summary>
 
-DLL 头文件
+创建一个名为 MySharedLib 的共享库
+
+CMakeLists.txt
+
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(MySharedLib)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_library(MySharedLib SHARED library.cpp library.h)
+```
+
+library.h
+
 ```cpp
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef MYSHAREDLIB_LIBRARY_H
+#define MYSHAREDLIB_LIBRARY_H
 
-#ifdef _WIN32
-#  ifdef MODULE_API_EXPORTS
-#    define MODULE_API __declspec(dllexport)
-#  else
-#    define MODULE_API __declspec(dllimport)
-#  endif
-#else
-#  define MODULE_API
-#endif
+// 打印 Hello World!
+void hello();
 
-MODULE_API int module_init();
-
-#ifdef __cplusplus
+// 使用可变模版参数求和
+template <typename T>
+T sum(T t)
+{
+    return t;
 }
+template <typename T, typename ...Types>
+T sum(T first, Types ... rest)
+{
+    return first + sum<T>(rest...);
+}
+
 #endif
 ```
 
-DLL 源文件
-```cpp
-#define MODULE_API_EXPORTS
-#include "module.h"
+library.cpp
 
-MODULE_API int module_init()
+```cpp
+#include <iostream>
+#include "library.h"
+
+void hello() {
+    std::cout << "Hello, World!" << std::endl;
+}
+```
+
+</details>
+
+#### so 共享库的使用（被可执行项目调用）
+
+<details><summary>使用 CLion 调用共享库</summary>
+
+创建一个名为 TestSharedLib 的可执行项目
+
+CMakeLists.txt
+
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(TestSharedLib)
+
+# C++11 编译
+set(CMAKE_CXX_STANDARD 11)
+
+# 头文件路径
+set(INC_DIR /home/xx/code/clion/MySharedLib)
+# 库文件路径
+set(LIB_DIR /home/xx/code/clion/MySharedLib/cmake-build-debug)
+
+include_directories(${INC_DIR})
+link_directories(${LIB_DIR})
+link_libraries(MySharedLib)
+
+add_executable(TestSharedLib main.cpp)
+
+# 链接 MySharedLib 库
+target_link_libraries(TestSharedLib MySharedLib)
+```
+
+main.cpp
+
+```cpp
+#include <iostream>
+#include "library.h"
+using std::cout;
+using std::endl;
+
+int main() {
+
+    hello();
+    cout << "1 + 2 = " << sum(1,2) << endl;
+    cout << "1 + 2 + 3 = " << sum(1,2,3) << endl;
+
+    return 0;
+}
+```
+
+执行结果
+
+```
+Hello, World!
+1 + 2 = 3
+1 + 2 + 3 = 6
+```
+
+</details>
+
+### Windows 应用程序入口函数
+
+* GUI（Graphical User Interface）应用，链接器选项：`/SUBSYSTEM:WINDOWS`
+* CUI（Console User Interface）应用，链接器选项：`/SUBSYSTEM:CONSOLE`
+
+<details><summary>_tWinMain 与 _tmain 函数声明</summary>
+
+```cpp
+Int WINAPI _tWinMain(
+    HINSTANCE hInstanceExe,
+    HINSTANCE,
+    PTSTR pszCmdLine,
+    int nCmdShow);
+
+int _tmain(
+    int argc,
+    TCHAR *argv[],
+    TCHAR *envp[]);
+```
+
+</details>
+
+应用程序类型|入口点函数|嵌入可执行文件的启动函数
+---|---|---
+处理ANSI字符（串）的GUI应用程序|_tWinMain(WinMain)|WinMainCRTSartup
+处理Unicode字符（串）的GUI应用程序|_tWinMain(wWinMain)|wWinMainCRTSartup
+处理ANSI字符（串）的CUI应用程序|_tmain(Main)|mainCRTSartup
+处理Unicode字符（串）的CUI应用程序|_tmain(wMain)|wmainCRTSartup
+动态链接库（Dynamic-Link Library）|DllMain|_DllMainCRTStartup 
+
+### Windows 的动态链接库（Dynamic-Link Library）
+
+#### 用处
+
+* 扩展了应用程序的特性
+* 简化了项目管理
+* 有助于节省内存
+* 促进了资源的共享
+* 促进了本地化
+* 有助于解决平台间的差异
+* 可以用于特殊目的
+
+#### 注意
+
+* 创建 DLL，事实上是在创建可供一个可执行模块调用的函数
+* 当一个模块提供一个内存分配函数（malloc、new）的时候，它必须同时提供另一个内存释放函数（free、delete）
+* 在使用 C 和 C++ 混编的时候，要使用 extern "C" 修饰符
+* 一个 DLL 可以导出函数、变量（避免导出）、C++ 类（导出导入需要同编译器，否则避免导出）
+* DLL 模块：cpp 文件中的 __declspec(dllexport) 写在 include 头文件之前
+* 调用 DLL 的可执行模块：cpp 文件的 __declspec(dllimport) 之前不应该定义 MYLIBAPI
+
+#### 加载 Windows 程序的搜索顺序
+
+1. 包含可执行文件的目录
+2. Windows 的系统目录，可以通过 GetSystemDirectory 得到
+3. 16 位的系统目录，即 Windows 目录中的 System 子目录
+4. Windows 目录，可以通过 GetWindowsDirectory 得到
+5. 进程的当前目录
+6. PATH 环境变量中所列出的目录
+
+#### DLL 入口函数
+
+<details><summary>DllMain 函数</summary>
+
+```cpp
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
-    /* do something useful */
+    switch(fdwReason)
+    {
+    case DLL_PROCESS_ATTACH:
+        // 第一次将一个DLL映射到进程地址空间时调用
+        // The DLL is being mapped into the process' address space.
+        break;
+    case DLL_THREAD_ATTACH:
+        // 当进程创建一个线程的时候，用于告诉DLL执行与线程相关的初始化（非主线程执行）
+        // A thread is bing created.
+        break;
+    case DLL_THREAD_DETACH:
+        // 系统调用 ExitThread 线程退出前，即将终止的线程通过告诉DLL执行与线程相关的清理
+        // A thread is exiting cleanly.
+        break;
+    case DLL_PROCESS_DETACH:
+        // 将一个DLL从进程的地址空间时调用
+        // The DLL is being unmapped from the process' address space.
+        break;
+    }
+    return (TRUE); // Used only for DLL_PROCESS_ATTACH
+}
+```
+
+</details>
+
+#### 载入卸载库
+
+<details><summary>LoadLibrary、LoadLibraryExA、LoadPackagedLibrary、FreeLibrary、FreeLibraryAndExitThread 函数声明</summary>
+
+```cpp
+// 载入库
+HMODULE WINAPI LoadLibrary(
+  _In_ LPCTSTR lpFileName
+);
+HMODULE LoadLibraryExA(
+  LPCSTR lpLibFileName,
+  HANDLE hFile,
+  DWORD  dwFlags
+);
+// 若要在通用 Windows 平台（UWP）应用中加载 Win32 DLL，需要调用 LoadPackagedLibrary，而不是 LoadLibrary 或 LoadLibraryEx
+HMODULE LoadPackagedLibrary(
+  LPCWSTR lpwLibFileName,
+  DWORD   Reserved
+);
+
+// 卸载库
+BOOL WINAPI FreeLibrary(
+  _In_ HMODULE hModule
+);
+// 卸载库和退出线程
+VOID WINAPI FreeLibraryAndExitThread(
+  _In_ HMODULE hModule,
+  _In_ DWORD   dwExitCode
+);
+```
+
+</details>
+
+#### 显示地链接到导出符号
+
+<details><summary>GetProcAddress 函数声明</summary>
+
+```cpp
+FARPROC GetProcAddress(
+  HMODULE hInstDll,
+  PCSTR pszSymbolName  // 只能接受 ANSI 字符串，不能是 Unicode
+);
+```
+
+</details>
+
+#### DumpBin.exe 查看 DLL 信息
+
+在 `VS 的开发人员命令提示符` 使用 `DumpBin.exe` 可查看 DLL 库的导出段（导出的变量、函数、类名的符号）、相对虚拟地址（RVA，relative virtual address）。如：
+```
+DUMPBIN -exports D:\mydll.dll
+```
+
+#### LoadLibrary 与 FreeLibrary 流程图
+
+<details><summary>LoadLibrary 与 FreeLibrary 流程图</summary>
+
+##### LoadLibrary
+
+![WindowsLoadLibrary](http://ojlsgreog.bkt.clouddn.com/WindowsLoadLibrary.png)
+
+##### FreeLibrary
+
+![WindowsFreeLibrary](http://ojlsgreog.bkt.clouddn.com/WindowsFreeLibrary.png)
+
+</details>
+
+#### DLL 库的编写（导出一个 DLL 模块）
+
+<details><summary>DLL 库的编写（导出一个 DLL 模块）</summary>
+DLL 头文件
+
+```cpp
+// MyLib.h
+
+#ifdef MYLIBAPI
+
+// MYLIBAPI 应该在全部 DLL 源文件的 include "Mylib.h" 之前被定义
+// 全部函数/变量正在被导出
+
+#else
+
+// 这个头文件被一个exe源代码模块包含，意味着全部函数/变量被导入
+#define MYLIBAPI extern "C" __declspec(dllimport)
+
+#endif
+
+// 这里定义任何的数据结构和符号
+
+// 定义导出的变量（避免导出变量）
+MYLIBAPI int g_nResult;
+
+// 定义导出函数原型
+MYLIBAPI int Add(int nLeft, int nRight);
+```
+
+DLL 源文件
+
+```cpp
+// MyLibFile1.cpp
+
+// 包含标准Windows和C运行时头文件
+#include <windows.h>
+
+// DLL源码文件导出的函数和变量
+#define MYLIBAPI extern "C" __declspec(dllexport)
+
+// 包含导出的数据结构、符号、函数、变量
+#include "MyLib.h"
+
+// 将此DLL源代码文件的代码放在此处
+int g_nResult;
+
+int Add(int nLeft, int nRight)
+{
+    g_nResult = nLeft + nRight;
+    return g_nResult;
+}
+```
+
+</details>
+
+#### DLL 库的使用（运行时动态链接 DLL）
+
+<details><summary>DLL 库的使用（运行时动态链接 DLL）</summary>
+
+```cpp
+// A simple program that uses LoadLibrary and 
+// GetProcAddress to access myPuts from Myputs.dll. 
+ 
+#include <windows.h> 
+#include <stdio.h> 
+ 
+typedef int (__cdecl *MYPROC)(LPWSTR); 
+ 
+int main( void ) 
+{ 
+    HINSTANCE hinstLib; 
+    MYPROC ProcAdd; 
+    BOOL fFreeResult, fRunTimeLinkSuccess = FALSE; 
+ 
+    // Get a handle to the DLL module.
+ 
+    hinstLib = LoadLibrary(TEXT("MyPuts.dll")); 
+ 
+    // If the handle is valid, try to get the function address.
+ 
+    if (hinstLib != NULL) 
+    { 
+        ProcAdd = (MYPROC) GetProcAddress(hinstLib, "myPuts"); 
+ 
+        // If the function address is valid, call the function.
+ 
+        if (NULL != ProcAdd) 
+        {
+            fRunTimeLinkSuccess = TRUE;
+            (ProcAdd) (L"Message sent to the DLL function\n"); 
+        }
+        // Free the DLL module.
+ 
+        fFreeResult = FreeLibrary(hinstLib); 
+    } 
+
+    // If unable to call the DLL function, use an alternative.
+    if (! fRunTimeLinkSuccess) 
+        printf("Message printed from executable\n"); 
+
     return 0;
 }
 ```
