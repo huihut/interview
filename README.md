@@ -2738,6 +2738,8 @@ int _tmain(
 
 ### Windows 的动态链接库（Dynamic-Link Library）
 
+> 知识点来自《Windows核心编程（第五版）》
+
 #### 用处
 
 * 扩展了应用程序的特性
