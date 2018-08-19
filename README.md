@@ -1,8 +1,8 @@
 # C/C++ 面试知识总结
 
-为 2018 年春招总结的 C/C++ 面试知识，只为复习、分享。部分知识点与图片来自网络，侵删。欢迎 Star，欢迎 Issues。
+C/C++ 面试知识总结，只为复习、分享。部分知识点与图片来自网络，侵删。
 
-秋招陆续开始了，祝大家斩获心仪 Offer。
+勘误请 Issue、Pull，新增请 Issue，建议、讨论请 [# issues/12](https://github.com/huihut/interview/issues/12)
 
 ## 使用建议
 
