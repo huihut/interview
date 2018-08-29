@@ -2194,6 +2194,41 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 * 在数据包之间设置边界，如添加特殊符号 `\r\n` 标记。FTP 协议正是这么做的。但问题在于如果数据正文中也含有 `\r\n`，则会误判为消息的边界。
 * 使用更加复杂的应用层协议。
 
+#### TCP 流量控制
+
+##### 概念
+
+流量控制（flow control）就是让发送方的发送速率不要太快，要让接收方来得及接收。
+
+##### 方法
+
+<details><summary>利用可变窗口进行流量控制</summary>
+
+![](images/利用可变窗口进行流量控制举例.png)
+
+</details>
+
+#### TCP 拥塞控制
+
+##### 概念
+
+拥塞控制就是防止过多的数据注入到网络中，这样可以使网络中的路由器或链路不致过载。
+
+##### 方法
+
+* 慢开始( slow-start )
+* 拥塞避免( congestion avoidance )
+* 快重传( fast retransmit )
+* 快恢复( fast recovery )
+
+<details><summary>TCP的拥塞控制图</summary>
+
+![](images/TCP拥塞窗口cwnd在拥塞控制时的变化情况.png)
+![](images/快重传示意图.png)
+![](images/TCP的拥塞控制流程图.png)
+
+</details>
+
 #### TCP 传输连接管理
 
 > 因为 TCP 三次握手建立连接、四次挥手释放连接很重要，所以附上《计算机网络（第 7 版）-谢希仁》书中对此章的详细描述：<https://github.com/huihut/interview/blob/master/images/TCP-transport-connection-management.png>
