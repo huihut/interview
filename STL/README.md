@@ -54,7 +54,7 @@ empty|返回 vector 是否为空
 reserve|请求 vector 容量至少足以包含 n（参数）个元素
 shrink_to_fit|要求容器减小其 capacity（容量）以适应其 size（元素数量）
 operator[]|返回容器中第 n（参数）个位置的元素的引用
-at|返回中第 n（参数）个位置的元素的引用
+at|返回容器中第 n（参数）个位置的元素的引用
 front|返回对容器中第一个元素的引用
 back|返回对容器中最后一个元素的引用
 data|返回指向容器中第一个元素的指针
@@ -183,10 +183,10 @@ equal(beg1, end1, beg2); // 比较每个元素，确定两个序列是否相等�
 equal(beg1, end1, beg2, binaryPred); // 比较每个元素，确定两个序列是否相等。
 
 // 二分搜索算法，传入前向迭代器或随机访问迭代器（random-access iterator），要求序列中的元素已经是有序的。通过小于运算符（<）或 comp 比较操作实现比较。
-lower_bound(beg, end, val); // 返回一个迭代器，表示第一个小于等于 val 的元素，不存在则返回 end
-lower_bound(beg, end, val, comp); // 返回一个迭代器，表示第一个小于等于 val 的元素，不存在则返回 end
-upper_bound(beg, end, val); // 返回一个迭代器，表示第一个大于 val 的元素，不存在则返回 end
-upper_bound(beg, end, val, comp); // 返回一个迭代器，表示第一个大于 val 的元素，不存在则返回 end
+lower_bound(beg, end, val); // 返回一个非递减序列 [beg, end) 中的第一个大于等于值 val 的位置的迭代器，不存在则返回 end
+lower_bound(beg, end, val, comp); // 返回一个非递减序列 [beg, end) 中的第一个大于等于值 val 的位置的迭代器，不存在则返回 end
+upper_bound(beg, end, val); // 返回一个非递减序列 [beg, end) 中第一个大于 val 的位置的迭代器，不存在则返回 end
+upper_bound(beg, end, val, comp); // 返回一个非递减序列 [beg, end) 中第一个大于 val 的位置的迭代器，不存在则返回 end
 equal_range(beg, end, val); // 返回一个 pair，其 first 成员是 lower_bound 返回的迭代器，其 second 成员是 upper_bound 返回的迭代器
 binary_search(beg, end, val); // 返回一个 bool 值，指出序列中是否包含等于 val 的元素。对于两个值 x 和 y，当 x 不小于 y 且 y 也不小于 x 时，认为它们相等。
 
@@ -206,7 +206,7 @@ transform(beg, end, beg2, dest, binaryOp); // 调用给定操作（二元操作�
 replace_copy(beg, end, dest, old_val, new_val); // 将每个元素拷贝到 dest，将等于 old_val 的的元素替换为 new_val
 replace_copy_if(beg, end, dest, unaryPred, new_val); // 将每个元素拷贝到 dest，将满足 unaryPred 的的元素替换为 new_val
 merge(beg1, end1, beg2, end2, dest); // 两个输入序列必须都是有序的，用 < 运算符将合并后的序列写入到 dest 中
-merge(beg1, end1, beg2, end2, dest, comp) // 两个输入序列必须都是有序的，使用给定的比较操作（comp）将合并后的序列写入到 dest 中
+merge(beg1, end1, beg2, end2, dest, comp); // 两个输入序列必须都是有序的，使用给定的比较操作（comp）将合并后的序列写入到 dest 中
 
 // 使用前向迭代器的写算法，要求前向迭代器
 iter_swap(iter1, iter2); // 交换 iter1 和 iter2 所表示的元素，返回 void
@@ -218,7 +218,7 @@ replace_if(beg, end, unaryPred, new_val); // 用 new_val 替换满足 unaryPred 
 copy_backward(beg, end, dest); // 从输入范围中拷贝元素到指定目的位置。如果范围为空,则返回值为 dest；否则，返回值表示从 *beg 中拷贝或移动的元素。
 move_backward(beg, end, dest);  // 从输入范围中移动元素到指定目的位置。如果范围为空,则返回值为 dest；否则,返回值表示从 *beg 中拷贝或移动的元素。
 inplace_merge(beg, mid, end); // 将同一个序列中的两个有序子序列合并为单一的有序序列。beg 到 mid 间的子序列和 mid 到 end 间的子序列被合并，并被写入到原序列中。使用 < 比较元素。
-inplace_merge(beg, mid, end, comp) // 将同一个序列中的两个有序子序列合并为单一的有序序列。beg 到 mid 间的子序列和 mid 到 end 间的子序列被合并，并被写入到原序列中。使用给定的 comp 操作。
+inplace_merge(beg, mid, end, comp); // 将同一个序列中的两个有序子序列合并为单一的有序序列。beg 到 mid 间的子序列和 mid 到 end 间的子序列被合并，并被写入到原序列中。使用给定的 comp 操作。
 
 // 划分算法，要求双向选代器（bidirectional iterator）
 is_partitioned(beg, end, unaryPred); // 如果所有满足谓词 unaryPred 的元素都在不满足 unarypred 的元素之前，则返回 true。若序列为空，也返回 true
@@ -230,8 +230,8 @@ partition(beg, end, unaryPred); // 使用 unaryPred 划分输入序列。满足 
 // 排序算法，要求随机访问迭代器（random-access iterator）
 sort(beg, end); // 排序整个范围
 stable_sort(beg, end); // 排序整个范围（稳定排序）
-sort(beg, end, comp) // 排序整个范围
-stable_sort(beg, end, comp) // 排序整个范围（稳定排序）
+sort(beg, end, comp); // 排序整个范围
+stable_sort(beg, end, comp); // 排序整个范围（稳定排序）
 is_sorted(beg, end); // 返回一个 bool 值，指出整个输入序列是否有序
 is_sorted(beg, end, comp); // 返回一个 bool 值，指出整个输入序列是否有序
 is_sorted_until(beg, end); // 在输入序列中査找最长初始有序子序列，并返回子序列的尾后迭代器

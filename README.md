@@ -1,6 +1,8 @@
 # C/C++ 面试知识总结
 
-为 2018 年春招总结的 C/C++ 面试知识，只为复习、分享。部分知识点与图片来自网络，侵删。欢迎 star，欢迎 issues。
+C/C++ 面试知识总结，只为复习、分享。部分知识点与图片来自网络，侵删。
+
+勘误请 Issue、Pull，新增请 Issue，建议、讨论请 [# issues/12](https://github.com/huihut/interview/issues/12)
 
 ## 使用建议
 
@@ -91,17 +93,6 @@ int* const function7();     // 返回一个指向变量的常指针，使用：i
 
 </details>
 
-### volatile
-
-```cpp
-volatile int i = 10; 
-```
-
-* volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素（操作系统、硬件、其它线程等）更改。
-* volatile 关键字声明的变量，每次访问时都必须从内存中取出值（没有被 volatile 修饰的变量，可能由于编译器的优化，从 CPU 寄存器中取值）
-* const 可以是 volatile （如只读的状态寄存器）
-* 指针可以是 volatile
-
 ### static
 
 #### 作用
@@ -113,7 +104,7 @@ volatile int i = 10;
 
 ### this 指针
 
-1. `this` 指针是一个隐含于每一个成员函数中的特殊指针。它指向正在被该成员函数操作的那个对象。
+1. `this` 指针是一个隐含于每一个非静态成员函数中的特殊指针。它指向正在被该成员函数操作的那个对象。
 2. 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 `this` 指针，然后调用成员函数，每次成员函数存取数据成员时，由隐含使用 `this` 指针。
 3. 当一个成员函数被调用时，自动向它传递一个隐含的参数，该参数是一个指向这个成员函数所在的对象的指针。
 4. `this` 指针被隐含地声明为: `ClassName *const this`，这意味着不能给 `this` 指针赋值；在 `ClassName` 类的 `const` 成员函数中，`this` 指针的类型为：`const ClassName* const`，这说明不能对 `this` 指针所指向的这种对象是不可修改的（即不能对这种对象的数据成员进行赋值操作）；
@@ -151,7 +142,7 @@ inline int functionName(int first, int secend,...) {/****/};
 
 </details>
 
-#### 编译器对inline函数的处理步骤
+#### 编译器对 inline 函数的处理步骤
 
 1. 将 inline 函数体复制到 inline 函数调用点处； 
 2. 为所用 inline 函数中的局部变量分配内存空间； 
@@ -228,9 +219,7 @@ int main()
 
 ### assert()
 
-断言，是宏，而非函数。assert 宏的原型定义在`<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。
-
-如
+断言，是宏，而非函数。assert 宏的原型定义在`<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。如：
 
 ```cpp
 assert( p != NULL );
@@ -263,6 +252,29 @@ struct test
 ```
 
 </details>
+
+### 位域
+
+```cpp
+Bit mode: 2;    // mode 占 2 位
+```
+
+类可以将其（非静态）数据成员定义为位域（bit-field），在一个位域中含有一定数量的二进制位。当一个程序需要向其他程序或硬件设备传递二进制数据时，通常会用到位域。
+
+* 位域在内存中的布局是与机器有关的
+* 位域的类型必须是整型或枚举类型，带符号类型中的位域的行为将因具体实现而定
+* 取地址运算符（&）不能作用于位域，任何指针都无法指向类的位域
+
+### volatile
+
+```cpp
+volatile int i = 10; 
+```
+
+* volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素（操作系统、硬件、其它线程等）更改。所以使用 volatile 告诉编译器不应对这样的对象进行优化。
+* volatile 关键字声明的变量，每次访问时都必须从内存中取出值（没有被 volatile 修饰的变量，可能由于编译器的优化，从 CPU 寄存器中取值）
+* const 可以是 volatile （如只读的状态寄存器）
+* 指针可以是 volatile
 
 ### extern "C"
 
@@ -358,6 +370,57 @@ int main() {
     1. 默认的继承访问权限。struct 是 public 的，class 是 private 的。  
     2. struct 作为数据结构的实现体，它默认的数据访问控制是 public 的，而 class 作为对象的实现体，它默认的成员变量访问控制是 private 的。
 
+### union 联合
+
+联合（union）是一种节省空间的特殊的类，一个 union 可以有多个数据成员，但是在任意时刻只有一个数据成员可以有值。当某个成员被赋值后其他成员变为未定义状态。联合有如下特点：
+
+* 默认访问控制符为 public
+* 可以含有构造函数、析构函数
+* 不能含有引用类型的成员
+* 不能继承自其他类，不能作为基类
+* 不能含有虚函数
+* 匿名 union 在定义所在作用域可直接访问 union 成员
+* 匿名 union 不能包含 protected 成员或 private 成员
+* 全局匿名联合必须是静态（static）的
+
+<details><summary>union 使用</summary> 
+
+```cpp
+#include<iostream>
+
+union UnionTest {
+    UnionTest() : i(10) {};
+    int i;
+    double d;
+};
+
+static union {
+    int i;
+    double d;
+};
+
+int main() {
+    UnionTest u;
+
+    union {
+        int i;
+        double d;
+    };
+
+    std::cout << u.i << std::endl;  // 输出 UnionTest 联合的 10
+
+    ::i = 20;
+    std::cout << ::i << std::endl;  // 输出全局静态匿名联合的 20
+
+    i = 30;
+    std::cout << i << std::endl;    // 输出局部匿名联合的 30
+
+    return 0;
+}
+```
+
+</details>
+
 ### C 实现 C++ 类
 
 [C 语言实现封装、继承和多态](http://dongxicheng.org/cpp/ooc/)
@@ -420,6 +483,24 @@ int main()
 using namespace_name::name;
 ```
 
+#### 构造函数的 using 声明【C++11】
+
+在 C++11 中，派生类能够重用其直接基类定义的构造函数。
+
+```cpp
+class Derived : Base {
+public:
+    using Base::Base;
+    /* ... */
+};
+```
+
+如上 using 声明，对于基类的每个构造函数，编译器都生成一个与之对应（形参列表完全相同）的派生类构造函数。生成如下类型构造函数：
+
+```cpp
+derived(parms) : base(args) { }
+```
+
 #### using 指示
 
 `using 指示` 使得某个特定命名空间中所有名字都可见，这样我们就无需再为它们添加任何前缀限定符了。如：
@@ -472,17 +553,17 @@ cout << x << endl;
 <details><summary>:: 使用</summary> 
 
 ```cpp
-int count = 0;      // 全局（::）的 count
+int count = 0;        // 全局（::）的 count
 
 class A {
 public:
-    static int count;      // 类 A 的 count（A::count）
+    static int count; // 类 A 的 count（A::count）
 };
 
 int main() {
     ::count = 1;      // 设置全局的 count 的值为 1
 
-    A::count = 2;	  // 设置类 A 的 count 为 2
+    A::count = 2;     // 设置类 A 的 count 为 2
 
     int count = 0;    // 局部的 count
     count = 3;        // 设置局部的 count 的值为 3
@@ -493,11 +574,75 @@ int main() {
 
 </details>
 
+### enum 枚举类型
+
+#### 限定作用域的枚举类型
+
+```cpp
+enum class open_modes { input, output, append };
+```
+
+#### 不限定作用域的枚举类型
+
+```cpp
+enum color { red, yellow, green };
+enum { floatPrec = 6, doublePrec = 10 };
+```
+
+### decltype
+
+decltype 关键字用于检查实体的声明类型或表达式的类型及值分类。语法：
+
+```cpp
+decltype ( expression )
+```
+
+<details><summary>decltype 使用</summary> 
+
+```cpp
+// 尾置返回允许我们在参数列表之后声明返回类型
+template <typename It>
+auto fcn(It beg, It end) -> decltype(*beg)
+{
+    // 处理序列
+    return *beg;    // 返回序列中一个元素的引用
+}
+// 为了使用模板参数成员，必须用 typename
+template <typename It>
+auto fcn2(It beg, It end) -> typename remove_reference<decltype(*beg)>::type
+{
+    // 处理序列
+    return *beg;    // 返回序列中一个元素的拷贝
+}
+```
+
+</details>
+
+### 引用
+
+#### 左值引用
+
+常规引用，一般表示对象的身份。
+
+#### 右值引用
+
+右值引用就是必须绑定到右值（一个临时对象、将要销毁的对象）的引用，一般表示对象的值。
+
+右值引用可实现转移语义（Move Sementics）和精确传递（Perfect Forwarding），它的主要目的有两个方面：
+
+* 消除两个对象交互时不必要的对象拷贝，节省运算存储资源，提高效率。
+* 能够更简洁明确地定义泛型函数。
+
+#### 引用折叠
+
+* `X& &`、`X& &&`、`X&& &` 可折叠成 `X&`
+* `X&& &&` 可折叠成 `X&&`
+
 ### 宏
 
-* 宏定义可以实现类似于函数的功能，但是它终归不是函数，而宏定义中括弧中的“参数”也不是真的参数，在宏展开的时候对 “参数” 进行的是一对一的替换。 
+* 宏定义可以实现类似于函数的功能，但是它终归不是函数，而宏定义中括弧中的“参数”也不是真的参数，在宏展开的时候对 “参数” 进行的是一对一的替换。
 
-### 初始化列表
+### 成员初始化列表
 
 好处
 
@@ -507,6 +652,64 @@ int main() {
   2. 引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面
   3. 没有默认构造函数的类类型，因为使用初始化列表可以不必调用默认构造函数来初始化，而是直接调用拷贝构造函数初始化。
 
+### initializer_list 列表初始化【C++11】
+
+用花括号初始化器列表列表初始化一个对象，其中对应构造函数接受一个 `std::initializer_list` 参数.
+
+<details><summary>initializer_list 使用</summary> 
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <initializer_list>
+ 
+template <class T>
+struct S {
+    std::vector<T> v;
+    S(std::initializer_list<T> l) : v(l) {
+         std::cout << "constructed with a " << l.size() << "-element list\n";
+    }
+    void append(std::initializer_list<T> l) {
+        v.insert(v.end(), l.begin(), l.end());
+    }
+    std::pair<const T*, std::size_t> c_arr() const {
+        return {&v[0], v.size()};  // 在 return 语句中复制列表初始化
+                                   // 这不使用 std::initializer_list
+    }
+};
+ 
+template <typename T>
+void templated_fn(T) {}
+ 
+int main()
+{
+    S<int> s = {1, 2, 3, 4, 5}; // 复制初始化
+    s.append({6, 7, 8});      // 函数调用中的列表初始化
+ 
+    std::cout << "The vector size is now " << s.c_arr().second << " ints:\n";
+ 
+    for (auto n : s.v)
+        std::cout << n << ' ';
+    std::cout << '\n';
+ 
+    std::cout << "Range-for over brace-init-list: \n";
+ 
+    for (int x : {-1, -2, -3}) // auto 的规则令此带范围 for 工作
+        std::cout << x << ' ';
+    std::cout << '\n';
+ 
+    auto al = {10, 11, 12};   // auto 的特殊规则
+ 
+    std::cout << "The list bound to auto has size() = " << al.size() << '\n';
+ 
+//    templated_fn({1, 2, 3}); // 编译错误！“ {1, 2, 3} ”不是表达式，
+                             // 它无类型，故 T 无法推导
+    templated_fn<std::initializer_list<int>>({1, 2, 3}); // OK
+    templated_fn<std::vector<int>>({1, 2, 3});           // 也 OK
+}
+```
+
+</details>
 
 ### 面向对象
 
@@ -675,6 +878,11 @@ virtual int A() = 0;
         * 虚函数不占用存储空间
         * 虚函数表存储的是虚函数地址
 
+### 模板类、成员模板、虚函数
+
+* 模板类中可以使用虚函数
+* 一个类（无论是普通类还是类模板）的成员模板（本身是模板的成员函数）不能是虚函数
+
 ### 抽象类、接口类、聚合类
 
 * 抽象类：含有纯虚函数的类
@@ -718,7 +926,7 @@ p = nullptr;
 
 #### new、delete
 
-1. new/new[]：完成两件事，先底层调用 malloc 分了配内存，然后调用构造函数（创建对象）。
+1. new / new[]：完成两件事，先底层调用 malloc 分了配内存，然后调用构造函数（创建对象）。
 2. delete/delete[]：也完成两件事，先调用析构函数（清理资源），然后底层调用 free 释放空间。
 3. new 在申请内存时会自动计算所需字节数，而 malloc 则需我们自己输入申请内存空间的字节数。
 
@@ -736,6 +944,20 @@ int main()
 ```
 
 </details>
+
+#### 定位 new
+
+定位 new（placement new）允许我们向 new 传递额外的参数。
+
+```cpp
+new (palce_address) type
+new (palce_address) type (initializers)
+new (palce_address) type [size]
+new (palce_address) type [size] { braced initializer list }
+```
+
+* `palce_address` 是个指针
+* `initializers` 提供一个（可能为空的）以逗号分隔的初始值列表
 
 ### delete this 合法吗？
 
@@ -1003,11 +1225,6 @@ hash_set|hash表|无序|不可重复|
 hash_multiset|hash表|无序|可重复|
 hash_map|hash表|无序|不可重复|
 hash_multimap|hash表|无序|可重复|
-
-### STL 空间配置器如何处理内存的？能说一下它的大概实现方案吗？为什么是 8Bytes 的倍数？
-
-* 大于 128Bytes 用 malloc 直接申请
-* 小于 128Bytes 使用一个 8Bytes 倍数的数组来进行申请（原因是为了提高效率，同时对于 64 位的机器而言，地址大小为 8Bytes）
 
 ## 数据结构
 
@@ -1477,6 +1694,21 @@ typedef struct BiTNode
 [红黑树](DataStructure/RedBlackTree.cpp) |O(log<sub>2</sub>n) | |
 2-3树 | O(log<sub>2</sub>n - log<sub>3</sub>n) |   | 
 B树/B+树 |O(log<sub>2</sub>n) |   | 
+
+### 图搜索算法
+
+图搜索算法 |数据结构| 遍历时间复杂度 | 空间复杂度
+---|---|---|---
+[BFS广度优先搜索](https://zh.wikipedia.org/wiki/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2)|邻接矩阵<br/>邻接链表|O(\|v\|<sup>2</sup>)<br/>O(\|v\|+\|E\|)|O(\|v\|<sup>2</sup>)<br/>O(\|v\|+\|E\|)
+[DFS深度优先搜索](https://zh.wikipedia.org/wiki/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2)|邻接矩阵<br/>邻接链表|O(\|v\|<sup>2</sup>)<br/>O(\|v\|+\|E\|)|O(\|v\|<sup>2</sup>)<br/>O(\|v\|+\|E\|)
+
+### 其他算法
+
+算法 |思想| 应用
+---|---|---
+[分治法](https://zh.wikipedia.org/wiki/%E5%88%86%E6%B2%BB%E6%B3%95)|把一个复杂的问题分成两个或更多的相同或相似的子问题，直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并|[循环赛日程安排问题](https://github.com/huihut/interview/tree/master/Problems/RoundRobinProblem)、排序算法（快速排序、归并排序）
+[动态规划](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92)|通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法，适用于有重叠子问题和最优子结构性质的问题|[背包问题](https://github.com/huihut/interview/tree/master/Problems/KnapsackProblem)、斐波那契数列
+[贪心法](https://zh.wikipedia.org/wiki/%E8%B4%AA%E5%BF%83%E6%B3%95)|一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是最好或最优的算法|旅行推销员问题（最短路径问题）、最小生成树、哈夫曼编码
 
 ## Problems
 
@@ -1962,6 +2194,41 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 * 在数据包之间设置边界，如添加特殊符号 `\r\n` 标记。FTP 协议正是这么做的。但问题在于如果数据正文中也含有 `\r\n`，则会误判为消息的边界。
 * 使用更加复杂的应用层协议。
 
+#### TCP 流量控制
+
+##### 概念
+
+流量控制（flow control）就是让发送方的发送速率不要太快，要让接收方来得及接收。
+
+##### 方法
+
+<details><summary>利用可变窗口进行流量控制</summary>
+
+![](images/利用可变窗口进行流量控制举例.png)
+
+</details>
+
+#### TCP 拥塞控制
+
+##### 概念
+
+拥塞控制就是防止过多的数据注入到网络中，这样可以使网络中的路由器或链路不致过载。
+
+##### 方法
+
+* 慢开始( slow-start )
+* 拥塞避免( congestion avoidance )
+* 快重传( fast retransmit )
+* 快恢复( fast recovery )
+
+<details><summary>TCP的拥塞控制图</summary>
+
+![](images/TCP拥塞窗口cwnd在拥塞控制时的变化情况.png)
+![](images/快重传示意图.png)
+![](images/TCP的拥塞控制流程图.png)
+
+</details>
+
 #### TCP 传输连接管理
 
 > 因为 TCP 三次握手建立连接、四次挥手释放连接很重要，所以附上《计算机网络（第 7 版）-谢希仁》书中对此章的详细描述：<https://github.com/huihut/interview/blob/master/images/TCP-transport-connection-management.png>
@@ -2200,6 +2467,30 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 ## 设计模式
 
+> 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/column/details/15392.html) 系列博文
+
+[设计模式工程目录](DesignPattern)
+
+### 单例模式
+
+[单例模式例子](DesignPattern/SingletonPattern)
+
+### 抽象工厂模式
+
+[抽象工厂模式例子](DesignPattern/AbstractFactoryPattern)
+
+### 适配器模式
+
+[适配器模式例子](DesignPattern/AdapterPattern)
+
+### 桥接模式
+
+[桥接模式例子](DesignPattern/BridgePattern)
+
+### 观察者模式
+
+[观察者模式例子](DesignPattern/ObserverPattern)
+
 ### 设计模式的六大原则
 
 * 单一职责原则（SRP，Single Responsibility Principle）
@@ -2208,41 +2499,6 @@ ssize_t write(int fd, const void *buf, size_t count);
 * 接口隔离原则（ISP，Interface Segregation Principle）
 * 迪米特法则（LoD，Law of Demeter）
 * 开放封闭原则（OCP，Open Close Principle）
-
-### 单例模式
-
-```cpp
-// 懒汉式单例模式
-class Singleton
-{
-private:
-	Singleton() { }
-	static Singleton * pInstance;
-public:
-	static Singleton * GetInstance()
-	{
-		if (pInstance == nullptr)
-			pInstance = new Singleton();
-		return pInstance;
-	}
-};
-
-// 线程安全的单例模式
-class Singleton
-{
-private:
-	Singleton() { }
-	~Singleton() { }
-	Singleton(const Singleton &);
-	Singleton & operator = (const Singleton &);
-public:
-	static Singleton & GetInstance()
-	{
-		static Singleton instance;
-		return instance;
-	}
-};
-```
 
 ## 链接装载库
 
@@ -2281,6 +2537,14 @@ public:
 * 没用初始化栈中的指针，指针的值一般会是随机数，之后就直接开始使用指针
 
 ### 编译链接
+
+#### 各平台文件格式
+
+平台 | 可执行文件 | 目标文件 | 动态库/共享对象 | 静态库
+---|---|---|---|---
+Windows|exe|obj|dll|lib
+Unix/Linux|ELF、out|o|so|a
+Mac|Mach-O|o|dylib、tbd、framework|a、framework
 
 #### 编译链接过程
 
@@ -2365,41 +2629,379 @@ Linux 下的共享库就是普通的 ELF 共享对象。
 * `LD_PRELOAD`：指定预先装载的一些共享库甚至是目标文件
 * `LD_DEBUG`：打开动态链接器的调试功能
 
-### Windows 的动态链接库（Dynamic-Link Library）
+#### so 共享库的编写
 
-<details><summary>Windows 动态链接库例子</summary>
+<details><summary>使用 CLion 编写共享库</summary>
 
-DLL 头文件
+创建一个名为 MySharedLib 的共享库
+
+CMakeLists.txt
+
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(MySharedLib)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_library(MySharedLib SHARED library.cpp library.h)
+```
+
+library.h
+
 ```cpp
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef MYSHAREDLIB_LIBRARY_H
+#define MYSHAREDLIB_LIBRARY_H
 
-#ifdef _WIN32
-#  ifdef MODULE_API_EXPORTS
-#    define MODULE_API __declspec(dllexport)
-#  else
-#    define MODULE_API __declspec(dllimport)
-#  endif
-#else
-#  define MODULE_API
-#endif
+// 打印 Hello World!
+void hello();
 
-MODULE_API int module_init();
-
-#ifdef __cplusplus
+// 使用可变模版参数求和
+template <typename T>
+T sum(T t)
+{
+    return t;
 }
+template <typename T, typename ...Types>
+T sum(T first, Types ... rest)
+{
+    return first + sum<T>(rest...);
+}
+
 #endif
 ```
 
-DLL 源文件
-```cpp
-#define MODULE_API_EXPORTS
-#include "module.h"
+library.cpp
 
-MODULE_API int module_init()
+```cpp
+#include <iostream>
+#include "library.h"
+
+void hello() {
+    std::cout << "Hello, World!" << std::endl;
+}
+```
+
+</details>
+
+#### so 共享库的使用（被可执行项目调用）
+
+<details><summary>使用 CLion 调用共享库</summary>
+
+创建一个名为 TestSharedLib 的可执行项目
+
+CMakeLists.txt
+
+```cmake
+cmake_minimum_required(VERSION 3.10)
+project(TestSharedLib)
+
+# C++11 编译
+set(CMAKE_CXX_STANDARD 11)
+
+# 头文件路径
+set(INC_DIR /home/xx/code/clion/MySharedLib)
+# 库文件路径
+set(LIB_DIR /home/xx/code/clion/MySharedLib/cmake-build-debug)
+
+include_directories(${INC_DIR})
+link_directories(${LIB_DIR})
+link_libraries(MySharedLib)
+
+add_executable(TestSharedLib main.cpp)
+
+# 链接 MySharedLib 库
+target_link_libraries(TestSharedLib MySharedLib)
+```
+
+main.cpp
+
+```cpp
+#include <iostream>
+#include "library.h"
+using std::cout;
+using std::endl;
+
+int main() {
+
+    hello();
+    cout << "1 + 2 = " << sum(1,2) << endl;
+    cout << "1 + 2 + 3 = " << sum(1,2,3) << endl;
+
+    return 0;
+}
+```
+
+执行结果
+
+```
+Hello, World!
+1 + 2 = 3
+1 + 2 + 3 = 6
+```
+
+</details>
+
+### Windows 应用程序入口函数
+
+* GUI（Graphical User Interface）应用，链接器选项：`/SUBSYSTEM:WINDOWS`
+* CUI（Console User Interface）应用，链接器选项：`/SUBSYSTEM:CONSOLE`
+
+<details><summary>_tWinMain 与 _tmain 函数声明</summary>
+
+```cpp
+Int WINAPI _tWinMain(
+    HINSTANCE hInstanceExe,
+    HINSTANCE,
+    PTSTR pszCmdLine,
+    int nCmdShow);
+
+int _tmain(
+    int argc,
+    TCHAR *argv[],
+    TCHAR *envp[]);
+```
+
+</details>
+
+应用程序类型|入口点函数|嵌入可执行文件的启动函数
+---|---|---
+处理ANSI字符（串）的GUI应用程序|_tWinMain(WinMain)|WinMainCRTSartup
+处理Unicode字符（串）的GUI应用程序|_tWinMain(wWinMain)|wWinMainCRTSartup
+处理ANSI字符（串）的CUI应用程序|_tmain(Main)|mainCRTSartup
+处理Unicode字符（串）的CUI应用程序|_tmain(wMain)|wmainCRTSartup
+动态链接库（Dynamic-Link Library）|DllMain|_DllMainCRTStartup 
+
+### Windows 的动态链接库（Dynamic-Link Library）
+
+> 知识点来自《Windows核心编程（第五版）》
+
+#### 用处
+
+* 扩展了应用程序的特性
+* 简化了项目管理
+* 有助于节省内存
+* 促进了资源的共享
+* 促进了本地化
+* 有助于解决平台间的差异
+* 可以用于特殊目的
+
+#### 注意
+
+* 创建 DLL，事实上是在创建可供一个可执行模块调用的函数
+* 当一个模块提供一个内存分配函数（malloc、new）的时候，它必须同时提供另一个内存释放函数（free、delete）
+* 在使用 C 和 C++ 混编的时候，要使用 extern "C" 修饰符
+* 一个 DLL 可以导出函数、变量（避免导出）、C++ 类（导出导入需要同编译器，否则避免导出）
+* DLL 模块：cpp 文件中的 __declspec(dllexport) 写在 include 头文件之前
+* 调用 DLL 的可执行模块：cpp 文件的 __declspec(dllimport) 之前不应该定义 MYLIBAPI
+
+#### 加载 Windows 程序的搜索顺序
+
+1. 包含可执行文件的目录
+2. Windows 的系统目录，可以通过 GetSystemDirectory 得到
+3. 16 位的系统目录，即 Windows 目录中的 System 子目录
+4. Windows 目录，可以通过 GetWindowsDirectory 得到
+5. 进程的当前目录
+6. PATH 环境变量中所列出的目录
+
+#### DLL 入口函数
+
+<details><summary>DllMain 函数</summary>
+
+```cpp
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
-    /* do something useful */
+    switch(fdwReason)
+    {
+    case DLL_PROCESS_ATTACH:
+        // 第一次将一个DLL映射到进程地址空间时调用
+        // The DLL is being mapped into the process' address space.
+        break;
+    case DLL_THREAD_ATTACH:
+        // 当进程创建一个线程的时候，用于告诉DLL执行与线程相关的初始化（非主线程执行）
+        // A thread is bing created.
+        break;
+    case DLL_THREAD_DETACH:
+        // 系统调用 ExitThread 线程退出前，即将终止的线程通过告诉DLL执行与线程相关的清理
+        // A thread is exiting cleanly.
+        break;
+    case DLL_PROCESS_DETACH:
+        // 将一个DLL从进程的地址空间时调用
+        // The DLL is being unmapped from the process' address space.
+        break;
+    }
+    return (TRUE); // Used only for DLL_PROCESS_ATTACH
+}
+```
+
+</details>
+
+#### 载入卸载库
+
+<details><summary>LoadLibrary、LoadLibraryExA、LoadPackagedLibrary、FreeLibrary、FreeLibraryAndExitThread 函数声明</summary>
+
+```cpp
+// 载入库
+HMODULE WINAPI LoadLibrary(
+  _In_ LPCTSTR lpFileName
+);
+HMODULE LoadLibraryExA(
+  LPCSTR lpLibFileName,
+  HANDLE hFile,
+  DWORD  dwFlags
+);
+// 若要在通用 Windows 平台（UWP）应用中加载 Win32 DLL，需要调用 LoadPackagedLibrary，而不是 LoadLibrary 或 LoadLibraryEx
+HMODULE LoadPackagedLibrary(
+  LPCWSTR lpwLibFileName,
+  DWORD   Reserved
+);
+
+// 卸载库
+BOOL WINAPI FreeLibrary(
+  _In_ HMODULE hModule
+);
+// 卸载库和退出线程
+VOID WINAPI FreeLibraryAndExitThread(
+  _In_ HMODULE hModule,
+  _In_ DWORD   dwExitCode
+);
+```
+
+</details>
+
+#### 显示地链接到导出符号
+
+<details><summary>GetProcAddress 函数声明</summary>
+
+```cpp
+FARPROC GetProcAddress(
+  HMODULE hInstDll,
+  PCSTR pszSymbolName  // 只能接受 ANSI 字符串，不能是 Unicode
+);
+```
+
+</details>
+
+#### DumpBin.exe 查看 DLL 信息
+
+在 `VS 的开发人员命令提示符` 使用 `DumpBin.exe` 可查看 DLL 库的导出段（导出的变量、函数、类名的符号）、相对虚拟地址（RVA，relative virtual address）。如：
+```
+DUMPBIN -exports D:\mydll.dll
+```
+
+#### LoadLibrary 与 FreeLibrary 流程图
+
+<details><summary>LoadLibrary 与 FreeLibrary 流程图</summary>
+
+##### LoadLibrary
+
+![WindowsLoadLibrary](http://ojlsgreog.bkt.clouddn.com/WindowsLoadLibrary.png)
+
+##### FreeLibrary
+
+![WindowsFreeLibrary](http://ojlsgreog.bkt.clouddn.com/WindowsFreeLibrary.png)
+
+</details>
+
+#### DLL 库的编写（导出一个 DLL 模块）
+
+<details><summary>DLL 库的编写（导出一个 DLL 模块）</summary>
+DLL 头文件
+
+```cpp
+// MyLib.h
+
+#ifdef MYLIBAPI
+
+// MYLIBAPI 应该在全部 DLL 源文件的 include "Mylib.h" 之前被定义
+// 全部函数/变量正在被导出
+
+#else
+
+// 这个头文件被一个exe源代码模块包含，意味着全部函数/变量被导入
+#define MYLIBAPI extern "C" __declspec(dllimport)
+
+#endif
+
+// 这里定义任何的数据结构和符号
+
+// 定义导出的变量（避免导出变量）
+MYLIBAPI int g_nResult;
+
+// 定义导出函数原型
+MYLIBAPI int Add(int nLeft, int nRight);
+```
+
+DLL 源文件
+
+```cpp
+// MyLibFile1.cpp
+
+// 包含标准Windows和C运行时头文件
+#include <windows.h>
+
+// DLL源码文件导出的函数和变量
+#define MYLIBAPI extern "C" __declspec(dllexport)
+
+// 包含导出的数据结构、符号、函数、变量
+#include "MyLib.h"
+
+// 将此DLL源代码文件的代码放在此处
+int g_nResult;
+
+int Add(int nLeft, int nRight)
+{
+    g_nResult = nLeft + nRight;
+    return g_nResult;
+}
+```
+
+</details>
+
+#### DLL 库的使用（运行时动态链接 DLL）
+
+<details><summary>DLL 库的使用（运行时动态链接 DLL）</summary>
+
+```cpp
+// A simple program that uses LoadLibrary and 
+// GetProcAddress to access myPuts from Myputs.dll. 
+ 
+#include <windows.h> 
+#include <stdio.h> 
+ 
+typedef int (__cdecl *MYPROC)(LPWSTR); 
+ 
+int main( void ) 
+{ 
+    HINSTANCE hinstLib; 
+    MYPROC ProcAdd; 
+    BOOL fFreeResult, fRunTimeLinkSuccess = FALSE; 
+ 
+    // Get a handle to the DLL module.
+ 
+    hinstLib = LoadLibrary(TEXT("MyPuts.dll")); 
+ 
+    // If the handle is valid, try to get the function address.
+ 
+    if (hinstLib != NULL) 
+    { 
+        ProcAdd = (MYPROC) GetProcAddress(hinstLib, "myPuts"); 
+ 
+        // If the function address is valid, call the function.
+ 
+        if (NULL != ProcAdd) 
+        {
+            fRunTimeLinkSuccess = TRUE;
+            (ProcAdd) (L"Message sent to the DLL function\n"); 
+        }
+        // Free the DLL module.
+ 
+        fFreeResult = FreeLibrary(hinstLib); 
+    } 
+
+    // If unable to call the DLL function, use an alternative.
+    if (! fRunTimeLinkSuccess) 
+        printf("Message printed from executable\n"); 
+
     return 0;
 }
 ```
@@ -2521,7 +3123,7 @@ MODULE_API int module_init()
 
 ## 招聘时间岗位
 
-* [牛客网 . 2018 IT名企校招指南](https://www.nowcoder.com/activity/campus2018)
+* [牛客网 . 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
 
 ## 面试题目经验
 
