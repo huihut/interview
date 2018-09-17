@@ -1669,7 +1669,7 @@ typedef struct BiTNode
 [插入排序](Algorithm/InsertSort.h) | O(n<sup>2</sup>)|O(n<sup>2</sup>)|O(1)|稳定
 [快速排序](Algorithm/QuickSort.h) | O(n*log<sub>2</sub>n) |  O(n<sup>2</sup>) | O(log<sub>2</sub>n) | 不稳定
 [堆排序](Algorithm/HeapSort.cpp) | O(n*log<sub>2</sub>n)|O(n<sup>2</sup>)|O(1)|不稳定
-[归并排序](Algorithm/MergeSort.h) | O(n*log<sub>2</sub>n) | O(n*log<sub>2</sub>n)|O(1)|稳定
+[归并排序](Algorithm/MergeSort.h) | O(n*log<sub>2</sub>n) | O(n*log<sub>2</sub>n)|O(n)|稳定
 [希尔排序](Algorithm/ShellSort.h) | O(n*log<sup>2</sup>n)|O(n<sup>2</sup>)|O(1)|不稳定
 [计数排序](Algorithm/CountSort.cpp) | O(n+m)|O(n+m)|O(n+m)|稳定
 [桶排序](Algorithm/BucketSort.cpp) | O(n)|O(n)|O(m)|稳定
