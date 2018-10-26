@@ -2,13 +2,12 @@
 
 C/C++ 面试知识总结，只为复习、分享。部分知识点与图片来自网络，侵删。
 
-勘误请 Issue、Pull，新增请 Issue，建议、讨论请 [# issues/12](https://github.com/huihut/interview/issues/12)
+勘误新增请 Issue、PR，建议、讨论请 [#issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)
 
-## 使用建议
+使用建议：
 
 * `Ctrl + F`：快速查找定位知识点
-* `TOC 导航`：使用 [jawil/GayHub](https://github.com/jawil/GayHub) 插件快速目录跳转
-* `T`：按 `T` 激活文件查找器快速查找 / 跳转文件
+* `TOC 导航`：[jawil/GayHub](https://github.com/jawil/GayHub) 插件快速目录跳转
 
 ## 目录
 
@@ -230,16 +229,18 @@ int main()
 
 ### assert()
 
-断言，是宏，而非函数。assert 宏的原型定义在`<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。可以通过定义`NDEBUG`来关闭assert，但是需要在源代码的开头，`include <assert.h>` 之前。如：
+断言，是宏，而非函数。assert 宏的原型定义在 `<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。可以通过定义 `NDEBUG` 来关闭 assert，但是需要在源代码的开头，`include <assert.h>` 之前。
+
+<details><summary>assert() 使用</summary> 
 
 ```cpp
-assert( p != NULL );
-
-#define NDEBUG
+#define NDEBUG          // 加上这行，则 assert 不可用
 #include <assert.h>
 
-assert( p != NULL ); //disable assert
+assert( p != NULL );    // assert 不可用
 ```
+
+</details>
 
 ### sizeof()
 
