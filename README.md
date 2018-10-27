@@ -1219,7 +1219,7 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 <details><summary>Google C++ Style Guide 图</summary>
 
-![Google C++ Style Guide](http://img.blog.csdn.net/20140713220242000)
+![Google C++ Style Guide](images/GoogleCppStyleGuide.png)
 
 > 图片来源于：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](http://blog.csdn.net/voidccc/article/details/37599203)
 
