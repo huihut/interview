@@ -1221,7 +1221,7 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 ![Google C++ Style Guide](images/GoogleCppStyleGuide.png)
 
-> 图片来源于：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](http://blog.csdn.net/voidccc/article/details/37599203)
+> 图片来源于：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](https://blog.csdn.net/voidccc/article/details/37599203)
 
 </details>
 
@@ -1233,23 +1233,30 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 ### 容器
 
-容器 | 底层数据结构 | 有无序 | 可不可重复 | 其他
----|---|---|---|---
-[array](https://github.com/huihut/interview/tree/master/STL#array)|数组|无序|可重复|支持快速随机访问
-[vector](https://github.com/huihut/interview/tree/master/STL#vector)|数组|无序|可重复|支持快速随机访问
-[list](https://github.com/huihut/interview/tree/master/STL#list)|双向链表|无序|可重复|支持快速增删
-[deque](https://github.com/huihut/interview/tree/master/STL#deque)|双端队列（一个中央控制器+多个缓冲区）|无序|可重复|支持首尾快速增删，支持随机访问
-[stack](https://github.com/huihut/interview/tree/master/STL#stack)|deque 或 list 封闭头端开口|无序|可重复|不用 vector 的原因应该是容量大小有限制，扩容耗时
-[queue](https://github.com/huihut/interview/tree/master/STL#queue)|deque 或 list 封闭底端出口和前端入口|无序|可重复|不用 vector 的原因应该是容量大小有限制，扩容耗时
-[priority_queue](https://github.com/huihut/interview/tree/master/STL#priority_queue)|vector|无序|可重复|vector容器+heap处理规则
-[set](https://github.com/huihut/interview/tree/master/STL#set)|红黑树|有序|不可重复|
-[multiset](https://github.com/huihut/interview/tree/master/STL#multiset)|红黑树|有序|可重复|
-[map](https://github.com/huihut/interview/tree/master/STL#map)|红黑树|有序|不可重复|
-[multimap](https://github.com/huihut/interview/tree/master/STL#multimap)|红黑树|有序|可重复|
-hash_set|hash表|无序|不可重复|
-hash_multiset|hash表|无序|可重复|
-hash_map|hash表|无序|不可重复|
-hash_multimap|hash表|无序|可重复|
+容器 | 底层数据结构 | 时间复杂度 | 有无序 | 可不可重复 | 其他
+---|---|---|---|---|---
+[array](https://github.com/huihut/interview/tree/master/STL#array)|数组|随机读改 O(1)|无序|可重复|支持快速随机访问
+[vector](https://github.com/huihut/interview/tree/master/STL#vector)|数组|随机读改、尾部插入、尾部删除 O(1)<br/>头部插入、头部删除 O(n)|无序|可重复|支持快速随机访问
+[list](https://github.com/huihut/interview/tree/master/STL#list)|双向链表|插入、删除 O(1)<br/>随机读改 O(n)|无序|可重复|支持快速增删
+[deque](https://github.com/huihut/interview/tree/master/STL#deque)|双端队列（一个中央控制器+多个缓冲区）|头尾插入、头尾删除 O(1)|无序|可重复|支持首尾快速增删，支持随机访问
+[stack](https://github.com/huihut/interview/tree/master/STL#stack)|deque 或 list 封闭头端开口|顶部插入、顶部删除 O(1)|无序|可重复|不用 vector 的原因应该是容量大小有限制，扩容耗时
+[queue](https://github.com/huihut/interview/tree/master/STL#queue)|deque 或 list 封闭底端出口和前端入口|尾部插入、头部删除 O(1)|无序|可重复|不用 vector 的原因应该是容量大小有限制，扩容耗时
+[priority_queue](https://github.com/huihut/interview/tree/master/STL#priority_queue)|vector + max-heap|插入、删除 O(log<sub>2</sub>n)|有序|可重复|vector容器+heap处理规则
+[set](https://github.com/huihut/interview/tree/master/STL#set)|红黑树|插入、删除、查找 O(log<sub>2</sub>n)|有序|不可重复|
+[multiset](https://github.com/huihut/interview/tree/master/STL#multiset)|红黑树|插入、删除、查找 O(log<sub>2</sub>n)|有序|可重复|
+[map](https://github.com/huihut/interview/tree/master/STL#map)|红黑树|插入、删除、查找 O(log<sub>2</sub>n)|有序|不可重复|
+[multimap](https://github.com/huihut/interview/tree/master/STL#multimap)|红黑树|插入、删除、查找 O(log<sub>2</sub>n)|有序|可重复|
+hash_set|hash表|插入、删除、查找 O(1) 最差 O(n)|无序|不可重复|
+hash_multiset|hash表|插入、删除、查找 O(1) 最差 O(n)|无序|可重复|
+hash_map|hash表|插入、删除、查找 O(1) 最差 O(n)|无序|不可重复|
+hash_multimap|hash表|插入、删除、查找 O(1) 最差 O(n)|无序|可重复|
+
+### 算法
+
+算法 | 底层算法 | 时间复杂度 | 可不可重复
+---|---|---|---
+[find](http://www.cplusplus.com/reference/algorithm/find/)|顺序查找|O(n)|可重复
+[sort](https://github.com/gcc-mirror/gcc/blob/master/libstdc++-v3/include/bits/stl_algo.h#L4808)|[内省排序](https://en.wikipedia.org/wiki/Introsort)|O(n*log<sub>2</sub>n)|可重复
 
 ## 数据结构
 
