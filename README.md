@@ -1178,7 +1178,7 @@ class doSomething(Flyable *obj)                 // 做些事情
 ### Effective C++
 
 1. 视 C++ 为一个语言联邦（C、Object-Oriented C++、Template C++、STL）
-2. 尽量以 `const`、`enum`、`inline` 替换 `#define`（宁可以编译器替换预处理器）
+2. 宁可以编译器替换预处理器（尽量以 `const`、`enum`、`inline` 替换 `#define`）
 3. 尽可能使用 const
 4. 确定对象被使用前已先被初始化（构造时赋值（copy 构造函数）比 default 构造后赋值（copy assignment）效率高）
 5. 了解 C++ 默默编写并调用哪些函数（编译器暗自为 class 创建 default 构造函数、copy 构造函数、copy assignment 操作符、析构函数）
@@ -1217,6 +1217,8 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 ### Google C++ Style Guide
 
+> 英文：[Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)  
+> 中文：[C++ 风格指南](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)
 <details><summary>Google C++ Style Guide 图</summary>
 
 ![Google C++ Style Guide](images/GoogleCppStyleGuide.png)
