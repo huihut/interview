@@ -1229,11 +1229,11 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 ## STL
 
-### 索引
+### STL 索引
 
-[STL 方法含义](https://github.com/huihut/interview/tree/master/STL)
+[STL 方法含义索引](https://github.com/huihut/interview/tree/master/STL)
 
-### 容器
+### STL 容器
 
 容器 | 底层数据结构 | 时间复杂度 | 有无序 | 可不可重复 | 其他
 ---|---|---|---|---|---
@@ -1253,7 +1253,7 @@ hash_multiset|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重�
 hash_map|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|不可重复|
 hash_multimap|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重复|
 
-### 算法
+### STL 算法
 
 算法 | 底层算法 | 时间复杂度 | 可不可重复
 ---|---|---|---
