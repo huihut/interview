@@ -2926,11 +2926,11 @@ DUMPBIN -exports D:\mydll.dll
 
 ##### LoadLibrary
 
-![WindowsLoadLibrary](http://ojlsgreog.bkt.clouddn.com/WindowsLoadLibrary.png)
+![WindowsLoadLibrary](images/WindowsLoadLibrary.png)
 
 ##### FreeLibrary
 
-![WindowsFreeLibrary](http://ojlsgreog.bkt.clouddn.com/WindowsFreeLibrary.png)
+![WindowsFreeLibrary](images/WindowsFreeLibrary.png)
 
 </details>
 
