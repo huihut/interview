@@ -3161,6 +3161,9 @@ int main( void )
 
 ### 牛客网
 
+* [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
+* [牛客网 . 2019校招技术类岗位面经汇总【技术类】](https://www.nowcoder.com/discuss/146655)
+* [牛客网 . 2018校招笔试真题汇总](https://www.nowcoder.com/discuss/68802)
 * [牛客网 . 2017秋季校园招聘笔经面经专题汇总](https://www.nowcoder.com/discuss/12805)
 * [牛客网 . 史上最全2017春招面经大合集！！](https://www.nowcoder.com/discuss/25268)
 * [牛客网 . 面试题干货在此](https://www.nowcoder.com/discuss/57978)
@@ -3169,7 +3172,6 @@ int main( void )
 
 * [知乎 . 互联网求职路上，你见过哪些写得很好、很用心的面经？最好能分享自己的面经、心路历程。](https://www.zhihu.com/question/29693016)
 * [知乎 . 互联网公司最常见的面试算法题有哪些？](https://www.zhihu.com/question/24964987)
-* [知乎 . 面试 C++ 程序员，什么样的问题是好问题？](https://www.zhihu.com/question/20184857)
 
 ### CSDN
 
