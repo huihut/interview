@@ -176,7 +176,7 @@ inline int A::doA() { return 0; }   // 需要显式内联
 
 #### 虚函数（virtual）可以是内联函数（inline）吗？
 
-[Are "inline virtual" member functions ever actually "inlined"?](http://www.cs.technion.ac.il/users/yechiel/c++-faq/inline-virtuals.html)
+> [Are "inline virtual" member functions ever actually "inlined"?](http://www.cs.technion.ac.il/users/yechiel/c++-faq/inline-virtuals.html)
 
 * 虚函数可以是内联函数，内联是可以修饰虚函数的，但是当虚函数表现多态性的时候不能内联。
 * 内联是在编译器建议编译器内联，而虚函数的多态性在运行期，编译器无法知道运行期调用哪个代码，因此虚函数表现为多态性时（运行期）不可以内联。
@@ -440,7 +440,7 @@ int main() {
 
 ### C 实现 C++ 类
 
-[C 语言实现封装、继承和多态](http://dongxicheng.org/cpp/ooc/)
+> [C 语言实现封装、继承和多态](http://dongxicheng.org/cpp/ooc/)
 
 ### explicit（显式）构造函数
 
@@ -864,7 +864,7 @@ virtual int A() = 0;
 
 ### 虚函数、纯虚函数
 
-[CSDN . C++ 中的虚函数、纯虚函数区别和联系](https://blog.csdn.net/u012260238/article/details/53610462)
+> [CSDN . C++ 中的虚函数、纯虚函数区别和联系](https://blog.csdn.net/u012260238/article/details/53610462)
 
 * 类里如果声明了虚函数，这个函数是实现的，哪怕是空实现，它的作用就是为了能让这个函数在它的子类里面可以被覆盖，这样的话，这样编译器就可以使用后期绑定来达到多态了。纯虚函数只是一个接口，是个函数的声明而已，它要留到子类里去实现。 
 * 虚函数在子类里面也可以不重载的；但纯虚函数必须在子类去实现。
@@ -978,7 +978,7 @@ new (palce_address) type [size] { braced initializer list }
 
 ### delete this 合法吗？
 
-[Is it legal (and moral) for a member function to say delete this?](https://isocpp.org/wiki/faq/freestore-mgmt#delete-this)
+> [Is it legal (and moral) for a member function to say delete this?](https://isocpp.org/wiki/faq/freestore-mgmt#delete-this)
 
 合法，但：
 
@@ -989,7 +989,7 @@ new (palce_address) type [size] { braced initializer list }
 
 ### 如何定义一个只能在堆上（栈上）生成对象的类？
 
-[如何定义一个只能在堆上（栈上）生成对象的类?](https://www.nowcoder.com/questionTerminal/0a584aa13f804f3ea72b442a065a7618)
+> [如何定义一个只能在堆上（栈上）生成对象的类?](https://www.nowcoder.com/questionTerminal/0a584aa13f804f3ea72b442a065a7618)
 
 #### 只能在堆上
 
@@ -1054,7 +1054,7 @@ unique_ptr 是 C++11 才开始提供的类型，是一种在异常时可以帮�
 
 ### 强制类型转换运算符
 
-[MSDN . 强制转换运算符](https://msdn.microsoft.com/zh-CN/library/5f6c9f8h.aspx)
+> [MSDN . 强制转换运算符](https://msdn.microsoft.com/zh-CN/library/5f6c9f8h.aspx)
 
 #### static_cast
 
@@ -2421,7 +2421,7 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
 
 ### Socket
 
-[Linux Socket 编程（不限 Linux）](https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html)
+> [Linux Socket 编程（不限 Linux）](https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html)
 
 ![Socket 客户端服务器通讯](images/socket客户端服务器通讯.jpg)
 
