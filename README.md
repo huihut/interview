@@ -2,10 +2,10 @@
 
 C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue](https://github.com/huihut/interview/issues)、[PR](https://github.com/huihut/interview/pulls)，建议、讨论请移步 [issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)，版权协议遵循 [CC BY-NC-SA 4.0](#License)。
 
-使用建议：
+右侧目录支持方式：
 
-* `Ctrl + F`：快速查找定位知识点
-* `TOC 导航`：[jawil/GayHub](https://github.com/jawil/GayHub) 插件快速目录跳转
+* 语雀的镜像仓库：[C/C++ 面试基础知识总结](https://www.yuque.com/huihut/interview/readme)
+* Github + TOC：[jawil/GayHub TOC 导航](https://github.com/jawil/GayHub)
 
 ## 目录
 
