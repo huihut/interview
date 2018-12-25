@@ -1,8 +1,6 @@
-# C/C++ 面试知识总结
+# C/C++ 面试基础知识总结
 
-C/C++ 面试知识总结，只为复习、分享。部分知识点与图片来自网络，侵删。
-
-勘误新增请 Issue、PR，建议、讨论请 [#issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)
+C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue](https://github.com/huihut/interview/issues)、[PR](https://github.com/huihut/interview/pulls)，建议、讨论请移步 [issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)，版权协议遵循 [CC BY-NC-SA 4.0](#License)。
 
 使用建议：
 
@@ -22,13 +20,13 @@ C/C++ 面试知识总结，只为复习、分享。部分知识点与图片来�
 * [数据库](#%E6%95%B0%E6%8D%AE%E5%BA%93)
 * [设计模式](#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F)
 * [链接装载库](#%E9%93%BE%E6%8E%A5%E8%A3%85%E8%BD%BD%E5%BA%93)
-* [海量数据处理](#%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86)
-* [音视频](#%E9%9F%B3%E8%A7%86%E9%A2%91)
 * [其他](#%E5%85%B6%E4%BB%96)
 * [书籍](#%E4%B9%A6%E7%B1%8D)
 * [复习刷题网站](#%E5%A4%8D%E4%B9%A0%E5%88%B7%E9%A2%98%E7%BD%91%E7%AB%99)
 * [招聘时间岗位](#%E6%8B%9B%E8%81%98%E6%97%B6%E9%97%B4%E5%B2%97%E4%BD%8D)
 * [面试题目经验](#%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E7%BB%8F%E9%AA%8C)
+* [Contributors](#Contributors)
+* [License](#License)
 
 ## C/C++
 
@@ -3111,16 +3109,6 @@ int main( void )
 * 变长参数（stdarg.h）
 * 非局部跳转（setjmp.h）
 
-## 海量数据处理
-
-* [ 海量数据处理面试题集锦](http://blog.csdn.net/v_july_v/article/details/6685962)
-* [十道海量数据处理面试题与十个方法大总结](http://blog.csdn.net/v_JULY_v/article/details/6279498)
-
-## 音视频
-
-* [最全实时音视频开发要用到的开源工程汇总](http://www.yunliaoim.com/im/1869.html)
-* [18个实时音视频开发中会用到开源项目](http://webrtc.org.cn/18%E4%B8%AA%E5%AE%9E%E6%97%B6%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BC%9A%E7%94%A8%E5%88%B0%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/)
-
 ## 其他
 
 * [Bjarne Stroustrup 的常见问题](http://www.stroustrup.com/bs_faq.html)
@@ -3160,10 +3148,12 @@ int main( void )
 
 ## 复习刷题网站
 
-* [leetcode](https://leetcode.com/)
-* [牛客网](https://www.nowcoder.net/)
-* [慕课网](https://www.imooc.com/)
-* [菜鸟教程](http://www.runoob.com/)
+* [cplusplus](http://www.cplusplus.com/)
+* [cppreference](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)
+* [runoob](http://www.runoob.com/cplusplus/cpp-tutorial.html)
+* [leetcode](https://leetcode.com/) | [leetcode-cn](https://leetcode-cn.com/)
+* [lintcode](https://www.lintcode.com/)
+* [nowcoder](https://www.nowcoder.net/)
 
 ## 招聘时间岗位
 
@@ -3171,33 +3161,31 @@ int main( void )
 
 ## 面试题目经验
 
-### 牛客网
-
 * [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
 * [牛客网 . 2019校招技术类岗位面经汇总【技术类】](https://www.nowcoder.com/discuss/146655)
 * [牛客网 . 2018校招笔试真题汇总](https://www.nowcoder.com/discuss/68802)
 * [牛客网 . 2017秋季校园招聘笔经面经专题汇总](https://www.nowcoder.com/discuss/12805)
 * [牛客网 . 史上最全2017春招面经大合集！！](https://www.nowcoder.com/discuss/25268)
 * [牛客网 . 面试题干货在此](https://www.nowcoder.com/discuss/57978)
-
-### 知乎
-
 * [知乎 . 互联网求职路上，你见过哪些写得很好、很用心的面经？最好能分享自己的面经、心路历程。](https://www.zhihu.com/question/29693016)
 * [知乎 . 互联网公司最常见的面试算法题有哪些？](https://www.zhihu.com/question/24964987)
-
-### CSDN
-
 * [CSDN . 全面整理的C++面试题](http://blog.csdn.net/ljzcome/article/details/574158)
 * [CSDN . 百度研发类面试题（C++方向）](http://blog.csdn.net/Xiongchao99/article/details/74524807?locationNum=6&fps=1)
 * [CSDN . c++常见面试题30道](http://blog.csdn.net/fakine/article/details/51321544)
 * [CSDN . 腾讯2016实习生面试经验（已经拿到offer)](http://blog.csdn.net/onever_say_love/article/details/51223886)
-
-### cnblogs
-
 * [cnblogs . C++面试集锦( 面试被问到的问题 )](https://www.cnblogs.com/Y1Focus/p/6707121.html)
 * [cnblogs . C/C++ 笔试、面试题目大汇总](https://www.cnblogs.com/fangyukuan/archive/2010/09/18/1829871.html)
 * [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
-
-### Segmentfault
-
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
+
+## Contributors
+
+包括勘误的 Issue、PR，排序按照贡献时间。
+
+[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)
+
+## License
+
+本仓库不参与商业活动，遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
+
+[![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
