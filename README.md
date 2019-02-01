@@ -440,41 +440,55 @@ int main() {
 
 > [C 语言实现封装、继承和多态](http://dongxicheng.org/cpp/ooc/)
 
-### explicit（显式）构造函数
+### explicit（显式）关键字
 
-explicit 修饰的构造函数可用来防止隐式转换
+* explicit 修饰构造函数时，可以防止隐式转换和复制初始化
+* explicit 修饰转换函数时，可以防止隐式转换，但 [按语境转换](https://zh.cppreference.com/w/cpp/language/implicit_conversion) 除外
 
 <details><summary>explicit 使用</summary> 
 
 ```cpp
-class Test1
+struct A
 {
-public:
-    Test1(int n)            // 普通构造函数
-    {
-        num=n;
-    }
-private:
-    int num;
+	A(int) { }
+	operator bool() const { return true; }
 };
 
-class Test2
+struct B
 {
-public:
-    explicit Test2(int n)   // explicit（显式）构造函数
-    {
-        num=n;
-    }
-private:
-    int num;
+	explicit B(int) {}
+	explicit operator bool() const { return true; }
 };
+
+void doA(A a) {}
+
+void doB(B b) {}
 
 int main()
 {
-    Test1 t1=12;            // 隐式调用其构造函数，成功
-    Test2 t2=12;            // 编译错误，不能隐式调用其构造函数
-    Test2 t2(12);           // 显式调用成功
-    return 0;
+	A a1(1);		// OK：直接初始化
+	A a2 = 1;		// OK：复制初始化
+	A a3{ 1 };		// OK：直接列表初始化
+	A a4 = { 1 };		// OK：复制列表初始化
+	A a5 = (A)1;		// OK：允许 static_cast 的显式转换 
+	doA(1);			// OK：允许从 int 到 A 的隐式转换
+	if (a1);		// OK：使用转换函数 A::operator bool() 的从 A 到 bool 的隐式转换
+	bool a6（a1）;		// OK：使用转换函数 A::operator bool() 的从 A 到 bool 的隐式转换
+	bool a7 = a1;		// OK：使用转换函数 A::operator bool() 的从 A 到 bool 的隐式转换
+	bool a8 = static_cast<bool>(a1);  // OK ：static_cast 进行直接初始化
+
+	B b1(1);		// OK：直接初始化
+	B b2 = 1;		// 错误：被 explicit 修饰构造函数的对象不可以复制初始化
+	B b3{ 1 };		// OK：直接列表初始化
+	B b4 = { 1 };		// 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化
+	B b5 = (B)1;		// OK：允许 static_cast 的显式转换
+	doB(1);			// 错误：被 explicit 修饰构造函数的对象不可以从 int 到 B 的隐式转换
+	if (b1);		// OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换
+	bool b6(b1);		// OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换
+	bool b7 = b1;		// 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换
+	bool b8 = static_cast<bool>(b1);  // OK：static_cast 进行直接初始化
+
+	return 0;
 }
 ```
 
@@ -3189,7 +3203,7 @@ int main( void )
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
-[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)
+[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)
 
 ## License
 
