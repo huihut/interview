@@ -1,18 +1,31 @@
+# C/C++ 面试基础知识总结
 
 C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue](https://github.com/huihut/interview/issues)、[PR](https://github.com/huihut/interview/pulls)，建议、讨论请移步 [issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)，版权协议遵循 [CC BY-NC-SA 4.0](#License)。
-
-<br>
-
-<b><details><summary>💡 提示</summary></b>
 
 右侧目录支持方式：
 
 * 语雀的镜像仓库：[C/C++ 面试基础知识总结](https://www.yuque.com/huihut/interview/readme)
 * Github + TOC：[jawil/GayHub TOC 导航](https://github.com/jawil/GayHub)
 
-</details>
+## 目录
 
-<b><details><summary>➕ C/C++</summary></b>
+* [C/C++](#cc)
+* [STL](#stl)
+* [数据结构](#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+* [算法](#%E7%AE%97%E6%B3%95)
+* [Problems](#problems)
+* [操作系统](#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F)
+* [计算机网络](#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C)
+* [网络编程](#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B)
+* [数据库](#%E6%95%B0%E6%8D%AE%E5%BA%93)
+* [设计模式](#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F)
+* [链接装载库](#%E9%93%BE%E6%8E%A5%E8%A3%85%E8%BD%BD%E5%BA%93)
+* [书籍](#%E4%B9%A6%E7%B1%8D)
+* [复习刷题网站](#%E5%A4%8D%E4%B9%A0%E5%88%B7%E9%A2%98%E7%BD%91%E7%AB%99)
+* [招聘时间岗位](#%E6%8B%9B%E8%81%98%E6%97%B6%E9%97%B4%E5%B2%97%E4%BD%8D)
+* [面试题目经验](#%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E7%BB%8F%E9%AA%8C)
+* [Contributors](#Contributors)
+* [License](#License)
 
 ## C/C++
 
@@ -1248,10 +1261,6 @@ class doSomething(Flyable *obj)                 // 做些事情
 * [Bjarne Stroustrup 的常见问题](http://www.stroustrup.com/bs_faq.html)
 * [Bjarne Stroustrup 的 C++ 风格和技巧常见问题](http://www.stroustrup.com/bs_faq2.html)
 
-</details>
-
-<b><details><summary>📦 STL</summary></b>
-
 ## STL
 
 ### STL 索引
@@ -1284,10 +1293,6 @@ hash_multimap|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重�
 ---|---|---|---
 [find](http://www.cplusplus.com/reference/algorithm/find/)|顺序查找|O(n)|可重复
 [sort](https://github.com/gcc-mirror/gcc/blob/master/libstdc++-v3/include/bits/stl_algo.h#L4808)|[内省排序](https://en.wikipedia.org/wiki/Introsort)|O(n*log<sub>2</sub>n)|可重复
-
-</details>
-
-<b><details><summary>〽️ 数据结构</summary></b>
 
 ## 数据结构
 
@@ -1719,10 +1724,6 @@ typedef struct BiTNode
 * 三维计算机图形
 * 最邻近搜索
 
-</details>
-
-<b><details><summary>⚡️ 算法</summary></b>
-
 ## 算法
 
 ### 排序
@@ -1775,10 +1776,6 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 [动态规划](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92)|通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法，适用于有重叠子问题和最优子结构性质的问题|[背包问题](https://github.com/huihut/interview/tree/master/Problems/KnapsackProblem)、斐波那契数列
 [贪心法](https://zh.wikipedia.org/wiki/%E8%B4%AA%E5%BF%83%E6%B3%95)|一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是最好或最优的算法|旅行推销员问题（最短路径问题）、最小生成树、哈夫曼编码
 
-</details>
-
-<b><details><summary>❓ Problems</summary></b>
-
 ## Problems
 
 ### Single Problem
@@ -1807,10 +1804,6 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 ### 牛客网
 
 * [牛客网 . 在线编程专题](https://www.nowcoder.com/activity/oj)
-
-</details>
-
-<b><details><summary>💻 操作系统</summary></b>
 
 ## 操作系统
 
@@ -2048,10 +2041,6 @@ int main()
 * 先进先出置换算法（FIFO）
 * 最近最久未使用（LRU）算法
 * 时钟（Clock）置换算法
-
-</details>
-
-<b><details><summary>☁️ 计算机网络</summary></b>
 
 ## 计算机网络
 
@@ -2462,10 +2451,6 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
     * 用于内部网络管理员作为对所有电脑作中央管理的手段
 * SNMP（Simple Network Management Protocol，简单网络管理协议）构成了互联网工程工作小组（IETF，Internet Engineering Task Force）定义的 Internet 协议族的一部分。该协议能够支持网络管理系统，用以监测连接到网络上的设备是否有任何引起管理上关注的情况。
 
-</details>
-
-<b><details><summary>🌩 网络编程</summary></b>
-
 ## 网络编程
 
 ### Socket
@@ -2531,10 +2516,6 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 这样每个方向上都有一个 FIN 和 ACK。
 
-</details>
-
-<b><details><summary>💾 数据库</summary></b>
-
 ## 数据库
 
 * 数据库事务四大特性：原子性、一致性、分离性、持久性
@@ -2549,10 +2530,6 @@ ssize_t write(int fd, const void *buf, size_t count);
 * 第三范式（3NF）：满足 2NF，任何非主属性不依赖于其他非主属性（消除 2NF 主属性对码的传递函数依赖）
 * 鲍依斯-科得范式（BCNF）：满足 3NF，任何非主属性不能对主键子集依赖（消除 3NF 主属性对码的部分和传递函数依赖）
 * 第四范式（4NF）：满足 3NF，属性之间不能有非平凡且非函数依赖的多值依赖（消除 3NF 非平凡且非函数依赖的多值依赖）
-
-</details>
-
-<b><details><summary>📏 设计模式</summary></b>
 
 ## 设计模式
 
@@ -2588,10 +2565,6 @@ ssize_t write(int fd, const void *buf, size_t count);
 * 接口隔离原则（ISP，Interface Segregation Principle）
 * 迪米特法则（LoD，Law of Demeter）
 * 开放封闭原则（OCP，Open Close Principle）
-
-</details>
-
-<b><details><summary>⚙️ 链接装载库</summary></b>
 
 ## 链接装载库
 
@@ -3160,10 +3133,6 @@ int main( void )
 * 变长参数（stdarg.h）
 * 非局部跳转（setjmp.h）
 
-</details>
-
-<b><details><summary>📚 书籍</summary></b>
-
 ## 书籍
 
 ### 语言
@@ -3196,10 +3165,6 @@ int main( void )
 
 * 《程序员的自我修养》
 
-</details>
-
-<b><details><summary>💯 复习刷题网站</summary></b>
-
 ## 复习刷题网站
 
 * [cplusplus](http://www.cplusplus.com/)
@@ -3209,17 +3174,9 @@ int main( void )
 * [lintcode](https://www.lintcode.com/)
 * [nowcoder](https://www.nowcoder.net/)
 
-</details>
-
-<b><details><summary>📆 招聘时间岗位</summary></b>
-
 ## 招聘时间岗位
 
 * [牛客网 . 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
-
-</details>
-
-<b><details><summary>📝 面试题目经验</summary></b>
 
 ## 面试题目经验
 
@@ -3241,24 +3198,14 @@ int main( void )
 * [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
 
-</details>
-
-<b><details><summary>👬 贡献者</summary></b>
-
-## 贡献者
+## Contributors
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
 [tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)
-
-</details>
-
-<b><details><summary>📜 License</summary></b>
 
 ## License
 
 本仓库不参与商业活动，遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
 
 [![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](LICENSE)
-
-</details>

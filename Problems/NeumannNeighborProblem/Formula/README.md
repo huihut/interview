@@ -9,7 +9,7 @@
 
 某算法从一个1×1的方格开始，每次都会在上次图形的周围再加上一圈方格，在第n次的时候要生成多少个方格？下图给出了n = 0，1，2是的结果。
 
-![](http://ojlsgreog.bkt.clouddn.com/NeumannNeighborProblem.jpg)
+![](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/NeumannNeighborProblem.jpg)
 
 ### 功能说明
 
