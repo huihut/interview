@@ -8,16 +8,33 @@
 </div> 
 <br>
 
-<b><details><summary>💡 提示</summary></b>
-
-右侧目录支持方式：
+💡 右侧目录支持方式：
 
 * 语雀的镜像仓库：[C/C++ 面试基础知识总结](https://www.yuque.com/huihut/interview/readme)
 * Github + TOC：[jawil/GayHub TOC 导航](https://github.com/jawil/GayHub)
 
-</details>
+## 📑 目录
 
-<b><details><summary>➕ C/C++</summary></b>
+* [➕ C/C++](#-cc)
+* [📦 STL](#-stl)
+* [〽️ 数据结构](#️-数据结构)
+* [⚡️ 算法](#️-算法)
+* [❓ Problems](#-problems)
+* [💻 操作系统](#-操作系统)
+* [☁️ 计算机网络](#️-计算机网络)
+* [🌩 网络编程](#-网络编程)
+* [💾 数据库](#-数据库)
+* [📏 设计模式](#-设计模式)
+* [⚙️ 链接装载库](#️-链接装载库)
+* [📚 书籍](#-书籍)
+* [💯 复习刷题网站](#-复习刷题网站)
+* [🔱 C/C++ 发展方向](#-cc-发展方向)
+* [📆 招聘时间岗位](#-招聘时间岗位)
+* [📝 面试题目经验](#-面试题目经验)
+* [👬 贡献者](#-贡献者)
+* [📜 License](#-license)
+
+## ➕ C/C++
 
 ### const
 
@@ -1253,9 +1270,7 @@ class doSomething(Flyable *obj)                 // 做些事情
 * [Bjarne Stroustrup 的常见问题](http://www.stroustrup.com/bs_faq.html)
 * [Bjarne Stroustrup 的 C++ 风格和技巧常见问题](http://www.stroustrup.com/bs_faq2.html)
 
-</details>
-
-<b><details><summary>📦 STL</summary></b>
+## 📦 STL
 
 ### STL 索引
 
@@ -1288,9 +1303,7 @@ hash_multimap|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重�
 [find](http://www.cplusplus.com/reference/algorithm/find/)|顺序查找|O(n)|可重复
 [sort](https://github.com/gcc-mirror/gcc/blob/master/libstdc++-v3/include/bits/stl_algo.h#L4808)|[内省排序](https://en.wikipedia.org/wiki/Introsort)|O(n*log<sub>2</sub>n)|可重复
 
-</details>
-
-<b><details><summary>〽️ 数据结构</summary></b>
+## 〽️ 数据结构
 
 ### 顺序结构
 
@@ -1720,9 +1733,7 @@ typedef struct BiTNode
 * 三维计算机图形
 * 最邻近搜索
 
-</details>
-
-<b><details><summary>⚡️ 算法</summary></b>
+## ⚡️ 算法
 
 ### 排序
 
@@ -1774,9 +1785,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 [动态规划](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92)|通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法，适用于有重叠子问题和最优子结构性质的问题|[背包问题](https://github.com/huihut/interview/tree/master/Problems/KnapsackProblem)、斐波那契数列
 [贪心法](https://zh.wikipedia.org/wiki/%E8%B4%AA%E5%BF%83%E6%B3%95)|一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是最好或最优的算法|旅行推销员问题（最短路径问题）、最小生成树、哈夫曼编码
 
-</details>
-
-<b><details><summary>❓ Problems</summary></b>
+## ❓ Problems
 
 ### Single Problem
 
@@ -1805,9 +1814,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 
 * [牛客网 . 在线编程专题](https://www.nowcoder.com/activity/oj)
 
-</details>
-
-<b><details><summary>💻 操作系统</summary></b>
+## 💻 操作系统
 
 ### 进程与线程
 
@@ -2044,9 +2051,7 @@ int main()
 * 最近最久未使用（LRU）算法
 * 时钟（Clock）置换算法
 
-</details>
-
-<b><details><summary>☁️ 计算机网络</summary></b>
+## ☁️ 计算机网络
 
 计算机经网络体系结构：
 
@@ -2455,9 +2460,7 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
     * 用于内部网络管理员作为对所有电脑作中央管理的手段
 * SNMP（Simple Network Management Protocol，简单网络管理协议）构成了互联网工程工作小组（IETF，Internet Engineering Task Force）定义的 Internet 协议族的一部分。该协议能够支持网络管理系统，用以监测连接到网络上的设备是否有任何引起管理上关注的情况。
 
-</details>
-
-<b><details><summary>🌩 网络编程</summary></b>
+## 🌩 网络编程
 
 ### Socket
 
@@ -2522,9 +2525,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 这样每个方向上都有一个 FIN 和 ACK。
 
-</details>
-
-<b><details><summary>💾 数据库</summary></b>
+## 💾 数据库
 
 * 数据库事务四大特性：原子性、一致性、分离性、持久性
 * 数据库索引：顺序索引、B+ 树索引、hash 索引
@@ -2539,9 +2540,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 * 鲍依斯-科得范式（BCNF）：满足 3NF，任何非主属性不能对主键子集依赖（消除 3NF 主属性对码的部分和传递函数依赖）
 * 第四范式（4NF）：满足 3NF，属性之间不能有非平凡且非函数依赖的多值依赖（消除 3NF 非平凡且非函数依赖的多值依赖）
 
-</details>
-
-<b><details><summary>📏 设计模式</summary></b>
+## 📏 设计模式
 
 > 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/column/details/15392.html) 系列博文
 
@@ -2576,9 +2575,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 * 迪米特法则（LoD，Law of Demeter）
 * 开放封闭原则（OCP，Open Close Principle）
 
-</details>
-
-<b><details><summary>⚙️ 链接装载库</summary></b>
+## ⚙️ 链接装载库
 
 ### 内存、栈、堆
 
@@ -3145,9 +3142,7 @@ int main( void )
 * 变长参数（stdarg.h）
 * 非局部跳转（setjmp.h）
 
-</details>
-
-<b><details><summary>📚 书籍</summary></b>
+## 📚 书籍
 
 ### 语言
 
@@ -3179,9 +3174,7 @@ int main( void )
 
 * 《程序员的自我修养》
 
-</details>
-
-<b><details><summary>💯 复习刷题网站</summary></b>
+## 💯 复习刷题网站
 
 * [cplusplus](http://www.cplusplus.com/)
 * [cppreference](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)
@@ -3190,9 +3183,7 @@ int main( void )
 * [lintcode](https://www.lintcode.com/)
 * [nowcoder](https://www.nowcoder.net/)
 
-</details>
-
-<b><details><summary>🔱 C/C++ 发展方向</summary></b>
+## 🔱 C/C++ 发展方向
 
 > C/C++ 发展方向甚广，包括不限于以下方向， 以下列举一些大厂校招岗位要求。
 
@@ -3278,15 +3269,11 @@ int main( void )
 * 较强的算法实现能力，熟练掌握 C/C++ 编程，熟悉 Shell/Python/Matlab 至少一种编程语言；
 * 在计算机视觉、模式识别等学术会议或者期刊上发表论文、相关国际比赛获奖、及有相关专利者优先。
 
-</details>
-
-<b><details><summary>📆 招聘时间岗位</summary></b>
+## 📆 招聘时间岗位
 
 * [牛客网 . 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
 
-</details>
-
-<b><details><summary>📝 面试题目经验</summary></b>
+## 📝 面试题目经验
 
 * [牛客网 . 2019补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
 * [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
@@ -3306,20 +3293,14 @@ int main( void )
 * [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
 
-</details>
-
-<b><details><summary>👬 贡献者</summary></b>
+## 👬 贡献者
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
 [tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)
 
-</details>
-
-<b><details><summary>📜 License</summary></b>
+## 📜 License
 
 本仓库不参与商业活动，遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
 
 [![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](LICENSE)
-
-</details>
