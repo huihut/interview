@@ -1,4 +1,3 @@
-
 📚 C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue](https://github.com/huihut/interview/issues)、[PR](https://github.com/huihut/interview/pulls)，建议、讨论请移步 [issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)，版权协议遵循 [CC BY-NC-SA 4.0](https://github.com/huihut/interview/blob/master/LICENSE)。
 
 <br>
