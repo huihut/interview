@@ -1,33 +1,40 @@
-# C/C++ 面试基础知识总结
+📚 C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue](https://github.com/huihut/interview/issues)、[PR](https://github.com/huihut/interview/pulls)，建议、讨论请移步 [issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)，版权协议遵循 [CC BY-NC-SA 4.0](https://github.com/huihut/interview/blob/master/LICENSE)。
 
-C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue](https://github.com/huihut/interview/issues)、[PR](https://github.com/huihut/interview/pulls)，建议、讨论请移步 [issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)，版权协议遵循 [CC BY-NC-SA 4.0](#License)。
+<br>
+<div align="center">
+<a href="https://github.com/huihut/interview">📘 Summary</a>
+&nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp
+<a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a>
+</div> 
+<br>
 
-右侧目录支持方式：
+💡 右侧目录支持方式：
 
 * 语雀的镜像仓库：[C/C++ 面试基础知识总结](https://www.yuque.com/huihut/interview/readme)
 * Github + TOC：[jawil/GayHub TOC 导航](https://github.com/jawil/GayHub)
 
-## 目录
+## 📑 目录
 
-* [C/C++](#cc)
-* [STL](#stl)
-* [数据结构](#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
-* [算法](#%E7%AE%97%E6%B3%95)
-* [Problems](#problems)
-* [操作系统](#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F)
-* [计算机网络](#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C)
-* [网络编程](#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B)
-* [数据库](#%E6%95%B0%E6%8D%AE%E5%BA%93)
-* [设计模式](#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F)
-* [链接装载库](#%E9%93%BE%E6%8E%A5%E8%A3%85%E8%BD%BD%E5%BA%93)
-* [书籍](#%E4%B9%A6%E7%B1%8D)
-* [复习刷题网站](#%E5%A4%8D%E4%B9%A0%E5%88%B7%E9%A2%98%E7%BD%91%E7%AB%99)
-* [招聘时间岗位](#%E6%8B%9B%E8%81%98%E6%97%B6%E9%97%B4%E5%B2%97%E4%BD%8D)
-* [面试题目经验](#%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E7%BB%8F%E9%AA%8C)
-* [Contributors](#Contributors)
-* [License](#License)
+* [➕ C/C++](#cc)
+* [📦 STL](#stl)
+* [〽️ 数据结构](#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+* [⚡️ 算法](#%E7%AE%97%E6%B3%95)
+* [❓ Problems](#problems)
+* [💻 操作系统](#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F)
+* [☁️ 计算机网络](#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C)
+* [🌩 网络编程](#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B)
+* [💾 数据库](#%E6%95%B0%E6%8D%AE%E5%BA%93)
+* [📏 设计模式](#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F)
+* [⚙️ 链接装载库](#%E9%93%BE%E6%8E%A5%E8%A3%85%E8%BD%BD%E5%BA%93)
+* [📚 书籍](#%E4%B9%A6%E7%B1%8D)
+* [💯 复习刷题网站](#%E5%A4%8D%E4%B9%A0%E5%88%B7%E9%A2%98%E7%BD%91%E7%AB%99)
+* [🔱 C/C++ 发展方向]()
+* [📆 招聘时间岗位](#%E6%8B%9B%E8%81%98%E6%97%B6%E9%97%B4%E5%B2%97%E4%BD%8D)
+* [📝 面试题目经验](#%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E7%BB%8F%E9%AA%8C)
+* [👬 贡献者]()
+* [📜 License](#License)
 
-## C/C++
+## ➕ C/C++
 
 ### const
 
@@ -224,6 +231,17 @@ int main()
 
 </details>
 
+### volatile
+
+```cpp
+volatile int i = 10; 
+```
+
+* volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素（操作系统、硬件、其它线程等）更改。所以使用 volatile 告诉编译器不应对这样的对象进行优化。
+* volatile 关键字声明的变量，每次访问时都必须从内存中取出值（没有被 volatile 修饰的变量，可能由于编译器的优化，从 CPU 寄存器中取值）
+* const 可以是 volatile （如只读的状态寄存器）
+* 指针可以是 volatile
+
 ### assert()
 
 断言，是宏，而非函数。assert 宏的原型定义在 `<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。可以通过定义 `NDEBUG` 来关闭 assert，但是需要在源代码的开头，`include <assert.h>` 之前。
@@ -278,17 +296,6 @@ Bit mode: 2;    // mode 占 2 位
 * 位域在内存中的布局是与机器有关的
 * 位域的类型必须是整型或枚举类型，带符号类型中的位域的行为将因具体实现而定
 * 取地址运算符（&）不能作用于位域，任何指针都无法指向类的位域
-
-### volatile
-
-```cpp
-volatile int i = 10; 
-```
-
-* volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素（操作系统、硬件、其它线程等）更改。所以使用 volatile 告诉编译器不应对这样的对象进行优化。
-* volatile 关键字声明的变量，每次访问时都必须从内存中取出值（没有被 volatile 修饰的变量，可能由于编译器的优化，从 CPU 寄存器中取值）
-* const 可以是 volatile （如只读的状态寄存器）
-* 指针可以是 volatile
 
 ### extern "C"
 
@@ -511,7 +518,7 @@ int main()
 using namespace_name::name;
 ```
 
-#### 构造函数的 using 声明【C++11】
+#### 构造函数的 using 声明
 
 在 C++11 中，派生类能够重用其直接基类定义的构造函数。
 
@@ -680,7 +687,7 @@ auto fcn2(It beg, It end) -> typename remove_reference<decltype(*beg)>::type
   2. 引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面
   3. 没有默认构造函数的类类型，因为使用初始化列表可以不必调用默认构造函数来初始化，而是直接调用拷贝构造函数初始化。
 
-### initializer_list 列表初始化【C++11】
+### initializer_list 列表初始化
 
 用花括号初始化器列表列表初始化一个对象，其中对应构造函数接受一个 `std::initializer_list` 参数.
 
@@ -749,15 +756,11 @@ int main()
 
 ### 封装
 
-* 把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。
-* 关键字：public, protected, friendly, private。不写默认为 friendly。
+把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。关键字：public, protected, private。不写默认为 private。
 
-| 关键字 | 当前类 | 包内 | 子孙类 | 包外 |
-| --- | --- | --- | --- | --- |
-| public | √ | √ | √ | √ |
-| protected | √ | √ | √ | × |
-| friendly | √ | √ | × | × |
-| private | √ | × | × | × |
+* `public` 成员：可以被任意实体访问
+* `protected` 成员：只允许被子类及本类的成员函数访问
+* `private` 成员：只允许被本类的成员函数访问
 
 ### 继承
 
@@ -765,11 +768,17 @@ int main()
 
 ### 多态
 
-* 多态，即多种状态，在面向对象语言中，接口的多种不同的实现方式即为多态。
-* C++ 多态有两种：静态多态（早绑定）、动态多态（晚绑定）。静态多态是通过函数重载实现的；动态多态是通过虚函数实现的。
+* 多态，即多种状态（形态）。简单来说，我们可以将多态定义为消息以多种形式显示的能力。
 * 多态是以封装和继承为基础的。
+* C++ 多态分类及实现：
+    1. 重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载
+    2. 子类型多态（Subtype Polymorphism，运行期）：虚函数
+    3. 参数多态性（Parametric Polymorphism，编译期）：类模板、函数模板
+    4. 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换
 
-#### 静态多态（早绑定）
+> [The Four Polymorphisms in C++](https://catonmat.net/cpp-polymorphism)
+
+#### 静态多态（编译期/早绑定）
 
 函数重载
 
@@ -782,7 +791,7 @@ public:
 };
 ```
 
-#### 动态多态（晚绑定）
+#### 动态多态（运行期期/晚绑定）
 
 * 虚函数：用 virtual 修饰成员函数，使其成为虚函数
 
@@ -1261,7 +1270,7 @@ class doSomething(Flyable *obj)                 // 做些事情
 * [Bjarne Stroustrup 的常见问题](http://www.stroustrup.com/bs_faq.html)
 * [Bjarne Stroustrup 的 C++ 风格和技巧常见问题](http://www.stroustrup.com/bs_faq2.html)
 
-## STL
+## 📦 STL
 
 ### STL 索引
 
@@ -1294,7 +1303,7 @@ hash_multimap|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重�
 [find](http://www.cplusplus.com/reference/algorithm/find/)|顺序查找|O(n)|可重复
 [sort](https://github.com/gcc-mirror/gcc/blob/master/libstdc++-v3/include/bits/stl_algo.h#L4808)|[内省排序](https://en.wikipedia.org/wiki/Introsort)|O(n*log<sub>2</sub>n)|可重复
 
-## 数据结构
+## 〽️ 数据结构
 
 ### 顺序结构
 
@@ -1724,7 +1733,7 @@ typedef struct BiTNode
 * 三维计算机图形
 * 最邻近搜索
 
-## 算法
+## ⚡️ 算法
 
 ### 排序
 
@@ -1776,7 +1785,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 [动态规划](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92)|通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法，适用于有重叠子问题和最优子结构性质的问题|[背包问题](https://github.com/huihut/interview/tree/master/Problems/KnapsackProblem)、斐波那契数列
 [贪心法](https://zh.wikipedia.org/wiki/%E8%B4%AA%E5%BF%83%E6%B3%95)|一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是最好或最优的算法|旅行推销员问题（最短路径问题）、最小生成树、哈夫曼编码
 
-## Problems
+## ❓ Problems
 
 ### Single Problem
 
@@ -1805,7 +1814,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 
 * [牛客网 . 在线编程专题](https://www.nowcoder.com/activity/oj)
 
-## 操作系统
+## 💻 操作系统
 
 ### 进程与线程
 
@@ -2042,7 +2051,7 @@ int main()
 * 最近最久未使用（LRU）算法
 * 时钟（Clock）置换算法
 
-## 计算机网络
+## ☁️ 计算机网络
 
 计算机经网络体系结构：
 
@@ -2451,7 +2460,7 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
     * 用于内部网络管理员作为对所有电脑作中央管理的手段
 * SNMP（Simple Network Management Protocol，简单网络管理协议）构成了互联网工程工作小组（IETF，Internet Engineering Task Force）定义的 Internet 协议族的一部分。该协议能够支持网络管理系统，用以监测连接到网络上的设备是否有任何引起管理上关注的情况。
 
-## 网络编程
+## 🌩 网络编程
 
 ### Socket
 
@@ -2516,7 +2525,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 这样每个方向上都有一个 FIN 和 ACK。
 
-## 数据库
+## 💾 数据库
 
 * 数据库事务四大特性：原子性、一致性、分离性、持久性
 * 数据库索引：顺序索引、B+ 树索引、hash 索引
@@ -2531,7 +2540,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 * 鲍依斯-科得范式（BCNF）：满足 3NF，任何非主属性不能对主键子集依赖（消除 3NF 主属性对码的部分和传递函数依赖）
 * 第四范式（4NF）：满足 3NF，属性之间不能有非平凡且非函数依赖的多值依赖（消除 3NF 非平凡且非函数依赖的多值依赖）
 
-## 设计模式
+## 📏 设计模式
 
 > 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/column/details/15392.html) 系列博文
 
@@ -2566,7 +2575,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 * 迪米特法则（LoD，Law of Demeter）
 * 开放封闭原则（OCP，Open Close Principle）
 
-## 链接装载库
+## ⚙️ 链接装载库
 
 ### 内存、栈、堆
 
@@ -3133,7 +3142,7 @@ int main( void )
 * 变长参数（stdarg.h）
 * 非局部跳转（setjmp.h）
 
-## 书籍
+## 📚 书籍
 
 ### 语言
 
@@ -3165,7 +3174,7 @@ int main( void )
 
 * 《程序员的自我修养》
 
-## 复习刷题网站
+## 💯 复习刷题网站
 
 * [cplusplus](http://www.cplusplus.com/)
 * [cppreference](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)
@@ -3174,11 +3183,97 @@ int main( void )
 * [lintcode](https://www.lintcode.com/)
 * [nowcoder](https://www.nowcoder.net/)
 
-## 招聘时间岗位
+## 🔱 C/C++ 发展方向
+
+> C/C++ 发展方向甚广，包括不限于以下方向， 以下列举一些大厂校招岗位要求。
+
+### 后台/服务器
+
+【后台开发】
+
+* 编程基本功扎实，掌握 C/C++/JAVA 等开发语言、常用算法和数据结构；
+* 熟悉 TCP/UDP 网络协议及相关编程、进程间通讯编程；
+* 了解 Python、Shell、Perl 等脚本语言；
+* 了解 MYSQL 及 SQL 语言、编程，了解 NoSQL, key-value 存储原理；
+* 全面、扎实的软件知识结构，掌握操作系统、软件工程、设计模式、数据结构、数据库系统、网络安全等专业知识；
+* 了解分布式系统设计与开发、负载均衡技术，系统容灾设计，高可用系统等知识。
+
+### 桌面客户端
+
+【PC 客户端开发】
+
+* 计算机软件相关专业本科或以上学历，热爱编程，基础扎实，理解算法和数据结构相关知识；  
+* 熟悉 windows 操作系统的内存管理、文件系统、进程线程调度； 
+* 熟悉 MFC/windows 界面实现机制，熟练使用 VC，精通 C/C++，熟练使用 STL，以及 Windows 下网络编程经验；
+* 熟练掌握 Windows 客户端开发、调试，有 Windows 应用软件开发经验优先；
+* 对于创新及解决具有挑战性的问题充满激情，具有良好的算法基础及系统分析能力。
+
+### 图形学/游戏/VR/AR
+
+【游戏客户端开发】
+
+* 计算机科学/工程相关专业本科或以上学历，热爱编程，基础扎实，理解算法、数据结构、软件设计相关知识；
+* 至少掌握一种游戏开发常用的编程语言，具 C++/C# 编程经验优先；
+* 具游戏引擎（如 Unity、Unreal）使用经验者优先；
+* 了解某方面的游戏客户端技术（如图形、音频、动画、物理、人工智能、网络同步）者优先考虑；
+* 对于创新及解决具有挑战性的问题充满激情，有较强的学习能力、分析及解决问题能力，具备良好的团队合作意识；
+* 具阅读英文技术文档能力；
+* 热爱游戏。
+
+### 测试开发
+
+【测试开发】
+
+* 计算机或相关专业本科及以上学历；
+* 一至两年的 C/C++/Python 或其他计算机语言的编程经验；
+* 具备撰写测试计划、测试用例、以及实现性能和安全等测试的能力；
+* 具备实现自动化系统的能力；
+* 具备定位调查产品缺陷能力、以及代码级别调试缺陷的能力；
+* 工作主动积极，有责任心，具有良好的团队合作精神。
+
+### 网络安全/逆向
+
+【安全技术】
+
+* 热爱互联网，对操作系统和网络安全有狂热的追求，专业不限；
+* 熟悉漏洞挖掘、网络安全攻防技术，了解常见黑客攻击手法；  
+* 掌握基本开发能力，熟练使用 C/C++ 语言；
+* 对数据库、操作系统、网络原理有较好掌握；  
+* 具有软件逆向，网络安全攻防或安全系统开发经验者优先。
+
+### 嵌入式/物联网
+
+【嵌入式应用开发】
+
+* 有良好的编程基础，熟练掌握C/C++语言；
+* 掌握操作系统、数据结构等软件开发必备知识；
+* 具备较强的沟通理解能力及良好的团队合作意识；
+* 有Linux/Android系统平台的开发经验者优先。
+
+### 音视频/流媒体/SDK
+
+【音视频编解码】
+
+1. 硕士及以上学历，计算机、信号处理、数学、信息类及相关专业和方向； 
+2. 视频编解码基础扎实，熟常用的 HEVC 或 H264，有较好的数字信号处理基础； 
+3. 掌握 C/C++，代码能力强, 熟悉一种汇编语言尤佳； 
+4. 较强的英文文献阅读能力； 
+5. 学习能力强，具有团队协作精神，有较强的抗压能力。
+
+### 计算机视觉/机器学习
+
+【计算机视觉研究】
+
+* 计算机、应用数学、模式识别、人工智能、自控、统计学、运筹学、生物信息、物理学/量子计算、神经科学、社会学/心理学等专业，图像处理、模式识别、机器学习相关研究方向，本科及以上，博士优先；
+* 熟练掌握计算机视觉和图像处理相关的基本算法及应用；
+* 较强的算法实现能力，熟练掌握 C/C++ 编程，熟悉 Shell/Python/Matlab 至少一种编程语言；
+* 在计算机视觉、模式识别等学术会议或者期刊上发表论文、相关国际比赛获奖、及有相关专利者优先。
+
+## 📆 招聘时间岗位
 
 * [牛客网 . 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
 
-## 面试题目经验
+## 📝 面试题目经验
 
 * [牛客网 . 2019补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
 * [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
@@ -3198,13 +3293,13 @@ int main( void )
 * [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
 
-## Contributors
+## 👬 贡献者
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
 [tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)
 
-## License
+## 📜 License
 
 本仓库不参与商业活动，遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
 

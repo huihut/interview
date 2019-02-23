@@ -1,6 +1,12 @@
 
-C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue](https://github.com/huihut/interview/issues)、[PR](https://github.com/huihut/interview/pulls)，建议、讨论请移步 [issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)，版权协议遵循 [CC BY-NC-SA 4.0](#License)。
+📚 C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue](https://github.com/huihut/interview/issues)、[PR](https://github.com/huihut/interview/pulls)，建议、讨论请移步 [issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)，版权协议遵循 [CC BY-NC-SA 4.0](https://github.com/huihut/interview/blob/master/LICENSE)。
 
+<br>
+<div align="center">
+<a href="https://github.com/huihut/interview">📘 Summary</a>
+&nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp
+<a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a>
+</div> 
 <br>
 
 <b><details><summary>💡 提示</summary></b>
@@ -13,8 +19,6 @@ C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue]
 </details>
 
 <b><details><summary>➕ C/C++</summary></b>
-
-## C/C++
 
 ### const
 
@@ -1254,8 +1258,6 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 <b><details><summary>📦 STL</summary></b>
 
-## STL
-
 ### STL 索引
 
 [STL 方法含义索引](https://github.com/huihut/interview/tree/master/STL)
@@ -1290,8 +1292,6 @@ hash_multimap|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重�
 </details>
 
 <b><details><summary>〽️ 数据结构</summary></b>
-
-## 数据结构
 
 ### 顺序结构
 
@@ -1725,8 +1725,6 @@ typedef struct BiTNode
 
 <b><details><summary>⚡️ 算法</summary></b>
 
-## 算法
-
 ### 排序
 
 排序算法 | 平均时间复杂度 | 最差时间复杂度 | 空间复杂度 | 数据对象稳定性
@@ -1781,8 +1779,6 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 
 <b><details><summary>❓ Problems</summary></b>
 
-## Problems
-
 ### Single Problem
 
 * [Chessboard Coverage Problem（棋盘覆盖问题）](Problems/ChessboardCoverageProblem)
@@ -1813,8 +1809,6 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 </details>
 
 <b><details><summary>💻 操作系统</summary></b>
-
-## 操作系统
 
 ### 进程与线程
 
@@ -2054,8 +2048,6 @@ int main()
 </details>
 
 <b><details><summary>☁️ 计算机网络</summary></b>
-
-## 计算机网络
 
 计算机经网络体系结构：
 
@@ -2468,8 +2460,6 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
 
 <b><details><summary>🌩 网络编程</summary></b>
 
-## 网络编程
-
 ### Socket
 
 > [Linux Socket 编程（不限 Linux）](https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html)
@@ -2537,8 +2527,6 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 <b><details><summary>💾 数据库</summary></b>
 
-## 数据库
-
 * 数据库事务四大特性：原子性、一致性、分离性、持久性
 * 数据库索引：顺序索引、B+ 树索引、hash 索引
 [MySQL 索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
@@ -2555,8 +2543,6 @@ ssize_t write(int fd, const void *buf, size_t count);
 </details>
 
 <b><details><summary>📏 设计模式</summary></b>
-
-## 设计模式
 
 > 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/column/details/15392.html) 系列博文
 
@@ -2594,8 +2580,6 @@ ssize_t write(int fd, const void *buf, size_t count);
 </details>
 
 <b><details><summary>⚙️ 链接装载库</summary></b>
-
-## 链接装载库
 
 ### 内存、栈、堆
 
@@ -3166,8 +3150,6 @@ int main( void )
 
 <b><details><summary>📚 书籍</summary></b>
 
-## 书籍
-
 ### 语言
 
 * 《C++ Primer》
@@ -3202,8 +3184,6 @@ int main( void )
 
 <b><details><summary>💯 复习刷题网站</summary></b>
 
-## 复习刷题网站
-
 * [cplusplus](http://www.cplusplus.com/)
 * [cppreference](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)
 * [runoob](http://www.runoob.com/cplusplus/cpp-tutorial.html)
@@ -3215,10 +3195,7 @@ int main( void )
 
 <b><details><summary>🔱 C/C++ 发展方向</summary></b>
 
-
-## C/C++ 发展方向
-
-> C/C++ 发展方向甚广，包括不限于以下方向， 以下列举一些大厂校招岗位要求
+> C/C++ 发展方向甚广，包括不限于以下方向， 以下列举一些大厂校招岗位要求。
 
 ### 后台/服务器
 
@@ -3306,15 +3283,11 @@ int main( void )
 
 <b><details><summary>📆 招聘时间岗位</summary></b>
 
-## 招聘时间岗位
-
 * [牛客网 . 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
 
 </details>
 
 <b><details><summary>📝 面试题目经验</summary></b>
-
-## 面试题目经验
 
 * [牛客网 . 2019补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
 * [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
@@ -3338,8 +3311,6 @@ int main( void )
 
 <b><details><summary>👬 贡献者</summary></b>
 
-## 贡献者
-
 包括勘误的 Issue、PR，排序按照贡献时间。
 
 [tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)
@@ -3347,8 +3318,6 @@ int main( void )
 </details>
 
 <b><details><summary>📜 License</summary></b>
-
-## License
 
 本仓库不参与商业活动，遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
 
