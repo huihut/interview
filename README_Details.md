@@ -748,7 +748,7 @@ int main()
 
 面向对象程序设计（Object-oriented programming，OOP）是种具有对象概念的程序编程典范，同时也是一种程序开发的抽象方针。
 
-![面向对象特征](http://img.my.csdn.net/uploads/201211/22/1353564524_6375.png)
+![面向对象特征](images/面向对象基本特征.png)
 
 面向对象三大特征 —— 封装、继承、多态
 
