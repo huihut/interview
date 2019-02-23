@@ -6,8 +6,6 @@
 </div> 
 <br>
 
-~~萌即使正义！~~
-
 <b><details><summary>💡 提示</summary></b>
 
 右侧目录支持方式：
