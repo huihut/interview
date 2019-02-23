@@ -13,6 +13,8 @@
 * 语雀的镜像仓库：[C/C++ 面试基础知识总结](https://www.yuque.com/huihut/interview/readme)
 * Github + TOC：[jawil/GayHub TOC 导航](https://github.com/jawil/GayHub)
 
+> 📘 Summary 的 README 页面无法使用目录跳转，请在 [📖 Details](https://github.com/huihut/interview/blob/master/README_Details.md) 页面使用
+
 </details>
 
 <b><details><summary>➕ C/C++</summary></b>
