@@ -1,12 +1,12 @@
-📚 C/C++ 面试基础知识总结，只为复习、分享。勘误新增请 [Issue](https://github.com/huihut/interview/issues)、[PR](https://github.com/huihut/interview/pulls)，建议、讨论请移步 [issues/12](https://github.com/huihut/interview/issues/12)，排版使用 [中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)，版权协议遵循 [CC BY-NC-SA 4.0](https://github.com/huihut/interview/blob/master/LICENSE)。
-
 <br>
 <div align="center">
-<a href="https://github.com/huihut/interview">📘 Summary</a>
+📘 Summary
 &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp
 <a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a>
 </div> 
 <br>
+
+~~萌即使正义！~~
 
 <b><details><summary>💡 提示</summary></b>
 
@@ -3254,10 +3254,10 @@ int main( void )
 
 【嵌入式应用开发】
 
-* 有良好的编程基础，熟练掌握C/C++语言；
+* 有良好的编程基础，熟练掌握 C/C++ 语言；
 * 掌握操作系统、数据结构等软件开发必备知识；
 * 具备较强的沟通理解能力及良好的团队合作意识；
-* 有Linux/Android系统平台的开发经验者优先。
+* 有 Linux/Android 系统平台的开发经验者优先。
 
 ### 音视频/流媒体/SDK
 
