@@ -2048,6 +2048,8 @@ int main()
 
 <b><details><summary>☁️ 计算机网络</summary></b>
 
+> 本节部分知识点来自《计算机网络（第 7 版）》
+
 计算机经网络体系结构：
 
 ![计算机经网络体系结构](images/计算机经网络体系结构.png)
@@ -2526,18 +2528,128 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 <b><details><summary>💾 数据库</summary></b>
 
-* 数据库事务四大特性：原子性、一致性、分离性、持久性
+> 本节部分知识点来自《数据库系统概论（第 5 版）》
+
+### 基本概念
+
+* 数据（data）：描述事物的符号记录称为数据。
+* 数据库（DataBase，DB）：是长期存储在计算机内、有组织的、可共享的大量数据的集合，具有永久存储、有组织、可共享三个基本特点（，数据库即是一个文件）。
+* 数据库管理系统（DataBase Management System，DBMS）：是位于用户与操作系统之间的一层数据管理软件。
+* 数据库系统（DataBase System，DBS）：是有数据库、数据库管理系统（及其应用开发工具）、应用程序和数据库管理员（DataBase Administrator DBA）组成的存储、管理、处理和维护数据的系统。
+* 实体（entity）：客观存在并可相互区别的事物称为实体。
+* 属性（attribute）：实体所具有的某一特性称为属性。
+* 码（key）：唯一标识实体的属性集称为码。
+* 实体型（entity type）：用实体名及其属性名集合来抽象和刻画同类实体，称为实体型。
+* 实体集（entity set）：同一实体型的集合称为实体集。
+* 联系（relationship）：实体之间的联系通常是指不同实体集之间的联系。
+* 模式（schema）：模式也称逻辑模式，是数据库全体数据的逻辑结构和特征的描述，是所有用户的公共数据视图。
+* 外模式（external schema）：外模式也称子模式（subschema）或用户模式，它是数据库用户（包括应用程序员和最终用户）能够看见和使用的局部数据的逻辑结构和特征的描述，是数据库用户的数据视图，是与某一应用有关的数据的逻辑表示。
+* 内模式（internal schema）：内模式也称为存储模式（storage schema），一个数据库只有一个内模式。他是数据物理结构和存储方式的描述，是数据库在数据库内部的组织方式。
+
+### 常用数据模型
+
+* 层次模型（hierarchical model）
+* 网状模型（network model）
+* 关系模型（relational model）
+    * 关系（relation）：一个关系对应通常说的一张表
+    * 元组（tuple）：表中的一行即为一个元组
+    * 属性（attribute）：表中的一列即为一个属性
+    * 码（key）：表中可以唯一确定一个元组的某个属性组
+    * 域（domain）：一组具有相同数据类型的值的集合
+    * 分量：元组中的一个属性值
+    * 关系模式：对关系的描述，一般表示为 `关系名(属性1, 属性2, ..., 属性n)`
+* 面向对象数据模型（object oriented data model）
+* 对象关系数据模型（object relational data model）
+* 半结构化数据模型（semistructure data model）
+
+### 常用 SQL 操作
+
+<table border="1">
+  <tr>
+    <th>对象类型</th>
+    <th>对象</th>
+    <th>操作类型</th>
+  </tr>
+  <tr>
+    <td rowspan="4">数据库模式</td>
+    <td>模式</td>
+    <td><code>CREATE SCHEMA</code></td>
+  </tr>
+  <tr>
+    <td>基本表</td>
+    <td><code>CREATE SCHEMA</code>，<code>ALTER TABLE</code></td>
+  </tr>
+    <tr>
+    <td>视图</td>
+    <td><code>CREATE VIEW</code></td>
+  </tr>
+    <tr>
+    <td>索引</td>
+    <td><code>CREATE INDEX</code></td>
+  </tr>
+    <tr>
+    <td rowspan="2">数据</td>
+    <td>基本表和视图</td>
+    <td><code>SELECT</code>，<code>INSERT</code>，<code>UPDATE</code>，<code>DELETE</code>，<code>REFERENCES</code>，<code>ALL PRIVILEGES</code></td>
+  </tr>
+    <tr>
+    <td>属性列</td>
+    <td><code>SELECT</code>，<code>INSERT</code>，<code>UPDATE</code>，<code>REFERENCES</code>，<code>ALL PRIVILEGES</code></td>
+  </tr>
+</table>
+
+> SQL 语法教程：[runoob . SQL 教程](http://www.runoob.com/sql/sql-tutorial.html)
+
+### 关系型数据库
+
+* 基本关系操作：查询（选择、投影、连接（等值连接、自然连接、外连接（左外连接、右外连接））、除、并、差、交、笛卡尔积等）、插入、删除、修改
+* 关系模型中的三类完整性约束：实体完整性、参照完整性、用户定义的完整性
+
+#### 索引
+
 * 数据库索引：顺序索引、B+ 树索引、hash 索引
-[MySQL 索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
-* [SQL 约束 (Constraints)](http://www.w3school.com.cn/sql/sql_constraints.asp)
+* [MySQL 索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
 
-### 范式
+### 数据库完整性
 
-* 第一范式（1NF）：属性（字段）是最小单位不可再分
-* 第二范式（2NF）：满足 1NF，每个非主属性完全依赖于主键（消除 1NF 非主属性对码的部分函数依赖）
-* 第三范式（3NF）：满足 2NF，任何非主属性不依赖于其他非主属性（消除 2NF 主属性对码的传递函数依赖）
-* 鲍依斯-科得范式（BCNF）：满足 3NF，任何非主属性不能对主键子集依赖（消除 3NF 主属性对码的部分和传递函数依赖）
-* 第四范式（4NF）：满足 3NF，属性之间不能有非平凡且非函数依赖的多值依赖（消除 3NF 非平凡且非函数依赖的多值依赖）
+* 数据库的完整性是指数据的正确性和相容性。
+    * 完整性：为了防止数据库中存在不符合语义（不正确）的数据。
+    * 安全性：为了保护数据库防止恶意破坏和非法存取。
+* 触发器：是用户定义在关系表中的一类由事件驱动的特殊过程。
+
+### 关系数据理论
+
+* 数据依赖是一个关系内部属性与属性之间的一种约束关系，是通过属性间值的相等与否体现出来的数据间相关联系。
+* 最重要的数据依赖：函数依赖、多值依赖。
+
+#### 范式
+
+* 第一范式（1NF）：属性（字段）是最小单位不可再分。
+* 第二范式（2NF）：满足 1NF，每个非主属性完全依赖于主键（消除 1NF 非主属性对码的部分函数依赖）。
+* 第三范式（3NF）：满足 2NF，任何非主属性不依赖于其他非主属性（消除 2NF 主属性对码的传递函数依赖）。
+* 鲍依斯-科得范式（BCNF）：满足 3NF，任何非主属性不能对主键子集依赖（消除 3NF 主属性对码的部分和传递函数依赖）。
+* 第四范式（4NF）：满足 3NF，属性之间不能有非平凡且非函数依赖的多值依赖（消除 3NF 非平凡且非函数依赖的多值依赖）。
+
+### 数据库恢复
+
+* 事务：是用户定义的一个数据库操作序列，这些操作要么全做，要么全不做，是一个不可分割的工作单位。
+* 事物的 ACID 特性：原子性、一致性、隔离性、持续性。
+* 恢复的实现技术：建立冗余数据 -> 利用冗余数据实施数据库恢复。
+* 建立冗余数据常用技术：数据转储（动态海量转储、动态增量转储、静态海量转储、静态增量转储）、登记日志文件。
+
+### 并发控制
+
+* 事务是并发控制的基本单位。
+* 并发操作带来的数据不一致性包括：丢失修改、不可重复读、读 “脏” 数据。
+* 并发控制主要技术：封锁、时间戳、乐观控制法、多版本并发控制等。
+* 基本封锁类型：排他锁（X 锁 / 写锁）、共享锁（S 锁 / 读锁）。
+* 活锁死锁：
+    * 活锁：事务永远处于等待状态，可通过先来先服务的策略避免。
+    * 死锁：事物永远不能结束
+        * 预防：一次封锁法、顺序封锁法；
+        * 诊断：超时法、等待图法；
+        * 解除：撤销处理死锁代价最小的事务，并释放此事务的所有的锁，使其他事务得以继续运行下去。
+* 可串行化调度：多个事务的并发执行是正确的，当且仅当其结果与按某一次序串行地执行这些事务时的结果相同。可串行性时并发事务正确调度的准则。
 
 </details>
 
@@ -2579,6 +2691,8 @@ ssize_t write(int fd, const void *buf, size_t count);
 </details>
 
 <b><details><summary>⚙️ 链接装载库</summary></b>
+
+> 本节部分知识点来自《程序员的自我修养——链接装载库》
 
 ### 内存、栈、堆
 
@@ -2851,7 +2965,7 @@ int _tmain(
 
 ### Windows 的动态链接库（Dynamic-Link Library）
 
-> 知识点来自《Windows核心编程（第五版）》
+> 部分知识点来自《Windows 核心编程（第五版）》
 
 #### 用处
 
@@ -3181,17 +3295,6 @@ int main( void )
 
 </details>
 
-<b><details><summary>💯 复习刷题网站</summary></b>
-
-* [cplusplus](http://www.cplusplus.com/)
-* [cppreference](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)
-* [runoob](http://www.runoob.com/cplusplus/cpp-tutorial.html)
-* [leetcode](https://leetcode.com/) | [leetcode-cn](https://leetcode-cn.com/)
-* [lintcode](https://www.lintcode.com/)
-* [nowcoder](https://www.nowcoder.net/)
-
-</details>
-
 <b><details><summary>🔱 C/C++ 发展方向</summary></b>
 
 > C/C++ 发展方向甚广，包括不限于以下方向， 以下列举一些大厂校招岗位要求。
@@ -3277,6 +3380,17 @@ int main( void )
 * 熟练掌握计算机视觉和图像处理相关的基本算法及应用；
 * 较强的算法实现能力，熟练掌握 C/C++ 编程，熟悉 Shell/Python/Matlab 至少一种编程语言；
 * 在计算机视觉、模式识别等学术会议或者期刊上发表论文、相关国际比赛获奖、及有相关专利者优先。
+
+</details>
+
+<b><details><summary>💯 复习刷题网站</summary></b>
+
+* [cplusplus](http://www.cplusplus.com/)
+* [cppreference](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)
+* [runoob](http://www.runoob.com/cplusplus/cpp-tutorial.html)
+* [leetcode](https://leetcode.com/) | [leetcode-cn](https://leetcode-cn.com/)
+* [lintcode](https://www.lintcode.com/)
+* [nowcoder](https://www.nowcoder.net/)
 
 </details>
 
