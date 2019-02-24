@@ -56,7 +56,7 @@ private:
 
 public:
     // 构造函数
-    A() { };
+    A() : a(0) { };
     A(int x) : a(x) { };        // 初始化列表
 
     // const可用于对重载函数的区分
@@ -3409,7 +3409,7 @@ int main( void )
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
-[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)
+[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)
 
 ## 📜 License
 
