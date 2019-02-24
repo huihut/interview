@@ -2564,7 +2564,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 ### 常用 SQL 操作
 
-<table border="1">
+<table>
   <tr>
     <th>对象类型</th>
     <th>对象</th>
