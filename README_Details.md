@@ -2532,7 +2532,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 ### 基本概念
 
 * 数据（data）：描述事物的符号记录称为数据。
-* 数据库（DataBase，DB）：是长期存储在计算机内、有组织的、可共享的大量数据的集合，具有永久存储、有组织、可共享三个基本特点（，数据库即是一个文件）。
+* 数据库（DataBase，DB）：是长期存储在计算机内、有组织的、可共享的大量数据的集合，具有永久存储、有组织、可共享三个基本特点。
 * 数据库管理系统（DataBase Management System，DBMS）：是位于用户与操作系统之间的一层数据管理软件。
 * 数据库系统（DataBase System，DBS）：是有数据库、数据库管理系统（及其应用开发工具）、应用程序和数据库管理员（DataBase Administrator DBA）组成的存储、管理、处理和维护数据的系统。
 * 实体（entity）：客观存在并可相互区别的事物称为实体。
