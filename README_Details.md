@@ -56,7 +56,7 @@ private:
 
 public:
     // 构造函数
-    A() { };
+    A() : a(0) { };
     A(int x) : a(x) { };        // 初始化列表
 
     // const可用于对重载函数的区分
@@ -2532,7 +2532,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 ### 基本概念
 
 * 数据（data）：描述事物的符号记录称为数据。
-* 数据库（DataBase，DB）：是长期存储在计算机内、有组织的、可共享的大量数据的集合，具有永久存储、有组织、可共享三个基本特点（，数据库即是一个文件）。
+* 数据库（DataBase，DB）：是长期存储在计算机内、有组织的、可共享的大量数据的集合，具有永久存储、有组织、可共享三个基本特点。
 * 数据库管理系统（DataBase Management System，DBMS）：是位于用户与操作系统之间的一层数据管理软件。
 * 数据库系统（DataBase System，DBS）：是有数据库、数据库管理系统（及其应用开发工具）、应用程序和数据库管理员（DataBase Administrator DBA）组成的存储、管理、处理和维护数据的系统。
 * 实体（entity）：客观存在并可相互区别的事物称为实体。
@@ -2563,7 +2563,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 ### 常用 SQL 操作
 
-<table border="1">
+<table>
   <tr>
     <th>对象类型</th>
     <th>对象</th>
@@ -3383,11 +3383,12 @@ int main( void )
 
 ## 📆 招聘时间岗位
 
-* [牛客网 . 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
+* [牛客网 . 2020届实习 | 2019名企实习直推专场](https://www.nowcoder.com/activity/2019recommand/index)
+* [牛客网 . 2019届补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
+* [牛客网 . 2019届校招 | 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
 
 ## 📝 面试题目经验
 
-* [牛客网 . 2019补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
 * [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
 * [牛客网 . 2019校招技术类岗位面经汇总【技术类】](https://www.nowcoder.com/discuss/146655)
 * [牛客网 . 2018校招笔试真题汇总](https://www.nowcoder.com/discuss/68802)
@@ -3409,7 +3410,7 @@ int main( void )
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
-[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)
+[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)
 
 ## 📜 License
 
