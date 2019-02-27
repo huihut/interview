@@ -90,7 +90,7 @@ int* const function7();     // 返回一个指向变量的常指针，使用：i
 
 ### this 指针
 
-1. `this` 指针是一个隐含于每一个非静态成员函数中的特殊指针。它指向正在被该成员函数操作的那个对象。
+1. `this` 指针是一个隐含于每一个非静态成员函数中的特殊指针。它指向调用该成员函数的那个对象。
 2. 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 `this` 指针，然后调用成员函数，每次成员函数存取数据成员时，由隐含使用 `this` 指针。
 3. 当一个成员函数被调用时，自动向它传递一个隐含的参数，该参数是一个指向这个成员函数所在的对象的指针。
 4. `this` 指针被隐含地声明为: `ClassName *const this`，这意味着不能给 `this` 指针赋值；在 `ClassName` 类的 `const` 成员函数中，`this` 指针的类型为：`const ClassName* const`，这说明不能对 `this` 指针所指向的这种对象是不可修改的（即不能对这种对象的数据成员进行赋值操作）；
@@ -3427,7 +3427,7 @@ int main( void )
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
-[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)
+[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)、[FengZiYjun](https://github.com/FengZiYjun)
 
 </details>
 
