@@ -1,6 +1,4 @@
-## 公司
-<a href="https://join.qq.com/"><img src="https://cdn.m.tencent.com/hr_static/img/logo.png" height="50"></a>
-
+# <a href="https://join.qq.com/"><img src="https://cdn.m.tencent.com/hr_static/img/logo.png" height="50"></a>
 
 ## 内推方式
 ### 方式一 -> 适用于所有
