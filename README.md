@@ -3423,6 +3423,12 @@ int main( void )
 
 </details>
 
+<b><details><summary>👍 内推</summary></b>
+
+* <a href="Recommend/虎牙直播.md"><img src="https://a.msstatic.com/huya/main/img/logo2.png" height="50"></a>
+
+</details>
+
 <b><details><summary>👬 贡献者</summary></b>
 
 包括勘误的 Issue、PR，排序按照贡献时间。

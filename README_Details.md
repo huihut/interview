@@ -3406,6 +3406,10 @@ int main( void )
 * [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
 
+## 👍 内推
+
+* <a href="Recommend/虎牙直播.md"><img src="https://a.msstatic.com/huya/main/img/logo2.png" height="50"></a>
+
 ## 👬 贡献者
 
 包括勘误的 Issue、PR，排序按照贡献时间。
