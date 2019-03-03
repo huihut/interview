@@ -3427,6 +3427,9 @@ int main( void )
 
 * <a href="Recommend/虎牙直播.md"><img src="Recommend/images/huya-logo.png" height="50"></a>
 
+* <a href="Recommend/Tencent.md"><img src="https://cdn.m.tencent.com/hr_static/img/logo.png" height="50"></a>
+
+
 </details>
 
 <b><details><summary>👬 贡献者</summary></b>
