@@ -29,6 +29,7 @@
 * [🔱 C/C++ 发展方向](#-cc-发展方向)
 * [📆 招聘时间岗位](#-招聘时间岗位)
 * [📝 面试题目经验](#-面试题目经验)
+* [👍 内推](#-内推)
 * [👬 贡献者](#-贡献者)
 * [📜 License](#-license)
 
@@ -3408,7 +3409,7 @@ int main( void )
 
 ## 👍 内推
 
-* <a href="Recommend/虎牙直播.md"><img src="https://a.msstatic.com/huya/main/img/logo2.png" height="50"></a>
+* <a href="Recommend/虎牙直播.md"><img src="Recommend/images/huya-logo.png" height="50"></a>
 
 ## 👬 贡献者
 

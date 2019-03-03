@@ -3425,7 +3425,7 @@ int main( void )
 
 <b><details><summary>👍 内推</summary></b>
 
-* <a href="Recommend/虎牙直播.md"><img src="https://a.msstatic.com/huya/main/img/logo2.png" height="50"></a>
+* <a href="Recommend/虎牙直播.md"><img src="Recommend/images/huya-logo.png" height="50"></a>
 
 </details>
 
