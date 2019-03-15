@@ -3259,6 +3259,8 @@ int main( void )
 
 ## 📚 书籍
 
+> [huihut/CS-Books](https://github.com/huihut/CS-Books)：📚 Computer Science Books 计算机技术类书籍
+
 ### 语言
 
 * 《C++ Primer》
