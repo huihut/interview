@@ -3425,6 +3425,6 @@ int main( void )
 
 ## 📜 License
 
-本仓库不参与商业活动，遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
+本仓库遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
 
 [![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](LICENSE)
