@@ -1,6 +1,6 @@
+[![](images/coding.png)](https://e.coding.net/?utm_source=huiha&utm_medium=banner&utm_campaign=march2019)
+
 <div align="center">
-<a href="https://e.coding.net/?utm_source=huiha&utm_medium=banner&utm_campaign=march2019"><img src="images/ad-coding.png" width="700"></a>
-<br>
 📘 Summary
 &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp
 <a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a>
