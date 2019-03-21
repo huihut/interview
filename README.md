@@ -1,9 +1,11 @@
+<div align="center">
+
 [![](images/coding.png)](https://e.coding.net/?utm_source=huiha&utm_medium=banner&utm_campaign=march2019)
 
-<div align="center">
 📘 Summary
-&nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp
+&emsp;&emsp; | &emsp;&emsp;
 <a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a>
+
 </div> 
 <br>
 
