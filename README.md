@@ -1,19 +1,21 @@
-<br>
 <div align="center">
+<a href="https://e.coding.net/?utm_source=huiha&utm_medium=banner&utm_campaign=march2019"><img src="images/ad-coding.jpg" width="700"></a>
+<br>
 📘 Summary
 &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp
 <a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a>
 </div> 
 <br>
 
-<b><details><summary>💡 提示</summary></b>
+<b><details><summary>💡 关于</summary></b>
 
-右侧目录支持方式：
+📚 本仓库是面向 C/C++ 方向校招求职者、初学者的基础知识总结，包括语言、程序库、数据结构、算法、系统、网络等知识及面试、内推等信息。
 
-* 语雀的镜像仓库：[C/C++ 面试基础知识总结](https://www.yuque.com/huihut/interview/readme)
-* Github + TOC：[jawil/GayHub TOC 导航](https://github.com/jawil/GayHub)
+📘 Summary 页面是目录收起，📖 Details 页面是全文展开，适用于不同场景和阅读习惯。
 
-> 📘 Summary 的 README 页面无法使用目录跳转，请在 [📖 Details](https://github.com/huihut/interview/blob/master/README_Details.md) 页面使用
+🙏 仓库内容如有错误或改进欢迎 issue 或 pr，建议或讨论可在 [#12](https://github.com/huihut/interview/issues/12) 提出。由于本人水平有限，仓库中的知识点有来自本人原创、读书笔记、书籍、博文等，非原创均已标明出处，如有遗漏，请 issue 提出。本仓库遵循 CC BY-NC-SA 4.0 协议，转载请注明出处。
+
+🍭 如果仓库内容对你有所帮助，可以点击浏览一下顶部的 [coding](https://e.coding.net/?utm_source=huiha&utm_medium=banner&utm_campaign=march2019) 广告支持我。~~（coding 的公仔还是挺可爱的。）~~
 
 </details>
 
