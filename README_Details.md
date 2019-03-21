@@ -1,5 +1,5 @@
 <div align="center">
-<a href="https://bit.ly/2TR1Gk0"><img src="images/ad-coding.png" width="700"></a>
+<a href="https://e.coding.net/?utm_source=huiha&utm_medium=banner&utm_campaign=march2019"><img src="images/ad-coding.png" width="700"></a>
 <br>
 <a href="https://github.com/huihut/interview">📘 Summary</a>
 &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp
