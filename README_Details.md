@@ -988,16 +988,16 @@ int main()
 
 #### 定位 new
 
-定位 new（placement new）允许我们向 new 传递额外的参数。
+定位 new（placement new）允许我们向 new 传递额外的地址参数，从而在预先指定的内存区域创建对象。
 
 ```cpp
-new (palce_address) type
-new (palce_address) type (initializers)
-new (palce_address) type [size]
-new (palce_address) type [size] { braced initializer list }
+new (place_address) type
+new (place_address) type (initializers)
+new (place_address) type [size]
+new (place_address) type [size] { braced initializer list }
 ```
 
-* `palce_address` 是个指针
+* `place_address` 是个指针
 * `initializers` 提供一个（可能为空的）以逗号分隔的初始值列表
 
 ### delete this 合法吗？
