@@ -78,7 +78,10 @@ Status EnQueue_LQ(LinkList &L, ElemType &e) {
         if (NULL == L) return OVERFLOW;
         L -> next = q;
     }
-    else if (NULL == L->next) L = q;
+    else if (NULL == L->next)
+    {
+        L -> next = q;
+    }
     else
     {
         p = L;
@@ -106,6 +109,7 @@ Status DeQueue_LQ(LinkList &L, ElemType &e) {
 //遍历调用
 Status visit(ElemType e) {
     printf("%d\t", e);
+    return OK;
 }
 
 //遍历单链表
