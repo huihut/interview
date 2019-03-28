@@ -37,7 +37,3 @@
 ## 注意事项
 
 > 一些额外的注意项
-
-## 内推人认证
-
-> 用公司邮箱发送主题为 `【huihut/interview 认证内推人】公司，简历收件邮箱` 的邮件至 <huihut@outlook.com>，认证成功后把图片放到 `interview\Recommend\images` 文件夹，并在此处引用： `![](images/公司名.png)`

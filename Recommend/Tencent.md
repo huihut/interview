@@ -51,14 +51,8 @@
 
 ![Tencent_nowcoder](images/tencent_nowcoder.png)
 
-
-
 ## 开放岗位
 
 详情可以看 https://join.qq.com
 
 ![Tencent](images/tencent_jd.jpg)
-
-
-
-
