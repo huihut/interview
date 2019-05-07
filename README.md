@@ -1,11 +1,7 @@
 <div align="center">
-
-[![](images/coding.png)](https://coding.net/?utm_source=huiha&utm_medium=banner&utm_campaign=march2019)
-
 📘 Summary
 &emsp;&emsp; | &emsp;&emsp;
 <a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a>
-
 </div> 
 <br>
 
@@ -16,8 +12,6 @@
 📘 Summary 页面是目录收起，📖 Details 页面是全文展开，适用于不同场景和阅读习惯。
 
 🙏 仓库内容如有错误或改进欢迎 issue 或 pr，建议或讨论可在 [#12](https://github.com/huihut/interview/issues/12) 提出。由于本人水平有限，仓库中的知识点有来自本人原创、读书笔记、书籍、博文等，非原创均已标明出处，如有遗漏，请 issue 提出。本仓库遵循 CC BY-NC-SA 4.0 协议，转载请注明出处。
-
-🍭 如果仓库内容对你有所帮助，可以点击浏览一下顶部的 [coding](https://coding.net/?utm_source=huiha&utm_medium=banner&utm_campaign=march2019) 广告支持我。~~（coding 的公仔还是挺可爱的。）~~
 
 </details>
 
