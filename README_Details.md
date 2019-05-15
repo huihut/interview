@@ -3414,8 +3414,6 @@ int main( void )
 
 * <a href="Recommend/虎牙直播.md"><img src="Recommend/images/huya-logo.png" height="50"></a>
 
-* <a href="Recommend/Tencent.md"><img src="https://cdn.m.tencent.com/hr_static/img/logo.png" height="50"></a>
-
 ## 👬 贡献者
 
 包括勘误的 Issue、PR，排序按照贡献时间。
