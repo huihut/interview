@@ -7,7 +7,7 @@
 
 <b><details><summary>💡 关于</summary></b>
 
-📚 本仓库是面向 C/C++ 方向校招求职者、初学者的基础知识总结，包括语言、程序库、数据结构、算法、系统、网络等知识及面试、内推等信息。
+📚 本仓库是面向 C/C++ 技术方向校招求职者、初学者的基础知识总结，包括语言、程序库、数据结构、算法、系统、网络、链接装载库等知识及面试经验、招聘、内推等信息。
 
 📘 Summary 页面是目录收起，📖 Details 页面是全文展开，适用于不同场景和阅读习惯。
 
@@ -3402,14 +3402,6 @@ int main( void )
 
 </details>
 
-<b><details><summary>📆 招聘时间岗位</summary></b>
-
-* [牛客网 . 2020届实习 | 2019名企实习直推专场](https://www.nowcoder.com/activity/2019recommand/index)
-* [牛客网 . 2019届补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
-* [牛客网 . 2019届校招 | 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
-
-</details>
-
 <b><details><summary>📝 面试题目经验</summary></b>
 
 * [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
@@ -3428,6 +3420,14 @@ int main( void )
 * [cnblogs . C/C++ 笔试、面试题目大汇总](https://www.cnblogs.com/fangyukuan/archive/2010/09/18/1829871.html)
 * [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
+
+</details>
+
+<b><details><summary>📆 招聘时间岗位</summary></b>
+
+* [牛客网 . 2020届实习 | 2019名企实习直推专场](https://www.nowcoder.com/activity/2019recommand/index)
+* [牛客网 . 2019届补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
+* [牛客网 . 2019届校招 | 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
 
 </details>
 

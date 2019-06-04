@@ -19,10 +19,10 @@
 * [📏 设计模式](#-设计模式)
 * [⚙️ 链接装载库](#️-链接装载库)
 * [📚 书籍](#-书籍)
-* [💯 复习刷题网站](#-复习刷题网站)
 * [🔱 C/C++ 发展方向](#-cc-发展方向)
-* [📆 招聘时间岗位](#-招聘时间岗位)
+* [💯 复习刷题网站](#-复习刷题网站)
 * [📝 面试题目经验](#-面试题目经验)
+* [📆 招聘时间岗位](#-招聘时间岗位)
 * [👍 内推](#-内推)
 * [👬 贡献者](#-贡献者)
 * [📜 License](#-license)
@@ -3382,12 +3382,6 @@ int main( void )
 * [lintcode](https://www.lintcode.com/)
 * [nowcoder](https://www.nowcoder.net/)
 
-## 📆 招聘时间岗位
-
-* [牛客网 . 2020届实习 | 2019名企实习直推专场](https://www.nowcoder.com/activity/2019recommand/index)
-* [牛客网 . 2019届补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
-* [牛客网 . 2019届校招 | 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
-
 ## 📝 面试题目经验
 
 * [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
@@ -3406,6 +3400,12 @@ int main( void )
 * [cnblogs . C/C++ 笔试、面试题目大汇总](https://www.cnblogs.com/fangyukuan/archive/2010/09/18/1829871.html)
 * [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
+
+## 📆 招聘时间岗位
+
+* [牛客网 . 2020届实习 | 2019名企实习直推专场](https://www.nowcoder.com/activity/2019recommand/index)
+* [牛客网 . 2019届补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
+* [牛客网 . 2019届校招 | 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
 
 ## 👍 内推
 
