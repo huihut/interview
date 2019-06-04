@@ -5,11 +5,6 @@
 </div> 
 <br>
 
-💡 右侧目录支持方式：
-
-* 语雀的镜像仓库：[C/C++ 面试基础知识总结](https://www.yuque.com/huihut/interview/readme)
-* Github + TOC：[jawil/GayHub TOC 导航](https://github.com/jawil/GayHub)
-
 ## 📑 目录
 
 * [➕ C/C++](#-cc)
