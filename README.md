@@ -1649,6 +1649,8 @@ typedef struct BiTNode
 
 #### 红黑树
 
+[RedBlackTree.cpp](DataStructure/RedBlackTree.cpp)
+
 ##### 红黑树的特征是什么？
 
 1. 节点是红色或黑色。
