@@ -3446,6 +3446,13 @@ int main( void )
 
 </details>
 
+<b><details><summary>🍭 支持赞助</summary></b>
+
+<object type="image/svg+xml" data="https://opencollective.com/interview/tiers/backer.svg?avatarHeight=36&width=600"></object>
+<object type="image/svg+xml" data="https://opencollective.com/interview/tiers/sponsor.svg?avatarHeight=36&width=600"></object>
+
+</details>
+
 <b><details><summary>📜 License</summary></b>
 
 本仓库遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
