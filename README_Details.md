@@ -3421,8 +3421,9 @@ int main( void )
 
 ## 🍭 支持赞助
 
-<object type="image/svg+xml" data="https://opencollective.com/interview/tiers/backer.svg?avatarHeight=36&width=600"></object>
-<object type="image/svg+xml" data="https://opencollective.com/interview/tiers/sponsor.svg?avatarHeight=36&width=600"></object>
+[![Backers](https://opencollective.com/interview/tiers/backer.svg?avatarHeight=36)](https://opencollective.com/interview#backers)
+
+[![Sponsor](https://opencollective.com/interview/tiers/sponsor.svg?avatarHeight=36)](https://opencollective.com/interview#sponsor)
 
 ## 📜 License
 
