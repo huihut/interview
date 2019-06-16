@@ -438,7 +438,13 @@ int main() {
 
 ### C 实现 C++ 类
 
-> [C 语言实现封装、继承和多态](http://dongxicheng.org/cpp/ooc/)
+C 实现 C++ 的面向对象特性（封装、继承、多态）
+
+* 封装：使用函数指针把属性与方法封装到结构体中
+* 继承：结构体嵌套
+* 多态：父类与子类方法的函数指针不同
+
+> [Can you write object-oriented code in C? [closed]](https://stackoverflow.com/a/351745)
 
 ### explicit（显式）关键字
 
