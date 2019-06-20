@@ -533,7 +533,7 @@ public:
 如上 using 声明，对于基类的每个构造函数，编译器都生成一个与之对应（形参列表完全相同）的派生类构造函数。生成如下类型构造函数：
 
 ```cpp
-derived(parms) : base(args) { }
+Derived(parms) : Base(args) { }
 ```
 
 #### using 指示
