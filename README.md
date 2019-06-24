@@ -11,9 +11,9 @@
 
 📘 Summary 页面是目录收起，📖 Details 页面是全文展开，适用于不同场景和阅读习惯。
 
-📄 保存为 PDF 方式：使用 Chrome 浏览器打开 <a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a> 页面，右键 - 打印 - 选择目标打印机是另存为PDF - 保存（[打印预览.png](images/打印预览.png)）
+📄 保存为 PDF 方式：使用 Chrome 浏览器打开 <a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a> 页面，右键 - 打印 - 选择目标打印机是另存为PDF - 保存（[打印预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/打印预览.png)）
 
-💡 右侧目录支持方式：[语雀的镜像仓库](https://www.yuque.com/huihut/interview/readme)、[Github + TOC 导航](https://github.com/jawil/GayHub)（[TOC预览.png](images/TOC预览.png)）
+💡 右侧目录支持方式：[语雀的镜像仓库](https://www.yuque.com/huihut/interview/readme)、[Github + TOC 导航](https://github.com/jawil/GayHub)（[TOC预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/TOC预览.png)）
 
 🙏 仓库内容如有错误或改进欢迎 issue 或 pr，建议或讨论可在 [#12](https://github.com/huihut/interview/issues/12) 提出。由于本人水平有限，仓库中的知识点有来自本人原创、读书笔记、书籍、博文等，非原创均已标明出处，如有遗漏，请 issue 提出。本仓库遵循 CC BY-NC-SA 4.0 协议，转载请注明出处。
 
@@ -741,7 +741,7 @@ int main()
 
 面向对象程序设计（Object-oriented programming，OOP）是种具有对象概念的程序编程典范，同时也是一种程序开发的抽象方针。
 
-![面向对象特征](images/面向对象基本特征.png)
+![面向对象特征](https://raw.githubusercontent.com/huihut/interview/master/images/面向对象基本特征.png)
 
 面向对象三大特征 —— 封装、继承、多态
 
@@ -1253,7 +1253,7 @@ class doSomething(Flyable *obj)                 // 做些事情
 > 中文：[C++ 风格指南](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)
 <details><summary>Google C++ Style Guide 图</summary>
 
-![Google C++ Style Guide](images/GoogleCppStyleGuide.png)
+![Google C++ Style Guide](https://raw.githubusercontent.com/huihut/interview/master/images/GoogleCppStyleGuide.png)
 
 > 图片来源于：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](https://blog.csdn.net/voidccc/article/details/37599203)
 
@@ -1320,7 +1320,7 @@ typedef struct {
 } SqSrack;
 ```
 
-![](images/SqStack.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/SqStack.png)
 
 </details>
 
@@ -1343,7 +1343,7 @@ typedef struct {
 
 <details><summary>非循环队列图片</summary>
 
-![](images/SqQueue.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/SqQueue.png)
 
 `SqQueue.rear++`
 
@@ -1353,7 +1353,7 @@ typedef struct {
 
 <details><summary>循环队列图片</summary>
 
-![](images/SqLoopStack.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/SqLoopStack.png)
 
 `SqQueue.rear = (SqQueue.rear + 1) % SqQueue.maxSize`
 
@@ -1374,7 +1374,7 @@ typedef struct {
 } SqList;
 ```
 
-![](images/SqList.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/SqList.png)
 
 </details>
 
@@ -1400,7 +1400,7 @@ typedef struct LNode {
 
 <details><summary>链队列图片</summary>
 
-![](images/LinkQueue.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/LinkQueue.png)
 
 </details>
 
@@ -1410,7 +1410,7 @@ typedef struct LNode {
 
 <details><summary>单链表图片</summary>
 
-![](images/LinkList.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/LinkList.png)
 
 </details>
 
@@ -1419,7 +1419,7 @@ typedef struct LNode {
 
 <details><summary>双向链表图片</summary>
 
-![](images/DuLinkList.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/DuLinkList.png)
 
 </details>
 
@@ -1427,7 +1427,7 @@ typedef struct LNode {
 
 <details><summary>循环链表图片</summary>
 
-![](images/CirLinkList.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/CirLinkList.png)
 
 </details>
 
@@ -1474,7 +1474,7 @@ typedef struct {
 }HashTable;
 ```
 
-![](images/HashTable.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/HashTable.png)
 
 </details>
 
@@ -1525,7 +1525,7 @@ typedef struct GLNode {
 } *GList, GLNode;
 ```
 
-![](images/GeneralizedList1.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/GeneralizedList1.png)
 
 </details>
 
@@ -1550,7 +1550,7 @@ typedef struct GLNode1 {
 } *GList1, GLNode1;
 ```
 
-![](images/GeneralizedList2.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/GeneralizedList2.png)
 
 </details>
 
@@ -1588,7 +1588,7 @@ typedef struct BiTNode
 
 <details><summary>二叉树顺序存储图片</summary>
 
-![](images/SqBinaryTree.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/SqBinaryTree.png)
 
 </details>
 
@@ -1596,7 +1596,7 @@ typedef struct BiTNode
 
 <details><summary>二叉树链式存储图片</summary>
 
-![](images/LinkBinaryTree.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/LinkBinaryTree.png)
 
 </details>
 
@@ -1643,7 +1643,7 @@ typedef struct BiTNode
 
 <details><summary>平衡二叉树图片</summary>
 
-![](images/Self-balancingBinarySearchTree.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/Self-balancingBinarySearchTree.png)
 
 </details>
 
@@ -1994,8 +1994,8 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 
 <details><summary>大端小端图片</summary>
 
-![大端序](images/CPU-Big-Endian.svg.png)
-![小端序](images/CPU-Little-Endian.svg.png)
+![大端序](https://raw.githubusercontent.com/huihut/interview/master/images/CPU-Big-Endian.svg.png)
+![小端序](https://raw.githubusercontent.com/huihut/interview/master/images/CPU-Little-Endian.svg.png)
 
 </details>
 
@@ -2065,7 +2065,7 @@ int main()
 
 计算机网络体系结构：
 
-![计算机网络体系结构](images/计算机网络体系结构.png)
+![计算机网络体系结构](https://raw.githubusercontent.com/huihut/interview/master/images/计算机网络体系结构.png)
 
 ### 各层作用及协议
 
@@ -2144,13 +2144,13 @@ E  类 | 前五位固定为 11110，后面保留为今后所用
 
 IP 数据报格式：
 
-![IP 数据报格式](images/IP数据报格式.png)
+![IP 数据报格式](https://raw.githubusercontent.com/huihut/interview/master/images/IP数据报格式.png)
 
 #### ICMP 网际控制报文协议
 
 ICMP 报文格式：
 
-![ICMP 报文格式](images/ICMP报文格式.png)
+![ICMP 报文格式](https://raw.githubusercontent.com/huihut/interview/master/images/ICMP报文格式.png)
 
 应用：
 * PING（Packet InterNet Groper，分组网间探测）测试两个主机之间的连通性
@@ -2220,11 +2220,11 @@ TCP 如何保证可靠传输：
 
 TCP 报文结构
 
-![TCP 报文](images/TCP报文.png)
+![TCP 报文](https://raw.githubusercontent.com/huihut/interview/master/images/TCP报文.png)
 
 TCP 首部
 
-![TCP 首部](images/TCP首部.png)
+![TCP 首部](https://raw.githubusercontent.com/huihut/interview/master/images/TCP首部.png)
 
 TCP：状态控制码（Code，Control Flag），占 6 比特，含义如下：
 * URG：紧急比特（urgent），当 `URG＝1` 时，表明紧急指针字段有效，代表该封包为紧急封包。它告诉系统此报文段中有紧急数据，应尽快传送(相当于高优先级的数据)， 且上图中的 Urgent Pointer 字段也会被启用。
@@ -2248,11 +2248,11 @@ TCP：状态控制码（Code，Control Flag），占 6 比特，含义如下：
 
 UDP 报文结构
 
-![UDP 报文](images/UDP报文.png)
+![UDP 报文](https://raw.githubusercontent.com/huihut/interview/master/images/UDP报文.png)
 
 UDP 首部
 
-![UDP 首部](images/UDP首部.png)
+![UDP 首部](https://raw.githubusercontent.com/huihut/interview/master/images/UDP首部.png)
 
 > TCP/UDP 图片来源于：<https://github.com/JerryC8080/understand-tcp-udp>
 
@@ -2289,7 +2289,7 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 
 <details><summary>利用可变窗口进行流量控制</summary>
 
-![](images/利用可变窗口进行流量控制举例.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/利用可变窗口进行流量控制举例.png)
 
 </details>
 
@@ -2308,19 +2308,19 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 
 <details><summary>TCP的拥塞控制图</summary>
 
-![](images/TCP拥塞窗口cwnd在拥塞控制时的变化情况.png)
-![](images/快重传示意图.png)
-![](images/TCP的拥塞控制流程图.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/TCP拥塞窗口cwnd在拥塞控制时的变化情况.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/快重传示意图.png)
+![](https://raw.githubusercontent.com/huihut/interview/master/images/TCP的拥塞控制流程图.png)
 
 </details>
 
 #### TCP 传输连接管理
 
-> 因为 TCP 三次握手建立连接、四次挥手释放连接很重要，所以附上《计算机网络（第 7 版）-谢希仁》书中对此章的详细描述：<https://github.com/huihut/interview/blob/master/images/TCP-transport-connection-management.png>
+> 因为 TCP 三次握手建立连接、四次挥手释放连接很重要，所以附上《计算机网络（第 7 版）-谢希仁》书中对此章的详细描述：<https://raw.githubusercontent.com/huihut/interview/master/images/TCP-transport-connection-management.png>
 
 ##### TCP 三次握手建立连接
 
-![UDP 报文](images/TCP三次握手建立连接.png)
+![UDP 报文](https://raw.githubusercontent.com/huihut/interview/master/images/TCP三次握手建立连接.png)
 
 【TCP 建立连接全过程解释】
 
@@ -2341,11 +2341,11 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 
 【答案三】为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。
 
-> [《计算机网络（第 7 版）-谢希仁》](https://github.com/huihut/interview/blob/master/images/TCP-transport-connection-management.png)
+> [《计算机网络（第 7 版）-谢希仁》](https://raw.githubusercontent.com/huihut/interview/master/images/TCP-transport-connection-management.png)
 
 ##### TCP 四次挥手释放连接
 
-![UDP 报文](images/TCP四次挥手释放连接.png)
+![UDP 报文](https://raw.githubusercontent.com/huihut/interview/master/images/TCP四次挥手释放连接.png)
 
 【TCP 释放连接全过程解释】
 
@@ -2378,7 +2378,7 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 
 <details><summary>TCP 有限状态机图片</summary>
 
-![TCP 的有限状态机](images/TCP的有限状态机.png)
+![TCP 的有限状态机](https://raw.githubusercontent.com/huihut/interview/master/images/TCP的有限状态机.png)
 
 </details>
 
@@ -2478,7 +2478,7 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
 
 > [Linux Socket 编程（不限 Linux）](https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html)
 
-![Socket 客户端服务器通讯](images/socket客户端服务器通讯.jpg)
+![Socket 客户端服务器通讯](https://raw.githubusercontent.com/huihut/interview/master/images/socket客户端服务器通讯.jpg)
 
 
 #### Socket 中的 read()、write() 函数
@@ -3099,11 +3099,11 @@ DUMPBIN -exports D:\mydll.dll
 
 ##### LoadLibrary
 
-![WindowsLoadLibrary](images/WindowsLoadLibrary.png)
+![WindowsLoadLibrary](https://raw.githubusercontent.com/huihut/interview/master/images/WindowsLoadLibrary.png)
 
 ##### FreeLibrary
 
-![WindowsFreeLibrary](images/WindowsFreeLibrary.png)
+![WindowsFreeLibrary](https://raw.githubusercontent.com/huihut/interview/master/images/WindowsFreeLibrary.png)
 
 </details>
 
