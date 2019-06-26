@@ -11,7 +11,7 @@
 
 📘 Summary 页面是目录收起，📖 Details 页面是全文展开，适用于不同场景和阅读习惯。
 
-📄 保存为 PDF 方式：使用 Chrome 浏览器打开 <a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a> 页面，右键 - 打印 - 选择目标打印机是另存为PDF - 保存（[打印预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/打印预览.png)）
+📄 保存为 PDF 方式：使用 Chrome 浏览器打开 <a href="https://www.huihut.com/interview">Docsify 文档</a> 页面，右键 - 打印 - 选择目标打印机是另存为PDF - 保存（[打印预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/打印预览.png)）
 
 💡 侧边目录支持方式：[Docsify 文档](https://www.huihut.com/interview)、[Github + TOC 导航](https://github.com/jawil/GayHub)（[TOC预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/TOC预览.png)）
 
