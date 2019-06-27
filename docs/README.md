@@ -1,7 +1,9 @@
 <div align="center">
 <a href="https://github.com/huihut/interview">📘 Summary</a>
 &emsp;&emsp; | &emsp;&emsp;
-📖 Details
+<a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a>
+&emsp;&emsp; | &emsp;&emsp;
+📚 Docsify
 </div> 
 <br>
 
