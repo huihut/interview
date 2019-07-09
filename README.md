@@ -1,27 +1,46 @@
 <div align="center">
-📘 Summary
-&emsp;&emsp; | &emsp;&emsp;
-<a href="https://github.com/huihut/interview/blob/master/README_Details.md">📖 Details</a>
+📖 Github
 &emsp;&emsp; | &emsp;&emsp;
 <a href="https://www.huihut.com/interview/">📚 Docsify</a>
 </div> 
 <br>
 
-<b><details><summary>💡 关于</summary></b>
+<b><details><summary><font size="4">💡 关于</font></summary></b>
 
 📚 本仓库是面向 C/C++ 技术方向校招求职者、初学者的基础知识总结，包括语言、程序库、数据结构、算法、系统、网络、链接装载库等知识及面试经验、招聘、内推等信息。
 
-👀 阅读方式：📘 Summary 页面是目录收起，📖 Details 页面是全文展开，📚 Docsify 文档是 GitBook 形式，适用于不同场景和阅读习惯。
+💡 侧边目录支持方式：[📚 Docsify 文档](https://www.huihut.com/interview)、[Github + TOC 导航](https://github.com/jawil/GayHub)（[TOC预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/TOC预览.png)）
 
-💡 侧边目录支持方式：[Docsify 文档](https://www.huihut.com/interview)、[Github + TOC 导航](https://github.com/jawil/GayHub)（[TOC预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/TOC预览.png)）
-
-📄 保存为 PDF 方式：使用 Chrome 浏览器打开 <a href="https://www.huihut.com/interview">Docsify 文档</a> 页面，缩起左侧目录-右键 - 打印 - 选择目标打印机是另存为PDF - 保存（[打印预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/打印预览.png)）
+📄 保存为 PDF 方式：使用 Chrome 浏览器打开 <a href="https://www.huihut.com/interview">📚 Docsify 文档</a> 页面，缩起左侧目录-右键 - 打印 - 选择目标打印机是另存为PDF - 保存（[打印预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/打印预览.png)）
 
 🙏 仓库内容如有错误或改进欢迎 issue 或 pr，建议或讨论可在 [#12](https://github.com/huihut/interview/issues/12) 提出。由于本人水平有限，仓库中的知识点有来自本人原创、读书笔记、书籍、博文等，非原创均已标明出处，如有遗漏，请 issue 提出。本仓库遵循 CC BY-NC-SA 4.0 协议，转载请注明出处。
 
 </details>
 
-<b><details><summary>➕ C/C++</summary></b>
+## 📑 目录
+
+* [➕ C/C++](#-cc)
+* [📦 STL](#-stl)
+* [〽️ 数据结构](#️-数据结构)
+* [⚡️ 算法](#️-算法)
+* [❓ Problems](#-problems)
+* [💻 操作系统](#-操作系统)
+* [☁️ 计算机网络](#️-计算机网络)
+* [🌩 网络编程](#-网络编程)
+* [💾 数据库](#-数据库)
+* [📏 设计模式](#-设计模式)
+* [⚙️ 链接装载库](#️-链接装载库)
+* [📚 书籍](#-书籍)
+* [🔱 C/C++ 发展方向](#-cc-发展方向)
+* [💯 复习刷题网站](#-复习刷题网站)
+* [📝 面试题目经验](#-面试题目经验)
+* [📆 招聘时间岗位](#-招聘时间岗位)
+* [👍 内推](#-内推)
+* [👬 贡献者](#-贡献者)
+* [🍭 支持赞助](#-支持赞助)
+* [📜 License](#-license)
+
+## ➕ C/C++
 
 ### const
 
@@ -34,7 +53,7 @@
 
 #### 使用
 
-<details><summary>const 使用</summary> 
+const 使用
 
 ```cpp
 // 类
@@ -81,8 +100,6 @@ const int* function6();     // 返回一个指向常量的指针变量，使用�
 int* const function7();     // 返回一个指向变量的常指针，使用：int* const p = function7();
 ```
 
-</details>
-
 ### static
 
 #### 作用
@@ -95,7 +112,7 @@ int* const function7();     // 返回一个指向变量的常指针，使用：i
 ### this 指针
 
 1. `this` 指针是一个隐含于每一个非静态成员函数中的特殊指针。它指向调用该成员函数的那个对象。
-2. 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 `this` 指针，然后调用成员函数，每次成员函数存取数据成员时，都隐含使用 `this` 指针。
+2. 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 `this` 指针，然后调用成员函数，每次成员函数存取数据成员时，都隐式使用 `this` 指针。
 3. 当一个成员函数被调用时，自动向它传递一个隐含的参数，该参数是一个指向这个成员函数所在的对象的指针。
 4. `this` 指针被隐含地声明为: `ClassName *const this`，这意味着不能给 `this` 指针赋值；在 `ClassName` 类的 `const` 成员函数中，`this` 指针的类型为：`const ClassName* const`，这说明不能对 `this` 指针所指向的这种对象是不可修改的（即不能对这种对象的数据成员进行赋值操作）；
 5. `this` 并不是一个常规变量，而是个右值，所以不能取得 `this` 的地址（不能 `&this`）。
@@ -116,8 +133,7 @@ int* const function7();     // 返回一个指向变量的常指针，使用：i
 
 #### 使用
 
-<details><summary>inline 使用</summary> 
-
+inline 使用
 
 ```cpp
 // 声明1（加 inline，建议使用）
@@ -140,8 +156,6 @@ class A {
 }
 inline int A::doA() { return 0; }   // 需要显式内联
 ```
-
-</details>
 
 #### 编译器对 inline 函数的处理步骤
 
@@ -173,8 +187,7 @@ inline int A::doA() { return 0; }   // 需要显式内联
 * 内联是在编译器建议编译器内联，而虚函数的多态性在运行期，编译器无法知道运行期调用哪个代码，因此虚函数表现为多态性时（运行期）不可以内联。
 * `inline virtual` 唯一可以内联的时候是：编译器知道所调用的对象是哪个类（如 `Base::who()`），这只有在编译器具有实际对象而不是对象的指针或引用时才会发生。
 
-<details><summary>虚函数内联使用</summary> 
-
+虚函数内联使用
 
 ```cpp
 #include <iostream>  
@@ -216,8 +229,6 @@ int main()
 } 
 ```
 
-</details>
-
 ### volatile
 
 ```cpp
@@ -233,7 +244,7 @@ volatile int i = 10;
 
 断言，是宏，而非函数。assert 宏的原型定义在 `<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。可以通过定义 `NDEBUG` 来关闭 assert，但是需要在源代码的开头，`include <assert.h>` 之前。
 
-<details><summary>assert() 使用</summary> 
+assert() 使用
 
 ```cpp
 #define NDEBUG          // 加上这行，则 assert 不可用
@@ -241,8 +252,6 @@ volatile int i = 10;
 
 assert( p != NULL );    // assert 不可用
 ```
-
-</details>
 
 ### sizeof()
 
@@ -253,8 +262,7 @@ assert( p != NULL );    // assert 不可用
 
 设定结构体、联合以及类成员变量以 n 字节方式对齐
 
-<details><summary>#pragma pack(n) 使用</summary> 
-
+#pragma pack(n) 使用
 
 ```cpp
 #pragma pack(push)  // 保存对齐状态
@@ -269,8 +277,6 @@ struct test
 
 #pragma pack(pop)   // 恢复对齐状态
 ```
-
-</details>
 
 ### 位域
 
@@ -291,7 +297,7 @@ Bit mode: 2;    // mode 占 2 位
 
 `extern "C"` 的作用是让 C++ 编译器将 `extern "C"` 声明的代码当作 C 语言代码处理，可以避免 C++ 因符号修饰导致代码不能和C语言库中的符号进行链接的问题。
 
-<details><summary>extern "C" 使用</summary> 
+extern "C" 使用
 
 ```cpp
 #ifdef __cplusplus
@@ -304,8 +310,6 @@ void *memset(void *, int, size_t);
 }
 #endif
 ```
-
-</details>
 
 ### struct 和 typedef struct
 
@@ -391,7 +395,7 @@ int main() {
 * 匿名 union 不能包含 protected 成员或 private 成员
 * 全局匿名联合必须是静态（static）的
 
-<details><summary>union 使用</summary> 
+union 使用
 
 ```cpp
 #include<iostream>
@@ -427,8 +431,6 @@ int main() {
 }
 ```
 
-</details>
-
 ### C 实现 C++ 类
 
 C 实现 C++ 的面向对象特性（封装、继承、多态）
@@ -444,7 +446,7 @@ C 实现 C++ 的面向对象特性（封装、继承、多态）
 * explicit 修饰构造函数时，可以防止隐式转换和复制初始化
 * explicit 修饰转换函数时，可以防止隐式转换，但 [按语境转换](https://zh.cppreference.com/w/cpp/language/implicit_conversion) 除外
 
-<details><summary>explicit 使用</summary> 
+explicit 使用
 
 ```cpp
 struct A
@@ -490,8 +492,6 @@ int main()
 	return 0;
 }
 ```
-
-</details>
 
 ### friend 友元类和友元函数
 
@@ -541,7 +541,7 @@ using namespace_name name;
 
 > 一般说来，使用 using 命令比使用 using 编译命令更安全，这是由于它**只导入了指定的名称**。如果该名称与局部名称发生冲突，编译器将**发出指示**。using编译命令导入所有的名称，包括可能并不需要的名称。如果与局部名称发生冲突，则**局部名称将覆盖名称空间版本**，而编译器**并不会发出警告**。另外，名称空间的开放性意味着名称空间的名称可能分散在多个地方，这使得难以准确知道添加了哪些名称。
 
-<details><summary>using 使用</summary> 
+using 使用
 
 尽量少使用 `using 指示`
 
@@ -568,8 +568,6 @@ cin >> x;
 cout << x << endl;
 ```
 
-</details>
-
 ### :: 范围解析运算符
 
 #### 分类
@@ -578,7 +576,7 @@ cout << x << endl;
 2. 类作用域符（`class::name`）：用于表示指定类型的作用域范围是具体某个类的
 3. 命名空间作用域符（`namespace::name`）:用于表示指定类型的作用域范围是具体某个命名空间的
 
-<details><summary>:: 使用</summary> 
+:: 使用
 
 ```cpp
 int count = 0;        // 全局（::）的 count
@@ -599,8 +597,6 @@ int main() {
     return 0;
 }
 ```
-
-</details>
 
 ### enum 枚举类型
 
@@ -625,7 +621,7 @@ decltype 关键字用于检查实体的声明类型或表达式的类型及值�
 decltype ( expression )
 ```
 
-<details><summary>decltype 使用</summary> 
+decltype 使用
 
 ```cpp
 // 尾置返回允许我们在参数列表之后声明返回类型
@@ -643,8 +639,6 @@ auto fcn2(It beg, It end) -> typename remove_reference<decltype(*beg)>::type
     return *beg;    // 返回序列中一个元素的拷贝
 }
 ```
-
-</details>
 
 ### 引用
 
@@ -684,7 +678,7 @@ auto fcn2(It beg, It end) -> typename remove_reference<decltype(*beg)>::type
 
 用花括号初始化器列表初始化一个对象，其中对应构造函数接受一个 `std::initializer_list` 参数.
 
-<details><summary>initializer_list 使用</summary> 
+initializer_list 使用
 
 ```cpp
 #include <iostream>
@@ -736,8 +730,6 @@ int main()
     templated_fn<std::vector<int>>({1, 2, 3});           // 也 OK
 }
 ```
-
-</details>
 
 ### 面向对象
 
@@ -795,7 +787,7 @@ public:
 * 构造函数不能是虚函数（因为在调用构造函数时，虚表指针并没有在对象的内存空间中，必须要构造函数调用完成后才会形成虚表指针）
 * 内联函数不能是表现多态性时的虚函数，解释见：[虚函数（virtual）可以是内联函数（inline）吗？](https://github.com/huihut/interview#%E8%99%9A%E5%87%BD%E6%95%B0virtual%E5%8F%AF%E4%BB%A5%E6%98%AF%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0inline%E5%90%97)
 
-<details><summary>动态多态使用</summary> 
+动态多态使用
 
 ```cpp
 class Shape                     // 形状类
@@ -833,13 +825,11 @@ int main()
 }
 ```
 
-</details>
-
 ### 虚析构函数
 
 虚析构函数是为了解决基类的指针指向派生类对象，并用基类的指针删除派生类对象。
 
-<details><summary>虚析构函数使用</summary> 
+虚析构函数使用
 
 ```cpp
 class Shape
@@ -864,8 +854,6 @@ int main()
     return 0；
 }
 ```
-
-</details>
 
 ### 纯虚函数
 
@@ -939,7 +927,7 @@ virtual int A() = 0;
 
 用于分配、释放内存
 
-<details><summary>malloc、free 使用</summary> 
+malloc、free 使用
 
 申请内存，确认是否申请成功
 
@@ -955,15 +943,13 @@ free(p);
 p = nullptr;
 ```
 
-</details>
-
 #### new、delete
 
 1. new / new[]：完成两件事，先底层调用 malloc 分配了内存，然后调用构造函数（创建对象）。
 2. delete/delete[]：也完成两件事，先调用析构函数（清理资源），然后底层调用 free 释放空间。
 3. new 在申请内存时会自动计算所需字节数，而 malloc 则需我们自己输入申请内存空间的字节数。
 
-<details><summary>new、delete 使用</summary> 
+new、delete 使用
 
 申请内存，确认是否申请成功
 
@@ -975,8 +961,6 @@ int main()
     return 0;
 }
 ```
-
-</details>
 
 #### 定位 new
 
@@ -1106,7 +1090,7 @@ unique_ptr 是 C++11 才开始提供的类型，是一种在异常时可以帮�
 
 * 由于强制转换为引用类型失败，dynamic_cast 运算符引发 bad_cast 异常。
 
-<details><summary>bad_cast 使用</summary> 
+bad_cast 使用
 
 ```cpp
 try {  
@@ -1116,8 +1100,6 @@ catch (bad_cast b) {
     cout << "Caught: " << b.what();  
 } 
 ```
-
-</details>
 
 ### 运行时类型信息 (RTTI) 
 
@@ -1137,7 +1119,7 @@ catch (bad_cast b) {
 * type_info 类描述编译器在程序中生成的类型信息。 此类的对象可以有效存储指向类型的名称的指针。 type_info 类还可存储适合比较两个类型是否相等或比较其排列顺序的编码值。 类型的编码规则和排列顺序是未指定的，并且可能因程序而异。
 * 头文件：`typeinfo`
 
-<details><summary>typeid、type_info 使用</summary>
+typeid、type_info 使用
 
 ```cpp
 class Flyable                       // 能飞的
@@ -1188,8 +1170,6 @@ class doSomething(Flyable *obj)                 // 做些事情
     obj->land();
 };
 ```
-
-</details>
 
 ### Effective C++
 
@@ -1253,22 +1233,18 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 > 英文：[Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)  
 > 中文：[C++ 风格指南](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)
-<details><summary>Google C++ Style Guide 图</summary>
+Google C++ Style Guide 图
 
 ![Google C++ Style Guide](https://raw.githubusercontent.com/huihut/interview/master/images/GoogleCppStyleGuide.png)
 
 > 图片来源于：[CSDN . 一张图总结Google C++编程规范(Google C++ Style Guide)](https://blog.csdn.net/voidccc/article/details/37599203)
-
-</details>
 
 ### 其他
 
 * [Bjarne Stroustrup 的常见问题](http://www.stroustrup.com/bs_faq.html)
 * [Bjarne Stroustrup 的 C++ 风格和技巧常见问题](http://www.stroustrup.com/bs_faq2.html)
 
-</details>
-
-<b><details><summary>📦 STL</summary></b>
+## 📦 STL
 
 ### STL 索引
 
@@ -1301,9 +1277,7 @@ hash_multimap|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重�
 [find](http://www.cplusplus.com/reference/algorithm/find/)|顺序查找|O(n)|可重复
 [sort](https://github.com/gcc-mirror/gcc/blob/master/libstdc++-v3/include/bits/stl_algo.h#L4808)|[内省排序](https://en.wikipedia.org/wiki/Introsort)|O(n*log<sub>2</sub>n)|可重复
 
-</details>
-
-<b><details><summary>〽️ 数据结构</summary></b>
+## 〽️ 数据结构
 
 ### 顺序结构
 
@@ -1311,7 +1285,7 @@ hash_multimap|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重�
 
 [SqStack.cpp](DataStructure/SqStack.cpp)
 
-<details><summary>顺序栈数据结构和图片</summary>
+顺序栈数据结构和图片
 
 ```cpp
 typedef struct {
@@ -1324,11 +1298,9 @@ typedef struct {
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/SqStack.png)
 
-</details>
-
 #### 队列（Sequence Queue）
 
-<details><summary>队列数据结构</summary>
+队列数据结构
 
 ```cpp
 typedef struct {
@@ -1339,33 +1311,27 @@ typedef struct {
 }SqQueue;
 ```
 
-</details>
-
 ##### 非循环队列
 
-<details><summary>非循环队列图片</summary>
+非循环队列图片
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/SqQueue.png)
 
 `SqQueue.rear++`
 
-</details>
-
 ##### 循环队列
 
-<details><summary>循环队列图片</summary>
+循环队列图片
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/SqLoopStack.png)
 
 `SqQueue.rear = (SqQueue.rear + 1) % SqQueue.maxSize`
 
-</details>
-
 #### 顺序表（Sequence List）
 
 [SqList.cpp](DataStructure/SqList.cpp)
 
-<details><summary>顺序表数据结构和图片</summary>
+顺序表数据结构和图片
 
 ```cpp
 typedef struct {
@@ -1378,8 +1344,6 @@ typedef struct {
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/SqList.png)
 
-</details>
-
 
 ### 链式结构
 
@@ -1387,7 +1351,7 @@ typedef struct {
 
 [LinkList_with_head.cpp](DataStructure/LinkList_with_head.cpp)
 
-<details><summary>链式数据结构</summary>
+链式数据结构
 
 ```cpp
 typedef struct LNode {
@@ -1396,42 +1360,31 @@ typedef struct LNode {
 } LNode, *LinkList; 
 ```
 
-</details>
-
 #### 链队列（Link Queue）
 
-<details><summary>链队列图片</summary>
+链队列图片
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/LinkQueue.png)
-
-</details>
 
 #### 线性表的链式表示
 
 ##### 单链表（Link List）
 
-<details><summary>单链表图片</summary>
+单链表图片
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/LinkList.png)
 
-</details>
-
-
 ##### 双向链表（Du-Link-List）
 
-<details><summary>双向链表图片</summary>
+双向链表图片
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/DuLinkList.png)
 
-</details>
-
 ##### 循环链表（Cir-Link-List）
 
-<details><summary>循环链表图片</summary>
+循环链表图片
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/CirLinkList.png)
-
-</details>
 
 ### 哈希表
 
@@ -1459,7 +1412,7 @@ typedef struct LNode {
 
 #### 线性探测的哈希表数据结构
 
-<details><summary>线性探测的哈希表数据结构和图片</summary>
+线性探测的哈希表数据结构和图片
 
 ```cpp
 typedef char KeyType;
@@ -1477,9 +1430,6 @@ typedef struct {
 ```
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/HashTable.png)
-
-</details>
-
 
 ### 递归
 
@@ -1506,7 +1456,7 @@ typedef struct {
 
 ##### 头尾链表存储表示
 
-<details><summary>广义表的头尾链表存储表示和图片</summary>
+广义表的头尾链表存储表示和图片
 
 ```cpp
 // 广义表的头尾链表存储表示
@@ -1529,11 +1479,9 @@ typedef struct GLNode {
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/GeneralizedList1.png)
 
-</details>
-
 ##### 扩展线性链表存储表示
 
-<details><summary>扩展线性链表存储表示和图片</summary>
+扩展线性链表存储表示和图片
 
 ```cpp
 // 广义表的扩展线性链表存储表示
@@ -1554,8 +1502,6 @@ typedef struct GLNode1 {
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/GeneralizedList2.png)
 
-</details>
-
 ### 二叉树
 
 [BinaryTree.cpp](DataStructure/BinaryTree.cpp)
@@ -1573,7 +1519,7 @@ typedef struct GLNode1 {
 
 #### 存储结构
 
-<details><summary>二叉树数据结构</summary>
+二叉树数据结构
 
 ```cpp
 typedef struct BiTNode
@@ -1583,24 +1529,17 @@ typedef struct BiTNode
 }BiTNode, *BiTree;
 ```
 
-</details>
-
-
 ##### 顺序存储
 
-<details><summary>二叉树顺序存储图片</summary>
+二叉树顺序存储图片
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/SqBinaryTree.png)
 
-</details>
-
 ##### 链式存储
 
-<details><summary>二叉树链式存储图片</summary>
+二叉树链式存储图片
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/LinkBinaryTree.png)
-
-</details>
 
 #### 遍历方式
 
@@ -1643,11 +1582,9 @@ typedef struct BiTNode
 * 平衡二叉树必定是二叉搜索树，反之则不一定
 * 最小二叉平衡树的节点的公式：`F(n)=F(n-1)+F(n-2)+1` （1 是根节点，F(n-1) 是左子树的节点数量，F(n-2) 是右子树的节点数量）
 
-<details><summary>平衡二叉树图片</summary>
+平衡二叉树图片
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/Self-balancingBinarySearchTree.png)
-
-</details>
 
 ##### 最小失衡树
 
@@ -1689,11 +1626,9 @@ typedef struct BiTNode
 
 #### B 树（B-tree）、B+ 树（B+-tree）
 
-<details><summary>B 树、B+ 树图片</summary>
+B 树、B+ 树图片
 
 ![B 树（B-tree）、B+ 树（B+-tree）](https://i.stack.imgur.com/l6UyF.png)
-
-</details>
 
 ##### 特点
 
@@ -1722,11 +1657,9 @@ typedef struct BiTNode
 
 #### 八叉树
 
-<details><summary>八叉树图片</summary>
+八叉树图片
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Octree2.png/400px-Octree2.png)
-
-</details>
 
 八叉树（octree），或称八元树，是一种用于描述三维空间（划分空间）的树状数据结构。八叉树的每个节点表示一个正方体的体积元素，每个节点有八个子节点，这八个子节点所表示的体积元素加在一起就等于父节点的体积。一般中心点作为节点的分叉中心。
 
@@ -1735,9 +1668,7 @@ typedef struct BiTNode
 * 三维计算机图形
 * 最邻近搜索
 
-</details>
-
-<b><details><summary>⚡️ 算法</summary></b>
+## ⚡️ 算法
 
 ### 排序
 
@@ -1789,9 +1720,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 [动态规划](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92)|通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法，适用于有重叠子问题和最优子结构性质的问题|[背包问题](https://github.com/huihut/interview/tree/master/Problems/KnapsackProblem)、斐波那契数列
 [贪心法](https://zh.wikipedia.org/wiki/%E8%B4%AA%E5%BF%83%E6%B3%95)|一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是最好或最优的算法|旅行推销员问题（最短路径问题）、最小生成树、哈夫曼编码
 
-</details>
-
-<b><details><summary>❓ Problems</summary></b>
+## ❓ Problems
 
 ### Single Problem
 
@@ -1820,9 +1749,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 
 * [牛客网 . 在线编程专题](https://www.nowcoder.com/activity/oj)
 
-</details>
-
-<b><details><summary>💻 操作系统</summary></b>
+## 💻 操作系统
 
 ### 进程与线程
 
@@ -1993,17 +1920,14 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 大端|12|34|56|78
 小端|78|56|34|12
 
-
-<details><summary>大端小端图片</summary>
+大端小端图片
 
 ![大端序](https://raw.githubusercontent.com/huihut/interview/master/images/CPU-Big-Endian.svg.png)
 ![小端序](https://raw.githubusercontent.com/huihut/interview/master/images/CPU-Little-Endian.svg.png)
 
-</details>
-
 ##### 判断大端小端
 
-<details><summary>判断大端小端</summary>
+判断大端小端
 
 可以这样判断自己 CPU 字节序是大端还是小端：
 
@@ -2023,8 +1947,6 @@ int main()
 	return 0;
 }
 ```
-
-</details>
 
 ##### 各架构处理器的字节序
 
@@ -2059,9 +1981,7 @@ int main()
 * 最近最久未使用（LRU）算法
 * 时钟（Clock）置换算法
 
-</details>
-
-<b><details><summary>☁️ 计算机网络</summary></b>
+## ☁️ 计算机网络
 
 > 本节部分知识点来自《计算机网络（第 7 版）》
 
@@ -2289,11 +2209,9 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 
 ##### 方法
 
-<details><summary>利用可变窗口进行流量控制</summary>
+利用可变窗口进行流量控制
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/利用可变窗口进行流量控制举例.png)
-
-</details>
 
 #### TCP 拥塞控制
 
@@ -2308,13 +2226,11 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 * 快重传( fast retransmit )
 * 快恢复( fast recovery )
 
-<details><summary>TCP的拥塞控制图</summary>
+TCP的拥塞控制图
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/TCP拥塞窗口cwnd在拥塞控制时的变化情况.png)
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/快重传示意图.png)
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/TCP的拥塞控制流程图.png)
-
-</details>
 
 #### TCP 传输连接管理
 
@@ -2378,11 +2294,9 @@ TCP 是一个基于字节流的传输服务（UDP 基于报文的），“流”
 
 #### TCP 有限状态机
 
-<details><summary>TCP 有限状态机图片</summary>
+TCP 有限状态机图片
 
 ![TCP 的有限状态机](https://raw.githubusercontent.com/huihut/interview/master/images/TCP的有限状态机.png)
-
-</details>
 
 ### 应用层
 
@@ -2472,9 +2386,7 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
     * 用于内部网络管理员作为对所有电脑作中央管理的手段
 * SNMP（Simple Network Management Protocol，简单网络管理协议）构成了互联网工程工作小组（IETF，Internet Engineering Task Force）定义的 Internet 协议族的一部分。该协议能够支持网络管理系统，用以监测连接到网络上的设备是否有任何引起管理上关注的情况。
 
-</details>
-
-<b><details><summary>🌩 网络编程</summary></b>
+## 🌩 网络编程
 
 ### Socket
 
@@ -2539,9 +2451,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 这样每个方向上都有一个 FIN 和 ACK。
 
-</details>
-
-<b><details><summary>💾 数据库</summary></b>
+## 💾 数据库
 
 > 本节部分知识点来自《数据库系统概论（第 5 版）》
 
@@ -2666,9 +2576,7 @@ ssize_t write(int fd, const void *buf, size_t count);
         * 解除：撤销处理死锁代价最小的事务，并释放此事务的所有的锁，使其他事务得以继续运行下去。
 * 可串行化调度：多个事务的并发执行是正确的，当且仅当其结果与按某一次序串行地执行这些事务时的结果相同。可串行性时并发事务正确调度的准则。
 
-</details>
-
-<b><details><summary>📏 设计模式</summary></b>
+## 📏 设计模式
 
 > 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/column/details/15392.html) 系列博文
 
@@ -2703,9 +2611,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 * 迪米特法则（LoD，Law of Demeter）
 * 开放封闭原则（OCP，Open Close Principle）
 
-</details>
-
-<b><details><summary>⚙️ 链接装载库</summary></b>
+## ⚙️ 链接装载库
 
 > 本节部分知识点来自《程序员的自我修养——链接装载库》
 
@@ -2838,7 +2744,7 @@ Linux 下的共享库就是普通的 ELF 共享对象。
 
 #### so 共享库的编写
 
-<details><summary>使用 CLion 编写共享库</summary>
+使用 CLion 编写共享库
 
 创建一个名为 MySharedLib 的共享库
 
@@ -2888,11 +2794,9 @@ void hello() {
 }
 ```
 
-</details>
-
 #### so 共享库的使用（被可执行项目调用）
 
-<details><summary>使用 CLion 调用共享库</summary>
+使用 CLion 调用共享库
 
 创建一个名为 TestSharedLib 的可执行项目
 
@@ -2946,14 +2850,12 @@ Hello, World!
 1 + 2 + 3 = 6
 ```
 
-</details>
-
 ### Windows 应用程序入口函数
 
 * GUI（Graphical User Interface）应用，链接器选项：`/SUBSYSTEM:WINDOWS`
 * CUI（Console User Interface）应用，链接器选项：`/SUBSYSTEM:CONSOLE`
 
-<details><summary>_tWinMain 与 _tmain 函数声明</summary>
+_tWinMain 与 _tmain 函数声明
 
 ```cpp
 Int WINAPI _tWinMain(
@@ -2967,8 +2869,6 @@ int _tmain(
     TCHAR *argv[],
     TCHAR *envp[]);
 ```
-
-</details>
 
 应用程序类型|入口点函数|嵌入可执行文件的启动函数
 ---|---|---
@@ -3012,7 +2912,7 @@ int _tmain(
 
 #### DLL 入口函数
 
-<details><summary>DllMain 函数</summary>
+DllMain 函数
 
 ```cpp
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
@@ -3040,11 +2940,9 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 }
 ```
 
-</details>
-
 #### 载入卸载库
 
-<details><summary>LoadLibrary、LoadLibraryExA、LoadPackagedLibrary、FreeLibrary、FreeLibraryAndExitThread 函数声明</summary>
+LoadLibrary、LoadLibraryExA、LoadPackagedLibrary、FreeLibrary、FreeLibraryAndExitThread 函数声明
 
 ```cpp
 // 载入库
@@ -3073,11 +2971,9 @@ VOID WINAPI FreeLibraryAndExitThread(
 );
 ```
 
-</details>
-
 #### 显示地链接到导出符号
 
-<details><summary>GetProcAddress 函数声明</summary>
+GetProcAddress 函数声明
 
 ```cpp
 FARPROC GetProcAddress(
@@ -3085,8 +2981,6 @@ FARPROC GetProcAddress(
   PCSTR pszSymbolName  // 只能接受 ANSI 字符串，不能是 Unicode
 );
 ```
-
-</details>
 
 #### DumpBin.exe 查看 DLL 信息
 
@@ -3097,7 +2991,7 @@ DUMPBIN -exports D:\mydll.dll
 
 #### LoadLibrary 与 FreeLibrary 流程图
 
-<details><summary>LoadLibrary 与 FreeLibrary 流程图</summary>
+LoadLibrary 与 FreeLibrary 流程图
 
 ##### LoadLibrary
 
@@ -3107,11 +3001,9 @@ DUMPBIN -exports D:\mydll.dll
 
 ![WindowsFreeLibrary](https://raw.githubusercontent.com/huihut/interview/master/images/WindowsFreeLibrary.png)
 
-</details>
-
 #### DLL 库的编写（导出一个 DLL 模块）
 
-<details><summary>DLL 库的编写（导出一个 DLL 模块）</summary>
+DLL 库的编写（导出一个 DLL 模块）
 DLL 头文件
 
 ```cpp
@@ -3162,11 +3054,9 @@ int Add(int nLeft, int nRight)
 }
 ```
 
-</details>
-
 #### DLL 库的使用（运行时动态链接 DLL）
 
-<details><summary>DLL 库的使用（运行时动态链接 DLL）</summary>
+DLL 库的使用（运行时动态链接 DLL）
 
 ```cpp
 // A simple program that uses LoadLibrary and 
@@ -3212,8 +3102,6 @@ int main( void )
     return 0;
 }
 ```
-
-</details>
 
 ### 运行库（Runtime Library）
 
@@ -3274,9 +3162,7 @@ int main( void )
 * 变长参数（stdarg.h）
 * 非局部跳转（setjmp.h）
 
-</details>
-
-<b><details><summary>📚 书籍</summary></b>
+## 📚 书籍
 
 > [huihut/CS-Books](https://github.com/huihut/CS-Books)：📚 Computer Science Books 计算机技术类书籍 PDF
 
@@ -3310,9 +3196,7 @@ int main( void )
 
 * 《程序员的自我修养》
 
-</details>
-
-<b><details><summary>🔱 C/C++ 发展方向</summary></b>
+## 🔱 C/C++ 发展方向
 
 > C/C++ 发展方向甚广，包括不限于以下方向， 以下列举一些大厂校招岗位要求。
 
@@ -3398,9 +3282,7 @@ int main( void )
 * 较强的算法实现能力，熟练掌握 C/C++ 编程，熟悉 Shell/Python/Matlab 至少一种编程语言；
 * 在计算机视觉、模式识别等学术会议或者期刊上发表论文、相关国际比赛获奖、及有相关专利者优先。
 
-</details>
-
-<b><details><summary>💯 复习刷题网站</summary></b>
+## 💯 复习刷题网站
 
 * [cplusplus](http://www.cplusplus.com/)
 * [cppreference](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)
@@ -3409,9 +3291,7 @@ int main( void )
 * [lintcode](https://www.lintcode.com/)
 * [nowcoder](https://www.nowcoder.net/)
 
-</details>
-
-<b><details><summary>📝 面试题目经验</summary></b>
+## 📝 面试题目经验
 
 * [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
 * [牛客网 . 2019校招技术类岗位面经汇总【技术类】](https://www.nowcoder.com/discuss/146655)
@@ -3430,43 +3310,31 @@ int main( void )
 * [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
 
-</details>
-
-<b><details><summary>📆 招聘时间岗位</summary></b>
+## 📆 招聘时间岗位
 
 * [牛客网 . 2020届实习 | 2019名企实习直推专场](https://www.nowcoder.com/activity/2019recommand/index)
 * [牛客网 . 2019届补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
 * [牛客网 . 2019届校招 | 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
 
-</details>
-
-<b><details><summary>👍 内推</summary></b>
+## 👍 内推
 
 * [Github . CyC2018/Job-Recommend](https://github.com/CyC2018/Job-Recommend)：🔎 互联网内推信息（社招、校招、实习）
 * [Github . amusi/AI-Job-Recommend](https://github.com/amusi/AI-Job-Recommend)：国内公司人工智能方向（含机器学习、深度学习、计算机视觉和自然语言处理）岗位的招聘信息（含全职、实习和校招）
 
-</details>
-
-<b><details><summary>👬 贡献者</summary></b>
+## 👬 贡献者
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
 [tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)、[FengZiYjun](https://github.com/FengZiYjun)、[shangjiaxuan](https://github.com/shangjiaxuan)、[kwongtailau](https://github.com/kwongtailau)、[asky991](https://github.com/asky991)、[traviszeng](https://github.com/traviszeng)、[kele1997](https://github.com/kele1997)、[hxdnshx](https://github.com/hxdnshx)、[a74731248](https://github.com/a74731248)、[qvjp](https://github.com/qvjp)、[xindelvcheng](https://github.com/xindelvcheng)、[hbsun2113](https://github.com/hbsun2113)、[linkwk7](https://github.com/linkwk7)
 
-</details>
-
-<b><details><summary>🍭 支持赞助</summary></b>
+## 🍭 支持赞助
 
 [![Backers](https://opencollective.com/interview/tiers/backer.svg?avatarHeight=36)](https://opencollective.com/interview#backers)
 
 [![Sponsor](https://opencollective.com/interview/tiers/sponsor.svg?avatarHeight=36)](https://opencollective.com/interview#sponsor)
 
-</details>
-
-<b><details><summary>📜 License</summary></b>
+## 📜 License
 
 本仓库遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
 
 [![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](LICENSE)
-
-</details>
