@@ -3311,6 +3311,8 @@ int main( void )
 
 ## 📝 面试题目经验
 
+* [牛客网 . 2020秋招面经大汇总！（岗位划分）](https://www.nowcoder.com/discuss/205497)
+* [牛客网 . 【备战秋招】2020届秋招备战攻略](https://www.nowcoder.com/discuss/197116)
 * [牛客网 . 2019校招面经大汇总！【每日更新中】](https://www.nowcoder.com/discuss/90907)
 * [牛客网 . 2019校招技术类岗位面经汇总【技术类】](https://www.nowcoder.com/discuss/146655)
 * [牛客网 . 2018校招笔试真题汇总](https://www.nowcoder.com/discuss/68802)
@@ -3330,9 +3332,7 @@ int main( void )
 
 ## 📆 招聘时间岗位
 
-* [牛客网 . 2020届实习 | 2019名企实习直推专场](https://www.nowcoder.com/activity/2019recommand/index)
-* [牛客网 . 2019届补招｜互联网名企2019应届生补招专场合集](https://www.nowcoder.com/discuss/139360)
-* [牛客网 . 2019届校招 | 2019 IT名企校招指南](https://www.nowcoder.com/activity/campus2019)
+* [牛客网 . 2020届校招 | 2020 IT名企校招日程](https://www.nowcoder.com/school/schedule)
 
 ## 👍 内推
 
