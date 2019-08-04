@@ -1,45 +1,9 @@
 <div align="center">
-📖 Github
+<a href="https://github.com/huihut/interview">📖 Github</a>
 &emsp;&emsp; | &emsp;&emsp;
-<a href="https://www.huihut.com/interview/">📚 Docsify</a>
+📚 Docsify
 </div> 
 <br>
-
-<b><details><summary>💡 关于</summary></b>
-
-📚 本仓库是面向 C/C++ 技术方向校招求职者、初学者的基础知识总结，包括语言、程序库、数据结构、算法、系统、网络、链接装载库等知识及面试经验、招聘、内推等信息。
-
-💡 侧边目录支持方式：[📚 Docsify 文档](https://www.huihut.com/interview)、[Github + TOC 导航](https://github.com/jawil/GayHub)（[TOC预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/TOC预览.png)）
-
-📄 保存为 PDF 方式：使用 Chrome 浏览器打开 <a href="https://www.huihut.com/interview">📚 Docsify 文档</a> 页面，缩起左侧目录-右键 - 打印 - 选择目标打印机是另存为PDF - 保存（[打印预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/打印预览.png)）
-
-🙏 仓库内容如有错误或改进欢迎 issue 或 pr，建议或讨论可在 [#12](https://github.com/huihut/interview/issues/12) 提出。由于本人水平有限，仓库中的知识点有来自本人原创、读书笔记、书籍、博文等，非原创均已标明出处，如有遗漏，请 issue 提出。本仓库遵循 CC BY-NC-SA 4.0 协议，转载请注明出处。
-
-</details>
-
-## 📑 目录
-
-* [➕ C/C++](#-cc)
-* [⭐️ Effective](#️-effective)
-* [📦 STL](#-stl)
-* [〽️ 数据结构](#️-数据结构)
-* [⚡️ 算法](#️-算法)
-* [❓ Problems](#-problems)
-* [💻 操作系统](#-操作系统)
-* [☁️ 计算机网络](#️-计算机网络)
-* [🌩 网络编程](#-网络编程)
-* [💾 数据库](#-数据库)
-* [📏 设计模式](#-设计模式)
-* [⚙️ 链接装载库](#️-链接装载库)
-* [📚 书籍](#-书籍)
-* [🔱 C/C++ 发展方向](#-cc-发展方向)
-* [💯 复习刷题网站](#-复习刷题网站)
-* [📝 面试题目经验](#-面试题目经验)
-* [📆 招聘时间岗位](#-招聘时间岗位)
-* [👍 内推](#-内推)
-* [👬 贡献者](#-贡献者)
-* [🍭 支持赞助](#-支持赞助)
-* [📜 License](#-license)
 
 ## ➕ C/C++
 

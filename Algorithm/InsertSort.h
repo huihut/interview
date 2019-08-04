@@ -16,7 +16,7 @@
 void InsertSort(vector<int>& v)
 {
     int len = v.size();
-	for (int i = 1; i < len - 1; ++i) {
+	for (int i = 1; i < len; ++i) {
 		int temp = v[i];
         for(int j = i - 1; j >= 0; --j)
         {
@@ -30,4 +30,3 @@ void InsertSort(vector<int>& v)
         }
 	}
 }
-

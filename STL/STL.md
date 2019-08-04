@@ -401,22 +401,22 @@ Example
 #include <iostream>
 #include <array>
 
-int main ()
+int main()
 {
-    std::array<int,10> myarray;
-    unsigned int i;
+	std::array<int, 10> myarray;
+	unsigned int i;
 
-    // assign some values:
-    for(i=0; i<10; i++)
-        myarray[i] = i;
+	// assign some values:
+	for (i = 0; i<10; i++)
+		myarray[i] = i;
 
-    // print content
-    std::cout << "myarray contains:";
-    for(i=0; i<10; i++)
-        std::cout << ' ' << myarray[i];
-    std::cout << '\n';
+	// print content
+	std::cout << "myarray contains:";
+	for (i = 0; i<10; i++)
+		std::cout << ' ' << myarray.at(i);
+	std::cout << '\n';
 
-    return 0;
+	return 0;
 }
 ```
 Output
@@ -1608,6 +1608,33 @@ Output
 ```
 The allocated array contains: 0 1 2 3 4
 ```
+
+注意：deallocate和destory的关系：
+
+deallocate实现的源码：
+
+	template <class T>
+	inline void _deallocate(T* buffer)
+	{
+		::operator delete(buffer);    //为什么不用 delete [] ?  ,operator delete 区别于 delete 
+		                             //operator delete  是一个底层操作符
+	}
+
+destory：
+
+	template <class T>
+	inline void _destory(T *ptr)
+	{
+		ptr->~T();
+	}
+
+destory负责调用类型的析构函数，销毁相应内存上的内容（但销毁后内存地址仍保留）
+
+deallocate负责释放内存（此时相应内存中的值在此之前应调用destory销毁，将内存地址返回给系统，代表这部分地址使用引用-1）
+
+
+
+
 #### relational operators (vector)
 #### swap (vector)
 #### vector <bool>
