@@ -32,7 +32,7 @@ void max_heapify(int arr[], int start, int end) {
 
 void heap_sort(int arr[], int len) {
 	//初始化，i從最後一個父節點開始調整
-	for (int i = len / 2 - 1; i >= 0; i--)
+	for (int i = len / 2 - 1; i >= 0; i--)         ////    2(*(x+1)=length
 		max_heapify(arr, i, len - 1);
 	//先將第一個元素和已经排好的元素前一位做交換，再從新調整(刚调整的元素之前的元素)，直到排序完畢
 	for (int i = len - 1; i > 0; i--) {
