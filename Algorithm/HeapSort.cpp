@@ -17,7 +17,7 @@ void max_heapify(int arr[], int start, int end) {
 	//建立父節點指標和子節點指標
 	int dad = start;
 	int son = dad * 2 + 1;
-	while (son <= end) { //若子節點指標在範圍內才做比較
+	while (son <= end) { //若子節點指標在範圍內才做比較   这一段就是从star处开始调整，直至符合大根堆结构， i 2i+1 2i+2 
 		if (son + 1 <= end && arr[son] < arr[son + 1]) //先比較兩個子節點大小，選擇最大的
 			son++;
 		if (arr[dad] > arr[son]) //如果父節點大於子節點代表調整完畢，直接跳出函數
