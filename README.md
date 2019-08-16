@@ -1314,7 +1314,7 @@ typedef struct {
 	int top;
 	int size;
 	int increment;
-} SqSrack;
+} SqStack;
 ```
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/SqStack.png)
@@ -1839,7 +1839,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 
 #### 线程之间私有和共享的资源
 
-* 私有：线程栈，寄存器，程序寄存器
+* 私有：线程栈，寄存器，程序计数器
 * 共享：堆，地址空间，全局变量，静态变量
 
 #### 多进程与多线程间的对比、优劣与选择
