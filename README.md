@@ -866,9 +866,9 @@ virtual int A() = 0;
 
 ### 虚函数、纯虚函数
 
-* 类里如果声明了虚函数，这个函数是实现的，哪怕是空实现，它的作用就是为了能让这个函数在它的子类里面可以被覆盖，这样的话，编译器就可以使用后期绑定来达到多态了。纯虚函数只是一个接口，是个函数的声明而已，它要留到子类里去实现。 
-* 虚函数在子类里面也可以不重载的；但纯虚函数必须在子类去实现。
-* 虚函数的类用于 “实作继承”，继承接口的同时也继承了父类的实现。当然大家也可以完成自己的实现。纯虚函数关注的是接口的统一性，实现由子类完成。 
+* 类里如果声明了虚函数，这个函数是实现的，哪怕是空实现，它的作用就是为了能让这个函数在它的子类里面可以被覆盖（override），这样的话，编译器就可以使用后期绑定来达到多态了。纯虚函数只是一个接口，是个函数的声明而已，它要留到子类里去实现。 
+* 虚函数在子类里面可以不重写；但纯虚函数必须在子类实现才可以实例化子类。
+* 虚函数的类用于 “实作继承”，继承接口的同时也继承了父类的实现。纯虚函数关注的是接口的统一性，实现由子类完成。 
 * 带纯虚函数的类叫抽象类，这种类不能直接生成对象，而只有被继承，并重写其虚函数后，才能使用。抽象类被继承后，子类可以继续是抽象类，也可以是普通类。
 * 虚基类是虚继承中的基类，具体见下文虚继承。
 
@@ -3346,7 +3346,7 @@ int main( void )
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
-[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)、[FengZiYjun](https://github.com/FengZiYjun)、[shangjiaxuan](https://github.com/shangjiaxuan)、[kwongtailau](https://github.com/kwongtailau)、[asky991](https://github.com/asky991)、[traviszeng](https://github.com/traviszeng)、[kele1997](https://github.com/kele1997)、[hxdnshx](https://github.com/hxdnshx)、[a74731248](https://github.com/a74731248)、[qvjp](https://github.com/qvjp)、[xindelvcheng](https://github.com/xindelvcheng)、[hbsun2113](https://github.com/hbsun2113)、[linkwk7](https://github.com/linkwk7)、[foolishflyfox](https://github.com/foolishflyfox)、[zhjp0](https://github.com/zhjp0)
+[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)、[FengZiYjun](https://github.com/FengZiYjun)、[shangjiaxuan](https://github.com/shangjiaxuan)、[kwongtailau](https://github.com/kwongtailau)、[asky991](https://github.com/asky991)、[traviszeng](https://github.com/traviszeng)、[kele1997](https://github.com/kele1997)、[hxdnshx](https://github.com/hxdnshx)、[a74731248](https://github.com/a74731248)、[qvjp](https://github.com/qvjp)、[xindelvcheng](https://github.com/xindelvcheng)、[hbsun2113](https://github.com/hbsun2113)、[linkwk7](https://github.com/linkwk7)、[foolishflyfox](https://github.com/foolishflyfox)、[zhjp0](https://github.com/zhjp0)、[Mrtj2016](https://github.com/Mrtj2016)
 
 ## 🍭 支持赞助
 
