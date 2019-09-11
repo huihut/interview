@@ -2,6 +2,8 @@
 #include <algorithm>
 using namespace std;
 
+int **T = NULL;		// 存储背包问题表格的数组指针
+
 // 返回两个值的最大值
 int max(int a, int b) {
 	return (a > b) ? a : b;
@@ -9,26 +11,47 @@ int max(int a, int b) {
 
 // 迭代法，能显示背包问题的表格
 int packIterative(int n, int W, int *w, int *v) {
+	
 	// 循环遍历n行
-	int T[i+1][j+1];
-	for (int i = 0; i <= n; ++i) {
+	for (int i = 1; i <= n; ++i)
+	{
 		// 循环遍历W列
-		for (int j = 0; j <= W; ++j) {
-			if (i == 0 || j == 0) {
-				T[i][j] = 0;
-			}
+		for (int j = 1; j <= W; ++j)
+		{
 			//第i个物品能装下，则比较包括第i个物品和不包括第i个物品，取其最大值
-			if ( w[i-1] <= j) {
-				T[i][j] = max(v[i-1] + T[i - 1][j - w[i]], T[i - 1][j]);
-			}
+			if (w[i] <= j)
+				T[i][j] = max(v[i] + T[i - 1][j - w[i]], T[i - 1][j]);
+
 			// 第i个物品不能装下，则递归装i-1个
-			else {
+			else
 				T[i][j] = T[i - 1][j];
-			}
 		}
 	}
-	
-	for (auto i = 0; i <= n; i++) {
+	return T[n][W];
+}
+
+// 递归法，不支持显示背包问题的表格
+int packRecursive(int n, int W, int *w, int *v) {
+	// 结束条件（初始条件），i或者j为0时最大总价值为0
+	if (n == 0 || W == 0) {
+		return 0;
+	}
+	// 第i个物品不能装下，则递归装i-1个
+	if (w[n] > W) {
+		return packRecursive(n - 1, W, w, v);
+	}
+	//第i个物品能装下，则比较包括第i个物品和不包括第i个物品，取其最大值
+	else {
+		return max(v[n] + packRecursive(n - 1, W - w[n], w, v), packRecursive(n - 1, W, w, v));
+	}
+}
+
+// 打印背包问题的表格
+void printT(int n, int W)
+{
+	// 打印n行
+	for (auto i = 0; i <= n; i++)
+	{
 		// 打印行数
 		cout << i << ":\t";
 
@@ -41,25 +64,7 @@ int packIterative(int n, int W, int *w, int *v) {
 		// 换行
 		cout << endl;
 	}
-	return T[n][W];
 }
-
-// 递归法，不支持显示背包问题的表格
-int packRecursive(int n, int W, int *w, int *v) {
-	// 结束条件（初始条件），i或者j为0时最大总价值为0
-	if (n == 0 || W == 0) {
-		return 0;
-	}
-	// 第i个物品不能装下，则递归装i-1个
-	if (w[i] > W) {
-		return packRecursive(n - 1, W, w, v);
-	}
-	//第i个物品能装下，则比较包括第i个物品和不包括第i个物品，取其最大值
-	else {
-		return max(v[i] + packRecursive(n - 1, W - w[n], w , v), packRecursive(n - 1, W, w, v));
-	}
-}
-
 
 int main() {
 	int *w = NULL;		// 存储每件物品重量的数组指针
@@ -94,8 +99,8 @@ int main() {
 
 	// 分配空间
 	// 对w和v分配n+1大小
-	w = new int[n+1];
-	v = new int[n+1];
+	w = new int[n + 1];
+	v = new int[n + 1];
 
 	// 对T分配n+1行，并初始化为0
 	T = new int *[n + 1]();
@@ -108,7 +113,7 @@ int main() {
 	// 输入背包的重量和价值
 	for (auto i = 1; i <= n; i++)
 	{
-		cout << "请输入第 " << i << " 个背包的重量和价值（用空格隔开）" << endl;
+		cout << "请输入第 " << i << " 个物品的重量和价值（用空格隔开）" << endl;
 		cin >> w[i] >> v[i];
 		if (cin.fail() || w[i] < 0 || v[i] < 0)
 		{
@@ -134,6 +139,8 @@ int main() {
 	{
 		// 迭代法，能显示背包问题的表格
 		cout << "能装下物品的最大价值为 " << packIterative(n, W, w, v) << endl;
+		cout << "------------------------------------------------" << endl;
+		printT(n, W);
 		break;
 	}
 	case 2:
@@ -150,6 +157,13 @@ int main() {
 	}
 
 	cout << "------------------------------------------------" << endl;
+
+	delete w;
+	delete v;
+	for (int i = 0; i <= n; ++i) {
+		delete[] T[i];
+	}
+	delete[] T;
 
 	system("pause");
 	return 0;
