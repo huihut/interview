@@ -18,6 +18,15 @@
 
 #### 使用
 
+#### Function
+
+1. Modify the variable to indicate that the variable cannot be changed;
+2. Modify pointers, divided from pointers to pointers and pointer constants;
+3. Constant references, often used in formal parameter types, which avoids copying and avoids modification of values ​​by functions;
+4. Modify the member function to indicate that the member variable cannot be modified within the member function.
+
+#### Use
+
 const 使用
 
 ```cpp
@@ -154,6 +163,38 @@ inline int A::doA() { return 0; }   // 需要显式内联
 
 虚函数内联使用
 
+#### Compiler processing steps for the inline function
+
+1. Modify the normal variable, modify the storage area and life cycle of the variable, and store the variable in the static area. The space is allocated before the main function runs. If there is an initial value, initialize it with the initial value. If there is no initial value, the system defaults. The value initializes it.
+2. Modify the normal function to indicate that the scope of the function can only be used in the file that defines the function. To prevent duplicate names in functions in other people's namespaces when developing projects, you can position the function as static.
+3. Modify member variables, modify member variables so that all objects only save one variable, and you can access the member without generating an object.
+4. Modify the member function, decorating the member function so that the function can be accessed without generating the object, but the non-static member cannot be accessed within the static function.
+
+### Advantages and disadvantages
+
+advantage
+
+1. The inline function, like the macro function, will perform code expansion at the called location, eliminating the need for parameter stacking, stack frame development and recycling, and returning results, thus improving the program running speed.
+2. Inline functions Compared to macro functions, when the code is expanded, security checks or automatic type conversions (same as normal functions) are performed, while macro definitions do not.
+3. Declaring a member function defined at the same time in the class is automatically converted to an inline function, so the inline function can access the member variables of the class, and the macro definition cannot.
+4. Inline functions can be debugged at runtime, while macro definitions are not.
+
+Disadvantage
+
+1. Code bloat. Inlining eliminates the overhead of function calls at the expense of code bloat (copy). If the time to execute the in-body code of the function is greater than the overhead of the function call, the efficiency gain will be minimal. On the other hand, each inline function call must copy the code, which will increase the total code size of the program and consume more memory space.
+2. The inline function cannot be upgraded as the library is upgraded. Changes to the inline function need to be recompiled, unlike non-inline which can be linked directly.
+3. Whether it is inline or not, the programmer is uncontrollable. Inline functions are just suggestions for the compiler. Whether the function is inline or not, the decision is in the compiler.
+
+#### Can a virtual function be an inline function?
+
+> [Are "inline virtual" member functions ever actually "inlined"?] (http://www.cs.technion.ac.il/users/yechiel/c++-faq/inline-virtuals.html)
+
+* Virtual functions can be inline functions, inlining can modify virtual functions, but can not be inlined when virtual functions are polymorphic.
+* Inlining is recommended in the compiler to inline the compiler, and the polymorphism of the virtual function is at runtime, the compiler can not know which code is called at runtime, so the virtual function can not be inline when it is polymorphic (runtime) .
+* `inline virtual` The only time you can inline: the compiler knows which class the called object is (such as `Base::who()`), which only has pointers or references to the actual object instead of the object in the compiler. It will only happen.
+
+Virtual function inline use
+
 ```cpp
 #include <iostream>  
 using namespace std;
@@ -208,6 +249,21 @@ volatile int i = 10;
 ### assert()
 
 断言，是宏，而非函数。assert 宏的原型定义在 `<assert.h>`（C）、`<cassert>`（C++）中，其作用是如果它的条件返回错误，则终止程序执行。可以通过定义 `NDEBUG` 来关闭 assert，但是需要在源代码的开头，`include <assert.h>` 之前。
+
+### volatile
+
+```cpp
+Volatile int i = 10;
+```
+
+* The volatile keyword is a type modifier that can be changed by factors that are unknown to some compilers (operating system, hardware, other threads, etc.). So using volatile tells the compiler not to optimize such objects.
+* Variables declared by the volatile keyword must take values ​​from memory each time they are accessed (variables that are not modified by volatile, may be evaluated from the CPU registers due to compiler optimization)
+* const can be volatile (such as a read-only status register)
+* The pointer can be volatile
+
+### assert()
+
+Assertions are macros, not functions. The prototype of the assert macro is defined in `<assert.h>`(C), `<cassert>`(C++), and its function is to terminate program execution if its condition returns an error. You can turn off assert by defining `NDEBUG`, but at the beginning of the source code, before `include <assert.h>`.
 
 assert() 使用
 
@@ -360,6 +416,30 @@ int main() {
 * 匿名 union 不能包含 protected 成员或 private 成员
 * 全局匿名联合必须是静态（static）的
 
+### C++ in struct and class
+
+In general, struct is more suitable as an implementation of a data structure, class is more suitable to be seen as an object implementation.
+
+#### the difference
+
+* The most essential difference is the default access control
+    1. Default inheritance access. The struct is public and the class is private.
+    2. struct As the implementation of the data structure, its default data access control is public, and class as the object implementation, its default member variable access control is private.
+
+### union联合
+
+A union is a special class that saves space. A union can have multiple data members, but only one data member can have a value at any time. When a member is assigned a value, the other members become undefined. The joint has the following characteristics:
+
+* The default access control is public
+* can contain constructors, destructors
+* Cannot contain members of the reference type
+* Cannot be inherited from other classes, not as a base class
+* Cannot contain virtual functions
+* Anonymous union has direct access to union members in the scope of the definition
+* Anonymous union cannot contain protected members or private members
+* Global anonymous union must be static
+
+
 union 使用
 
 ```cpp
@@ -412,6 +492,23 @@ C 实现 C++ 的面向对象特性（封装、继承、多态）
 * explicit 修饰转换函数时，可以防止隐式转换，但 [按语境转换](https://zh.cppreference.com/w/cpp/language/implicit_conversion) 除外
 
 explicit 使用
+
+### C Implementing C++ Classes
+
+C implements object-oriented features of C++ (encapsulation, inheritance, polymorphism)
+
+* Encapsulation: Encapsulate properties and methods into structures using function pointers
+* Inheritance: Structure nesting
+* Polymorphism: the function pointers of the parent and child methods are different
+
+> [Can you write object-oriented code in C? [closed]](https://stackoverflow.com/a/351745)
+
+### explicit (explicit) keyword
+
+* explicit prevents implicit conversion and copy initialization when decorating the constructor
+* explicit prevents implicit conversion when modifying conversion functions, except for [contextual conversion] (https://zh.cppreference.com/w/cpp/language/implicit_conversion)
+
+Explicit use
 
 ```cpp
 struct A
@@ -479,6 +576,27 @@ using namespace_name::name;
 #### 构造函数的 using 声明
 
 在 C++11 中，派生类能够重用其直接基类定义的构造函数。
+### friend friend class and friend function
+
+* Access to private members
+* Destructive packaging
+* Friends relationship cannot be passed
+* Unidirectionality of friendship
+* The form and quantity of the friend declaration are not limited
+
+### using
+
+#### using statement
+
+A `using declaration` statement only introduces one member of the namespace at a time. It allows us to know exactly which name is being referenced in the program. Such as:
+
+```cpp
+Using namespace_name::name;
+```
+
+#### using declaration of constructor
+
+In C++11, derived classes are able to reuse constructors whose direct base class definitions.
 
 ```cpp
 class Derived : Base {
@@ -516,6 +634,20 @@ using namespace std;
 
 应该多使用 `using 声明`
 
+#### Try to use less `using directives` pollution namespace
+
+> In general, using the using command is more secure than using the using compile command because it only imports the specified name**. If the name conflicts with the local name, the compiler will issue an indication**. The using compile command imports all the names, including names that may not be needed. If there is a conflict with the local name, the **local name will override the namespace version**, and the compiler** will not issue a warning**. In addition, the openness of the namespace means that the names of the namespaces may be scattered in multiple places, which makes it difficult to know exactly which names have been added.
+
+Using
+
+Use `using directives as little as possible.
+
+```cpp
+Using namespace std;
+```
+
+You should use the `using statement more.
+
 ```cpp
 int x;
 std::cin >> x ;
@@ -542,6 +674,16 @@ cout << x << endl;
 3. 命名空间作用域符（`namespace::name`）:用于表示指定类型的作用域范围是具体某个命名空间的
 
 :: 使用
+
+### :: Range Resolution Operator
+
+#### Categories
+
+1. Global scoping (`::name`): before the type name (class, class member, member function, variable, etc.), indicates that the scope is a global namespace
+2. Class scope (`class::name`): used to indicate that the scope of the specified type is specific to a class
+3. Namespace scoping (`namespace::name`): used to indicate that the scope scope of the specified type is specific to a namespace
+
+:: Use
 
 ```cpp
 int count = 0;        // 全局（::）的 count
@@ -581,6 +723,25 @@ enum { floatPrec = 6, doublePrec = 10 };
 ### decltype
 
 decltype 关键字用于检查实体的声明类型或表达式的类型及值分类。语法：
+
+### enum Enumeration type
+
+#### Enumeration type of qualified scope
+
+```cpp
+Enum class open_modes { input, output, append };
+```
+
+#### Unqualified enum type
+
+```cpp
+Enum color { red, yellow, green };
+Enum { floatPrec = 6, doublePrec = 10 };
+```
+
+### decltype
+
+The decltype keyword is used to check the entity's declared type or the type and value classification of the expression. grammar:
 
 ```cpp
 decltype ( expression )
