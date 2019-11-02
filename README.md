@@ -17,7 +17,7 @@
 
 </details>
 
-🍭 广告与打赏：个人独立开发的一个虚拟形象扮演软件 **《[Avalive](https://store.steampowered.com/app/1137770/Avalive/)》** （[Steam 商店](https://store.steampowered.com/app/1137770/Avalive/) | [YouTube](https://www.youtube.com/channel/UCv8I7x73RXZjGImJvMS6DbQ) | [Github](https://github.com/avamoe/Avalive) | [avamoe](https://ava.moe/)）。打赏请点 [支持赞助](#-支持赞助)。
+🍭 广告与打赏：个人独立开发的一个虚拟形象扮演软件 **《[Avalive](https://store.steampowered.com/app/1137770/Avalive/)》**（[Steam 商店](https://store.steampowered.com/app/1137770/Avalive/) | [YouTube](https://www.youtube.com/channel/UCv8I7x73RXZjGImJvMS6DbQ) | [Github](https://github.com/avamoe/Avalive) | [avamoe](https://ava.moe/)）。打赏请点 [支持赞助](#-支持赞助)。
 
 ## 📑 目录
 
