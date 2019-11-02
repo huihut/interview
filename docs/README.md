@@ -3314,9 +3314,9 @@ int main( void )
 
 ## 🍭 支持赞助
 
-[![Backers](https://opencollective.com/interview/tiers/backer.svg?avatarHeight=36)](https://opencollective.com/interview#backers)
+打赏我一包辣条~
 
-[![Sponsor](https://opencollective.com/interview/tiers/sponsor.svg?avatarHeight=36)](https://opencollective.com/interview#sponsor)
+![Huihut-AliPay](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/Huihut-AliPay-H370.png) ![Huihut-WeChatPay](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/Huihut-WeChatPay-H370.png)
 
 ## 📜 License
 

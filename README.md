@@ -17,6 +17,8 @@
 
 </details>
 
+🍭 广告与打赏：个人独立开发的一个虚拟形象扮演软件 **《[Avalive](https://store.steampowered.com/app/1137770/Avalive/)》** （[Steam 商店](https://store.steampowered.com/app/1137770/Avalive/) | [YouTube](https://www.youtube.com/channel/UCv8I7x73RXZjGImJvMS6DbQ) | [Github](https://github.com/avamoe/Avalive) | [avamoe](https://ava.moe/)）。打赏请点 [支持赞助](#-支持赞助)。
+
 ## 📑 目录
 
 * [➕ C/C++](#-cc)
@@ -3350,9 +3352,9 @@ int main( void )
 
 ## 🍭 支持赞助
 
-[![Backers](https://opencollective.com/interview/tiers/backer.svg?avatarHeight=36)](https://opencollective.com/interview#backers)
+打赏我一包辣条~
 
-[![Sponsor](https://opencollective.com/interview/tiers/sponsor.svg?avatarHeight=36)](https://opencollective.com/interview#sponsor)
+![Huihut-AliPay](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/Huihut-AliPay-H370.png) ![Huihut-WeChatPay](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/Huihut-WeChatPay-H370.png)
 
 ## 📜 License
 
