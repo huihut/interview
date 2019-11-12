@@ -2,21 +2,16 @@
 #include <algorithm>
 using namespace std;
 
-int *w = NULL;		// 存储每件物品重量的数组指针
-int *v = NULL;		// 存储每件物品价值的数组指针
 int **T = NULL;		// 存储背包问题表格的数组指针
-int n;				// 物品个数n
-int W;				// 背包总承重W
 
 // 返回两个值的最大值
-int max(int a, int b)
-{
+int max(int a, int b) {
 	return (a > b) ? a : b;
 }
 
 // 迭代法，能显示背包问题的表格
-void packIterative()
-{
+int packIterative(int n, int W, int *w, int *v) {
+	
 	// 循环遍历n行
 	for (int i = 1; i <= n; ++i)
 	{
@@ -32,22 +27,23 @@ void packIterative()
 				T[i][j] = T[i - 1][j];
 		}
 	}
+	return T[n][W];
 }
 
 // 递归法，不支持显示背包问题的表格
-int packRecursive(int i, int j, int *w, int *v)
-{
+int packRecursive(int n, int W, int *w, int *v) {
 	// 结束条件（初始条件），i或者j为0时最大总价值为0
-	if (i == 0 || j == 0)
+	if (n == 0 || W == 0) {
 		return 0;
-
+	}
 	// 第i个物品不能装下，则递归装i-1个
-	if (w[i] > j)
-		return packRecursive(i - 1, j, w, v);
-
+	if (w[n] > W) {
+		return packRecursive(n - 1, W, w, v);
+	}
 	//第i个物品能装下，则比较包括第i个物品和不包括第i个物品，取其最大值
-	else
-		return max(v[i] + packRecursive(i - 1, j - w[i], w, v), packRecursive(i - 1, j, w, v));
+	else {
+		return max(v[n] + packRecursive(n - 1, W - w[n], w, v), packRecursive(n - 1, W, w, v));
+	}
 }
 
 // 打印背包问题的表格
@@ -70,8 +66,11 @@ void printT(int n, int W)
 	}
 }
 
-int main()
-{
+int main() {
+	int *w = NULL;		// 存储每件物品重量的数组指针
+	int *v = NULL;		// 存储每件物品价值的数组指针
+	int n;				// 物品个数n
+	int W;				// 背包总承重W
 
 	cout << "---------------- 背包问题 ----------------" << endl;
 	cout << "请输入物品数 n (n>=0) " << endl;
@@ -100,8 +99,8 @@ int main()
 
 	// 分配空间
 	// 对w和v分配n+1大小
-	w = new int[n+1];
-	v = new int[n+1];
+	w = new int[n + 1];
+	v = new int[n + 1];
 
 	// 对T分配n+1行，并初始化为0
 	T = new int *[n + 1]();
@@ -114,7 +113,7 @@ int main()
 	// 输入背包的重量和价值
 	for (auto i = 1; i <= n; i++)
 	{
-		cout << "请输入第 " << i << " 个背包的重量和价值（用空格隔开）" << endl;
+		cout << "请输入第 " << i << " 个物品的重量和价值（用空格隔开）" << endl;
 		cin >> w[i] >> v[i];
 		if (cin.fail() || w[i] < 0 || v[i] < 0)
 		{
@@ -139,8 +138,7 @@ int main()
 	case 1:
 	{
 		// 迭代法，能显示背包问题的表格
-		packIterative();
-		cout << "能装下物品的最大价值为 " << T[n][W] << endl;
+		cout << "能装下物品的最大价值为 " << packIterative(n, W, w, v) << endl;
 		cout << "------------------------------------------------" << endl;
 		printT(n, W);
 		break;
@@ -159,6 +157,13 @@ int main()
 	}
 
 	cout << "------------------------------------------------" << endl;
+
+	delete w;
+	delete v;
+	for (int i = 0; i <= n; ++i) {
+		delete[] T[i];
+	}
+	delete[] T;
 
 	system("pause");
 	return 0;
