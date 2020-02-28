@@ -582,22 +582,28 @@ cout << x << endl;
 :: 使用
 
 ```cpp
-int count = 0;        // 全局（::）的 count
+int count = 11;         // 全局（::）的 count
 
 class A {
 public:
-    static int count; // 类 A 的 count（A::count）
+	static int count;   // 类 A 的 count（A::count）
 };
+int A::count = 21;
+
+void fun()
+{
+	int count = 31;     // 初始化局部的 count 为 31
+	count = 32;         // 设置局部的 count 的值为 32
+}
 
 int main() {
-    ::count = 1;      // 设置全局的 count 的值为 1
+	::count = 12;       // 测试 1：设置全局的 count 的值为 12
 
-    A::count = 2;     // 设置类 A 的 count 为 2
+	A::count = 22;      // 测试 2：设置类 A 的 count 为 22
 
-    int count = 0;    // 局部的 count
-    count = 3;        // 设置局部的 count 的值为 3
+	fun();		        // 测试 3
 
-    return 0;
+	return 0;
 }
 ```
 
