@@ -1131,6 +1131,9 @@ catch (bad_cast b) {
 typeid、type_info 使用
 
 ```cpp
+#include <iostream>
+using namespace std;
+
 class Flyable                       // 能飞的
 {
 public:
@@ -1143,6 +1146,7 @@ public:
     void foraging() {...}           // 觅食
     virtual void takeoff() {...}
     virtual void land() {...}
+    virtual ~Bird(){}
 };
 class Plane : public Flyable        // 飞机
 {
@@ -1164,7 +1168,7 @@ private:
     ...
 };
 
-class doSomething(Flyable *obj)                 // 做些事情
+void doSomething(Flyable *obj)                 // 做些事情
 {
     obj->takeoff();
 
@@ -1177,7 +1181,15 @@ class doSomething(Flyable *obj)                 // 做些事情
     }
 
     obj->land();
-};
+}
+
+int main(){
+	Bird *b = new Bird();
+	doSomething(b);
+	delete b;
+	b = nullptr;
+	return 0;
+}
 ```
 
 
@@ -1472,14 +1484,14 @@ typedef struct {
     * 问题的分解
     * 问题规模的分解
 * 折半查找（递归）
-* 归并查找（递归）
+* 归并排序（递归）
 * 快速排序（递归）
 
 #### 递归与迭代
 
 * 迭代：反复利用变量旧值推出新值
 * 折半查找（迭代）
-* 归并查找（迭代）
+* 归并排序（迭代）
 
 #### 广义表
 
