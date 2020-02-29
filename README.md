@@ -1152,7 +1152,7 @@ class Plane : public Flyable        // 飞机
 {
 public:
     void carry() {...}              // 运输
-    virtual void take off() {...}
+    virtual void takeoff() {...}
     virtual void land() {...}
 };
 
