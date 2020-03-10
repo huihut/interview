@@ -54,6 +54,15 @@
 3. 修饰引用，指向常量的引用（reference to const），用于形参类型，即避免了拷贝，又避免了函数对值的修改；
 4. 修饰成员函数，说明该成员函数内不能修改成员变量。
 
+#### const 的指针与引用
+
+* 指针
+    * 指向常量的指针（pointer to const）
+    * 自身是常量的指针（常量指针，const pointer）
+* 引用
+    * 指向常量的引用（reference to const）
+    * 没有 const reference，因为引用本身就是 const pointer
+
 > （为了方便记忆可以想成）被 const 修饰（在 const 后面）的值不可改变，如下文使用例子中的 `p2`、`p3`
 
 #### 使用
