@@ -12,9 +12,20 @@
 #### 作用
 
 1. 修饰变量，说明该变量不可以被改变；
-2. 修饰指针，分为指向常量的指针和指针常量；
-3. 常量引用，经常用于形参类型，即避免了拷贝，又避免了函数对值的修改；
+2. 修饰指针，分为指向常量的指针（pointer to const）和自身是常量的指针（常量指针，const pointer）；
+3. 修饰引用，指向常量的引用（reference to const），用于形参类型，即避免了拷贝，又避免了函数对值的修改；
 4. 修饰成员函数，说明该成员函数内不能修改成员变量。
+
+#### const 的指针与引用
+
+* 指针
+    * 指向常量的指针（pointer to const）
+    * 自身是常量的指针（常量指针，const pointer）
+* 引用
+    * 指向常量的引用（reference to const）
+    * 没有 const reference，因为引用本身就是 const pointer
+
+> （为了方便记忆可以想成）被 const 修饰（在 const 后面）的值不可改变，如下文使用例子中的 `p2`、`p3`
 
 #### 使用
 
@@ -42,21 +53,21 @@ void function()
     // 对象
     A b;                        // 普通对象，可以调用全部成员函数、更新常成员变量
     const A a;                  // 常对象，只能调用常成员函数
-    const A *p = &a;            // 常指针
-    const A &q = a;             // 常引用
+    const A *p = &a;            // 指针变量，指向常对象
+    const A &q = a;             // 指向常对象的引用
 
     // 指针
     char greeting[] = "Hello";
     char* p1 = greeting;                // 指针变量，指向字符数组变量
-    const char* p2 = greeting;          // 指针变量，指向字符数组常量
-    char* const p3 = greeting;          // 常指针，指向字符数组变量
-    const char* const p4 = greeting;    // 常指针，指向字符数组常量
+    const char* p2 = greeting;          // 指针变量，指向字符数组常量（const 后面是 char，说明指向的字符（char）不可改变）
+    char* const p3 = greeting;          // 自身是常量的指针，指向字符数组变量（const 后面是 p3，说明 p3 指针自身不可改变）
+    const char* const p4 = greeting;    // 自身是常量的指针，指向字符数组常量
 }
 
 // 函数
 void function1(const int Var);           // 传递过来的参数在函数内不可变
 void function2(const char* Var);         // 参数指针所指内容为常量
-void function3(char* const Var);         // 参数指针为常指针
+void function3(char* const Var);         // 参数指针为常量
 void function4(const int& Var);          // 引用参数在函数内为常量
 
 // 函数返回值
@@ -544,22 +555,28 @@ cout << x << endl;
 :: 使用
 
 ```cpp
-int count = 0;        // 全局（::）的 count
+int count = 11;         // 全局（::）的 count
 
 class A {
 public:
-    static int count; // 类 A 的 count（A::count）
+	static int count;   // 类 A 的 count（A::count）
 };
+int A::count = 21;
+
+void fun()
+{
+	int count = 31;     // 初始化局部的 count 为 31
+	count = 32;         // 设置局部的 count 的值为 32
+}
 
 int main() {
-    ::count = 1;      // 设置全局的 count 的值为 1
+	::count = 12;       // 测试 1：设置全局的 count 的值为 12
 
-    A::count = 2;     // 设置类 A 的 count 为 2
+	A::count = 22;      // 测试 2：设置类 A 的 count 为 22
 
-    int count = 0;    // 局部的 count
-    count = 3;        // 设置局部的 count 的值为 3
+	fun();		        // 测试 3
 
-    return 0;
+	return 0;
 }
 ```
 
@@ -830,9 +847,9 @@ virtual int A() = 0;
 
 ### 虚函数、纯虚函数
 
-* 类里如果声明了虚函数，这个函数是实现的，哪怕是空实现，它的作用就是为了能让这个函数在它的子类里面可以被覆盖，这样的话，编译器就可以使用后期绑定来达到多态了。纯虚函数只是一个接口，是个函数的声明而已，它要留到子类里去实现。 
-* 虚函数在子类里面也可以不重载的；但纯虚函数必须在子类去实现。
-* 虚函数的类用于 “实作继承”，继承接口的同时也继承了父类的实现。当然大家也可以完成自己的实现。纯虚函数关注的是接口的统一性，实现由子类完成。 
+* 类里如果声明了虚函数，这个函数是实现的，哪怕是空实现，它的作用就是为了能让这个函数在它的子类里面可以被覆盖（override），这样的话，编译器就可以使用后期绑定来达到多态了。纯虚函数只是一个接口，是个函数的声明而已，它要留到子类里去实现。 
+* 虚函数在子类里面可以不重写；但纯虚函数必须在子类实现才可以实例化子类。
+* 虚函数的类用于 “实作继承”，继承接口的同时也继承了父类的实现。纯虚函数关注的是接口的统一性，实现由子类完成。 
 * 带纯虚函数的类叫抽象类，这种类不能直接生成对象，而只有被继承，并重写其虚函数后，才能使用。抽象类被继承后，子类可以继续是抽象类，也可以是普通类。
 * 虚基类是虚继承中的基类，具体见下文虚继承。
 
@@ -1087,6 +1104,9 @@ catch (bad_cast b) {
 typeid、type_info 使用
 
 ```cpp
+#include <iostream>
+using namespace std;
+
 class Flyable                       // 能飞的
 {
 public:
@@ -1099,12 +1119,13 @@ public:
     void foraging() {...}           // 觅食
     virtual void takeoff() {...}
     virtual void land() {...}
+    virtual ~Bird(){}
 };
 class Plane : public Flyable        // 飞机
 {
 public:
     void carry() {...}              // 运输
-    virtual void take off() {...}
+    virtual void takeoff() {...}
     virtual void land() {...}
 };
 
@@ -1120,7 +1141,7 @@ private:
     ...
 };
 
-class doSomething(Flyable *obj)                 // 做些事情
+void doSomething(Flyable *obj)                 // 做些事情
 {
     obj->takeoff();
 
@@ -1133,7 +1154,15 @@ class doSomething(Flyable *obj)                 // 做些事情
     }
 
     obj->land();
-};
+}
+
+int main(){
+	Bird *b = new Bird();
+	doSomething(b);
+	delete b;
+	b = nullptr;
+	return 0;
+}
 ```
 
 
@@ -1171,7 +1200,7 @@ class doSomething(Flyable *obj)                 // 做些事情
 28. 避免使用 handles（包括 引用、指针、迭代器）指向对象内部（以增加封装性、使 const 成员函数的行为更像 const、降低 “虚吊号码牌”（dangling handles，如悬空指针等）的可能性）
 29. 为 “异常安全” 而努力是值得的（异常安全函数（Exception-safe functions）即使发生异常也不会泄露资源或允许任何数据结构败坏，分为三种可能的保证：基本型、强列型、不抛异常型）
 30. 透彻了解 inlining 的里里外外（inlining 在大多数 C++ 程序中是编译期的行为；inline 函数是否真正 inline，取决于编译器；大部分编译器拒绝太过复杂（如带有循环或递归）的函数 inlining，而所有对 virtual 函数的调用（除非是最平淡无奇的）也都会使 inlining 落空；inline 造成的代码膨胀可能带来效率损失；inline 函数无法随着程序库的升级而升级）
-31. 将文件间的编译依存关系降至最低（如果使用 object references 或 object pointers 可以完成任务，就不要使用 objects；如果能过够，尽量以 class 声明式替换 class 定义式；为声明式和定义式提供不同的头文件）
+31. 将文件间的编译依存关系降至最低（如果使用 object references 或 object pointers 可以完成任务，就不要使用 objects；如果能够，尽量以 class 声明式替换 class 定义式；为声明式和定义式提供不同的头文件）
 32. 确定你的 public 继承塑模出 is-a（是一种）关系（适用于 base classes 身上的每一件事情一定适用于 derived classes 身上，因为每一个 derived class 对象也都是一个 base class 对象）
 33. 避免遮掩继承而来的名字（可使用 using 声明式或转交函数（forwarding functions）来让被遮掩的名字再见天日）
 34. 区分接口继承和实现继承（在 public 继承之下，derived classes 总是继承 base class 的接口；pure virtual 函数只具体指定接口继承；非纯 impure virtual 函数具体指定接口继承及缺省实现继承；non-virtual 函数具体指定接口继承以及强制性实现继承）
@@ -1238,10 +1267,11 @@ class doSomething(Flyable *obj)                 // 做些事情
 
 容器 | 底层数据结构 | 时间复杂度 | 有无序 | 可不可重复 | 其他
 ---|---|---|---|---|---
-[array](https://github.com/huihut/interview/tree/master/STL#array)|数组|随机读改 O(1)|无序|可重复|支持快速随机访问
-[vector](https://github.com/huihut/interview/tree/master/STL#vector)|数组|随机读改、尾部插入、尾部删除 O(1)<br/>头部插入、头部删除 O(n)|无序|可重复|支持快速随机访问
-[list](https://github.com/huihut/interview/tree/master/STL#list)|双向链表|插入、删除 O(1)<br/>随机读改 O(n)|无序|可重复|支持快速增删
+[array](https://github.com/huihut/interview/tree/master/STL#array)|数组|随机读改 O(1)|无序|可重复|支持随机访问
+[vector](https://github.com/huihut/interview/tree/master/STL#vector)|数组|随机读改、尾部插入、尾部删除 O(1)<br/>头部插入、头部删除 O(n)|无序|可重复|支持随机访问
 [deque](https://github.com/huihut/interview/tree/master/STL#deque)|双端队列|头尾插入、头尾删除 O(1)|无序|可重复|一个中央控制器 + 多个缓冲区，支持首尾快速增删，支持随机访问
+[forward_list](https://github.com/huihut/interview/tree/master/STL#forward_list)|单向链表|插入、删除 O(1)|无序|可重复|不支持随机访问
+[list](https://github.com/huihut/interview/tree/master/STL#list)|双向链表|插入、删除 O(1)|无序|可重复|不支持随机访问
 [stack](https://github.com/huihut/interview/tree/master/STL#stack)|deque / list|顶部插入、顶部删除 O(1)|无序|可重复|deque 或 list 封闭头端开口，不用 vector 的原因应该是容量大小有限制，扩容耗时
 [queue](https://github.com/huihut/interview/tree/master/STL#queue)|deque / list|尾部插入、头部删除 O(1)|无序|可重复|deque 或 list 封闭头端开口，不用 vector 的原因应该是容量大小有限制，扩容耗时
 [priority_queue](https://github.com/huihut/interview/tree/master/STL#priority_queue)|vector + max-heap|插入、删除 O(log<sub>2</sub>n)|有序|可重复|vector容器+heap处理规则
@@ -1249,10 +1279,10 @@ class doSomething(Flyable *obj)                 // 做些事情
 [multiset](https://github.com/huihut/interview/tree/master/STL#multiset)|红黑树|插入、删除、查找 O(log<sub>2</sub>n)|有序|可重复|
 [map](https://github.com/huihut/interview/tree/master/STL#map)|红黑树|插入、删除、查找 O(log<sub>2</sub>n)|有序|不可重复|
 [multimap](https://github.com/huihut/interview/tree/master/STL#multimap)|红黑树|插入、删除、查找 O(log<sub>2</sub>n)|有序|可重复|
-hash_set|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|不可重复|
-hash_multiset|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重复|
-hash_map|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|不可重复|
-hash_multimap|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重复|
+[unordered_set](https://github.com/huihut/interview/tree/master/STL#unordered_set)|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|不可重复|
+[unordered_multiset](https://github.com/huihut/interview/tree/master/STL#unordered_multiset)|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重复|
+[unordered_map](https://github.com/huihut/interview/tree/master/STL#unordered_map)|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|不可重复|
+[unordered_multimap](https://github.com/huihut/interview/tree/master/STL#unordered_multimap)|哈希表|插入、删除、查找 O(1) 最差 O(n)|无序|可重复|
 
 ### STL 算法
 
@@ -1277,7 +1307,7 @@ typedef struct {
 	int top;
 	int size;
 	int increment;
-} SqSrack;
+} SqStack;
 ```
 
 ![](https://raw.githubusercontent.com/huihut/interview/master/images/SqStack.png)
@@ -1427,14 +1457,14 @@ typedef struct {
     * 问题的分解
     * 问题规模的分解
 * 折半查找（递归）
-* 归并查找（递归）
+* 归并排序（递归）
 * 快速排序（递归）
 
 #### 递归与迭代
 
 * 迭代：反复利用变量旧值推出新值
 * 折半查找（迭代）
-* 归并查找（迭代）
+* 归并排序（迭代）
 
 #### 广义表
 
@@ -1770,7 +1800,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
     * 缺点：
         1. 通信是通过将共享空间缓冲区直接附加到进程的虚拟地址空间中来实现的，因此进程间的读写操作的同步问题
         2. 利用内存缓冲区直接交换信息，内存的实体存在于计算机中，只能同一个计算机系统中的诸多进程共享，不方便网络通信
-* 套接字（Socket）：可用于不同及其间的进程通信
+* 套接字（Socket）：可用于不同计算机间的进程通信
     * 优点：
         1. 传输数据为字节级，传输数据可自定义，数据量小效率高
         2. 传输数据时间短，性能高
@@ -1802,7 +1832,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 
 #### 线程之间私有和共享的资源
 
-* 私有：线程栈，寄存器，程序寄存器
+* 私有：线程栈，寄存器，程序计数器
 * 共享：堆，地址空间，全局变量，静态变量
 
 #### 多进程与多线程间的对比、优劣与选择
@@ -1839,7 +1869,7 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 
 #### 原因
 
-在现代操作系统里，同一时间可能有多个内核执行流在执行，因此内核其实象多进程多线程编程一样也需要一些同步机制来同步各执行单元对共享数据的访问。尤其是在多处理器系统上，更需要一些同步机制来同步不同处理器上的执行单元对共享的数据的访问。
+在现代操作系统里，同一时间可能有多个内核执行流在执行，因此内核其实像多进程多线程编程一样也需要一些同步机制来同步各执行单元对共享数据的访问。尤其是在多处理器系统上，更需要一些同步机制来同步不同处理器上的执行单元对共享的数据的访问。
 
 #### 同步方式
 
@@ -2535,7 +2565,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 * 第一范式（1NF）：属性（字段）是最小单位不可再分。
 * 第二范式（2NF）：满足 1NF，每个非主属性完全依赖于主键（消除 1NF 非主属性对码的部分函数依赖）。
-* 第三范式（3NF）：满足 2NF，任何非主属性不依赖于其他非主属性（消除 2NF 主属性对码的传递函数依赖）。
+* 第三范式（3NF）：满足 2NF，任何非主属性不依赖于其他非主属性（消除 2NF 非主属性对码的传递函数依赖）。
 * 鲍依斯-科得范式（BCNF）：满足 3NF，任何非主属性不能对主键子集依赖（消除 3NF 主属性对码的部分和传递函数依赖）。
 * 第四范式（4NF）：满足 3NF，属性之间不能有非平凡且非函数依赖的多值依赖（消除 3NF 非平凡且非函数依赖的多值依赖）。
 
@@ -2562,7 +2592,7 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 ## 📏 设计模式
 
-> 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/column/details/15392.html) 系列博文
+> 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/liang19890820/article/details/66974516) 系列博文
 
 [设计模式工程目录](DesignPattern)
 
@@ -3309,16 +3339,16 @@ int main( void )
 
 包括勘误的 Issue、PR，排序按照贡献时间。
 
-[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)、[FengZiYjun](https://github.com/FengZiYjun)、[shangjiaxuan](https://github.com/shangjiaxuan)、[kwongtailau](https://github.com/kwongtailau)、[asky991](https://github.com/asky991)、[traviszeng](https://github.com/traviszeng)、[kele1997](https://github.com/kele1997)、[hxdnshx](https://github.com/hxdnshx)、[a74731248](https://github.com/a74731248)、[qvjp](https://github.com/qvjp)、[xindelvcheng](https://github.com/xindelvcheng)、[hbsun2113](https://github.com/hbsun2113)、[linkwk7](https://github.com/linkwk7)
+[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)、[FengZiYjun](https://github.com/FengZiYjun)、[shangjiaxuan](https://github.com/shangjiaxuan)、[kwongtailau](https://github.com/kwongtailau)、[asky991](https://github.com/asky991)、[traviszeng](https://github.com/traviszeng)、[kele1997](https://github.com/kele1997)、[hxdnshx](https://github.com/hxdnshx)、[a74731248](https://github.com/a74731248)、[qvjp](https://github.com/qvjp)、[xindelvcheng](https://github.com/xindelvcheng)、[hbsun2113](https://github.com/hbsun2113)、[linkwk7](https://github.com/linkwk7)、[foolishflyfox](https://github.com/foolishflyfox)、[zhjp0](https://github.com/zhjp0)、[Mrtj2016](https://github.com/Mrtj2016)
 
 ## 🍭 支持赞助
 
-[![Backers](https://opencollective.com/interview/tiers/backer.svg?avatarHeight=36)](https://opencollective.com/interview#backers)
+打赏我一包辣条~
 
-[![Sponsor](https://opencollective.com/interview/tiers/sponsor.svg?avatarHeight=36)](https://opencollective.com/interview#sponsor)
+![Huihut-AliPay](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/Huihut-AliPay-H370.png) ![Huihut-WeChatPay](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/Huihut-WeChatPay-H370.png)
 
 ## 📜 License
 
-本仓库遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用） 协议，转载请注明出处。
+本仓库遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用 - 相同方式共享） 协议，转载请注明出处，不得用于商业目的。
 
 [![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](LICENSE)
