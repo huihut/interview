@@ -2090,7 +2090,7 @@ ICMP 报文格式：
 
 应用：
 * PING（Packet InterNet Groper，分组网间探测）测试两个主机之间的连通性
-    * TTL（Time To Live，生存时间）该字段指定 IP 包被路由器丢弃之前允许通过的最大网段数量
+* TTL（Time To Live，生存时间）该字段指定 IP 包被路由器丢弃之前允许通过的最大网段数量
 
 #### 内部网关协议
 
