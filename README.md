@@ -1,21 +1,14 @@
-<nav style="margin: 0px 40px 0 0;position: absolute;right: 0;text-align: right;z-index: 10;">
-    <ul style="display: inline-block;list-style: none;margin: 0;">
-        <li style="display: inline-block;margin: 0 1rem;padding: 5px 0;position: relative;cursor: pointer;">
-            <a href="https://github.com/huihut/interview" style="color: inherit;font-size: 16px;text-decoration: none;transition: color .3s;">简体中文</a>
-        </li>
-        <li style="display: inline-block;margin: 0 1rem;padding: 5px 0;position: relative;cursor: pointer;">
-            <a href="README_en.md" style="color: inherit;font-size: 16px;text-decoration: none;transition: color .3s; border-bottom: 2px solid var(--theme-color,#42b983); color: var(--theme-color,#42b983);">English</a>
-        </li>
-    </ul>
-</nav>
-
-<br/>
-<br/>
-
 <div align="center">
 📖 Github
 &emsp;&emsp; | &emsp;&emsp;
 <a href="https://interview.huihut.com">📚 Docsify</a>
+</div> 
+<br>
+
+<div align="center">
+简体中文
+&emsp;&emsp; | &emsp;&emsp;
+<a href="https://github.com/huihut/interview/README_en.md">English</a>
 </div> 
 <br>
 
