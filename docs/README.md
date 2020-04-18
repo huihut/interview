@@ -5,6 +5,45 @@
 </div> 
 <br>
 
+<b><details><summary>💡 关于</summary></b>
+
+📚 本仓库是面向 C/C++ 技术方向校招求职者、初学者的基础知识总结，包括语言、程序库、数据结构、算法、系统、网络、链接装载库等知识及面试经验、招聘、内推等信息。
+
+💡 侧边目录支持方式：[📚 Docsify 文档](https://interview.huihut.com)、[Github + TOC 导航](https://github.com/jawil/GayHub)（[TOC预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/TOC预览.png)）
+
+📄 保存为 PDF 方式：使用 Chrome 浏览器打开 <a href="https://interview.huihut.com">📚 Docsify 文档</a> 页面，缩起左侧目录-右键 - 打印 - 选择目标打印机是另存为PDF - 保存（[打印预览.png](https://raw.githubusercontent.com/huihut/interview/master/images/打印预览.png)）
+
+🙏 仓库内容如有错误或改进欢迎 issue 或 pr，建议或讨论可在 [#12](https://github.com/huihut/interview/issues/12) 提出。由于本人水平有限，仓库中的知识点有来自本人原创、读书笔记、书籍、博文等，非原创均已标明出处，如有遗漏，请 issue 提出。本仓库遵循 [CC BY-NC-SA 4.0（署名 - 非商业性使用 - 相同方式共享）](https://github.com/huihut/interview/blob/master/LICENSE) 协议，转载请注明出处，不得用于商业目的。
+
+</details>
+
+## 📑 目录
+
+* [➕ C/C++](#cc)
+* [⭐️ Effective](#effective)
+* [📦 STL](#stl)
+* [〽️ 数据结构](#data-structure)
+* [⚡️ 算法](#algorithm)
+* [❓ Problems](#problems)
+* [💻 操作系统](#os)
+* [☁️ 计算机网络](#computer-network)
+* [🌩 网络编程](#network-programming)
+* [💾 数据库](#database)
+* [📏 设计模式](#design-pattern)
+* [⚙️ 链接装载库](#link-loading-library)
+* [📚 书籍](#books)
+* [🔱 C/C++ 发展方向](#cc-development-direction)
+* [💯 复习刷题网站](#review-of-brush-questions-website)
+* [📝 面试题目经验](#interview-questions-experience)
+* [📆 招聘时间岗位](#recruitment-time-post)
+* [👍 内推](#recommend)
+* [👬 贡献者](#contributor)
+* [🍭 支持赞助](#support-sponsor)
+* [📜 License](#license)
+
+
+<a id="cc"></a>
+
 ## ➕ C/C++
 
 ### const
@@ -1165,6 +1204,7 @@ int main(){
 }
 ```
 
+<a id="effective"></a>
 
 ## ⭐️ Effective
 
@@ -1257,6 +1297,8 @@ int main(){
 * [Bjarne Stroustrup 的常见问题](http://www.stroustrup.com/bs_faq.html)
 * [Bjarne Stroustrup 的 C++ 风格和技巧常见问题](http://www.stroustrup.com/bs_faq2.html)
 
+<a id="stl"></a>
+
 ## 📦 STL
 
 ### STL 索引
@@ -1290,6 +1332,9 @@ int main(){
 ---|---|---|---
 [find](http://www.cplusplus.com/reference/algorithm/find/)|顺序查找|O(n)|可重复
 [sort](https://github.com/gcc-mirror/gcc/blob/master/libstdc++-v3/include/bits/stl_algo.h#L4808)|[内省排序](https://en.wikipedia.org/wiki/Introsort)|O(n*log<sub>2</sub>n)|可重复
+
+
+<a id="data-structure"></a>
 
 ## 〽️ 数据结构
 
@@ -1682,6 +1727,8 @@ B 树、B+ 树图片
 * 三维计算机图形
 * 最邻近搜索
 
+<a id="algorithm"></a>
+
 ## ⚡️ 算法
 
 ### 排序
@@ -1734,6 +1781,8 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 [动态规划](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92)|通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法，适用于有重叠子问题和最优子结构性质的问题|[背包问题](https://github.com/huihut/interview/tree/master/Problems/KnapsackProblem)、斐波那契数列
 [贪心法](https://zh.wikipedia.org/wiki/%E8%B4%AA%E5%BF%83%E6%B3%95)|一种在每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是最好或最优的算法|旅行推销员问题（最短路径问题）、最小生成树、哈夫曼编码
 
+<a id="problems"></a>
+
 ## ❓ Problems
 
 ### Single Problem
@@ -1762,6 +1811,8 @@ B树/B+树 |O(log<sub>2</sub>n) |   |
 ### 牛客网
 
 * [牛客网 . 在线编程专题](https://www.nowcoder.com/activity/oj)
+
+<a id="os"></a>
 
 ## 💻 操作系统
 
@@ -1994,6 +2045,8 @@ int main()
 * 先进先出置换算法（FIFO）
 * 最近最久未使用（LRU）算法
 * 时钟（Clock）置换算法
+
+<a id="computer-network"></a>
 
 ## ☁️ 计算机网络
 
@@ -2400,6 +2453,8 @@ TRACE | 回显服务器收到的请求，主要用于测试或诊断
     * 用于内部网络管理员作为对所有电脑作中央管理的手段
 * SNMP（Simple Network Management Protocol，简单网络管理协议）构成了互联网工程工作小组（IETF，Internet Engineering Task Force）定义的 Internet 协议族的一部分。该协议能够支持网络管理系统，用以监测连接到网络上的设备是否有任何引起管理上关注的情况。
 
+<a id="network-programming"></a>
+
 ## 🌩 网络编程
 
 ### Socket
@@ -2464,6 +2519,8 @@ ssize_t write(int fd, const void *buf, size_t count);
 4. 接收到这个 FIN 的源发送端 TCP 对它进行确认。
 
 这样每个方向上都有一个 FIN 和 ACK。
+
+<a id="database"></a>
 
 ## 💾 数据库
 
@@ -2590,6 +2647,8 @@ ssize_t write(int fd, const void *buf, size_t count);
         * 解除：撤销处理死锁代价最小的事务，并释放此事务的所有的锁，使其他事务得以继续运行下去。
 * 可串行化调度：多个事务的并发执行是正确的，当且仅当其结果与按某一次序串行地执行这些事务时的结果相同。可串行性时并发事务正确调度的准则。
 
+<a id="design-pattern"></a>
+
 ## 📏 设计模式
 
 > 各大设计模式例子参考：[CSDN专栏 . C++ 设计模式](https://blog.csdn.net/liang19890820/article/details/66974516) 系列博文
@@ -2624,6 +2683,8 @@ ssize_t write(int fd, const void *buf, size_t count);
 * 接口隔离原则（ISP，Interface Segregation Principle）
 * 迪米特法则（LoD，Law of Demeter）
 * 开放封闭原则（OCP，Open Close Principle）
+
+<a id="link-loading-library"></a>
 
 ## ⚙️ 链接装载库
 
@@ -3176,6 +3237,8 @@ int main( void )
 * 变长参数（stdarg.h）
 * 非局部跳转（setjmp.h）
 
+<a id="books"></a>
+
 ## 📚 书籍
 
 > [huihut/CS-Books](https://github.com/huihut/CS-Books)：📚 Computer Science Books 计算机技术类书籍 PDF
@@ -3209,6 +3272,8 @@ int main( void )
 ### 其他
 
 * 《程序员的自我修养》
+
+<a id="cc-development-direction"></a>
 
 ## 🔱 C/C++ 发展方向
 
@@ -3296,6 +3361,8 @@ int main( void )
 * 较强的算法实现能力，熟练掌握 C/C++ 编程，熟悉 Shell/Python/Matlab 至少一种编程语言；
 * 在计算机视觉、模式识别等学术会议或者期刊上发表论文、相关国际比赛获奖、及有相关专利者优先。
 
+<a id="review-of-brush-questions-website"></a>
+
 ## 💯 复习刷题网站
 
 * [cplusplus](http://www.cplusplus.com/)
@@ -3304,6 +3371,8 @@ int main( void )
 * [leetcode](https://leetcode.com/) | [leetcode-cn](https://leetcode-cn.com/)
 * [lintcode](https://www.lintcode.com/)
 * [nowcoder](https://www.nowcoder.net/)
+
+<a id="interview-questions-experience"></a>
 
 ## 📝 面试题目经验
 
@@ -3326,29 +3395,36 @@ int main( void )
 * [cnblogs . 常见C++面试题及基本知识点总结（一）](https://www.cnblogs.com/LUO77/p/5771237.html)
 * [segmentfault . C++常见面试问题总结](https://segmentfault.com/a/1190000003745529)
 
+<a id="recruitment-time-post"></a>
+
 ## 📆 招聘时间岗位
 
 * [牛客网 . 2020届校招 | 2020 IT名企校招日程](https://www.nowcoder.com/school/schedule)
+
+<a id="recommend"></a>
 
 ## 👍 内推
 
 * [Github . CyC2018/Job-Recommend](https://github.com/CyC2018/Job-Recommend)：🔎 互联网内推信息（社招、校招、实习）
 * [Github . amusi/AI-Job-Recommend](https://github.com/amusi/AI-Job-Recommend)：国内公司人工智能方向（含机器学习、深度学习、计算机视觉和自然语言处理）岗位的招聘信息（含全职、实习和校招）
 
+<a id="contributor"></a>
+
 ## 👬 贡献者
 
-包括勘误的 Issue、PR，排序按照贡献时间。
+<a href="https://github.com/huihut/interview/graphs/contributors"><img src="https://opencollective.com/interview/contributors.svg?button=false" /></a>
 
-[tamarous](https://github.com/tamarous)、[i0Ek3](https://github.com/i0Ek3)、[sniper00](https://github.com/sniper00)、[blackhorse001](https://github.com/blackhorse001)、[houbaron](https://github.com/houbaron)、[Qouan](https://github.com/Qouan)、[2329408386](https://github.com/2329408386)、[FlyingfishMORE](https://github.com/FlyingfishMORE)、[Ematrix163](https://github.com/Ematrix163)、[ReturnZero23](https://github.com/ReturnZero23)、[kelvinkuo](https://github.com/kelvinkuo)、[henryace](https://github.com/henryace)、[xinghun](https://github.com/xinghun)、[maokelong](https://github.com/maokelong)、[easyYao](https://github.com/easyYao)、[FengZiYjun](https://github.com/FengZiYjun)、[shangjiaxuan](https://github.com/shangjiaxuan)、[kwongtailau](https://github.com/kwongtailau)、[asky991](https://github.com/asky991)、[traviszeng](https://github.com/traviszeng)、[kele1997](https://github.com/kele1997)、[hxdnshx](https://github.com/hxdnshx)、[a74731248](https://github.com/a74731248)、[qvjp](https://github.com/qvjp)、[xindelvcheng](https://github.com/xindelvcheng)、[hbsun2113](https://github.com/hbsun2113)、[linkwk7](https://github.com/linkwk7)、[foolishflyfox](https://github.com/foolishflyfox)、[zhjp0](https://github.com/zhjp0)、[Mrtj2016](https://github.com/Mrtj2016)
+<a id="support-sponsor"></a>
 
 ## 🍭 支持赞助
 
-打赏我一包辣条~
+**[Avalive](https://store.steampowered.com/app/1137770/Avalive/)**：一个面部捕捉的虚拟形象扮演软件。
 
-![Huihut-AliPay](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/Huihut-AliPay-H370.png) ![Huihut-WeChatPay](https://huihut-img.oss-cn-shenzhen.aliyuncs.com/Huihut-WeChatPay-H370.png)
+<a id="license"></a>
 
 ## 📜 License
 
 本仓库遵循 CC BY-NC-SA 4.0（署名 - 非商业性使用 - 相同方式共享） 协议，转载请注明出处，不得用于商业目的。
 
-[![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](LICENSE)
+[![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](https://github.com/huihut/interview/blob/master/LICENSE)
+

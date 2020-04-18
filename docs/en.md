@@ -1,56 +1,7 @@
-<style>
-.app-nav {
-    margin: 0px 40px 0 0;
-    position: absolute;
-    right: 0;
-    text-align: right;
-    z-index: 10;
-}
-
-.app-nav li, .app-nav ul {
-    display: inline-block;
-    list-style: none;
-    margin: 0;
-}
-
-.app-nav li {
-    display: inline-block;
-    margin: 0 1rem;
-    padding: 5px 0;
-    position: relative;
-    cursor: pointer;
-}
-
-.app-nav a {
-    color: inherit;
-    font-size: 16px;
-    text-decoration: none;
-    transition: color .3s;
-}
-
-.app-nav a.active {
-    border-bottom: 2px solid var(--theme-color,#42b983);
-}
-
-.app-nav a.active, .app-nav a:hover {
-    color: var(--theme-color,#42b983);
-}
-</style>
-
-<nav class="app-nav">
-    <ul>
-        <li><a href="/">简体中文</a></li>
-        <li><a href="README_en.md" class="active">English</a></li>
-    </ul>
-</nav>
-
-<br/>
-<br/>
-
 <div align="center">
-📖 Github
+<a href="https://github.com/huihut/interview">📖 Github</a>
 &emsp;&emsp; | &emsp;&emsp;
-<a href="https://interview.huihut.com">📚 Docsify</a>
+📚 Docsify
 </div> 
 <br>
 	
