@@ -11,31 +11,30 @@
 
 int main() {
     std::cout << "*******************" << std::endl;
-    std::cout << "** Éè¼ÆÄ£Ê½Àı×Ó **" << std::endl;
+    std::cout << "** ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ **" << std::endl;
     std::cout << "*******************" << std::endl;
 
     std::cout << "*******************" << std::endl;
-    std::cout << "** µ¥ÀıÄ£Ê½ **" << std::endl;
+    std::cout << "** ï¿½ï¿½ï¿½ï¿½Ä£Ê½ **" << std::endl;
     std::cout << "*******************" << std::endl;
     SingletonMain();
 
     std::cout << "*******************" << std::endl;
-    std::cout << "** ³éÏó¹¤³§Ä£Ê½ **" << std::endl;
+    std::cout << "** ï¿½ï¿½ï¿½ó¹¤³ï¿½Ä£Ê½ **" << std::endl;
     std::cout << "*******************" << std::endl;
     FactoryMain();
     
     std::cout << "*******************" << std::endl;
-    std::cout << "** ÊÊÅäÆ÷Ä£Ê½ **" << std::endl;
+    std::cout << "** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ **" << std::endl;
     std::cout << "*******************" << std::endl;
     AdapterMain();
 
     std::cout << "*******************" << std::endl;
-    std::cout << "** ÇÅ½ÓÄ£Ê½ **" << std::endl;
+    std::cout << "** ï¿½Å½ï¿½Ä£Ê½ **" << std::endl;
     std::cout << "*******************" << std::endl;
-    BridgeMain();
     
     std::cout << "*******************" << std::endl;
-    std::cout << "** ¹Û²ìÕßÄ£Ê½ **" << std::endl;
+    std::cout << "** ï¿½Û²ï¿½ï¿½ï¿½Ä£Ê½ **" << std::endl;
     std::cout << "*******************" << std::endl;
     ObserverMain();
 
