@@ -9,13 +9,13 @@ Factory* Factory::CreateFactory(FACTORY_TYPE factory)
 {
     Factory *pFactory = nullptr;
     switch (factory) {
-        case FACTORY_TYPE::BENZ_FACTORY:  // 奔驰工厂
+        case FACTORY_TYPE::BENZ_FACTORY:  // Benz factory
             pFactory = new BenzFactory();
             break;
-        case FACTORY_TYPE::BMW_FACTORY:  // 宝马工厂
+        case FACTORY_TYPE::BMW_FACTORY:  // BMW factory
             pFactory = new BmwFactory();
             break;
-        case FACTORY_TYPE::AUDI_FACTORY:  // 奥迪工厂
+        case FACTORY_TYPE::AUDI_FACTORY:  // Audi factory
             pFactory = new AudiFactory();
             break;
         default:

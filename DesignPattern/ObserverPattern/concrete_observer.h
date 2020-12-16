@@ -19,7 +19,7 @@ public:
     }
 
 private:
-    std::string m_strName;  // 名字
+    std::string m_strName;  // name
 };
 
 #endif //DESIGNPATTERN_CONCRETE_OBSERVER_H

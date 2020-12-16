@@ -10,7 +10,7 @@ using namespace std;
 
 void FactoryMain()
 {
-    // ±¼³Û
+    // Benz
     Factory * pFactory = Factory::CreateFactory(Factory::FACTORY_TYPE::BENZ_FACTORY);
     ICar * pCar = pFactory->CreateCar();
     IBike * pBike = pFactory->CreateBike();
@@ -22,7 +22,7 @@ void FactoryMain()
     SAFE_DELETE(pBike);
     SAFE_DELETE(pFactory);
 
-    // ±¦Âí
+    // BMW
     pFactory = Factory::CreateFactory(Factory::FACTORY_TYPE::BMW_FACTORY);
     pCar = pFactory->CreateCar();
     pBike = pFactory->CreateBike();
@@ -33,7 +33,7 @@ void FactoryMain()
     SAFE_DELETE(pBike);
     SAFE_DELETE(pFactory);
 
-    // °ÂµÏ
+    // Audi
     pFactory = Factory::CreateFactory(Factory::FACTORY_TYPE::AUDI_FACTORY);
     pCar = pFactory->CreateCar();
     pBike = pFactory->CreateBike();

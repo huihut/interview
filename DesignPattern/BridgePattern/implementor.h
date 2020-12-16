@@ -5,13 +5,13 @@
 #ifndef DESIGNPATTERN_IMPLEMENTOR_H
 #define DESIGNPATTERN_IMPLEMENTOR_H
 
-// 电器
+// Electric equipment
 class IElectricalEquipment
 {
 public:
     virtual ~IElectricalEquipment(){}
-    virtual void PowerOn() = 0;     // 打开
-    virtual void PowerOff() = 0;    // 关闭
+    virtual void PowerOn() = 0;
+    virtual void PowerOff() = 0;
 };
 
 #endif //DESIGNPATTERN_IMPLEMENTOR_H

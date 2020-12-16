@@ -8,14 +8,14 @@
 #include <string>
 using std::string;
 
-// 汽车接口
+// Car Interface
 class ICar
 {
 public:
     virtual string Name() = 0;
 };
 
-// 自行车接口
+// Bike Interface
 class IBike
 {
 public:

@@ -10,7 +10,7 @@
 #include <iostream>
 #include <list>
 
-// 具体主题
+// Specific Subject
 class  ConcreteSubject : public ISubject
 {
 public:
@@ -27,7 +27,7 @@ public:
     {
         m_observers.remove(observer);
     }
-    // 通知所有观察者
+    // Notify all observers
     void Notify()
     {
         std::list<IObserver *>::iterator it = m_observers.begin();
@@ -38,8 +38,8 @@ public:
         }
     }
 private:
-    std::list<IObserver *> m_observers; // 观察者列表
-    float m_fPrice;                     // 价格
+    std::list<IObserver *> m_observers; // Observer list
+    float m_fPrice;                     // Price
 };
 
 #endif //DESIGNPATTERN_CONCRETE_SUBJECT_H

@@ -6,25 +6,25 @@
 
 void ObserverMain()
 {
-    // 创建主题
+    // Create Subject
     ConcreteSubject * pSubject = new ConcreteSubject();
 
-    // 创建观察者
+    // Create Observer
     IObserver * pObserver1 = new ConcreteObserver("Jack Ma");
     IObserver * pObserver2 = new ConcreteObserver("Pony");
 
-    // 注册观察者
+    // Attach Observers
     pSubject->Attach(pObserver1);
     pSubject->Attach(pObserver2);
 
-    // 更改价格，并通知观察者
+    // Change the price and notify the observer
     pSubject->SetPrice(12.5);
     pSubject->Notify();
 
-    // 注销一个观察者
+    // Detach Observers
     pSubject->Detach(pObserver2);
 
-    // 再次更改状态，并通知观察者
+    // Change the state again and notify the observer
     pSubject->SetPrice(15.0);
     pSubject->Notify();
 

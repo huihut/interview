@@ -9,10 +9,10 @@
 
 void AdapterMain()
 {
-    // ´´½¨ÊÊÅäÆ÷
+    // Create a power adapter
     IRussiaSocket * pAdapter = new PowerAdapter();
 
-    // ³äµç
+    // Recharge
     pAdapter->Charge();
 
     SAFE_DELETE(pAdapter);

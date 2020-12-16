@@ -10,9 +10,9 @@ class IObserver;
 class ISubject
 {
 public:
-    virtual void Attach(IObserver *) = 0;   // 注册观察者
-    virtual void Detach(IObserver *) = 0;   // 注销观察者
-    virtual void Notify() = 0;              // 通知观察者
+    virtual void Attach(IObserver *) = 0;   // Attach observer
+    virtual void Detach(IObserver *) = 0;   // Detach observer
+    virtual void Notify() = 0;              // Notify observer
 };
 
 #endif //DESIGNPATTERN_SUBJECT_H

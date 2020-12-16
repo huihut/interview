@@ -5,7 +5,7 @@
 #ifndef DESIGNPATTERN_SINGLETON_H
 #define DESIGNPATTERN_SINGLETON_H
 
-// 单例模式
+// Singleton mode
 class Singleton {
 private:
     Singleton(){}
