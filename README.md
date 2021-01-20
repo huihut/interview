@@ -496,7 +496,7 @@ int main()
 	A a5 = (A)1;		// OK：允许 static_cast 的显式转换 
 	doA(1);			// OK：允许从 int 到 A 的隐式转换
 	if (a1);		// OK：使用转换函数 A::operator bool() 的从 A 到 bool 的隐式转换
-	bool a6（a1）;		// OK：使用转换函数 A::operator bool() 的从 A 到 bool 的隐式转换
+	bool a6(a1);		// OK：使用转换函数 A::operator bool() 的从 A 到 bool 的隐式转换
 	bool a7 = a1;		// OK：使用转换函数 A::operator bool() 的从 A 到 bool 的隐式转换
 	bool a8 = static_cast<bool>(a1);  // OK ：static_cast 进行直接初始化
 
