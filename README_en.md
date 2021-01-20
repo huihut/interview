@@ -500,7 +500,7 @@ int main()
 	A a5 = (A)1;		// OK：Allow explicit conversion of static_cast
 	doA(1);			// OK：Allow implicit conversion from int to A
 	if (a1);		// OK: implicit conversion from A to bool using conversion function A ::operator bool()
-	bool a6（a1）;		// OK: implicit conversion from A to bool using conversion function A::operator bool()
+	bool a6(a1);		// OK: implicit conversion from A to bool using conversion function A::operator bool()
 	bool a7 = a1;		// OK: implicit conversion from A to bool using conversion function A::operator bool()
 	bool a8 = static_cast<bool>(a1);  // OK: static_cast for direct initialization
 
