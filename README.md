@@ -3406,7 +3406,7 @@ int main( void )
 
 ## 📆 招聘时间岗位
 
-* [牛客网 . 2020届校招 | 2020 IT名企校招日程](https://www.nowcoder.com/school/schedule)
+* [牛客网 . 名企校招日程](https://www.nowcoder.com/school/schedule)
 
 <a id="recommend"></a>
 
