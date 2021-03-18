@@ -811,9 +811,11 @@ public:
 #### Dynamic polymorphism (runtime / late binding)
 
 * Virtual functions: decorate member functions with virtual to make them virtual
+* Dynamic binding: dynamic binding occurs when a virtual function is called using a reference or pointer to a base class
 
 **note:**
 
+* You can assign an object of a derived class to a pointer or reference of the base class, and not vice versa
 * Ordinary functions (non-class member functions) cannot be virtual functions
 * Static functions (static) cannot be virtual functions
 * The constructor cannot be a virtual function (because when the constructor is called, the virtual table pointer is not in the object's memory space, the virtual table pointer must be formed after the constructor is called)
