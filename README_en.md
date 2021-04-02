@@ -2650,7 +2650,7 @@ So there is a FIN and ACK in each direction.
 * Basic lock types: exclusive lock (X lock / write lock), shared lock (S lock / read lock).
 * Livelock deadlock:
     * Livelock: The transaction is always in a waiting state, which can be avoided through a first come, first served policy.
-    * Deadlock: Things can never end
+    * Deadlock: The transaction can never end
         * Prevention: one-time block method, sequential block method;
         * Diagnosis: timeout method, waiting graph method;
         * Cancel: Undo the transaction with the least deadlock cost and release all the locks of this transaction, so that other transactions can continue to run.
