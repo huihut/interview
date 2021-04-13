@@ -62,7 +62,7 @@
     * 自身是常量的指针（常量指针，const pointer）
 * 引用
     * 指向常量的引用（reference to const）
-    * 没有 const reference，因为引用本身就是 const pointer
+    * 没有 const reference，因为引用只是对象的别名，引用不是对象，不能用 const 修饰
 
 > （为了方便记忆可以想成）被 const 修饰（在 const 后面）的值不可改变，如下文使用例子中的 `p2`、`p3`
 
@@ -75,7 +75,7 @@ const 使用
 class A
 {
 private:
-    const int a;                // 常对象成员，只能在初始化列表赋值
+    const int a;                // 常对象成员，可以使用初始化列表或者类内初始化
 
 public:
     // 构造函数

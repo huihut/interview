@@ -64,9 +64,9 @@
 * Pointer
      * Pointer to const
      * A pointer to a constant itself (const pointer)
-* Quote
+* Reference
      * Reference to const
-     * There is no const reference because the reference itself is a const pointer
+     * There is no const reference because the reference is an alias of an object, the reference is not an object
 
 > (Think of it for convenience) The value modified by const (after const) cannot be changed, such as `p2`, `p3` in the usage example below
 
@@ -80,7 +80,7 @@ const use
 class A
 {
 private:
-    const int a;                // constant object member, can only be assigned in the initialization list
+    const int a;                // constant object member, can use initialization list or in-class initializer
 
 public:
     // Constructor
@@ -95,7 +95,7 @@ public:
 void function()
 {
     // object
-    A b;                        // ordinary object, can call all member functions, update constant member variables
+    A b;                        // ordinary object, can call all member functions
     const A a;                  // constant object, can only call constant member functions
     const A *p = &a;            // pointer variable, point to a constant object
     const A &q = a;             // reference to constant object
