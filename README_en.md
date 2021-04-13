@@ -102,7 +102,7 @@ public:
 void function()
 {
     // object
-    A b;                        // ordinary object, can call all member functions, update constant member variables
+    A b;                        // ordinary object, can call all member functions
     const A a;                  // constant object, can only call constant member functions
     const A *p = &a;            // pointer variable, point to a constant object
     const A &q = a;             // reference to constant object
