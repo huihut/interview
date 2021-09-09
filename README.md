@@ -122,6 +122,67 @@ const int* function6();     // 返回一个指向常量的指针变量，使用�
 int* const function7();     // 返回一个指向变量的常指针，使用：int* const p = function7();
 ```
 
+#### #define与const的区别
+
+##### 常量定义的两种方式
+- 使用``#define``预处理器：``#define 变量名 变量值``
+- 使用关键字``const``：``const 数据类型 变量名 变量值``
+
+##### #define与const定义常量的区别
+1. const定义常量时，需要带数据类型，而define不用带
+2. const是在编译、运行的时候起作用，而define是在编译的预处理阶段起作用
+3. define只是简单的替换，没有类型检查。简单的字符串替换会导致边界效应，
+
+```cpp
+#include <stdio.h>
+
+#define A 1
+#define B A+3
+#define C A/B*3
+void main() {
+   //分析过程
+   //#define就是一个简单的替换
+   //C其实是A/A+3*3 = > 1/1 + 3*3 = 10
+   printf("C=%d",C);
+   getchar();
+}
+```
+
+  这里替换的意思就是字面上的意思，比如说代码中A = 1，B = A+3，那么AB就为AB = AA+3 = 11+3；按照我们一般的思维，这里的AB应该为A(A+3)，但实际上并不是，所以使用#define定义常量容易造成边界效应，如果想把B的值作为一个整体，就需要使用括号将值括起来。
+
+4. const常量可以进行调试，define不能进行调试，主要是预编译阶段就已经替换掉了，调试的时候就没它了；（简单点说，在预编译的时候就已经将常量替换成了对应的值，所以是没法调试的）；
+5. const不能重新定义，不可以定义两个一样的，而define通过undef取消某个符号的定义，再重新定义,例如：
+
+```cpp
+#include <stdio.h>
+#define PI  3.14 //定义一个常量
+#undef PI	//取消定义
+#define PI  3.1456  //再次定义
+//const不能重新定义，不可以定义两个一样的，而define通过undef取消某个符号的定义，再重新定义
+void main() {
+	const int n1 = 10;
+	printf("%0.3f",PI * 10);
+	getchar();
+}
+```
+
+6. define可以配合#ifdef、#ifndef、#endif来使用，可以让代码更加灵活，比如我们可以通过``#define``来启动或者关闭调试信息
+
+```cpp
+#include <stdio.h>
+
+//#define DEBUG
+void main() {
+#ifdef DEBUG //如果定义了DEBUG
+	printf("OK,调试信息");
+#endif //结束语句
+#ifndef DEBUG //如果没有定义DEBUG
+	printf("no,其他信息");
+#endif
+	getchar();
+}
+```
+
 ### static
 
 #### 作用
