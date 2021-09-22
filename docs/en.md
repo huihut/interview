@@ -120,6 +120,17 @@ const int* function6();     // returns a pointer variable to a constant, use: co
 int* const function7();     // returns a constant pointer to a variable, use: int * const p = function7 ();
 ```
 
+#### #define and const constants 
+
+#define|const constants
+---|---
+Macro definitions, equivalent to character substitution|constant declarations
+preprocessor processing|compiler processing
+without type safety checking|with type safety checking
+no memory allocation|memory allocation required
+stored in code segment|stored in data segment
+Can be canceled by `#undef`|Not cancelable
+
 ### static
 
 #### Function
