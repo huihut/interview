@@ -903,6 +903,27 @@ int main()
 virtual int A() = 0;
 ```
 
+纯虚函数也可以在基类中有自己的具体实现，方便派生类进行调用。
+
+```cpp
+class Base{
+    public:
+    virtual void print() = 0;
+};
+
+class Derived: public Base {
+    public:
+    virtual void print(){
+        Base::print();
+        cout << "Print from Derived." << std::endl;
+    }
+};
+
+void Base::print(){
+    cout << "Print from Base." << std::endl;
+}
+```
+
 ### 虚函数、纯虚函数
 
 * 类里如果声明了虚函数，这个函数是实现的，哪怕是空实现，它的作用就是为了能让这个函数在它的子类里面可以被覆盖（override），这样的话，编译器就可以使用后期绑定来达到多态了。纯虚函数只是一个接口，是个函数的声明而已，它要留到子类里去实现。 

@@ -908,6 +908,27 @@ A pure virtual function is a special kind of virtual function. You cannot give a
 virtual int A() = 0;
 ```
 
+A pure virtual method may optionally provide an implementation, and by using the scope operator the deried class can make use of the base implementation.
+
+```cpp
+class Base{
+    public:
+    virtual void print() = 0;
+};
+
+class Derived: public Base {
+    public:
+    virtual void print(){
+        Base::print();
+        cout << "Print from Derived." << std::endl;
+    }
+};
+
+void Base::print(){
+    cout << "Print from Base." << std::endl;
+}
+```
+
 ### Virtual functions, pure virtual functions
 
 * If a virtual function is declared in the class, this function is implemented, even if it is empty, its role is to allow this function to be overridden in its subclasses, so that the compiler can use Late binding to achieve polymorphism. A pure virtual function is just an interface. It is a function declaration. It must be left in a subclass to implement it.
