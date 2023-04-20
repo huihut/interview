@@ -310,11 +310,52 @@ struct test
 
 #pragma pack(pop)   // 恢复对齐状态
 ```
+```cpp
+struct test test1;
+sizeof(test1)=16;
+```
+#pragma扩展
+#pragma是C/C++编译器中的一个预处理指令，其可以用来告诉编译器一些特殊的信息或给出针对代码的编译选项。
+
+#pragma语句通常由pragma关键字，以及后面跟随的一些参数组成。根据不同的编译器或目标平台，具体支持的参数也可能有所不同。下面是#pragma指令的一些常见用途：
+
+#pragma once
+用于避免同一头文件被多次包含，可以提高编译效率。
+
+#pragma warning
+用于控制编译时警告信息的输出方式，比如禁止/开启显示某些指定编号的警告信息。
+
+#pragma pack
+用于控制数据结构的对齐方式，以优化内存占用和访问速度。
+
+#pragma message
+用于在编译过程中向开发者输出一些提示、信息或警告等。
+
+需要注意的是，由于#pragma是编译器的拓展功能，因此在使用时应该特别小心，尤其是涉及到与编译器相关的选项和语言扩展时，应该遵循编译器的使用规范，防止出现意外情况和错误。
+
 
 ### 位域
-
+位域是一种数据类型，允许程序员将一个字节中的每一个位（二进制位）都视为一个单独的字段，并分别进行读写操作。因此，位域可以用来优化内存占用和提高数据访问速度。
 ```cpp
 Bit mode: 2;    // mode 占 2 位
+```
+```cpp
+struct bit_field
+{
+    unsigned int a: 1;  // 以一位作为a字段
+    unsigned int b: 2;  // 以两位作为b字段
+    unsigned int c: 4;  // 以四位作为c字段
+};
+struct bit_field bf = {1, 2, 7};  // 定义并初始化位域结构体变量
+
+if (bf.a == 1)      // 对a值的读取
+    bf.b++;         // 对b值的递增
+else
+    bf.c -= 2;      // 对c值的递减
+
+printf("a=%d, b=%d, c=%d", bf.a, bf.b, bf.c);   // 输出三个字段的值
+
+//a=1, b=3, c=7
 ```
 
 类可以将其（非静态）数据成员定义为位域（bit-field），在一个位域中含有一定数量的二进制位。当一个程序需要向其他程序或硬件设备传递二进制数据时，通常会用到位域。
@@ -351,7 +392,7 @@ void *memset(void *, int, size_t);
 ```c
 // c
 typedef struct Student {
-    int age; 
+    int age;
 } S;
 ```
 
@@ -359,8 +400,8 @@ typedef struct Student {
 
 ```c
 // c
-struct Student { 
-    int age; 
+struct Student {
+    int age;
 };
 
 typedef struct Student S;
@@ -380,8 +421,8 @@ typedef struct Student S;
 
 ```cpp
 // cpp
-struct Student { 
-    int age; 
+struct Student {
+    int age;
 };
 
 void f( Student me );       // 正确，"struct" 关键字可省略
@@ -390,8 +431,8 @@ void f( Student me );       // 正确，"struct" 关键字可省略
 二、若定义了与 `Student` 同名函数之后，则 `Student` 只代表函数，不代表结构体，如下：
 
 ```cpp
-typedef struct Student { 
-    int age; 
+typedef struct Student {
+    int age;
 } S;
 
 void Student() {}           // 正确，定义后 "Student" 只代表此函数
@@ -399,11 +440,14 @@ void Student() {}           // 正确，定义后 "Student" 只代表此函数
 //void S() {}               // 错误，符号 "S" 已经被定义为一个 "struct Student" 的别名
 
 int main() {
-    Student(); 
+    Student();
     struct Student me;      // 或者 "S me";
     return 0;
 }
 ```
+在C语言中，如果使用struct关键字定义结构体类型，则每当需要使用该类型时，都必须加上struct关键字进行标识。
+在C++中，与C语言不同的是，如果使用struct关键字定义类型，则可以在声明结构体变量时省略关键字struct
+对于typedef struct的用法，其实是将结构体类型定义一个新的名字，这样之后可以直接使用新名字来代替原始的结构体类型名。它使得结构体具有了类似基本数据类型的别名特性
 
 ### C++ 中 struct 和 class
 
@@ -474,6 +518,47 @@ C 实现 C++ 的面向对象特性（封装、继承、多态）
 
 > [Can you write object-oriented code in C? [closed]](https://stackoverflow.com/a/351745)
 
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// 实现一个类Person
+typedef struct _Person
+{
+    char name[10];
+    int age;
+
+    // 声明成员函数
+    void (*say_hello)(struct _Person* p);
+} Person;
+
+// 成员函数实现
+void say_hello(Person* p)
+{
+    printf("Hello, my name is %s and I am %d years old.\n", p->name, p->age);
+}
+
+// 构造函数
+void init_person(Person* p, const char* name, int age)
+{
+    strncpy(p->name, name, sizeof(p->name) - 1);
+    p->name[sizeof(p->name) - 1] = '\0';
+    p->age = age;
+    p->say_hello = say_hello;   // 成员函数赋值
+}
+
+int main(void)
+{
+    // 创建对象并调用成员函数
+    Person p;
+    init_person(&p, "Tom", 18);
+    p.say_hello(&p);
+
+    return EXIT_SUCCESS;
+}
+```
+
 ### explicit（显式）关键字
 
 * explicit 修饰构造函数时，可以防止隐式转换和复制初始化
@@ -525,10 +610,11 @@ int main()
 	return 0;
 }
 ```
+通常来说，类定义了一个构造函数后，可以根据这个构造函数自动创建对象（编译器在必要时将调用该构造函数）。而使用explicit关键字可以防止编译器自动调用这个构造函数
 
 ### friend 友元类和友元函数
 
-* 能访问私有成员  
+* 能访问私有成员
 * 破坏封装性
 * 友元关系不可传递
 * 友元关系的单向性
@@ -652,9 +738,53 @@ enum color { red, yellow, green };
 enum { floatPrec = 6, doublePrec = 10 };
 ```
 
+在C++中，枚举类型（enumeration type）是一种定义命名值的构造方式，用于为变量分配离散的、有限集合的变量。C++中有两种类型的枚举类型：限定作用域的枚举类型和不限定作用域的枚举类型。
+
+限定作用域的枚举类型
+限定作用域的枚举类型（scoped enumeration type）是在C++11中引入的新特性，它通过限制枚举类型的作用域来提高代码的可读性和安全性。在定义限定作用域的枚举类型时，需要使用关键字enum class或enum struct：
+
+```cpp
+// 使用enum class定义枚举类型
+enum class Color { RED, GREEN, BLUE };
+
+// 使用enum struct定义枚举类型
+enum struct Size { SMALL, MEDIUM, LARGE };
+```
+上述代码中，Color和Size是被定义为限定作用域的枚举类型，并且其名称与其他作用域中的名称隔离开来，因此可以避免命名冲突等问题。此外，由于这种枚举类型只能通过范围解析运算符(::)进行访问，因此对于枚举值的使用必须显式指定所属的类型，例如：
+
+
+```cpp
+Color c = Color::RED;
+Size s = Size::SMALL;
+```
+不限定作用域的枚举类型
+不限定作用域的枚举类型（unscoped enumeration type）是C++早期就存在的一种枚举类型，其定义方式如下：
+
+```cpp
+enum Color { RED, GREEN, BLUE };
+```
+在这种枚举类型中，枚举值名称处于全局作用域，因此可能会与其他命名空间中的枚举值名称冲突。同时，由于其未进行限定作用域，也不需要使用范围解析运算符访问枚举值，因此也可能造成命名冲突等问题。
+
+尽管不限定作用域的枚举类型已经存在了很久，并且仍然被广泛使用，但是推荐在新的C++代码中使用限定作用域的枚举类型以避免潜在的错误。
+
+```cpp
+int i = 100;
+decltype(i) j = i;      // 推导出j为int类型
+
+const int& k = i;
+decltype(k) m = i;      // 推导出m为int&类型
+```
+
+需要注意的是，decltype并不会对表达式进行求值，因此即使所涉及的表达式并未真正执行，也能够推导出正确的类型。另外，当使用decltype访问类成员时，也需要加上类名或对象名来限定作用域
+在C++11中，还引入了一个新特性decltype(auto)，它会将推导结果的左值/右值特性保留下来，并且能够自动推导返回类型
+
 ### decltype
 
 decltype 关键字用于检查实体的声明类型或表达式的类型及值分类。语法：
+
+decltype是C++11中引入的一种新运算符，用于推导表达式类型。它可以取得一个表达式的类型，并且不会对这个表达式进行求值。使用该运算符可以帮助程序自动分析表达式的类型，从而更加方便和灵活地编写代码。
+
+decltype(expr)表示得到expr的数据类型
 
 ```cpp
 decltype ( expression )
@@ -678,6 +808,15 @@ auto fcn2(It beg, It end) -> typename remove_reference<decltype(*beg)>::type
     return *beg;    // 返回序列中一个元素的拷贝
 }
 ```
+### static_assert
+static_assert是C++11中引入的一种新机制，用于在编译期间进行静态断言（即在编译时就能够发现错误）。它可以在编译时检查一些常量表达式，如果该表达式值为假，则会导致编译错误，从而提高程序的健壮性和开发效率。
+
+static_assert的语法如下：
+```cpp
+static_assert(constant-expression, error-message);
+```
+其中，constant-expression是要检查的静态表达式，必须是一个常量表达式，其值应为true或false。若为false，则输出error-message作为错误信息，终止编译，并在编译结果中显示此错误消息。例如：
+需要注意的是，由于static_assert是在编译期间执行的断言，因此不能包括任何运行时变量。同时也要记得在写断言时使用常量来编写常量表达式，否则可能无法通过编译。
 
 ### 引用
 
