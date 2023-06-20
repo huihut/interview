@@ -32,7 +32,8 @@ int main() {
     std::cout << "*******************" << std::endl;
     std::cout << "** Bridge mode **" << std::endl;
     std::cout << "*******************" << std::endl;
-    
+    BridgeMain();
+
     std::cout << "*******************" << std::endl;
     std::cout << "** Observer mode **" << std::endl;
     std::cout << "*******************" << std::endl;
