@@ -38,7 +38,6 @@
 * [📆 招聘时间岗位](#recruitment-time-post)
 * [👍 内推](#recommend)
 * [👬 贡献者](#contributor)
-* [🍭 支持赞助](#support-sponsor)
 * [📜 License](#license)
 
 
@@ -3425,12 +3424,6 @@ int main( void )
 ## 👬 贡献者
 
 <a href="https://github.com/huihut/interview/graphs/contributors"><img src="https://opencollective.com/interview/contributors.svg?button=false" /></a>
-
-<a id="support-sponsor"></a>
-
-## 🍭 支持赞助
-
-**[Avalive](https://store.steampowered.com/app/1137770/Avalive/)**：一个面部捕捉的虚拟形象扮演软件。
 
 <a id="license"></a>
 

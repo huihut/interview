@@ -49,7 +49,6 @@ English
 * [📆 Recruitment time post](#recruitment-time-post)
 * [👍 Recommend](#recommend)
 * [👬 Contributor](#contributor)
-* [🍭 Support Sponsor](#support-sponsor)
 * [📜 License](#license)
 
 
@@ -3434,12 +3433,6 @@ contain:
 ## 👬 Contributor
 
 <a href="https://github.com/huihut/interview/graphs/contributors"><img src="https://opencollective.com/interview/contributors.svg?button=false" /></a>
-
-<a id="support-sponsor"></a>
-
-## 🍭 Support sponsorship
-
-**[Avalive](https://store.steampowered.com/app/1137770/Avalive/)** - A avatar role-playing software for facial capture.
 
 <a id="license"></a>
 
