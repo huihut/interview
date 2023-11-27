@@ -324,10 +324,38 @@ Bit mode: 2;    // mode 占 2 位
 
 ### extern "C"
 
-* 被 extern 限定的函数或变量是 extern 类型的
-* 被 `extern "C"` 修饰的变量和函数是按照 C 语言方式编译和链接的
+- 可以与使用 C 语言编写的函数进行链接，使得在 C++ 中定义能从 C 单元调用的函数成为可能
 
-`extern "C"` 的作用是让 C++ 编译器将 `extern "C"` 声明的代码当作 C 语言代码处理，可以避免 C++ 因符号修饰导致代码不能和C语言库中的符号进行链接的问题。
+`extern "C"` 的作用是让 C++ 编译器将 `extern "C"` 声明的代码导出符号像 C 一样，可以避免 C++ 因符号修饰导致代码不能和 C 语言库中的符号进行链接的问题。
+
+这里需要注意的是，使用 `extern "C"` 也不代表导出的符号没有额外的修饰，这根据编译器，环境，等等，另外 C 没有标准的 ABI（符号修饰）。
+
+即使不使用 `extern "C"` 也不代表一定会被添加额外符号的修饰，比如：
+
+```cpp
+#include<iostream>
+
+int a = 0;
+
+namespace ss{
+    int a = 0;
+}
+
+extern int _ZN2ss1aE;
+
+int main(){
+    _ZN2ss1aE = 100;
+    std::cout<<ss::a<<'\n';
+}
+```
+
+[运行结果](https://godbolt.org/z/hdjsr8sd3)：
+
+```txt
+100
+```
+
+在 gcc 和 clang 的某些环境下，在全局作用域声明的对象不会有任何的额外符号修饰。
 
 extern "C" 使用
 
@@ -444,7 +472,7 @@ static union {
 };
 
 int main() {
-    UnionTest u;
+    UnionTest extern;
 
     union {
         int i;
