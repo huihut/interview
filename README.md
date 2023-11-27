@@ -472,7 +472,7 @@ static union {
 };
 
 int main() {
-    UnionTest extern;
+    UnionTest u;
 
     union {
         int i;
