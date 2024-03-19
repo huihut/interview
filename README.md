@@ -566,7 +566,7 @@ Derived(parms) : Base(args) { }
 `using 指示` 使得某个特定命名空间中所有名字都可见，这样我们就无需再为它们添加任何前缀限定符了。如：
 
 ```cpp
-using namespace_name name;
+using namespace namespace_name;
 ```
 
 #### 尽量少使用 `using 指示` 污染命名空间
