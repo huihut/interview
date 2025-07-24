@@ -544,7 +544,7 @@ int main()
 A `using declaration` introduces only one member of a namespace at a time. It allows us to know exactly which name is referenced in the program. Such as:
 
 ```cpp
-using namespace_name :: name;
+using namespace_name::name;
 ```
 
 #### Using declaration of constructor
@@ -570,7 +570,7 @@ Derived (parms): Base (args) {}
 The `using directive` makes all names in a particular namespace visible, so we don't need to add any prefix qualifiers to them. Such as:
 
 ```cpp
-using namespace_name name;
+using namespace namespace_name;
 ```
 
 #### Minimize `using directives` to pollute namespaces
