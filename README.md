@@ -2187,7 +2187,7 @@ ICMP 报文格式：
 #### 内部网关协议
 
 * RIP（Routing Information Protocol，路由信息协议）
-* OSPF（Open Sortest Path First，开放最短路径优先）
+* OSPF（Open Shortest Path First，开放最短路径优先）
 
 #### 外部网关协议
 

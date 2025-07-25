@@ -2186,7 +2186,7 @@ application:
 #### Interior Gateway Protocol
 
 * RIP (Routing Information Protocol, Routing Information Protocol)
-* OSPF (Open Sortest Path First)
+* OSPF (Open Shortest Path First)
 
 #### External gateway protocol
 
