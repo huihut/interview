@@ -1866,12 +1866,12 @@ For non-threaded systems:
 #### Communication between processes and advantages and disadvantages
 
 * Pipeline (PIPE)
-    * Famous Pipeline: A half-duplex communication method that allows communication between unrelated processes
+    * Named pipes: A first-in-first-out communication method that allows communication between unrelated processes
         * Advantages: can achieve inter-process communication in any relationship
         * Disadvantages:
             1. Long-term storage in the system, improper use is prone to errors
             Limited buffer
-    * Unnamed pipe: a half-duplex communication method that can only be used between processes with parental relationships (parent-child processes)
+    * Anonymous pipes: A simplex first-in-first-out communication method that can only be used between processes with affinity (parent-child processes)
         * Advantages: simple and convenient
         * Disadvantages:
             Limited to one-way communication
