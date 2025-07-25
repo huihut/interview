@@ -1102,37 +1102,62 @@ Deprecated by c ++ 11 due to lack of language features such as `std::move` seman
 
 #### static_cast
 
-* For non-polymorphic conversions
-* Do not perform runtime type checking (conversion security is not as good as dynamic_cast)
-* Usually used to convert numeric data types (such as float-> int)
-* You can move the pointer throughout the class hierarchy. It is safe (upward conversion) for a child class to be converted to a parent class, and it is not safe to convert a parent class to a child class (because a child class may have fields or methods that are not in the parent class)
+* Compile-time type conversion (no runtime checks)  
+* Does not depend on RTTI
 
-> Upcast is an implicit conversion.
+| Conversion Type          | Safety       | Example                     |
+|--------------------------|--------------|--------------------------|
+| Numeric conversion       | ✅ Safe      | `float f=3.14; int i=static_cast<int>(f);` |
+| Upcast (class hierarchy) | ✅ Safe      | `Derived* d; Base* b=static_cast<Base*>(d);` |
+| Downcast (class hierarchy)| ⚠️ Unsafe    | `Base* b=new Base; Derived* d=static_cast<Derived*>(b);` |
+| Same-type conversion     | ✅ Safe      | `MyClass* p; MyClass* same=static_cast<MyClass*>(p);` |
+| Explicit constructor call| ✅ Safe      | `func(static_cast<std::string>("text"));` |
+| Any type→void*           | ✅ Safe      | `int* p; void* vp=static_cast<void*>(p);` |
+| Enum↔Integer             | ✅ Safe      | `enum Color{RED}; int c=static_cast<int>(RED);` |
 
 #### dynamic_cast
 
-* For polymorphic type conversions
-* Perform line runtime type checking
-* Only applicable to pointers or references
-* Conversion of ambiguous pointers will fail (return nullptr), but no exception will be thrown
-* You can move the pointer throughout the class hierarchy, including up conversion, down conversion
+* Runtime type checking (depends on RTTI)  
+* Requires polymorphic type (base must have at least one virtual function)  
+* Safe failure mechanism (nullptr or exception)  
+
+| Conversion Type     | Safety | Runtime Cost | Polymorphic Required | Failure Handling          | Example |
+|---------------------|--------|--------------|----------------------|---------------------------|---------|
+| Upcast              | ✅ Safe | None         | ❌ Not required      | Not applicable (always succeeds) | `Derived* d; Base* b = dynamic_cast<Base*>(d);` |
+| Downcast            | ✅ Safe | Yes          | ✅ Required          | Pointer→`nullptr`<br>Reference→`std::bad_cast` | `Base* b; Derived* d = dynamic_cast<Derived*>(b);` |
+| Cross-cast          | ✅ Safe | Yes          | ✅ Required          | Pointer→`nullptr`<br>Reference→`std::bad_cast` | `B2* b2 = dynamic_cast<B2*>(b1); // In diamond inheritance` |
+| Same-type conversion| ✅ Safe | None         | ❌ Not required      | Not applicable (always succeeds) | `Derived* d2 = dynamic_cast<Derived*>(d1);` |
+| Any type→void*      | ✅ Safe | Yes          | ✅ Required          | `nullptr`                 | `void* p = dynamic_cast<void*>(obj);` |
 
 #### const_cast
 
-* Used to remove const, volatile, and __unaligned features (such as converting const int to int)
+* Compile-time type modifier operation  
+* Only modifies `const`/`volatile` attributes  
+* Does not change underlying binary representation  
+
+| Conversion Type        | Safety       | Example                          |
+|------------------------|--------------|----------------------------------|
+| Remove const           | ⚠️ Risky     | `const int* cp; int* p=const_cast<int*>(cp);` |
+| Remove volatile        | ⚠️ Risky     | `volatile int* vp; int* p=const_cast<int*>(vp);` |
+| Add const              | ✅ Safe      | `int* p; const int* cp=const_cast<const int*>(p);` |
+| Legacy API compatibility | ⚠️ Necessary risk | `legacy_api(const_cast<char*>(str.c_str()));` |
 
 #### reinterpret_cast
 
-* Simple reinterpretation for bits
-* Misuse of the reinterpret_cast operator can be very risky. Unless the required conversion itself is low-level, you should use one of the other cast operators.
-* Allows conversion of any pointer to any other pointer type (such as `char *` to `int *` or `One_class *` to `Unrelated_class *`, but it is not itself safe)
-* Also allows conversion of any integer type to any pointer type and reverse conversion.
-* The reinterpret_cast operator cannot lose const, volatile, or __unaligned attributes.
-* A practical use of reinterpret_cast is in a hash function, which is to map values to indexes by making two different values hardly end with the same index.
+* No compile-time type safety checks  
+* Binary bit-level reinterpretation  
+* Most dangerous cast operator  
+
+| Conversion Type        | Safety       | Example                          |
+|------------------------|--------------|----------------------------------|
+| Pointer↔Pointer        | ❌ High risk | `MyClass* obj; void* p=reinterpret_cast<void*>(obj);` |
+| Pointer↔Integer        | ❌ High risk | `intptr_t addr=reinterpret_cast<intptr_t>(&obj);` |
+| Function pointer conversion | ❌ Extreme risk | Converting function pointers with different signatures |
+| Memory-mapped I/O      | ⚠️ Systems programming | Hardware register access |
 
 #### bad_cast
 
-* The dynamic_cast operator throws a bad_cast exception because the cast to a reference type fails.
+* The exception type for a failed reference conversion using `dynamic_cast`.
 
 bad_cast demo
 
@@ -1146,10 +1171,6 @@ catch (bad_cast b) {
 ```
 
 ### Runtime Type Information (RTTI)
-
-#### dynamic_cast
-
-* For polymorphic type conversions
 
 #### typeid
 
