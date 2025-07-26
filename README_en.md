@@ -295,25 +295,46 @@ assert( p != NULL );    // assert is not available
 * sizeof For arrays - get the size of the entire array.
 * sizeof For pointers - get the size of the space occupied by the pointer itself.
 
-### #pragma pack(n)
+### Compiler Extensions vs Standard Alignment Control
 
-Set structure, union, and class member variables to be n-byte aligned
+* Compiler Extension `#pragma pack(n)`, restricts the maximum alignment of members in subsequently defined `struct`/`class`/`union` to n bytes.
+* Standard Alignment Control:
+    * `alignas(k)`, requires types or variables to be aligned to at least k bytes (rounds up to ≥ natural alignment).
+    * `alignof(T)`, gets the natural alignment requirement of type T (compile-time constant).
 
-#pragma pack (n) use
+Feature         | `#pragma pack`         | `alignas` 
+----------------|-------------------------|---------------------
+Standardization | ❌ Compiler Extension  | ✅ C++11 Standard
+Alignment Direction | ⬇️ Only decreases alignment | ⬆️ Only increases alignment
+Portability     | ❌ Compiler Dependent   | ✅ Cross-platform
+Scope           | 🔄 Affects entire struct | 🎯 Per-member control
+Performance Impact | ⚠️ May reduce memory access speed | ⚠️ Over-alignment wastes space
+
+#### Usage Examples
 
 ```cpp
-#pragma pack(push)  // save alignment state
-#pragma pack(4)     // Set to 4 byte alignment
+#include <cstddef>
+#include <iostream>
 
-struct test
-{
-    char m1;
-    double m4;
-    int m3;
+#pragma pack(push, 1)             // Max alignment 1 byte (compact layout)
+struct PackedHeader {
+    uint16_t len;                // offset 0
+    uint32_t id;                 // offset 2
+};
+#pragma pack(pop)
+
+struct alignas(8) Align8 {        // Force 8-byte alignment
+    double  value;               // offset 0 (8 bytes)
+    int     flag;                // offset 8
 };
 
-#pragma pack(pop)   // Restore alignment
-```
+int main() {
+    std::cout << "PackedHeader size: " 
+              << sizeof(PackedHeader) << "\n";  // Output: 6
+    
+    std::cout << "Align8 size: " 
+              << sizeof(Align8) << "\n";        // Output: 16
+}
 
 ### Bit field
 
