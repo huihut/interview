@@ -1031,22 +1031,6 @@ Legal, but:
 3. You must ensure that the member function does not call this after `delete this`
 4. Make sure no one uses it after delete this
 
-### How to define a class that can only generate objects on the heap (on the stack)?
-
-> [How to define a class that can only generate objects on the heap (on the stack)?](https://www.nowcoder.com/questionTerminal/0a584aa13f804f3ea72b442a065a7618)
-
-#### Only on the heap
-
-Method: Make the destructor private
-
-Reason: C ++ is a static binding language. The compiler manages the life cycle of objects on the stack. When the compiler allocates stack space for class objects, it first checks the accessibility of the class's destructor. If the destructor is not accessible, the object cannot be created on the stack.
-
-#### Only on the stack
-
-Method: overload new and delete as private
-
-Reason: The object is generated on the heap using the new keyword operation. The process is divided into two stages: the first stage uses new to find available memory on the heap and allocates it to the object; the second stage calls the constructor to generate the object. By setting the new operation to private, the first phase cannot be completed, and objects cannot be generated on the heap.
-
 ### Smart pointer
 
 #### In the C ++ Standard Library (STL)
