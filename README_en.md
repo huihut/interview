@@ -2238,7 +2238,7 @@ Port number | 21 | 23 | 25 | 53 | 69 | 80 | 443 | 161
 
 Feature:
 * Connection oriented
-* Only point-to-point (one-to-one) communication
+* End-to-end communication
 * Reliable interaction
 * Full-duplex communication
 * Byte stream oriented
