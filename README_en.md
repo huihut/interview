@@ -1180,7 +1180,7 @@ catch (bad_cast b) {
 #### typeid
 
 * The typeid operator allows determining the type of an object at runtime
-* type \ _id returns a reference to a type \ _info object
+* typeid returns a reference to a type\_info object
 * If you want to get the data type of the derived class through the pointer of the base class, the base class must have a virtual function
 * Can only get the actual type of the object
 

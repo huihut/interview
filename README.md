@@ -1173,7 +1173,7 @@ catch (bad_cast b) {
 #### typeid
 
 * typeid 运算符允许在运行时确定对象的类型
-* type\_id 返回一个 type\_info 对象的引用
+* typeid 返回一个 type\_info 对象的引用
 * 如果想通过基类的指针获得派生类的数据类型，基类必须带有虚函数
 * 只能获取对象的实际类型
 
