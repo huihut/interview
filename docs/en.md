@@ -225,37 +225,37 @@ using namespace std;
 class Base
 {
 public:
-	inline virtual void who()
-	{
-		cout << "I am Base\n";
-	}
-	virtual ~Base() {}
+    inline virtual void who()
+    {
+        cout << "I am Base\n";
+    }
+    virtual ~Base() {}
 };
 class Derived : public Base
 {
 public:
-	inline void who()  // Implicit inlining when not writing inline
-	{
-		cout << "I am Derived\n";
-	}
+    inline void who()  // Implicit inlining when not writing inline
+    {
+        cout << "I am Derived\n";
+    }
 };
 
 int main()
 {
-	// The virtual function who () here is called through the concrete object (b) of the class (Base), which can be determined during compilation, so it can be inlined, but whether it is inlined depends on the compilation Device.
-	Base b;
-	b.who();
+    // The virtual function who () here is called through the concrete object (b) of the class (Base), which can be determined during compilation, so it can be inlined, but whether it is inlined depends on the compilation Device.
+    Base b;
+    b.who();
 
-	// The virtual function here is called through a pointer, which is polymorphic and needs to be determined during runtime, so it cannot be inlined.
-	Base *ptr = new Derived();
-	ptr->who();
+    // The virtual function here is called through a pointer, which is polymorphic and needs to be determined during runtime, so it cannot be inlined.
+    Base *ptr = new Derived();
+    ptr->who();
 
-	// Because Base has a virtual destructor (virtual ~ Base () {}), when deleting, the Derived destructor is called first, and then the Base destructor is called to prevent memory leaks.
-	delete ptr;
-	ptr = nullptr;
+    // Because Base has a virtual destructor (virtual ~ Base () {}), when deleting, the Derived destructor is called first, and then the Base destructor is called to prevent memory leaks.
+    delete ptr;
+    ptr = nullptr;
 
-	system("pause");
-	return 0;
+    system("pause");
+    return 0;
 } 
 ```
 
@@ -288,25 +288,46 @@ assert( p != NULL );    // assert is not available
 * sizeof For arrays - get the size of the entire array.
 * sizeof For pointers - get the size of the space occupied by the pointer itself.
 
-### #pragma pack(n)
+### Compiler Extensions vs Standard Alignment Control
 
-Set structure, union, and class member variables to be n-byte aligned
+* Compiler Extension `#pragma pack(n)`, restricts the maximum alignment of members in subsequently defined `struct`/`class`/`union` to n bytes.
+* Standard Alignment Control:
+    * `alignas(k)`, requires types or variables to be aligned to at least k bytes (rounds up to ≥ natural alignment).
+    * `alignof(T)`, gets the natural alignment requirement of type T (compile-time constant).
 
-#pragma pack (n) use
+Feature         | `#pragma pack`         | `alignas` 
+----------------|-------------------------|---------------------
+Standardization | ❌ Compiler Extension  | ✅ C++11 Standard
+Alignment Direction | ⬇️ Only decreases alignment | ⬆️ Only increases alignment
+Portability     | ❌ Compiler Dependent   | ✅ Cross-platform
+Scope           | 🔄 Affects entire struct | 🎯 Per-member control
+Performance Impact | ⚠️ May reduce memory access speed | ⚠️ Over-alignment wastes space
+
+#### Usage Examples
 
 ```cpp
-#pragma pack(push)  // save alignment state
-#pragma pack(4)     // Set to 4 byte alignment
+#include <cstddef>
+#include <iostream>
 
-struct test
-{
-    char m1;
-    double m4;
-    int m3;
+#pragma pack(push, 1)             // Max alignment 1 byte (compact layout)
+struct PackedHeader {
+    uint16_t len;                // offset 0
+    uint32_t id;                 // offset 2
+};
+#pragma pack(pop)
+
+struct alignas(8) Align8 {        // Force 8-byte alignment
+    double  value;               // offset 0 (8 bytes)
+    int     flag;                // offset 8
 };
 
-#pragma pack(pop)   // Restore alignment
-```
+int main() {
+    std::cout << "PackedHeader size: " 
+              << sizeof(PackedHeader) << "\n";  // Output: 6
+    
+    std::cout << "Align8 size: " 
+              << sizeof(Align8) << "\n";        // Output: 16
+}
 
 ### Bit field
 
@@ -320,14 +341,14 @@ A class can define its (non-static) data members as bit-fields, which contain a 
 * The type of the bit field must be an integer or enumerated type. The behavior of the bit field in a signed type will depend on the implementation.
 * The fetch operator (&) cannot be applied to the bit field, and no pointer can point to the bit field of the class
 
-### extern "C"
+### `extern` vs `extern "C"`
 
-* Extern-qualified functions or variables are of type extern
-* Variables and functions decorated with `extern" C "` are compiled and linked in C
+* `extern` is a **storage-class specifier** used to declare that a variable or function has **external linkage**, indicating that the entity's definition may reside in another translation unit.
+* `extern "C"` is a **linkage directive** that specifies functions or variables should use **C language linkage** (without affecting compilation rules).  
+    1. **Suppresses C++ name mangling**: Ensures symbol names match those generated by the C compiler _on that specific platform_, preventing undefined symbol errors during linking due to name decoration. **Does not guarantee platform ABI (Application Binary Interface) consistency**.  
+    2. **Enables C/C++ interoperability**: Allows C++ functions to be called from C code (and vice versa).
 
-The function of `extern" C "` is to let the C ++ compiler treat the code declared by `extern" C "` as C language code, which can avoid the problem that the code cannot be linked with the symbols in the C language library due to symbol modification. .
-
-extern "C" demo
+`extern "C"` demo
 
 ```cpp
 #ifdef __cplusplus
@@ -480,14 +501,14 @@ explicit demo
 ```cpp
 struct A
 {
-	A(int) { }
-	operator bool() const { return true; }
+    A(int) { }
+    operator bool() const { return true; }
 };
 
 struct B
 {
-	explicit B(int) {}
-	explicit operator bool() const { return true; }
+    explicit B(int) {}
+    explicit operator bool() const { return true; }
 };
 
 void doA(A a) {}
@@ -496,29 +517,29 @@ void doB(B b) {}
 
 int main()
 {
-	A a1(1);		// OK：direct initialization
-	A a2 = 1;		// OK：copy initialization
-	A a3{ 1 };		// OK：direct list initialization
-	A a4 = { 1 };		// OK：copy list initialization
-	A a5 = (A)1;		// OK：Allow explicit conversion of static_cast
-	doA(1);			// OK：Allow implicit conversion from int to A
-	if (a1);		// OK: implicit conversion from A to bool using conversion function A ::operator bool()
-	bool a6（a1）;		// OK: implicit conversion from A to bool using conversion function A::operator bool()
-	bool a7 = a1;		// OK: implicit conversion from A to bool using conversion function A::operator bool()
-	bool a8 = static_cast<bool>(a1);  // OK: static_cast for direct initialization
+    A a1(1);		// OK：direct initialization
+    A a2 = 1;		// OK：copy initialization
+    A a3{ 1 };		// OK：direct list initialization
+    A a4 = { 1 };		// OK：copy list initialization
+    A a5 = (A)1;		// OK：Allow explicit conversion of static_cast
+    doA(1);			// OK：Allow implicit conversion from int to A
+    if (a1);		// OK: implicit conversion from A to bool using conversion function A ::operator bool()
+    bool a6(a1);		// OK: implicit conversion from A to bool using conversion function A::operator bool()
+    bool a7 = a1;		// OK: implicit conversion from A to bool using conversion function A::operator bool()
+    bool a8 = static_cast<bool>(a1);  // OK: static_cast for direct initialization
 
-	B b1(1);		// OK：direct initialization
-	B b2 = 1;		// Error: Object modified by explicit constructor cannot be initialized by copying
-	B b3{ 1 };		// OK：direct list initialization
-	B b4 = { 1 };		// Error: Object modified by explicit constructor cannot copy list initialization
-	B b5 = (B)1;		// OK: Allow explicit conversion of static_cast
-	doB(1);			// Error: Objects whose constructor is explicitly modified cannot be implicitly converted from int to B
-	if (b1);		// OK: objects modified by explicit conversion function B::operator bool() can be converted from B to bool by context
-	bool b6(b1);		// OK: Explicitly modified conversion function B::operator The object of bool() can be converted from B to bool by context
-	bool b7 = b1;		// Error: Objects modified by explicit conversion function B :: operator bool () cannot be implicitly converted
-	bool b8 = static_cast<bool>(b1);  // OK: static_cast performs direct initialization
+    B b1(1);		// OK：direct initialization
+    B b2 = 1;		// Error: Object modified by explicit constructor cannot be initialized by copying
+    B b3{ 1 };		// OK：direct list initialization
+    B b4 = { 1 };		// Error: Object modified by explicit constructor cannot copy list initialization
+    B b5 = (B)1;		// OK: Allow explicit conversion of static_cast
+    doB(1);			// Error: Objects whose constructor is explicitly modified cannot be implicitly converted from int to B
+    if (b1);		// OK: objects modified by explicit conversion function B::operator bool() can be converted from B to bool by context
+    bool b6(b1);		// OK: Explicitly modified conversion function B::operator The object of bool() can be converted from B to bool by context
+    bool b7 = b1;		// Error: Objects modified by explicit conversion function B :: operator bool () cannot be implicitly converted
+    bool b8 = static_cast<bool>(b1);  // OK: static_cast performs direct initialization
 
-	return 0;
+    return 0;
 }
 ```
 
@@ -537,7 +558,7 @@ int main()
 A `using declaration` introduces only one member of a namespace at a time. It allows us to know exactly which name is referenced in the program. Such as:
 
 ```cpp
-using namespace_name :: name;
+using namespace_name::name;
 ```
 
 #### Using declaration of constructor
@@ -563,7 +584,7 @@ Derived (parms): Base (args) {}
 The `using directive` makes all names in a particular namespace visible, so we don't need to add any prefix qualifiers to them. Such as:
 
 ```cpp
-using namespace_name name;
+using namespace namespace_name;
 ```
 
 #### Minimize `using directives` to pollute namespaces
@@ -612,24 +633,24 @@ int count = 11;         // Global (: :) count
 
 class A {
 public:
-	static int count;   // Count (A::count) of class A
+    static int count;   // Count (A::count) of class A
 };
 int A::count = 21;
 
 void fun()
 {
-	int count = 31;     // Initialize the local count to 31
-	count = 32;         // Set the local count to 32
+    int count = 31;     // Initialize the local count to 31
+    count = 32;         // Set the local count to 32
 }
 
 int main() {
-	::count = 12;       // Test 1: Set the global count to 12
+    ::count = 12;       // Test 1: Set the global count to 12
 
-	A::count = 22;      // Test 2: Set the count of class A to 22
+    A::count = 22;      // Test 2: Set the count of class A to 22
 
-	fun();		        // Test 3
+    fun();		        // Test 3
 
-	return 0;
+    return 0;
 }
 ```
 
@@ -814,9 +835,11 @@ public:
 #### Dynamic polymorphism (runtime / late binding)
 
 * Virtual functions: decorate member functions with virtual to make them virtual
+* Dynamic binding: dynamic binding occurs when a virtual function is called using a reference or pointer to a base class
 
 **note:**
 
+* You can assign an object of a derived class to a pointer or reference of the base class, and not vice versa
 * Ordinary functions (non-class member functions) cannot be virtual functions
 * Static functions (static) cannot be virtual functions
 * The constructor cannot be a virtual function (because when the constructor is called, the virtual table pointer is not in the object's memory space, the virtual table pointer must be formed after the constructor is called)
@@ -1022,22 +1045,6 @@ Legal, but:
 3. You must ensure that the member function does not call this after `delete this`
 4. Make sure no one uses it after delete this
 
-### How to define a class that can only generate objects on the heap (on the stack)?
-
-> [How to define a class that can only generate objects on the heap (on the stack)?](https://www.nowcoder.com/questionTerminal/0a584aa13f804f3ea72b442a065a7618)
-
-#### Only on the heap
-
-Method: Make the destructor private
-
-Reason: C ++ is a static binding language. The compiler manages the life cycle of objects on the stack. When the compiler allocates stack space for class objects, it first checks the accessibility of the class's destructor. If the destructor is not accessible, the object cannot be created on the stack.
-
-#### Only on the stack
-
-Method: overload new and delete as private
-
-Reason: The object is generated on the heap using the new keyword operation. The process is divided into two stages: the first stage uses new to find available memory on the heap and allocates it to the object; the second stage calls the constructor to generate the object. By setting the new operation to private, the first phase cannot be completed, and objects cannot be generated on the heap.
-
 ### Smart pointer
 
 #### In the C ++ Standard Library (STL)
@@ -1093,37 +1100,62 @@ Deprecated by c ++ 11 due to lack of language features such as `std::move` seman
 
 #### static_cast
 
-* For non-polymorphic conversions
-* Do not perform runtime type checking (conversion security is not as good as dynamic_cast)
-* Usually used to convert numeric data types (such as float-> int)
-* You can move the pointer throughout the class hierarchy. It is safe (upward conversion) for a child class to be converted to a parent class, and it is not safe to convert a parent class to a child class (because a child class may have fields or methods that are not in the parent class)
+* Compile-time type conversion (no runtime checks)  
+* Does not depend on RTTI
 
-> Upcast is an implicit conversion.
+| Conversion Type          | Safety       | Example                     |
+|--------------------------|--------------|--------------------------|
+| Numeric conversion       | ✅ Safe      | `float f=3.14; int i=static_cast<int>(f);` |
+| Upcast (class hierarchy) | ✅ Safe      | `Derived* d; Base* b=static_cast<Base*>(d);` |
+| Downcast (class hierarchy)| ⚠️ Unsafe    | `Base* b=new Base; Derived* d=static_cast<Derived*>(b);` |
+| Same-type conversion     | ✅ Safe      | `MyClass* p; MyClass* same=static_cast<MyClass*>(p);` |
+| Explicit constructor call| ✅ Safe      | `func(static_cast<std::string>("text"));` |
+| Any type→void*           | ✅ Safe      | `int* p; void* vp=static_cast<void*>(p);` |
+| Enum↔Integer             | ✅ Safe      | `enum Color{RED}; int c=static_cast<int>(RED);` |
 
 #### dynamic_cast
 
-* For polymorphic type conversions
-* Perform line runtime type checking
-* Only applicable to pointers or references
-* Conversion of ambiguous pointers will fail (return nullptr), but no exception will be thrown
-* You can move the pointer throughout the class hierarchy, including up conversion, down conversion
+* Runtime type checking (depends on RTTI)  
+* Requires polymorphic type (base must have at least one virtual function)  
+* Safe failure mechanism (nullptr or exception)  
+
+| Conversion Type     | Safety | Runtime Cost | Polymorphic Required | Failure Handling          | Example |
+|---------------------|--------|--------------|----------------------|---------------------------|---------|
+| Upcast              | ✅ Safe | None         | ❌ Not required      | Not applicable (always succeeds) | `Derived* d; Base* b = dynamic_cast<Base*>(d);` |
+| Downcast            | ✅ Safe | Yes          | ✅ Required          | Pointer→`nullptr`<br>Reference→`std::bad_cast` | `Base* b; Derived* d = dynamic_cast<Derived*>(b);` |
+| Cross-cast          | ✅ Safe | Yes          | ✅ Required          | Pointer→`nullptr`<br>Reference→`std::bad_cast` | `B2* b2 = dynamic_cast<B2*>(b1); // In diamond inheritance` |
+| Same-type conversion| ✅ Safe | None         | ❌ Not required      | Not applicable (always succeeds) | `Derived* d2 = dynamic_cast<Derived*>(d1);` |
+| Any type→void*      | ✅ Safe | Yes          | ✅ Required          | `nullptr`                 | `void* p = dynamic_cast<void*>(obj);` |
 
 #### const_cast
 
-* Used to remove const, volatile, and __unaligned features (such as converting const int to int)
+* Compile-time type modifier operation  
+* Only modifies `const`/`volatile` attributes  
+* Does not change underlying binary representation  
+
+| Conversion Type        | Safety       | Example                          |
+|------------------------|--------------|----------------------------------|
+| Remove const           | ⚠️ Risky     | `const int* cp; int* p=const_cast<int*>(cp);` |
+| Remove volatile        | ⚠️ Risky     | `volatile int* vp; int* p=const_cast<int*>(vp);` |
+| Add const              | ✅ Safe      | `int* p; const int* cp=const_cast<const int*>(p);` |
+| Legacy API compatibility | ⚠️ Necessary risk | `legacy_api(const_cast<char*>(str.c_str()));` |
 
 #### reinterpret_cast
 
-* Simple reinterpretation for bits
-* Misuse of the reinterpret_cast operator can be very risky. Unless the required conversion itself is low-level, you should use one of the other cast operators.
-* Allows conversion of any pointer to any other pointer type (such as `char *` to `int *` or `One_class *` to `Unrelated_class *`, but it is not itself safe)
-* Also allows conversion of any integer type to any pointer type and reverse conversion.
-* The reinterpret_cast operator cannot lose const, volatile, or __unaligned attributes.
-* A practical use of reinterpret_cast is in a hash function, which is to map values to indexes by making two different values hardly end with the same index.
+* No compile-time type safety checks  
+* Binary bit-level reinterpretation  
+* Most dangerous cast operator  
+
+| Conversion Type        | Safety       | Example                          |
+|------------------------|--------------|----------------------------------|
+| Pointer↔Pointer        | ❌ High risk | `MyClass* obj; void* p=reinterpret_cast<void*>(obj);` |
+| Pointer↔Integer        | ❌ High risk | `intptr_t addr=reinterpret_cast<intptr_t>(&obj);` |
+| Function pointer conversion | ❌ Extreme risk | Converting function pointers with different signatures |
+| Memory-mapped I/O      | ⚠️ Systems programming | Hardware register access |
 
 #### bad_cast
 
-* The dynamic_cast operator throws a bad_cast exception because the cast to a reference type fails.
+* The exception type for a failed reference conversion using `dynamic_cast`.
 
 bad_cast demo
 
@@ -1138,14 +1170,10 @@ catch (bad_cast b) {
 
 ### Runtime Type Information (RTTI)
 
-#### dynamic_cast
-
-* For polymorphic type conversions
-
 #### typeid
 
 * The typeid operator allows determining the type of an object at runtime
-* type \ _id returns a reference to a type \ _info object
+* typeid returns a reference to a type\_info object
 * If you want to get the data type of the derived class through the pointer of the base class, the base class must have a virtual function
 * Can only get the actual type of the object
 
@@ -1210,11 +1238,11 @@ void doSomething(Flyable *obj)                 // do something
 }
 
 int main(){
-	Bird *b = new Bird();
-	doSomething(b);
-	delete b;
-	b = nullptr;
-	return 0;
+    Bird *b = new Bird();
+    doSomething(b);
+    delete b;
+    b = nullptr;
+    return 0;
 }
 ```
 
@@ -1355,10 +1383,10 @@ Sequential stack data structures and pictures
 
 ```cpp
 typedef struct {
-	ElemType *elem;
-	int top;
-	int size;
-	int increment;
+    ElemType *elem;
+    int top;
+    int size;
+    int increment;
 } SqStack;
 ```
 
@@ -1370,10 +1398,10 @@ Queue data structure
 
 ```cpp
 typedef struct {
-	ElemType * elem;
-	int front;
-	int rear;
-	int maxSize;
+    ElemType * elem;
+    int front;
+    int rear;
+    int maxSize;
 }SqQueue;
 ```
 
@@ -1401,10 +1429,10 @@ Sequence table data structure and pictures
 
 ```cpp
 typedef struct {
-	ElemType *elem;
-	int length;
-	int size;
-	int increment;
+    ElemType *elem;
+    int length;
+    int size;
+    int increment;
 } SqList;
 ```
 
@@ -1484,14 +1512,14 @@ Hash table data structure and pictures for linear detection
 typedef char KeyType;
 
 typedef struct {
-	KeyType key;
+    KeyType key;
 }RcdType;
 
 typedef struct {
-	RcdType *rcd;
-	int size;
-	int count;
-	bool *tag;
+    RcdType *rcd;
+    int size;
+    int count;
+    bool *tag;
 }HashTable;
 ```
 
@@ -1836,12 +1864,12 @@ For non-threaded systems:
 #### Communication between processes and advantages and disadvantages
 
 * Pipeline (PIPE)
-    * Famous Pipeline: A half-duplex communication method that allows communication between unrelated processes
+    * Named pipes: A first-in-first-out communication method that allows communication between unrelated processes
         * Advantages: can achieve inter-process communication in any relationship
         * Disadvantages:
             1. Long-term storage in the system, improper use is prone to errors
             Limited buffer
-    * Unnamed pipe: a half-duplex communication method that can only be used between processes with parental relationships (parent-child processes)
+    * Anonymous pipes: A simplex first-in-first-out communication method that can only be used between processes with affinity (parent-child processes)
         * Advantages: simple and convenient
         * Disadvantages:
             Limited to one-way communication
@@ -2010,14 +2038,14 @@ using namespace std;
 
 int main()
 {
-	int i = 0x12345678;
+    int i = 0x12345678;
 
-	if (*((char*)&i) == 0x12)
-		cout << "Big endian" << endl;
-	else	
-		cout << "Little endian" << endl;
+    if (*((char*)&i) == 0x12)
+        cout << "Big endian" << endl;
+    else	
+        cout << "Little endian" << endl;
 
-	return 0;
+    return 0;
 }
 ```
 
@@ -2156,7 +2184,7 @@ application:
 #### Interior Gateway Protocol
 
 * RIP (Routing Information Protocol, Routing Information Protocol)
-* OSPF (Open Sortest Path First)
+* OSPF (Open Shortest Path First)
 
 #### External gateway protocol
 
@@ -2203,7 +2231,7 @@ Port number | 21 | 23 | 25 | 53 | 69 | 80 | 443 | 161
 
 Feature:
 * Connection oriented
-* Only point-to-point (one-to-one) communication
+* End-to-end communication
 * Reliable interaction
 * Full-duplex communication
 * Byte stream oriented
@@ -2651,7 +2679,7 @@ So there is a FIN and ACK in each direction.
 * Basic lock types: exclusive lock (X lock / write lock), shared lock (S lock / read lock).
 * Livelock deadlock:
     * Livelock: The transaction is always in a waiting state, which can be avoided through a first come, first served policy.
-    * Deadlock: Things can never end
+    * Deadlock: The transaction can never end
         * Prevention: one-time block method, sequential block method;
         * Diagnosis: timeout method, waiting graph method;
         * Cancel: Undo the transaction with the least deadlock cost and release all the locks of this transaction, so that other transactions can continue to run.
@@ -3387,7 +3415,7 @@ contain:
 
 ## 📝 Interview Question Experience
 
-* [Newcoder.com's summary of the 2020 autumn tricks! (Post division)](https://www.nowcoder.com/discuss/205497)
+* [Nowcoder.com's summary of the 2020 autumn tricks! (Post division)](https://www.nowcoder.com/discuss/205497)
 * [【Preparation for Autumn Moves】 Raiders for 2020 Autumn Moves](https://www.nowcoder.com/discuss/197116)
 * [2019 School Recruitment Summary! 【Daily Update】](https://www.nowcoder.com/discuss/90907)
 * [2019 School Recruitment Technology Posts Summary [Technology]](https://www.nowcoder.com/discuss/146655)
@@ -3395,8 +3423,8 @@ contain:
 * [2017 Autumn Campus Recruitment Pen and Face Summaries](https://www.nowcoder.com/discuss/12805)
 * [The most complete collection of 2017 spring tricks in history!!](https://www.nowcoder.com/discuss/25268)
 * [Interview questions are here](https://www.nowcoder.com/discuss/57978)
-* [Knowing.. On the Internet job search, what well-written and attentive face have you seen? It is best to share your own facial and mental journey. ](https://www.zhihu.com/question/29693016)
-* [Know. What are the most common interview algorithm questions for internet companies? ](https://www.zhihu.com/question/24964987)
+* [zhihu. On the Internet job search, what well-written and attentive face have you seen? It is best to share your own facial and mental journey. ](https://www.zhihu.com/question/29693016)
+* [zhihu. What are the most common interview algorithm questions for internet companies? ](https://www.zhihu.com/question/24964987)
 * [CSDN. C ++ Interview Questions Completely Organized](http://blog.csdn.net/ljzcome/article/details/574158)
 * [CSDN. Baidu R & D interview questions (C ++ direction)](http://blog.csdn.net/Xiongchao99/article/details/74524807?locationNum=6&fps=1)
 * [CSDN. C ++ 30 common interview questions](http://blog.csdn.net/fakine/article/details/51321544)
@@ -3410,7 +3438,7 @@ contain:
 
 ## 📆 Recruiting time posts
 
-* [Niuke.com 2020 School Recruitment | 2020 IT Enterprise Recruitment Schedule](https://www.nowcoder.com/school/schedule)
+* [nowcoder . Enterprise Recruitment Schedule](https://www.nowcoder.com/school/schedule)
 
 <a id="recommend"></a>
 
