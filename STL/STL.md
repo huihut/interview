@@ -2045,17 +2045,418 @@ mylist contains: 19 77 2 16
 ```
 
 ### list
+list是一个双向链表容器，它存储元素的顺序由元素被插入的顺序决定，而不是由元素的值决定。list 不对元素进行排序，也不提供基于键的快速访问。
 
+#### list::front,list::back
+返回第一个与最后一个元素的引用，如果容器为空，则调用该函数会导致未定义行为。
+```cpp
+reference front();
+const_reference front() const;
+reference back();
+const_reference back() const;
+```
+Example
+```cpp
+#include <iostream>
+#include <list>
+
+int main()
+{
+  std::list<int> mylist = {20, 30, 40, 50};
+  mylist.front() = 10;
+  mylist.back() = 99;
+  std::cout << "mylist contains:";
+  for (auto& x : mylist) std::cout << ' ' << x;
+  std::cout << '\n';
+  return 0;
+}
+```
+Output
+```cpp
+mylist contains: 10 30 40 99
+```
+
+#### list::unique
+移除容器中所有连续重复的元素，只保留一个。如果提供了比较函数，则使用该函数来判断元素是否相等。否则使用默认的比较函数operator==。
+```cpp
+template <class BinaryPredicate>
+void unique(BinaryPredicate pred);
+```
+Example
+```cpp
+#include <iostream>
+#include <list>
+int main()
+{
+  std::list<int> mylist = {1, 2, 2, 3, 3, 3, 4, 4, 4, 4};
+  mylist.unique();
+  std::cout << "mylist contains:";
+  for (int& x : mylist)
+  std::cout << ' ' << x;
+  return 0;
+}
+```
+Output
+```cpp
+mylist contains: 1 2 3 4
+```
+
+#### list::merge
+将两个已排序的list合并为一个有序的list。如果this和other中的元素都按非递减顺序排序，则merge会将other中的所有元素合并到this中，合并后的this仍然保持非递减顺序,other清空元素。如果this和other指向同一个list，则行为未定义。
+```cpp
+template <class Compare>
+void merge(std::list<T, Allocator>& other, Compare comp);
+```
+Example
+```cpp
+#include <iostream>
+#include <list>
+int main()
+{
+  std::list<int> first = {1, 3, 5, 7};
+  std::list<int> second = {2, 4, 6, 8};
+  first.merge(second);
+  std::cout << "first contains:";
+  for (int& x : first) std::cout << ' ' << x;
+  std::cout << '\n';
+  std::cout << "second contains:";
+  for (int& x : second) std::cout << ' ' << x;
+  return 0;
+}
+```
+Output
+```cpp
+first contains: 1 2 3 4 5 6 7 8
+second contains:
+```
+
+#### list::splice
+移除other中指定区间的元素，并插入到this中。
+```cpp
+void splice(iterator it, list& x, iterator first);
+```
+Example
+```cpp
+#include <iostream>
+#include <list>
+int main() {
+    std::list<int> list1 = {1, 3, 5, 7};
+    std::list<int> list2 = {2, 4, 6, 8};
+    auto it = list1.begin();
+    std::advance(it, 2);//Not support + for iterator
+    auto first = list2.begin();
+    std::advance(first, 1);
+    list1.splice(it, list2, first);
+    for (int value : list1) {
+        std::cout << value << " ";
+    }
+    std::cout << std::endl;
+    for (int value : list2) {
+        std::cout << value << " ";
+    }
+    std::cout << std::endl;
+    return 0;
+}
+```
+Output:
+```cpp
+1 3 4 5 7
+2 6 8
+```
+
+#### list::reverse
+反转容器中的元素。
+```cpp
+void reverse() noexcept;
+```
+Example:
+```cpp
+#include <iostream>
+#include <list>
+int main()
+{
+  std::list<int> mylist = {1, 2, 3, 4, 5};
+  mylist.reverse();
+  std::cout << "mylist contains:";
+  for (int& x : mylist) std::cout << ' ' << x;
+  return 0;
+}
+```
+Output:
+```cpp
+mylist contains:1 2 3 4 5
+```
 ### stack
+后进先出（LIFO）,基于底层容器（deque或list或vector）实现。
+#### stack::emplace
+在栈顶构造一个新元素,减少了不必要的对象构造和销毁.
+```cpp
+template <class... Args>
+void emplace(Args&&... args);
+```
+Example:
+```cpp
+#include <iostream>
+#include <stack>
+int main()
+{
+  std::stack<int> mystack;
+  mystack.emplace(10);
+  mystack.emplace(20);
+  std::cout << "mystack contains:";
+  while (!mystack.empty())
+  {
+    std::cout << ' ' << mystack.top();
+    mystack.pop();
+  }
+  return 0;
+}
+```
+Output:
+```cpp
+mystack contains: 20 10
+```
+
+#### stack::push_range(c++23)
+将范围中的每个元素插入到栈的末尾
+```cpp
+template <class InputIterator>
+void push_range(InputIterator first, InputIterator last);
+```
+Example:
+```cpp
+#include <iostream>
+#include <stack>
+#include <vector>
+int main() {
+    std::stack<int> st;
+    std::vector<int> vec = {1, 2, 3, 4};
+    st.push_range(vec);
+    while (!st.empty()) {
+        std::cout << st.top() <<" ";
+        st.pop();
+    }
+}
+```
+Output:
+```cpp
+4 3 2 1
+```
 
 ### queue
 
+先进先出（FIFO）,基于底层容器（deque或list）实现。
+
 ### priority_queue
 
+提供了一种基于优先级的队列，通常基于堆实现，默认使用最大堆。
+#### lambda自定义函数比较
+```cpp
+#include <iostream>
+#include <queue>
+#include <vector>
+int main() {
+    std::priority_queue<int> maxHeap;
+    maxHeap.push(10);
+    maxHeap.push(20);
+    maxHeap.push(15);
+    std::cout << "Top element (max): " << maxHeap.top() << std::endl;
+    maxHeap.pop();
+    std::cout << "Top element after pop: " << maxHeap.top()<<std::endl;
+    auto cmp = [](int a, int b) { return a > b; };//lambda
+    std::priority_queue<int, std::vector<int>, decltype(cmp)> minHeap(cmp);
+    minHeap.push(10);
+    minHeap.push(20);
+    minHeap.push(15);
+    std::cout << "Top element (min): " << minHeap.top() << std::endl;
+    return 0;
+}
+```
+Output:
+```cpp
+Top element (max): 20
+Top element after pop: 15
+Top element (min): 10
+```
+
 ### set
-
+存储唯一的元素，并且这些元素会自动按照特定的顺序排列.
+#### set::upper_bound
+返回指向第一个大于指定值的元素的迭代器。
+```cpp
+template <class K>
+iterator upper_bound(const K& x);
+template <class K>
+const_iterator upper_bound(const K& x) const;
+```
+Example:
+```cpp
+#include <iostream>
+#include <set>
+#include <string>
+int main() {
+    std::set<std::string> mySet = {"apple", "banana", "cherry", "date"};
+    auto it = mySet.upper_bound("banana");
+    if (it != mySet.end()) {
+        std::cout << "The first element greater than 'banana' is: " << *it;
+    } else {
+        std::cout << "No element greater than 'banana' found.";
+    }
+    return 0;
+}
+```
+Output:
+```cpp
+The first element greater than 'banana' is: cherry
+```
+#### set::contains
+判断元素是否存在。
+```cpp
+bool contains(const key_type& key) const;
+```
+Example:
+```cpp
+#include <iostream>
+#include <set>
+int main() {
+    std::set<int> mySet = {1, 2, 3, 4, 5};
+    int valueToFind = 3;
+    if (mySet.contains(valueToFind)) {
+        std::cout << valueToFind << " is in the set.";
+    } else {
+        std::cout << valueToFind << " is not in the set.";
+    }
+    return 0;
+}
+```
+Output:
+```cpp
+3 is in the set.
+```
+#### set::value_comp
+获取一个函数对象，用于比较两个键值。
+```cpp
+key_compare value_comp() const;
+```
+Example:
+```cpp
+#include <iostream>
+#include <set>
+int main() {
+    std::set<int> mySet = {5, 3, 9, 1, 7};
+    auto comp = mySet.value_comp();
+    int a = 3;
+    int b = 5;
+    if (comp(a, b)) {
+        std::cout << a << " is less than " << b << " according to the set's comparison function.";
+    } else {
+        std::cout << a << " is not less than " << b << " according to the set's comparison function.";
+    }
+    return 0;
+}
+```
+Output:
+```cpp
+3 is less than 5 according to the set's comparison function.
+```
+#### set::extract
+从set中提取指定的元素节点，并返回一个节点句柄。
+```cpp
+template<class K>
+node_type extract(K&& x); 
+```
+Example:
+```cpp
+#include <iostream>
+#include <set>
+int main() {
+    std::set<int> mySet = {1, 2, 3, 4, 5};
+    auto nh = mySet.extract(3);
+    if (!nh.empty()) {
+        std::cout << "Extracted element: " << nh.value();
+    } else {
+        std::cout << "Element not found.";
+    }
+    std::cout<<std::endl;
+    nh.value() = 10;
+    mySet.insert(std::move(nh));
+    for (const auto& elem : mySet) {
+        std::cout << elem << " ";
+    }
+    return 0;
+}
+```
+Output:
+```cpp
+Extracted element: 3
+1 2 4 5 10
+```
 ### multiset
-
+在set的基础上，允许重复元素。
+#### multiset::equal_range
+返回一个范围pair，该范围包含所有满足条件的元素。
+Example:
+```cpp
+#include <iostream>
+#include <set>
+int main() {
+    std::multiset<int> ms = {1, 2, 2, 3, 3, 3, 4, 4, 4, 4};
+    auto range = ms.equal_range(3);
+    for (auto it = range.first; it != range.second; ++it) {
+        std::cout << *it << " ";
+    }
+    return 0;
+}
+```
+Output:
+```cpp
+3 3 3
+```
+#### multset::find
+返回一个迭代器，指向给定键的元素。如果找不到给定键，则返回一个指向 multiset 的末尾的迭代器。
+Example:
+```cpp
+#include <iostream>
+#include <set>
+int main() {
+    std::multiset<int> myMultiset = {1, 2, 2, 3, 4, 4, 4};
+    auto it = myMultiset.find(2);
+    if (it != myMultiset.end()) {
+        std::cout << "Found element with value " << *it << std::endl;
+    } else {
+        std::cout << "Element not found" << std::endl;
+    }
+    return 0;
+}
+```
+Output:
+```cpp
+Found element with value 2
+```
+#### multiset::emplace_hint
+通过提供一个位置，帮助优化插入操作的性能。
+```cpp
+template <class... Args>
+iterator emplace_hint(const_iterator hint, Args&&... args);
+```
+Example:
+```cpp
+#include <iostream>
+#include <set>
+int main() {
+    std::multiset<int> myMultiset{1, 2, 4, 5};
+    auto it = myMultiset.find(2);
+    myMultiset.emplace_hint(it, 3);//Given position of 2
+    for (const auto& elem : myMultiset) {
+        std::cout << elem << " ";
+    }
+    return 0;
+}
+```
+Output:
+```cpp
+1 2 3 4 5
+```
 ### map
 
 map 是关联容器，按照特定顺序存储由 key value (键值) 和 mapped value (映射值) 组合形成的元素。
@@ -2505,35 +2906,7 @@ upper bound points to: 'c' => 30
 ```
 
 ### multimap
-
-### 无序容器（Unordered Container）：unordered\_set、unordered\_multiset、unordered\_map、unordered\_multimap
-
-包括：
-
-* unordered\_set
-* unordered\_multiset
-* unordered\_map
-* unordered\_multimap
-
-都是以哈希表实现的。
-
-![](http://img.blog.csdn.net/20160410123436394)
-
-unordered\_set、unodered\_multiset结构：
-
-![](http://img.blog.csdn.net/20160410123518692)
-
-unordered\_map、unodered\_multimap结构：
-
-![](http://img.blog.csdn.net/20160410123525739)
-
-### unordered_set 
-
-### unordered_multiset 
-
-### unordered_map 
-
-### unordered_multimap 
+在map的基础上，允许重复元素。
 
 ### tuple
 
@@ -2672,7 +3045,82 @@ Output
 ```
 sixth contains: 30 and c
 ```
-
+#### tuple::tie
+将元组中的值解包到多个变量中.
+```cpp
+template <class... Types>
+constexpr tuple<Types&...> tie(Types&... args);
+```
+Example:
+```cpp
+#include <iostream>
+#include <tuple>
+int main() {
+    std::tuple<int, double, std::string> myTuple(42, 3.14, "Hello");
+    int a;
+    double b;
+    std::string c;
+    std::tie(a, b, c) = myTuple;
+    std::cout << "a: " << a << "\n";
+    std::cout << "b: " << b << "\n";
+    std::cout << "c: " << c << "\n";
+    return 0;
+}
+```
+Output:
+```cpp
+a: 42
+b: 3.14
+c: Hello
+```
+#### tuple::apply(c++23)
+将函数 F 应用于 tuple t
+```cpp
+template <class F, class Tuple>
+constexpr decltype(auto) apply(F&& f, Tuple&& t);
+```
+Example:
+```cpp
+#include <iostream>
+#include <tuple>
+void print(int a, double b, const std::string& c) {
+    std::cout << "a: " << a << ", b: " << b << ", c: " << c << "\n";
+}
+int main() {
+    std::tuple<int, double, std::string> myTuple(42, 3.14, "Hello");
+    std::apply(print, myTuple);
+    return 0;
+}
+```
+Output:
+```cpp
+a: 42, b: 3.14, c: Hello
+```
+#### tuple::ignore
+解包操作中忽略某个值。
+```cpp
+namespace std {
+    struct _Ignored {};
+    _Ignored const ignore;
+}
+```
+Example:
+```cpp
+#include <iostream>
+#include <tuple>
+int main() {
+    std::tuple<int, double, std::string, char> t(1, 2.5, "hello", 'a');
+    int a;
+    std::string c;
+    std::tie(a, std::ignore, c, std::ignore) = t;
+    std::cout << "a: " << a << ", c: " << c << std::endl;
+    return 0;
+}
+```
+Output:
+```cpp
+a: 1, c: hello
+```
 ### pair
 这个类把一对值（values）结合在一起，这些值可能是不同的类型（T1 和 T2）。每个值可以被公有的成员变量first、second访问。
 
@@ -2756,3 +3204,79 @@ The price of lightbulbs is $0.99
 The price of shoes is $39.9
 The price of tomatoes is $2.3
 ```
+### span
+提供了一种方便的方式来引用连续的内存块。span不复制数据，使用方式类似于指针或引用，提供了更高的性能。
+
+#### span::first
+获取一个包含span前count个元素的子视图。
+```cpp
+template <std::size_t Count>
+constexpr std::span<T, Count> first() const;
+```
+Example:
+```cpp
+#include <iostream>
+#include <span>
+#include <vector>
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::span<int> span(vec);
+    auto first3 = span.first<3>();
+    std::cout << "First 3 elements: ";
+    for (int i : first3) {
+        std::cout << i << " ";
+    }
+    return 0;
+}
+```
+Output:
+```cpp
+First 3 elements: 1 2 3
+```
+#### span::subspan
+获取一个包含span中从offset开始的count个元素的子视图。
+```cpp
+constexpr std::span subspan(std::size_t offset, std::size_t count) const;
+```
+Example:
+```cpp
+#include <iostream>
+#include <span>
+#include <vector>
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::span<int> span(vec);
+    auto subspan1 = span.subspan(2, 3);
+    std::cout << "Subspan : ";
+    for (int i : subspan1) {
+        std::cout << i << " ";
+    }
+    return 0;
+}
+```
+Output:
+```cpp
+Subspan : 3 4 5
+```
+### 无序容器（基于哈希表实现）
+![](http://img.blog.csdn.net/20160410123436394)
+
+#### unordered_set 
+存储唯一的元素，不允许重复，元素的顺序是无序的。
+#### unordered_multiset 
+存储元素，允许重复，元素的顺序是无序的。
+#### unordered_map 
+存储键值对，键是唯一的，元素的顺序是无序的。
+#### unordered_multimap 
+存储键值对，允许键重复，元素的顺序是无序的。
+### 平坦容器(C++23)
+使用连续的存储空间，速度优化。
+![](http://img.blog.csdn.net/20160410123436394)
+
+#### flat_set
+
+#### flat_multiset
+
+#### flat_map
+
+#### flat_multimap
