@@ -3464,3 +3464,264 @@ int main( void )
 
 [![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](https://github.com/huihut/interview/blob/master/LICENSE)
 
+### Q1. What is the purpose of the `const` keyword in JavaScript?
+
+- [x] Declares a variable with a constant value that cannot be reassigned
+- [ ] Declares a variable that can only be accessed within a block scope
+- [ ] Declares a variable that is only accessible within a function scope
+- [ ] Declares a variable that can be modified but not redeclared
+
+**Explanation:**
+The `const` keyword in JavaScript is used to declare a variable with a constant value that cannot be reassigned. Once a `const` variable is initialized, its value cannot be changed through reassignment. This is useful for defining values that should not be modified, such as configuration settings, API keys, or mathematical constants.
+
+**Reference:** [MDN Web Docs - const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
+
+---
+
+### Q2. What is the purpose of the `async` keyword in JavaScript?
+
+- [x] Declares an asynchronous function that returns a Promise
+- [ ] Declares a function that should be executed in a separate thread
+- [ ] Declares a function that should be executed immediately upon definition
+- [ ] Declares a function that should be executed after a specified delay
+
+**Explanation:**
+The `async` keyword in JavaScript is used to declare an asynchronous function. When a function is marked as `async`, it automatically returns a Promise, even if the function doesn't explicitly use the `Promise` API. This allows the function to use the `await` keyword to wait for asynchronous operations, such as network requests or timers, to complete before continuing execution.
+
+**Reference:** [MDN Web Docs - async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+
+---
+
+### Q3. What is the purpose of the `await` keyword in JavaScript?
+
+- [x] Pauses the execution of an asynchronous function until a Promise is resolved
+- [ ] Declares a variable that can only be accessed within an asynchronous function
+- [ ] Executes a function in a separate thread and waits for it to complete
+- [ ] Defines a default value for a function parameter if it is not provided
+
+**Explanation:**
+The `await` keyword in JavaScript is used inside asynchronous functions (marked with the `async` keyword) to pause the execution of the function until a Promise is resolved. When an `await` expression is encountered, the asynchronous function suspends its execution, allowing other code to run in the meantime. Once the Promise is resolved, the function resumes execution with the resolved value.
+
+**Reference:** [MDN Web Docs - await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+
+---
+
+### Q4. What is the purpose of the `let` keyword in JavaScript?
+
+- [ ] Declares a variable with a constant value that cannot be reassigned
+- [x] Declares a variable with block-level scope that can be reassigned
+- [ ] Declares a variable with function-level scope that can be reassigned
+- [ ] Declares a variable that is only accessible within a single expression
+
+**Explanation:**
+The `let` keyword in JavaScript is used to declare a variable with block-level scope. Unlike `var`, which has function-level or global scope, `let` variables are scoped to the nearest enclosing block (e.g., a pair of curly braces `{}`). This means that `let` variables are only accessible within the block they are defined in, and they can be reassigned to a new value.
+
+**Reference:** [MDN Web Docs - let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+
+---
+
+### Q5. What is the purpose of the `var` keyword in JavaScript?
+
+- [ ] Declares a variable with a constant value that cannot be reassigned
+- [ ] Declares a variable with block-level scope that can be reassigned
+- [x] Declares a variable with function-level or global scope that can be reassigned
+- [ ] Declares a variable that is only accessible within a single expression
+
+**Explanation:**
+The `var` keyword in JavaScript is used to declare a variable with function-level or global scope. Variables declared with `var` are accessible throughout the entire function they are defined in, or globally if defined outside of a function. Unlike `let`, `var` variables are not scoped to the nearest enclosing block, and they can be reassigned to a new value.
+
+**Reference:** [MDN Web Docs - var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var)
+
+---
+
+### Q6. What is the purpose of the `this` keyword in JavaScript?
+
+- [ ] Refers to the global object, regardless of the execution context
+- [x] Refers to the object that the current function is a method of
+- [ ] Refers to the object that was used to call the current function
+- [ ] Refers to the object that was passed as an argument to the current function
+
+**Explanation:**
+In JavaScript, the `this` keyword refers to the object that the current function is a method of. The value of `this` is determined by how a function is called, and it can change depending on the execution context. When a function is called as a method of an object, `this` refers to that object. When a function is called as a standalone function, `this` typically refers to the global object (e.g., `window` in a browser environment).
+
+**Reference:** [MDN Web Docs - this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+
+---
+
+### Q7. What is the purpose of the `new` keyword in JavaScript?
+
+- [ ] Creates a new primitive value (e.g., number, string, boolean)
+- [ ] Creates a new function that can be called with the `new` keyword
+- [x] Creates a new object instance of a constructor function or class
+- [ ] Creates a new variable that can be used within the current scope
+
+**Explanation:**
+The `new` keyword in JavaScript is used to create a new object instance of a constructor function or class. When the `new` keyword is used with a function call, it creates a new object and sets the `this` value within the function to the new object. The new object inherits the properties and methods defined in the constructor function or class.
+
+**Reference:** [MDN Web Docs - new operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new)
+
+---
+
+### Q8. What is the purpose of the `class` keyword in JavaScript?
+
+- [ ] Declares a new primitive data type in JavaScript
+- [x] Provides a syntax for creating object-oriented classes
+- [ ] Defines a new global variable that can be accessed anywhere
+- [ ] Declares a function that can only be called with the `new` keyword
+
+**Explanation:**
+The `class` keyword in JavaScript is used to create object-oriented classes, which serve as blueprints for creating object instances. Classes in JavaScript provide a more concise and readable syntax for defining constructor functions, inheritance, and other object-oriented concepts. While JavaScript does not have true classes like in other object-oriented languages, the `class` syntax is a syntactical sugar over the existing prototype-based inheritance model.
+
+**Reference:** [MDN Web Docs - Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+
+---
+
+### Q9. What is the purpose of the `extends` keyword in JavaScript?
+
+- [ ] Declares a new variable that can be accessed outside of the current scope
+- [ ] Defines a new function that can be called with the `new` keyword
+- [x] Creates a subclass that inherits from a parent class
+- [ ] Declares a constant value that cannot be reassigned
+
+**Explanation:**
+The `extends` keyword in JavaScript is used to create a subclass that inherits from a parent class. When a class extends another class, the subclass inherits all the properties and methods of the parent class. This allows for code reuse and the creation of hierarchical relationships between classes. The subclass can also override or extend the functionality of the parent class as needed.
+
+**Reference:** [MDN Web Docs - extends](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends)
+
+---
+
+### Q10. What is the purpose of the `super()` function in JavaScript?
+
+- [ ] Calls a function with the same name as the current class
+- [ ] Declares a new variable that can be accessed throughout the program
+- [x] Calls the constructor of the parent class from a subclass
+- [ ] Defines a new constant value that cannot be reassigned
+
+**Explanation:**
+The `super()` function in JavaScript is used to call the constructor of the parent class from within a subclass. When a subclass is created using the `extends` keyword, the subclass inherits the properties and methods of the parent class. The `super()` function allows the subclass to call the parent class's constructor, which is necessary for properly initializing the inherited properties.
+
+**Reference:** [MDN Web Docs - super](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super)
+
+---
+
+### Q11. What is the purpose of the `import` statement in JavaScript?
+
+- [ ] Declares a new variable that can be accessed throughout the program
+- [ ] Defines a new function that can be called with the `new` keyword
+- [x] Imports one or more values (functions, objects, etc.) from another module
+- [ ] Declares a new constant value that cannot be reassigned
+
+**Explanation:**
+The `import` statement in JavaScript is used to import one or more values (such as functions, objects, or variables) from another module. Modules in JavaScript provide a way to organize and encapsulate code, allowing for better code reuse and maintainability. The `import` statement allows you to access the exported values from a different module, which can be either a local file or a third-party library.
+
+**Reference:** [MDN Web Docs - import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+
+---
+
+### Q12. What is the purpose of the `export` statement in JavaScript?
+
+- [ ] Declares a new variable that can be accessed throughout the program
+- [ ] Defines a new function that can be called with the `new` keyword
+- [x] Exports one or more values (functions, objects, etc.) from a module
+- [ ] Declares a new constant value that cannot be reassigned
+
+**Explanation:**
+The `export` statement in JavaScript is used to export one or more values (such as functions, objects, or variables) from a module. Modules in JavaScript provide a way to organize and encapsulate code, allowing for better code reuse and maintainability. The `export` statement makes the specified values available for import by other modules, which can be either local files or third-party libraries.
+
+**Reference:** [MDN Web Docs - export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+
+---
+
+### Q13. What is the purpose of the `Promise` object in JavaScript?
+
+- [ ] Provides a way to create new objects with a constructor function
+- [x] Represents the eventual completion (or failure) of an asynchronous operation
+- [ ] Defines a new syntax for creating object-oriented classes
+- [ ] Allows for the creation of constant values that cannot be reassigned
+
+**Explanation:**
+The `Promise` object in JavaScript is a built-in construct that represents the eventual completion (or failure) of an asynchronous operation. Promises provide a more manageable way to handle asynchronous code, compared to traditional callback-based approaches. A Promise can be in one of three states: pending, fulfilled, or rejected. Promises allow you to chain multiple asynchronous operations together and handle errors more effectively.
+
+**Reference:** [MDN Web Docs - Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+---
+
+### Q14. What is the purpose of the `async/await` syntax in JavaScript?
+
+- [ ] Provides a way to create new objects with a constructor function
+- [ ] Defines a new syntax for creating object-oriented classes
+- [x] Simplifies the handling of asynchronous code using Promises
+- [ ] Allows for the creation of constant values that cannot be reassigned
+
+**Explanation:**
+The `async/await` syntax in JavaScript is a syntactical sugar on top of the `Promise` API, which simplifies the handling of asynchronous code. The `async` keyword is used to declare a function as asynchronous, and the `await` keyword is used to pause the execution of an asynchronous function until a Promise is resolved. This allows you to write asynchronous code that looks and behaves more like synchronous code, making it easier to reason about and manage.
+
+**Reference:** [MDN Web Docs - async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+
+---
+
+### Q15. What is the purpose of the `setTimeout()` function in JavaScript?
+
+- [ ] Provides a way to create new objects with a constructor function
+- [ ] Defines a new syntax for creating object-oriented classes
+- [ ] Allows for the creation of constant values that cannot be reassigned
+- [x] Schedules a function to be executed after a specified delay
+
+**Explanation:**
+The `setTimeout()` function in JavaScript is used to schedule a function to be executed after a specified delay. The function takes two arguments: a callback function to be executed, and a delay in milliseconds. When the specified delay has elapsed, the callback function is added to the event queue and executed when the JavaScript engine has the opportunity to do so. This is a common way to introduce asynchronous behavior in JavaScript programs.
+
+**Reference:** [MDN Web Docs - setTimeout()](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout)
+
+---
+
+### Q16. What is the purpose of the `setInterval()` function in JavaScript?
+
+- [ ] Provides a way to create new objects with a constructor function
+- [ ] Defines a new syntax for creating object-oriented classes
+- [ ] Allows for the creation of constant values that cannot be reassigned
+- [x] Schedules a function to be executed repeatedly at a fixed interval
+
+**Explanation:**
+The `setInterval()` function in JavaScript is used to schedule a function to be executed repeatedly at a fixed interval. The function takes two arguments: a callback function to be executed, and a delay in milliseconds. The callback function is executed every time the specified delay has elapsed. This is a common way to create periodic or recurring tasks in JavaScript programs, such as updating a clock or fetching new data from a server.
+
+**Reference:** [MDN Web Docs - setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/setInterval)
+
+---
+
+### Q17. What is the purpose of the `Array.prototype.map()` method in JavaScript?
+
+- [ ] Checks if all elements in an array pass a given test
+- [ ] Applies a function to each element in an array and returns a new array
+- [x] Creates a new array with the results of calling a provided function on every element in the calling array
+- [ ] Reduces the elements of an array to a single value by applying a function of two arguments
+
+**Explanation:**
+The `map()` method in JavaScript is used to create a new array with the results of calling a provided function on every element in the calling array. The `map()` method calls the provided function once for each element in the array and constructs a new array with the results. This is a powerful way to transform data or perform operations on each element in an array.
+
+**Reference:** [MDN Web Docs - Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+
+---
+
+### Q18. What is the purpose of the `Array.prototype.filter()` method in JavaScript?
+
+- [ ] Checks if all elements in an array pass a given test
+- [x] Creates a new array with all elements that pass the test implemented by the provided function
+- [ ] Applies a function to each element in an array and returns a new array
+- [ ] Reduces the elements of an array to a single value by applying a function of two arguments
+
+**Explanation:**
+The `filter()` method in JavaScript is used to create a new array with all elements that pass the test implemented by the provided function. The `filter()` method calls the provided function once for each element in the array, and if the function returns a truthy value, the element is included in the new array. This is a useful way to selectively extract elements from an array based on a specific condition.
+
+**Reference:** [MDN Web Docs - Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+
+---
+
+### Q19. What is the purpose of the `Array.prototype.reduce()` method in JavaScript?
+
+- [ ] Checks if all elements in an array pass a given test
+- [ ] Creates a new array with all elements that pass the test implemented by the provided function
+- [ ] Applies a function to each element in an array and returns a new array
+- [x] Reduces the elements of an array to a single value by applying a function of two arguments
+
+**Explanation:**
+The `reduce()` method in JavaScript is used to reduce the elements of an array to a single value by applying a function of two arguments. The function is called a "reducer" and is executed on each element of the array (from left to right), with the result being accumulate
