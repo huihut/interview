@@ -1770,6 +1770,31 @@ An octree is a tree-like data structure used to describe three-dimensional space
 * 3D computer graphics
 * Nearest Search
 
+#### Trie (Prefix Tree)
+
+[Trie.cpp](DataStructure/Trie.cpp)
+
+A Trie, also known as a prefix tree or digital tree, is a multi-way tree structure used for efficient string retrieval.
+
+##### Features
+
+* The root node contains no character; each node except the root contains only one character
+* The path from the root node to a certain node, connecting the characters passed through, forms the string corresponding to that node
+* All child nodes of each node contain different characters
+
+##### Properties
+
+* Insert time complexity: O(m), where m is the string length
+* Search time complexity: O(m)
+* Space complexity: O(ALPHABET_SIZE * N * M)
+
+##### Applications
+
+* String retrieval
+* Word frequency statistics
+* String sorting
+* Prefix matching (keyword suggestions in search engines)
+
 <a id="algorithm"></a>
 
 ## ⚡️ Algorithm
@@ -1815,6 +1840,36 @@ Graph Search Algorithm | Data Structure | Traversal Time Complexity | Spatial Co
 ---|---|---|---
 [BFS - Breadth First Search](https://zh.wikipedia.org/wiki/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2)|adjacency matrix <br/> adjacency list |O(\|v\|<sup>2</sup>)<br/>O(\|v\|+\|E\|)|O(\|v\|<sup>2</sup>)<br/>O(\|v\|+\|E\|)
 [DFS - Depth-First Search](https://zh.wikipedia.org/wiki/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2)| adjacency matrix <br/> adjacent linked list |O(\|v\|<sup>2</sup>)<br/>O(\|v\|+\|E\|)|O(\|v\|<sup>2</sup>)<br/>O(\|v\|+\|E\|)
+
+### Topological Sort
+
+[TopologicalSort.h](Algorithm/TopologicalSort.h)
+
+Topological sorting is a linear ordering of vertices in a directed acyclic graph (DAG) such that for every directed edge (u, v), vertex u comes before vertex v in the ordering.
+
+#### Algorithm Implementation
+
+* **Kahn's Algorithm (BFS)**: In-degree based topological sorting
+  1. Calculate the in-degree of all vertices
+  2. Add all vertices with in-degree 0 to the queue
+  3. Remove a vertex from the queue and decrease the in-degree of its neighbors by 1
+  4. Repeat step 3 until the queue is empty
+  
+* **DFS Algorithm**: Depth-first search based topological sorting
+  1. Perform DFS on each unvisited vertex
+  2. Push the vertex onto a stack after DFS completes
+  3. The reverse order of elements in the stack is the topological sort result
+
+#### Time Complexity
+
+* O(V + E), where V is the number of vertices and E is the number of edges
+
+#### Applications
+
+* Task scheduling
+* Build order
+* Course scheduling
+* Dependency resolution
 
 ### Other algorithms
 
@@ -2719,6 +2774,30 @@ So there is a FIN and ACK in each direction.
 ### Observer mode
 
 [Example of Observer Pattern](DesignPattern/ObserverPattern)
+
+### Strategy Pattern
+
+[Strategy Pattern Example](DesignPattern/StrategyPattern)
+
+The Strategy Pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
+
+#### Components
+
+* **Strategy (Strategy Interface)**: Defines a common interface for all supported algorithms
+* **ConcreteStrategy (Concrete Strategy)**: Implements the Strategy interface with specific algorithms
+* **Context**: Maintains a reference to a Strategy object
+
+#### Advantages
+
+* Algorithms can be switched freely
+* Avoids multiple conditional statements
+* Good extensibility
+
+#### Application Scenarios
+
+* Sorting algorithm selection
+* Payment method selection
+* Compression algorithm selection
 
 ### Six Principles of Design Patterns
 
