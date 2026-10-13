@@ -1,0 +1,15 @@
+{
+  "name": "wps-form-autofill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tampermonkey userscript: auto-fill WPS 表单 / 金山表单 (kdocs ksform) with compatibility self-check",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/run-tests.mjs && node tests/demo-smoke.mjs",
+    "test:unit": "node tests/run-tests.mjs",
+    "test:demo": "node tests/demo-smoke.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  }
+}
