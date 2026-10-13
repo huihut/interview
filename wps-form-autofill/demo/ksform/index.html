@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2027届计科、计科(专升本)毕业设计选题 — 演示表单</title>
+<script>
+  // 演示页跑在 localhost / 预览域名上：显式声明"这就是表单页"，脚本才不会被自身的域名白名单挡住
+  window.__WPS_AUTOFILL_FORCE__ = true;
+  // 演示用：预置一份"我的信息"，让脚本一打开就能填（localStorage 按域名隔离，不会影响你在真实表单里的配置）
+  try {
+    if (!localStorage.getItem('wpsfa.v1.profile')) {
+      localStorage.setItem('wpsfa.v1.profile', JSON.stringify({
+        name: '张三', studentId: '2027001234', gender: '女',
+        topic1: '数字媒体技术', topic2: '软件工程',
+        advisor: '李建国', phone: '13800138000', agree: '是',
+        remark: '希望做前端可视化方向'
+      }));
+    }
+  } catch (e) {}
+</script>
+<style>
+  :root { --green:#0b8f5a; --line:#e3e6eb; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f5f6f8; color:#1f2329; font: 14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; }
+  .layout { display:flex; gap:16px; align-items:flex-start; padding:20px; flex-wrap:wrap; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px 22px; box-shadow:0 2px 10px rgba(0,0,0,.04); }
+  #root { flex:1 1 520px; max-width:640px; }
+  .side { flex:0 1 380px; min-width:320px; position:sticky; top:20px; }
+  h1 { font-size:19px; margin:0 0 4px; }
+  .sub { color:#8a9099; font-size:12px; margin-bottom:16px; }
+  .k-form-item { padding:14px 0; border-bottom:1px solid #f2f3f5; }
+  .k-label { font-weight:600; margin-bottom:8px; display:block; }
+  .k-required { color:#e34d59; margin-right:2px; }
+  .k-input, .k-textarea { width:100%; max-width:360px; padding:8px 10px; border:1px solid #dcdfe4; border-radius:8px; font-size:14px; font-family:inherit; }
+  .k-input:focus, .k-textarea:focus { outline:none; border-color:var(--green); box-shadow:0 0 0 2px rgba(11,143,90,.12); }
+  .k-textarea { max-width:100%; min-height:72px; resize:vertical; }
+  .k-radio-group, .k-checkbox-group { display:flex; flex-wrap:wrap; gap:10px 18px; }
+  .k-radio, .k-checkbox { display:inline-flex; align-items:center; gap:6px; cursor:pointer; padding:4px 8px; border-radius:8px; }
+  .k-radio:hover, .k-checkbox:hover { background:#f2faf6; }
+  .k-select { display:inline-flex; align-items:center; justify-content:space-between; gap:10px; min-width:260px; padding:8px 10px; border:1px solid #dcdfe4; border-radius:8px; cursor:pointer; background:#fff; }
+  .k-select:hover { border-color:var(--green); }
+  .k-select-text { color:#333; }
+  .k-select-text.placeholder { color:#a8adb4; }
+  .caret { color:#9aa1a9; font-size:11px; }
+  .k-select-dropdown { position:absolute; z-index:999; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,.14); padding:4px; min-width:260px; }
+  .k-select-option { padding:8px 10px; border-radius:7px; cursor:pointer; }
+  .k-select-option:hover { background:#f2faf6; color:var(--green); }
+  .k-form-footer { display:flex; gap:10px; padding-top:16px; }
+  .k-button { padding:8px 16px; border:1px solid #dcdfe4; background:#fff; border-radius:8px; cursor:pointer; font-size:14px; }
+  .k-button:hover { border-color:var(--green); color:var(--green); }
+  .k-button-primary { background:var(--green); border-color:var(--green); color:#fff; font-weight:600; }
+  .k-button-primary:hover { color:#fff; opacity:.92; }
+  .k-dialog { position:fixed; inset:0; margin:auto; width:320px; height:170px; background:#fff; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,.24); padding:20px; z-index:100000; text-align:center; }
+  .k-dialog .k-form-footer { justify-content:center; }
+  .demo-tip { background:#fff8e6; border:1px solid #ffe1a8; color:#8a6d1f; padding:10px 12px; border-radius:10px; font-size:12px; margin-bottom:14px; }
+  pre { background:#0f172a; color:#c9e2ff; border-radius:10px; padding:12px; font-size:12px; overflow:auto; max-height:46vh; }
+  .ev { font-size:11px; color:#6b7280; max-height:150px; overflow:auto; margin-top:8px; }
+  .ev div { padding:2px 0; border-bottom:1px dashed #eef0f3; }
+  .tag-script { color:#0b8f5a; font-weight:600; }
+  .tag-user { color:#b45309; font-weight:600; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; margin:8px 0; }
+  h2 { font-size:14px; margin:14px 0 6px; }
+</style>
+</head>
+<body>
+<div class="layout">
+  <div id="root" class="card">
+    <h1>2027届计科、计科(专升本)毕业设计选题</h1>
+    <div class="sub">演示表单 · 结构与 WPS 表单（金山表单 / kdocs ksform）一致：受控输入 + 单选/多选 + portal 下拉 + 分页 + 提交确认</div>
+    <div class="demo-tip">这是本地演示页：油猴脚本已通过 &lt;script&gt; 以普通脚本方式加载（面板在右上/右下角）。试试点“一键填写”，或直接在页面里改一个值再点“一键填写”看覆盖行为。</div>
+
+    <div class="form-page" id="page1">
+      <div class="k-form-item" data-question-id="1001">
+        <label class="k-label"><span class="k-required">*</span>姓名</label>
+        <input class="k-input" type="text" placeholder="请输入" required>
+      </div>
+      <div class="k-form-item" data-question-id="1002">
+        <label class="k-label">学号</label>
+        <input class="k-input" type="text" placeholder="请输入学号">
+      </div>
+      <div class="k-form-item" data-question-id="1003">
+        <label class="k-label"><span class="k-required">*</span>性别</label>
+        <div class="k-radio-group" role="radiogroup" aria-required="true">
+          <label class="k-radio"><input type="radio" name="gender" value="男"><span>男</span></label>
+          <label class="k-radio"><input type="radio" name="gender" value="女"><span>女</span></label>
+        </div>
+      </div>
+      <div class="k-form-item" data-question-id="1004">
+        <label class="k-label">兴趣方向（可多选）</label>
+        <div class="k-checkbox-group" role="group">
+          <label class="k-checkbox"><input type="checkbox" name="interest" value="ai"><span>人工智能</span></label>
+          <label class="k-checkbox"><input type="checkbox" name="interest" value="dm"><span>数字媒体技术</span></label>
+          <label class="k-checkbox"><input type="checkbox" name="interest" value="other"><span>其他</span></label>
+        </div>
+      </div>
+      <div class="k-form-item" data-question-id="1005">
+        <label class="k-label"><span class="k-required">*</span>毕业设计选题（第一志愿）</label>
+        <div class="k-select" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
+          <span class="k-select-text placeholder">请选择</span><span class="caret">▼</span>
+        </div>
+      </div>
+      <div class="k-form-item" data-question-id="1006">
+        <label class="k-label">备注</label>
+        <textarea class="k-textarea" placeholder="可留空"></textarea>
+      </div>
+      <div class="k-form-footer"><button class="k-button k-button-primary" type="button" id="next">下一页</button></div>
+    </div>
+
+    <div class="form-page" id="page2" style="display:none">
+      <div class="k-form-item" data-question-id="2001">
+        <label class="k-label"><span class="k-required">*</span>指导教师</label>
+        <input class="k-input" type="text" placeholder="请输入">
+      </div>
+      <div class="k-form-item" data-question-id="2002">
+        <label class="k-label">联系电话</label>
+        <input class="k-input" type="tel" placeholder="请输入">
+      </div>
+      <div class="k-form-item" data-question-id="2003">
+        <label class="k-label"><span class="k-required">*</span>是否服从调剂</label>
+        <div class="k-radio-group" role="radiogroup">
+          <label class="k-radio"><input type="radio" name="adjust" value="y"><span>是</span></label>
+          <label class="k-radio"><input type="radio" name="adjust" value="n"><span>否</span></label>
+        </div>
+      </div>
+      <div class="k-form-item" data-question-id="2004">
+        <label class="k-label">第二志愿（备选题目）</label>
+        <div class="k-select" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
+          <span class="k-select-text placeholder">请选择</span><span class="caret">▼</span>
+        </div>
+      </div>
+      <div class="k-form-footer">
+        <button class="k-button" type="button" id="save">保存草稿</button>
+        <button class="k-button k-button-primary" type="button" id="submit">提交</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="side card">
+    <h2>表单内部状态（React state，提交时真正用的值）</h2>
+    <pre id="state">{}</pre>
+    <h2>事件来源（脚本派发 vs 真人操作）</h2>
+    <div class="ev" id="events"></div>
+    <h2>对照实验：为什么必须用原型链 setter</h2>
+    <div class="row">
+      <button class="k-button" id="naive">❌ 直接 input.value 赋值</button>
+      <button class="k-button" id="proper">✅ 脚本的写入方式</button>
+      <button class="k-button" id="reset">重置演示</button>
+    </div>
+    <div class="sub" id="cmp">点上面两个按钮，看“表单内部状态”有没有变化。</div>
+  </div>
+</div>
+
+<script>
+/* ============================================================================
+ * 迷你「React」：复刻受控组件的真实语义
+ *   - 每个受控 input 上挂 _valueTracker，并给节点定义 value 的 getter/setter
+ *   - 直接 `input.value = x` → setter 会同步 tracker → React 认为"值没变" → 不触发 onChange
+ *   - 绕过 tracker 写入（原型链 setter）+ 派发 input 事件 → React 才会收到变更
+ * 这正是 WPS 表单里"值填进去了但提交为空"的根因，也是本脚本必须用原型 setter 的原因。
+ * ========================================================================== */
+(function () {
+  const demo = window.__demo = {
+    state: {},            // 表单内部状态（等价于 React state）
+    events: [],
+    submitCount: 0,
+    confirmCount: 0,
+    page: 1,
+  };
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+  function logEvent(el, type, trusted) {
+    demo.events.unshift({ t: new Date().toLocaleTimeString(), name: el.getAttribute('placeholder') || el.name || el.tagName.toLowerCase(), type, trusted });
+    if (demo.events.length > 40) demo.events.pop();
+    renderEvents();
+  }
+
+  /** 把一个输入框变成"受控组件" */
+  function controlled(el, key) {
+    const desc = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(el), 'value');
+    demo.state[key] = el.value;      // 表单状态：提交时真正用的值
+    let last = el.value;             // tracker 记住的"框架上次看到的值"（和表单状态是两个东西）
+    const tracker = { getValue: () => last, setValue: (v) => { last = String(v); }, stopTracking() { } };
+    Object.defineProperty(el, '_valueTracker', { value: tracker, configurable: true });
+    Object.defineProperty(el, 'value', {
+      configurable: true,
+      get() { return desc.get.call(el); },
+      set(v) { tracker.setValue(v); desc.set.call(el, v); },     // ← React 就是这么打补丁的：顺手把 tracker 同步成"已看过"
+    });
+    el.addEventListener('input', (ev) => {
+      logEvent(el, 'input', ev.isTrusted);
+      // 框架的判定：DOM 和 tracker 不一致才认为是"真的变了" → 触发 onChange → 更新表单状态
+      if (last !== el.value) { last = el.value; demo.state[key] = el.value; renderState(); }
+      renderEvents();
+    });
+    el.addEventListener('change', (ev) => logEvent(el, 'change', ev.isTrusted));
+    return el;
+  }
+
+  // 1. 文本类
+  $$('input[type=text], input[type=tel], textarea').forEach((el, i) => controlled(el, 'f' + i));
+
+  // 2. 单选 / 多选：状态由点击驱动（和 React 一样，直接改 checked 不会更新状态）
+  $$('label.k-radio').forEach((label) => {
+    const input = $('input', label);
+    label.addEventListener('click', () => {
+      $$('input[name="' + input.name + '"]').forEach((o) => { o.checked = false; });
+      input.checked = true;
+      demo.state['radio:' + input.name] = input.value;
+      renderState();
+    });
+  });
+
+  $$('label.k-checkbox').forEach((label) => {
+    const input = $('input', label);
+    label.addEventListener('click', () => {
+      input.checked = !input.checked;
+      const set = new Set(demo.state['check:' + input.name] || []);
+      if (input.checked) set.add(input.value); else set.delete(input.value);
+      demo.state['check:' + input.name] = Array.from(set);
+      if (input.value === 'other') {
+        const ex = $('.k-other-input');
+        if (input.checked && !ex) {
+          const inp = document.createElement('input');
+          inp.type = 'text'; inp.className = 'k-input k-other-input'; inp.placeholder = '请填写其他内容';
+          inp.style.marginTop = '8px';
+          label.parentElement.appendChild(inp);
+          controlled(inp, 'other');
+        } else if (!input.checked && ex) { ex.remove(); delete demo.state.other; }
+      }
+      renderState();
+    });
+  });
+
+  // 3. portal 下拉：浮层挂在 body 上（和 WPS 表单一致）
+  const TOPICS = ['计算机科学与技术', '数字媒体技术', '软件工程', '人工智能'];
+  $$('.k-select[role=combobox]').forEach((trigger, idx) => {
+    const key = 'select:' + idx;
+    trigger.addEventListener('click', () => {
+      const ex = $('.k-select-dropdown');
+      if (ex) { ex.remove(); return; }
+      const dd = document.createElement('div');
+      dd.className = 'k-select-dropdown';
+      dd.setAttribute('role', 'listbox');
+      const r = trigger.getBoundingClientRect();
+      dd.style.left = (r.left + window.scrollX) + 'px';
+      dd.style.top = (r.bottom + window.scrollY + 6) + 'px';
+      TOPICS.forEach((text) => {
+        const o = document.createElement('div');
+        o.className = 'k-select-option';
+        o.setAttribute('role', 'option');
+        o.textContent = text;
+        o.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          const span = $('.k-select-text', trigger);
+          span.textContent = text;
+          span.classList.remove('placeholder');
+          demo.state[key] = text;
+          dd.remove();
+          renderState();
+        });
+        dd.appendChild(o);
+      });
+      document.body.appendChild(dd);
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.k-select') && !e.target.closest('.k-select-dropdown')) {
+      const dd = $('.k-select-dropdown'); if (dd) dd.remove();
+    }
+  });
+
+  // 4. 分页
+  $('#next').addEventListener('click', () => {
+    $('#page1').style.display = 'none';
+    $('#page2').style.display = '';
+    demo.page = 2;
+    renderState();
+  });
+
+  // 5. 提交 + 确认弹窗（提交后把"表单内部状态"定格展示，方便验证脚本到底写进去了什么）
+  $('#submit').addEventListener('click', () => {
+    demo.submitCount++;
+    const dlg = document.createElement('div');
+    dlg.className = 'k-dialog';
+    dlg.setAttribute('role', 'dialog');
+    dlg.innerHTML = '<div style="font-weight:600;margin-bottom:6px">确定要提交吗？</div><div class="sub">提交后不可修改</div>' +
+      '<div class="k-form-footer"><button class="k-button" id="cancel">取消</button><button class="k-button k-button-primary" id="confirm">确定</button></div>';
+    document.body.appendChild(dlg);
+    $('#cancel', dlg).addEventListener('click', () => dlg.remove());
+    $('#confirm', dlg).addEventListener('click', () => {
+      demo.confirmCount++;
+      demo.submitted = JSON.parse(JSON.stringify(demo.state));
+      dlg.remove();
+      renderState();
+    });
+  });
+  $('#save').addEventListener('click', () => logEvent($('#save'), 'click(保存草稿)', true));
+
+  // 6. 对照实验
+  $('#naive').addEventListener('click', () => {
+    const el = $('[data-question-id="1002"] input');
+    el.value = '直接赋值-' + Date.now() % 1000;     // 走节点自己的 setter → 顺手把 tracker 同步了
+    el.dispatchEvent(new Event('input', { bubbles: true }));   // 就算再补一个 input 事件也没用
+    $('#cmp').innerHTML = '❌ 直接赋值（并补发 input 事件）：DOM 上能看到值，但右侧「表单内部状态」没变 —— 提交时会丢掉。';
+  });
+  $('#proper').addEventListener('click', () => {
+    const el = $('[data-question-id="1002"] input');
+    const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+    setter.call(el, '脚本写入-' + Date.now() % 1000);   // 绕过 tracker
+    el.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText', data: el.value }));
+    $('#cmp').innerHTML = '✅ 脚本写入：绕过 tracker + 派发 input 事件 → 右侧状态同步更新。';
+  });
+  $('#reset').addEventListener('click', () => location.reload());
+
+  // 7. 渲染状态面板
+  function renderState() {
+    const out = {};
+    Object.keys(demo.state).sort().forEach((k) => { out[k] = demo.state[k]; });
+    const el = $('#state');
+    if (el) el.textContent = JSON.stringify(out, null, 2) + (demo.submitted ? '\n\n/* 已提交快照 */\n' + JSON.stringify(demo.submitted, null, 2) : '');
+  }
+  function renderEvents() {
+    const box = $('#events');
+    if (!box) return;
+    box.innerHTML = demo.events.slice(0, 12).map((e) =>
+      '<div>' + e.t + ' · ' + e.type + ' · ' + e.name + ' · 来源：' +
+      (e.trusted ? '<span class="tag-user">真人操作</span>' : '<span class="tag-script">脚本</span>') + '</div>').join('');
+  }
+  renderState();
+  renderEvents();
+})();
+</script>
+<!-- 油猴脚本本体：以普通脚本方式加载（没有 GM_* API 时自动退回 localStorage，方便本地演示） -->
+<script src="../../wps-form-autofill.user.js"></script>
+</body>
+</html>
