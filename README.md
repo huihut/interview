@@ -3450,6 +3450,7 @@ int main( void )
 
 * [Github . CyC2018/Job-Recommend](https://github.com/CyC2018/Job-Recommend)：🔎 互联网内推信息（社招、校招、实习）
 * [Github . amusi/AI-Job-Recommend](https://github.com/amusi/AI-Job-Recommend)：国内公司人工智能方向（含机器学习、深度学习、计算机视觉和自然语言处理）岗位的招聘信息（含全职、实习和校招）
+* [Github . hahahas2asdasd/pdd-campus-referral-2027](https://github.com/hahahas2asdasd/pdd-campus-referral-2027)：拼多多 2027 届校招正式批员工内推（内推码与投递说明）
 
 <a id="contributor"></a>
 
